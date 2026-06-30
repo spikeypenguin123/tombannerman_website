@@ -1,0 +1,481 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Importance of Getting It Right — Tom Bannerman</title>
+<meta name="description" content="An interactive essay: most engineering failures aren't failures of execution — they're failures of definition. Adjust the variables and feel the idea.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script>document.documentElement.className='js'</script>
+<style>
+:root{
+  --paper:#fff7e6;--paper-deep:#FFEAD0;--ink:#2A1733;--ink-soft:#5a4660;
+  --violet:#922aff;--periwinkle:#726bf3;--orange:#f19202;--red:#ff3939;--teal:#179f93;
+  --line:rgba(42,23,51,.16);--w:760px;--w-wide:1080px;
+  --panel:#160c1e;--panel-line:rgba(255,255,255,.12);--panel-ink:#ece5f4;--panel-soft:#a99fc0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;
+  font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:var(--violet);text-decoration:none}
+a:hover{color:var(--orange)}
+::selection{background:var(--periwinkle);color:#fff}
+img{max-width:100%}
+
+/* nav / tabs */
+.nav{position:sticky;top:0;z-index:20;backdrop-filter:saturate(140%) blur(8px);
+  background:rgba(255,219,187,.82);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--w-wide);margin:0 auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between}
+.mark{font-family:"Fraunces",serif;font-weight:600;font-size:19px;font-variation-settings:"opsz" 30,"SOFT" 40,"WONK" 1;letter-spacing:.3px;color:var(--ink)}
+.mark b{color:var(--violet)}
+.tabs{display:flex;gap:6px;align-items:center}
+.tabs a{font-family:"Space Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--ink-soft);padding:7px 13px;border-radius:30px}
+.tabs a:hover{color:var(--ink);background:rgba(42,23,51,.06)}
+.tabs a.active{color:var(--paper);background:var(--ink)}
+.tabs a.active:hover{background:var(--violet)}
+.burger{display:none;background:none;border:0;cursor:pointer;padding:6px}
+.burger span{display:block;width:23px;height:2px;background:var(--ink);margin:5px 0;transition:.25s}
+
+.wrap{max-width:var(--w);margin:0 auto;padding:0 24px}
+section{padding:40px 0}
+.eyebrow{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--violet);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* article */
+.post-head{padding:48px 0 6px}
+.post-head h1{font-family:"Fraunces",serif;font-weight:600;font-variation-settings:"opsz" 144,"SOFT" 40,"WONK" 1;
+  font-size:clamp(34px,6vw,58px);line-height:1.0;letter-spacing:-.025em;margin:0 0 16px}
+.post-meta{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft);margin:0}
+.post-meta b{color:var(--violet);font-weight:400}
+.abstract{font-size:18.5px;line-height:1.72;color:var(--ink);border-left:3px solid var(--violet);
+  padding:4px 0 4px 22px;margin:30px 0 8px}
+.prose h2{font-family:"Fraunces",serif;font-weight:500;font-variation-settings:"opsz" 80,"SOFT" 30,"WONK" 0;
+  font-size:clamp(24px,3.4vw,33px);line-height:1.08;margin:8px 0 18px;letter-spacing:-.01em}
+.prose h2 .num{font-family:"Space Mono",monospace;font-size:.5em;color:var(--violet);vertical-align:middle;
+  margin-right:12px;letter-spacing:0}
+.prose p{margin:0 0 16px;max-width:64ch}
+.prose strong{font-weight:700}
+
+/* simulator block */
+.sim{margin:26px 0 6px;border:1.5px solid var(--ink);border-radius:18px;overflow:hidden;
+  background:var(--panel);box-shadow:5px 7px 0 rgba(42,23,51,.12)}
+.sim canvas{display:block;width:100%;height:320px;background:var(--panel);touch-action:none}
+.sim-panel{padding:18px 20px 20px;border-top:1.5px solid var(--panel-line);color:var(--panel-ink)}
+.sim-row{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-end}
+.sim-ctrls{flex:1 1 260px;min-width:240px}
+.ctrl-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;gap:12px}
+.ctrl-top label{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--panel-soft)}
+.ctrl-top .val{font-family:"Space Mono",monospace;font-size:13px;color:var(--orange)}
+.sim input[type=range]{width:100%;accent-color:var(--violet);cursor:pointer;height:22px}
+.map{font-size:13.5px;line-height:1.5;color:var(--panel-soft);margin:12px 0 0;max-width:52ch}
+.map b{color:var(--panel-ink);font-weight:500}
+.sim-stats{flex:1 1 200px;display:flex;gap:22px;flex-wrap:wrap;align-items:flex-end;justify-content:flex-end}
+.stat{text-align:right}
+.stat .k{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--panel-soft);display:block;margin-bottom:3px}
+.stat .v{font-family:"Fraunces",serif;font-weight:600;font-size:26px;line-height:1;color:var(--panel-ink)}
+.stat .v small{font-size:13px;color:var(--panel-soft);font-family:"Space Mono",monospace;font-weight:400}
+.sim-foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:14px;flex-wrap:wrap}
+.legend{font-family:"Space Mono",monospace;font-size:10.5px;letter-spacing:.5px;color:var(--panel-soft);display:flex;gap:16px;flex-wrap:wrap}
+.legend i{font-style:normal;display:inline-flex;align-items:center;gap:6px}
+.legend .sw{width:10px;height:10px;border-radius:50%;display:inline-block}
+.reset{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;
+  background:transparent;color:var(--panel-ink);border:1.5px solid var(--panel-line);padding:8px 16px;border-radius:30px;cursor:pointer;transition:.2s}
+.reset:hover{background:var(--violet);border-color:var(--violet);color:#fff}
+
+.closer{font-size:18px;border-top:1px solid var(--line);padding-top:30px;margin-top:18px}
+.closer p{max-width:64ch}
+
+/* footer */
+footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-top:20px}
+.footsun{width:96px;height:48px;margin:0 auto 14px;display:block}
+.foot-links{display:flex;gap:20px;justify-content:center;margin:6px 0 12px;flex-wrap:wrap}
+.foot-links a{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft)}
+.foot-links a:hover{color:var(--violet)}
+.colophon{font-family:"Space Mono",monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.5px}
+
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
+
+@media (max-width:820px){
+  .tabs{position:absolute;top:100%;right:0;left:0;flex-direction:column;align-items:stretch;gap:0;
+    background:var(--paper);border-bottom:1px solid var(--line);padding:8px 18px;max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .tabs.open{max-height:340px}
+  .tabs a{padding:11px 8px;border-radius:8px}
+  .burger{display:block}
+}
+@media (max-width:600px){
+  .sim-stats{justify-content:flex-start}
+  .stat{text-align:left}
+  .sim canvas{height:280px}
+}
+</style></head><body>
+<nav class="nav"><div class="nav-in">
+<a href="index.html" class="mark">Tom<b>.</b>Bannerman</a>
+<button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+<div class="tabs" id="tabs"><a href="index.html" class="">Home</a><a href="projects.html" class="">Projects</a><a href="writing.html" class="active">Writing</a><a href="gallery.html" class="">Gallery</a><a href="store.html" class="">Store</a></div>
+</div></nav>
+
+<article class="wrap">
+<header class="post-head reveal">
+  <p class="eyebrow">Essay · Interactive</p>
+  <h1>The Importance of Getting It Right</h1>
+  <p class="post-meta">For engineers &amp; technically-minded founders · <b>Drag the sliders</b> · ~12 min</p>
+  <p class="abstract">Most engineering failures aren't failures of execution — they're failures of definition. We watch teams move with precision toward the wrong target, burning resources and talent on problems nobody actually agreed needed solving. The culprit is almost always the same: a founding vision so poorly articulated that each person on the team is effectively working from a broken compass. They're not lazy. They're not incompetent. They're just pointing in different directions and calling it progress. This essay is about why getting it right at the start — truly right, with ruthless clarity about your principles and your destination — is the only leverage that matters. It's not about working harder. It's about working toward something real. For engineers building the next generation of Australian technology, there's no substitute for this kind of foundational rigour. The future belongs to the teams that know exactly what they're building and why, and have the discipline to stay true to that vision under pressure. That's not idealism. That's just engineering.</p>
+</header>
+
+<section class="prose reveal">
+  <h2><span class="num">01</span>Goal clarity</h2>
+  <p>Start with the destination. A goal isn't a slogan — it's a coordinate. Every person you hire is, in effect, a vector: a direction and a magnitude of effort. When the destination is sharp, those vectors stack. When it's fuzzy, each engineer resolves the ambiguity privately, picks a slightly different interpretation, and sets off with total confidence toward a point only they can see.</p>
+  <p>The cruel part is that nobody feels lost. Everyone is moving fast. The motion looks like progress right up until the moment you measure where the team actually landed — a scattered cloud around the target instead of a point on it. The difference between those two outcomes is almost never talent. It's how precisely the target was defined before anyone started moving.</p>
+  <p>Below, each dot is a teammate leaving the origin for target <strong>A</strong>. The slider is how clearly <strong>A</strong> was specified. Watch the wasted distance and convergence time as you blur the goal.</p>
+
+  <div class="sim" data-sim="1">
+    <canvas id="c1" aria-label="Goal clarity simulation: agents moving from origin to a target"></canvas>
+    <div class="sim-panel">
+      <div class="sim-row">
+        <div class="sim-ctrls">
+          <div class="ctrl-top"><label for="clarity">Goal clarity</label><span class="val" id="clarityv">0.50</span></div>
+          <input type="range" id="clarity" min="0" max="1" step="0.01" value="0.5">
+          <p class="map">Maps to <b>requirements-definition rigour</b>. At 1.0 the spec is unambiguous and everyone targets the same point; at 0.0 each engineer infers their own version of "done" and scatters.</p>
+        </div>
+        <div class="sim-stats">
+          <div class="stat"><span class="k">Convergence</span><span class="v" id="m1conv">—<small> steps</small></span></div>
+          <div class="stat"><span class="k">Wasted distance</span><span class="v" id="m1waste">—<small>×</small></span></div>
+          <div class="stat"><span class="k">On target</span><span class="v" id="m1hit">—<small>%</small></span></div>
+        </div>
+      </div>
+      <div class="sim-foot">
+        <div class="legend"><i><span class="sw" style="background:#922aff"></span>team</i><i><span class="sw" style="background:#f19202"></span>origin</i><i><span class="sw" style="background:#179f93"></span>target A</i></div>
+        <button class="reset" id="r1">Re-run</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="num">02</span>Principles &amp; boundary conditions</h2>
+  <p>You will never fully resolve the ambiguity of the goal. Markets move, requirements shift, and the target is genuinely uncertain at the edges. This is where most people give up and call it "agility." But uncertainty about the destination doesn't have to mean chaos in the movement — if the team shares strong operating principles.</p>
+  <p>Principles are boundary conditions. They don't tell each engineer exactly where to go; they constrain <em>how</em> everyone moves so that decisions made independently still rhyme. "We optimise for reversibility." "We never ship without a test." "Mass is the enemy." With tight principles, a team can be uncertain about <strong>A</strong> and still travel as one coordinated body, correcting together. With loose principles, the same uncertainty fractures into independent drift.</p>
+  <p>Here the target stays deliberately uncertain. The slider is how tightly shared principles bind each agent's heading to the team's collective direction. Watch dispersion collapse as the guardrails tighten — even though nobody knows exactly where they're going.</p>
+
+  <div class="sim" data-sim="2">
+    <canvas id="c2" aria-label="Principles simulation: agents constrained by shared operating principles"></canvas>
+    <div class="sim-panel">
+      <div class="sim-row">
+        <div class="sim-ctrls">
+          <div class="ctrl-top"><label for="principles">Principle strength</label><span class="val" id="principlesv">0.50</span></div>
+          <input type="range" id="principles" min="0" max="1" step="0.01" value="0.5">
+          <p class="map">Maps to <b>design-authority scope &amp; guardrails</b>. At 1.0 shared principles dominate and independent choices stay aligned; at 0.0 every engineer optimises locally and the team drifts apart.</p>
+        </div>
+        <div class="sim-stats">
+          <div class="stat"><span class="k">Dispersion</span><span class="v" id="m2disp">—<small>%</small></span></div>
+          <div class="stat"><span class="k">Alignment</span><span class="v" id="m2align">—<small>%</small></span></div>
+        </div>
+      </div>
+      <div class="sim-foot">
+        <div class="legend"><i><span class="sw" style="background:#726bf3"></span>team</i><i><span class="sw" style="background:#f19202"></span>origin</i><i><span class="sw" style="background:#179f93"></span>uncertain A</i></div>
+        <button class="reset" id="r2">Re-run</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="num">03</span>Context retention</h2>
+  <p>The last variable is memory. Even with a clear goal and strong principles, a team that forgets what it has already learned will re-walk every dead end. The engineer who solved this exact thermal problem left two years ago and took the reasoning with them. The decision log is a Slack thread nobody can find. So the team rediscovers the same wall, from the same angle, again.</p>
+  <p>Institutional memory is what lets a team route <em>around</em> obstacles instead of bouncing off them. High retention turns a hard-won lesson into a permanent change of trajectory; low retention means every obstacle is a surprise, every time. The destination doesn't move — but the path you take to it gets longer with every fact you fail to keep.</p>
+  <p>Below, obstacles sit between the origin and <strong>A</strong>. The slider is how much each agent remembers about where it has already been blocked. Watch the efficiency ratio — ideal path versus the path actually walked.</p>
+
+  <div class="sim" data-sim="3">
+    <canvas id="c3" aria-label="Context retention simulation: agents routing around obstacles"></canvas>
+    <div class="sim-panel">
+      <div class="sim-row">
+        <div class="sim-ctrls">
+          <div class="ctrl-top"><label for="memory">Context retention</label><span class="val" id="memoryv">0.50</span></div>
+          <input type="range" id="memory" min="0" max="1" step="0.01" value="0.5">
+          <p class="map">Maps to <b>institutional memory &amp; handover quality</b>. At 1.0 lessons persist and the team commits to a route around known walls; at 0.0 every blockage is rediscovered from scratch.</p>
+        </div>
+        <div class="sim-stats">
+          <div class="stat"><span class="k">Efficiency</span><span class="v" id="m3eff">—<small>%</small></span></div>
+          <div class="stat"><span class="k">Path vs ideal</span><span class="v" id="m3path">—<small>×</small></span></div>
+        </div>
+      </div>
+      <div class="sim-foot">
+        <div class="legend"><i><span class="sw" style="background:#ff3939"></span>team</i><i><span class="sw" style="background:#f19202"></span>origin</i><i><span class="sw" style="background:#179f93"></span>target A</i><i><span class="sw" style="background:#5a4660"></span>obstacles</i></div>
+        <button class="reset" id="r3">Re-run</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <div class="closer">
+    <p>Three sliders, one lesson. None of them is about working harder — every agent in every simulation moves at the same speed and tries just as hard. What changes the outcome is entirely upstream of the work: how sharply the goal was defined, how strong the shared principles are, and how well the team remembers what it learns.</p>
+    <p>That's the leverage. You can't out-effort a broken compass. Get the definition right — the destination, the principles, the memory — and ordinary effort compounds into something real. Get it wrong, and the most talented team you can assemble will sprint, in perfect formation, toward the wrong point. <strong>That's not idealism. That's just engineering.</strong></p>
+  </div>
+</section>
+</article>
+
+<footer><div class="wrap"><svg class="footsun" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs><linearGradient id="fs" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#922aff"/><stop offset="0.5" stop-color="#ff3939"/><stop offset="1" stop-color="#f19202"/>
+</linearGradient></defs>
+<g clip-path="url(#fc)"><clipPath id="fc"><rect x="0" y="0" width="200" height="100"/></clipPath>
+<circle cx="100" cy="100" r="78" fill="url(#fs)"/>
+<rect x="0" y="70" width="200" height="4" fill="#fff7e6"/><rect x="0" y="80" width="200" height="5" fill="#fff7e6"/><rect x="0" y="91" width="200" height="6" fill="#fff7e6"/>
+</g><line x1="0" y1="99" x2="200" y2="99" stroke="#2A1733" stroke-width="2"/></svg>
+<div class="foot-links">
+<a href="writing.html">← All writing</a>
+<a href="mailto:tban4122@gmail.com">Email</a>
+<a href="https://www.linkedin.com/in/tombannerman/" target="_blank" rel="noopener">LinkedIn</a>
+</div>
+<p class="colophon">tombannerman.com · Built on the Gold Coast · <span id="yr"></span> · First principles, always.</p>
+</div></footer>
+
+<script>
+// --- nav + reveal (shared site pattern) ---
+const b=document.querySelector('.burger'),t=document.getElementById('tabs');
+b.addEventListener('click',()=>{const o=t.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const y=document.getElementById('yr');if(y)y.textContent=new Date().getFullYear();
+
+// --- tiny helpers ---
+const reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+function randn(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+const clamp=(x,a,b)=>x<a?a:x>b?b:x;
+const COUNT=36, MAXSTEP=1200;
+
+/* Generic agent-field simulator engine.
+   Each section supplies init/update/metrics/render hooks. Keeps ~36 agents,
+   redraws on a fading dark canvas so motion leaves short trails. */
+function Sim(cfg){
+  const cv=document.getElementById(cfg.id), ctx=cv.getContext('2d');
+  let W,H,S,dpr,agents,step,settledStep,raf;
+  function resize(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    W=cv.clientWidth; H=cv.clientHeight; S=Math.min(W,H);
+    cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  const O=()=>({x:W*0.13,y:H*0.5});
+  const T=()=>({x:W*0.85,y:H*0.5});
+  function env(){return {o:O(),t:T(),W,H,S,P:cfg.P,agents,step};}
+  function reset(){
+    resize();
+    ctx.fillStyle='#160c1e'; ctx.fillRect(0,0,W,H);
+    const e=env(); agents=[];
+    for(let i=0;i<COUNT;i++){
+      const a={x:e.o.x,y:e.o.y+(Math.random()-.5)*H*0.46,vx:0,vy:0,path:0,done:false,ax:0,ay:0,col:cfg.col(i),tx:0,ty:0};
+      cfg.init(a,e,i); agents.push(a);
+    }
+    step=0; settledStep=null;
+    cancelAnimationFrame(raf);
+    if(reduced){ for(let k=0;k<MAXSTEP;k++){ if(!tick())break; } draw(); cfg.render(metrics()); }
+    else loop();
+  }
+  function tick(){
+    const e=env();
+    if(cfg.pre) cfg.pre(e);
+    let moving=0;
+    for(const a of agents){ if(!a.done){ cfg.update(a,e); moving++; } }
+    step++;
+    const done=agents.length-moving;
+    if(settledStep===null && done>=COUNT*0.9) settledStep=step;
+    return moving>0 && step<MAXSTEP;
+  }
+  function metrics(){return cfg.metrics(agents,env(),settledStep);}
+  function loop(){
+    const cont=tick();
+    draw();
+    cfg.render(metrics());
+    if(cont) raf=requestAnimationFrame(loop);
+  }
+  function draw(){
+    const e=env();
+    // fade previous frame for short trails
+    ctx.fillStyle='rgba(22,12,30,0.30)'; ctx.fillRect(0,0,W,H);
+    if(cfg.bg) cfg.bg(ctx,e);
+    // target A
+    ctx.save();
+    ctx.strokeStyle='#179f93'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(e.t.x,e.t.y,S*0.05,0,7); ctx.stroke();
+    ctx.fillStyle='rgba(23,159,147,.9)';
+    ctx.beginPath(); ctx.arc(e.t.x,e.t.y,3.5,0,7); ctx.fill();
+    ctx.restore();
+    // origin
+    ctx.fillStyle='#f19202';
+    ctx.beginPath(); ctx.arc(e.o.x,e.o.y,4.5,0,7); ctx.fill();
+    // agents
+    for(const a of agents){
+      ctx.fillStyle=a.col;
+      ctx.beginPath(); ctx.arc(a.x,a.y,a.done?2.2:3,0,7); ctx.fill();
+    }
+  }
+  // wire slider + reset + persistence
+  const sl=document.getElementById(cfg.slider), lab=document.getElementById(cfg.slider+'v');
+  const KEY='gir.'+cfg.slider, saved=localStorage.getItem(KEY);
+  if(saved!==null) sl.value=saved;
+  cfg.P[cfg.key]=+sl.value; if(lab) lab.textContent=(+sl.value).toFixed(2);
+  let deb;
+  sl.addEventListener('input',()=>{
+    cfg.P[cfg.key]=+sl.value; if(lab) lab.textContent=(+sl.value).toFixed(2);
+    localStorage.setItem(KEY,sl.value);
+    clearTimeout(deb); deb=setTimeout(reset,40);
+  });
+  document.getElementById(cfg.reset).addEventListener('click',reset);
+  let rz; window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(reset,160);});
+  reset();
+}
+
+/* ---------- 01 · GOAL CLARITY ---------- */
+Sim({
+  id:'c1', slider:'clarity', key:'clarity', reset:'r1', P:{}, col:()=> '#922aff',
+  init(a,e){
+    const fuzz=1-e.P.clarity;
+    // perceived target = blend of true A and a noisy point; fuzz widens the cloud
+    a.tx=e.t.x + randn()*e.S*0.34*fuzz;
+    a.ty=e.t.y + randn()*e.S*0.40*fuzz;
+    a.fuzz=fuzz; a.ideal=Math.hypot(e.t.x-a.x,e.t.y-a.y);
+  },
+  update(a,e){
+    const dx=a.tx-a.x, dy=a.ty-a.y, d=Math.hypot(dx,dy)||1;
+    const sp=e.S*0.014;
+    const jit=e.S*0.010*a.fuzz;
+    a.x+=dx/d*sp + randn()*jit;
+    a.y+=dy/d*sp + randn()*jit;
+    a.path+=sp;
+    if(d<e.S*0.018) a.done=true;
+  },
+  bg(ctx,e){ // fuzz halo around A
+    const fuzz=1-e.P.clarity;
+    if(fuzz<=0.001) return;
+    const r=e.S*0.06 + e.S*0.34*fuzz;
+    const g=ctx.createRadialGradient(e.t.x,e.t.y,2,e.t.x,e.t.y,r);
+    g.addColorStop(0,'rgba(146,42,255,0.16)'); g.addColorStop(1,'rgba(146,42,255,0)');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(e.t.x,e.t.y,r,0,7); ctx.fill();
+  },
+  metrics(agents,e,settled){
+    const R=e.S*0.06;
+    let hit=0, path=0, ideal=0;
+    for(const a of agents){ path+=a.path; ideal+=a.ideal; if(Math.hypot(a.x-e.t.x,a.y-e.t.y)<R) hit++; }
+    return {conv:settled, waste:path/Math.max(ideal,1), hit:Math.round(hit/agents.length*100)};
+  },
+  render(m){
+    document.getElementById('m1conv').innerHTML=(m.conv?m.conv:'—')+'<small> steps</small>';
+    document.getElementById('m1waste').innerHTML=m.waste.toFixed(2)+'<small>×</small>';
+    document.getElementById('m1hit').innerHTML=m.hit+'<small>%</small>';
+  }
+});
+
+/* ---------- 02 · PRINCIPLES / BOUNDARY CONDITIONS ---------- */
+Sim({
+  id:'c2', slider:'principles', key:'principles', reset:'r2', P:{}, col:()=> '#726bf3',
+  init(a,e){ // every agent has its own noisy idea of where A is (fixed uncertainty)
+    a.tx=e.t.x + randn()*e.S*0.30;
+    a.ty=e.t.y + randn()*e.S*0.34;
+  },
+  pre(e){ // team's mean desired heading this frame
+    let mx=0,my=0,n=0;
+    for(const a of e.agents){ if(a.done)continue; const dx=a.tx-a.x,dy=a.ty-a.y,d=Math.hypot(dx,dy)||1; mx+=dx/d; my+=dy/d; n++; }
+    const m=Math.hypot(mx,my)||1; e.mx=mx/m; e.my=my/m;
+  },
+  update(a,e){
+    const p=e.P.principles;
+    const dx=a.tx-a.x, dy=a.ty-a.y, d=Math.hypot(dx,dy)||1;
+    let hx=(1-p)*(dx/d)+p*e.mx, hy=(1-p)*(dy/d)+p*e.my;
+    const h=Math.hypot(hx,hy)||1; hx/=h; hy/=h;
+    const sp=e.S*0.013;
+    a.vx=hx; a.vy=hy;
+    a.x+=hx*sp; a.y+=hy*sp; a.path+=sp;
+    if(Math.hypot(a.x-e.t.x,a.y-e.t.y)<e.S*0.05) a.done=true;
+  },
+  metrics(agents,e){
+    let cx=0,cy=0,n=0;
+    for(const a of agents){cx+=a.x;cy+=a.y;n++;}
+    cx/=n; cy/=n;
+    let disp=0; for(const a of agents) disp+=Math.hypot(a.x-cx,a.y-cy);
+    disp=disp/n/(e.S*0.5); // normalised spread
+    // alignment: mean velocity coherence
+    let mvx=0,mvy=0,m=0;
+    for(const a of agents){ if(a.vx||a.vy){mvx+=a.vx;mvy+=a.vy;m++;} }
+    const ml=Math.hypot(mvx,mvy)/Math.max(m,1);
+    return {disp:Math.round(clamp(disp,0,1)*100), align:Math.round(clamp(ml,0,1)*100)};
+  },
+  render(m){
+    document.getElementById('m2disp').innerHTML=m.disp+'<small>%</small>';
+    document.getElementById('m2align').innerHTML=m.align+'<small>%</small>';
+  }
+});
+
+/* ---------- 03 · CONTEXT RETENTION ---------- */
+Sim({
+  id:'c3', slider:'memory', key:'memory', reset:'r3', P:{}, col:()=> '#ff3939',
+  init(a,e){
+    a.ax=0; a.ay=0;
+    a.ideal=Math.hypot(e.t.x-a.x,e.t.y-a.y);
+    if(i===0){ // rebuild obstacles each run so they track the current canvas size
+      e.P._obs=[
+        {x:e.W*0.40,y:e.H*0.34,r:e.S*0.13},
+        {x:e.W*0.52,y:e.H*0.68,r:e.S*0.15},
+        {x:e.W*0.68,y:e.H*0.42,r:e.S*0.11}
+      ];
+    }
+  },
+  update(a,e){
+    const obs=e.P._obs, m=e.P.memory;
+    let dx=e.t.x-a.x, dy=e.t.y-a.y, d=Math.hypot(dx,dy)||1;
+    let gx=dx/d, gy=dy/d; // goal direction
+    // sense obstacles, accumulate avoidance into memory vector
+    let px=0,py=0;
+    for(const o of obs){
+      const ox=a.x-o.x, oy=a.y-o.y, od=Math.hypot(ox,oy);
+      const gap=od-o.r;
+      if(gap < e.S*0.10){
+        const w=1/Math.max(gap,4);
+        px+=ox/(od||1)*w; py+=oy/(od||1)*w;
+      }
+    }
+    // retention: high memory keeps avoidance vector alive -> commits to a detour
+    const decay=0.15+0.80*m;
+    a.ax=a.ax*decay + px*(0.6+1.6*m);
+    a.ay=a.ay*decay + py*(0.6+1.6*m);
+    let hx=gx + a.ax, hy=gy + a.ay;
+    const h=Math.hypot(hx,hy)||1; hx/=h; hy/=h;
+    const sp=e.S*0.013;
+    let nx=a.x+hx*sp, ny=a.y+hy*sp;
+    // hard collision resolve (never enter an obstacle)
+    for(const o of obs){
+      const ox=nx-o.x, oy=ny-o.y, od=Math.hypot(ox,oy);
+      if(od<o.r){ nx=o.x+ox/(od||1)*o.r; ny=o.y+oy/(od||1)*o.r; }
+    }
+    a.path+=Math.hypot(nx-a.x,ny-a.y);
+    a.x=nx; a.y=ny;
+    if(d<e.S*0.05) a.done=true;
+  },
+  bg(ctx,e){
+    if(!e.P._obs)return;
+    for(const o of e.P._obs){
+      ctx.fillStyle='rgba(90,70,96,0.30)'; ctx.strokeStyle='rgba(168,159,192,0.5)'; ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.arc(o.x,o.y,o.r,0,7); ctx.fill(); ctx.stroke();
+    }
+  },
+  metrics(agents,e){
+    let path=0, ideal=0, n=0;
+    for(const a of agents){ path+=a.path; ideal+=a.ideal; n++; }
+    const ratioPath=path/Math.max(ideal,1);
+    const eff=clamp(ideal/Math.max(path,1),0,1);
+    return {eff:Math.round(eff*100), path:ratioPath};
+  },
+  render(m){
+    document.getElementById('m3eff').innerHTML=m.eff+'<small>%</small>';
+    document.getElementById('m3path').innerHTML=m.path.toFixed(2)+'<small>×</small>';
+  }
+});
+</script>
+</body></html>
