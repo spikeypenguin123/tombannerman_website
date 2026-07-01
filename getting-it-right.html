@@ -132,7 +132,7 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
   <h2><span class="num">01</span>Goal clarity</h2>
   <p>Start with the destination. A goal isn't a slogan — it's a coordinate. Every person you hire is, in effect, a vector: a direction and a magnitude of effort. When the destination is sharp, those vectors stack. When it's fuzzy, each engineer resolves the ambiguity privately, picks a slightly different interpretation, and sets off with total confidence toward a point only they can see.</p>
   <p>The cruel part is that nobody feels lost. Everyone is moving fast. The motion looks like progress right up until the moment you measure where the team actually landed — a scattered cloud around the target instead of a point on it. The difference between those two outcomes is almost never talent. It's how precisely the target was defined before anyone started moving.</p>
-  <p>Below, each dot is a teammate leaving the origin for target <strong>A</strong>. The slider is how clearly <strong>A</strong> was specified. Watch the wasted distance and convergence time as you blur the goal.</p>
+  <p>Below, each dot is a teammate leaving the origin for target <strong>A</strong>. When the goal is fuzzy they commit, with full confidence, to their own misread of it — then have to correct toward the real target once it's finally clear. Their faded trails are the wasted work. The slider is how sharply <strong>A</strong> was specified; watch the cone of paths widen and the wasted distance climb as you blur it.</p>
 
   <div class="sim" data-sim="1">
     <canvas id="c1" aria-label="Goal clarity simulation: agents moving from origin to a target"></canvas>
@@ -146,7 +146,7 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
         <div class="sim-stats">
           <div class="stat"><span class="k">Convergence</span><span class="v" id="m1conv">—<small> steps</small></span></div>
           <div class="stat"><span class="k">Wasted distance</span><span class="v" id="m1waste">—<small>×</small></span></div>
-          <div class="stat"><span class="k">On target</span><span class="v" id="m1hit">—<small>%</small></span></div>
+          <div class="stat"><span class="k">First-try right</span><span class="v" id="m1hit">—<small>%</small></span></div>
         </div>
       </div>
       <div class="sim-foot">
@@ -161,7 +161,7 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
   <h2><span class="num">02</span>Principles &amp; boundary conditions</h2>
   <p>You will never fully resolve the ambiguity of the goal. Markets move, requirements shift, and the target is genuinely uncertain at the edges. This is where most people give up and call it "agility." But uncertainty about the destination doesn't have to mean chaos in the movement — if the team shares strong operating principles.</p>
   <p>Principles are boundary conditions. They don't tell each engineer exactly where to go; they constrain <em>how</em> everyone moves so that decisions made independently still rhyme. "We optimise for reversibility." "We never ship without a test." "Mass is the enemy." With tight principles, a team can be uncertain about <strong>A</strong> and still travel as one coordinated body, correcting together. With loose principles, the same uncertainty fractures into independent drift.</p>
-  <p>Here the target stays deliberately uncertain. The slider is how tightly shared principles bind each agent's heading to the team's collective direction. Watch dispersion collapse as the guardrails tighten — even though nobody knows exactly where they're going.</p>
+  <p>Each dial below is one engineer's compass — their private read on which way is "north." Some read it dead on; others are off by as much as half a right angle, and their needle wanders every time they glance at it. The slider is how strongly shared principles constrain that reading. Watch the spread collapse as the guardrails tighten — even though no single person is any more certain than before.</p>
 
   <div class="sim" data-sim="2">
     <canvas id="c2" aria-label="Principles simulation: agents constrained by shared operating principles"></canvas>
@@ -173,12 +173,12 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
           <p class="map">Maps to <b>design-authority scope &amp; guardrails</b>. At 1.0 shared principles dominate and independent choices stay aligned; at 0.0 every engineer optimises locally and the team drifts apart.</p>
         </div>
         <div class="sim-stats">
-          <div class="stat"><span class="k">Dispersion</span><span class="v" id="m2disp">—<small>%</small></span></div>
+          <div class="stat"><span class="k">Heading spread</span><span class="v" id="m2disp">—<small>°</small></span></div>
           <div class="stat"><span class="k">Alignment</span><span class="v" id="m2align">—<small>%</small></span></div>
         </div>
       </div>
       <div class="sim-foot">
-        <div class="legend"><i><span class="sw" style="background:#726bf3"></span>team</i><i><span class="sw" style="background:#f19202"></span>origin</i><i><span class="sw" style="background:#179f93"></span>uncertain A</i></div>
+        <div class="legend"><i><span class="sw" style="background:#179f93"></span>on north</i><i><span class="sw" style="background:#f19202"></span>off north</i><i><span class="sw" style="background:#922aff"></span>uncertainty</i></div>
         <button class="reset" id="r2">Re-run</button>
       </div>
     </div>
@@ -249,35 +249,33 @@ const y=document.getElementById('yr');if(y)y.textContent=new Date().getFullYear(
 const reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 function randn(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
 const clamp=(x,a,b)=>x<a?a:x>b?b:x;
-const COUNT=36, MAXSTEP=1200;
+const MAXSTEP=1100;
 
-/* Generic agent-field simulator engine.
-   Each section supplies init/update/metrics/render hooks. Keeps ~36 agents,
-   redraws on a fading dark canvas so motion leaves short trails. */
+/* Generic canvas simulator engine. Each section supplies init/update/metrics/
+   render hooks (plus optional pre/bg/draw). Agent counts stay modest and the loop
+   only runs while the canvas is on-screen, so it stays smooth on older machines. */
 function Sim(cfg){
   const cv=document.getElementById(cfg.id), ctx=cv.getContext('2d');
-  let W,H,S,dpr,agents,step,settledStep,raf;
+  const N=cfg.count||30;
+  let W,H,S,dpr,agents,step,settledStep,raf=0,inView=false,finished=false;
   function resize(){
     dpr=Math.min(window.devicePixelRatio||1,2);
-    W=cv.clientWidth; H=cv.clientHeight; S=Math.min(W,H);
+    W=cv.clientWidth||600; H=cv.clientHeight||320; S=Math.min(W,H);
     cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
   }
   const O=()=>({x:W*0.13,y:H*0.5});
   const T=()=>({x:W*0.85,y:H*0.5});
   function env(){return {o:O(),t:T(),W,H,S,P:cfg.P,agents,step};}
-  function reset(){
+  function build(){
     resize();
     ctx.fillStyle='#160c1e'; ctx.fillRect(0,0,W,H);
     const e=env(); agents=[];
-    for(let i=0;i<COUNT;i++){
-      const a={x:e.o.x,y:e.o.y+(Math.random()-.5)*H*0.46,vx:0,vy:0,path:0,done:false,ax:0,ay:0,col:cfg.col(i),tx:0,ty:0};
-      cfg.init(a,e,i); agents.push(a);
+    for(let i=0;i<N;i++){
+      const a={x:e.o.x,y:e.o.y,vx:0,vy:0,path:0,done:false,ax:0,ay:0,col:'#922aff',trail:[]};
+      cfg.init(a,e,i,N); agents.push(a);
     }
-    step=0; settledStep=null;
-    cancelAnimationFrame(raf);
-    if(reduced){ for(let k=0;k<MAXSTEP;k++){ if(!tick())break; } draw(); cfg.render(metrics()); }
-    else loop();
+    step=0; settledStep=null; finished=false;
   }
   function tick(){
     const e=env();
@@ -286,37 +284,56 @@ function Sim(cfg){
     for(const a of agents){ if(!a.done){ cfg.update(a,e); moving++; } }
     step++;
     const done=agents.length-moving;
-    if(settledStep===null && done>=COUNT*0.9) settledStep=step;
+    if(settledStep===null && done>=N*0.9) settledStep=step;
+    if(cfg.loopForever) return step<MAXSTEP*20;
     return moving>0 && step<MAXSTEP;
   }
   function metrics(){return cfg.metrics(agents,env(),settledStep);}
-  function loop(){
-    const cont=tick();
-    draw();
-    cfg.render(metrics());
-    if(cont) raf=requestAnimationFrame(loop);
-  }
   function draw(){
     const e=env();
-    // fade previous frame for short trails
-    ctx.fillStyle='rgba(22,12,30,0.30)'; ctx.fillRect(0,0,W,H);
+    if(cfg.draw){ cfg.draw(ctx,e,agents,S); return; }
+    if(cfg.clearSolid){ ctx.fillStyle='#160c1e'; ctx.fillRect(0,0,W,H); }
+    else { ctx.fillStyle='rgba(22,12,30,'+(cfg.fade||0.30)+')'; ctx.fillRect(0,0,W,H); }
     if(cfg.bg) cfg.bg(ctx,e);
+    if(cfg.trail){
+      ctx.lineWidth=1.1;
+      for(const a of agents){ const tr=a.trail; if(tr&&tr.length>1){
+        ctx.strokeStyle=a.tcol||'rgba(146,42,255,0.20)';
+        ctx.beginPath(); ctx.moveTo(tr[0].x,tr[0].y);
+        for(let k=1;k<tr.length;k++) ctx.lineTo(tr[k].x,tr[k].y);
+        ctx.stroke();
+      }}
+    }
     // target A
-    ctx.save();
     ctx.strokeStyle='#179f93'; ctx.lineWidth=2;
     ctx.beginPath(); ctx.arc(e.t.x,e.t.y,S*0.05,0,7); ctx.stroke();
     ctx.fillStyle='rgba(23,159,147,.9)';
     ctx.beginPath(); ctx.arc(e.t.x,e.t.y,3.5,0,7); ctx.fill();
-    ctx.restore();
     // origin
     ctx.fillStyle='#f19202';
     ctx.beginPath(); ctx.arc(e.o.x,e.o.y,4.5,0,7); ctx.fill();
     // agents
-    for(const a of agents){
-      ctx.fillStyle=a.col;
-      ctx.beginPath(); ctx.arc(a.x,a.y,a.done?2.2:3,0,7); ctx.fill();
-    }
+    for(const a of agents){ ctx.fillStyle=a.col; ctx.beginPath(); ctx.arc(a.x,a.y,a.done?2.2:3,0,7); ctx.fill(); }
   }
+  function frame(){
+    if(!inView){ raf=0; return; }
+    const more=tick(); draw(); cfg.render(metrics());
+    if(more) raf=requestAnimationFrame(frame);
+    else { finished=true; raf=0; }
+  }
+  function ensure(){ if(reduced||raf) return; if(inView && !finished) raf=requestAnimationFrame(frame); }
+  function reset(){
+    if(raf){ cancelAnimationFrame(raf); raf=0; }
+    build();
+    if(reduced){ const lim=cfg.loopForever?160:MAXSTEP; for(let k=0;k<lim;k++){ if(!tick())break; } draw(); cfg.render(metrics()); return; }
+    draw(); cfg.render(metrics());          // first static frame
+    ensure();
+  }
+  // only animate while the canvas is visible
+  try{
+    const ob=new IntersectionObserver(es=>es.forEach(en=>{ inView=en.isIntersecting; if(inView) ensure(); }),{threshold:0.12});
+    ob.observe(cv);
+  }catch(_){ inView=true; ensure(); }
   // wire slider + reset + persistence
   const sl=document.getElementById(cfg.slider), lab=document.getElementById(cfg.slider+'v');
   const KEY='gir.'+cfg.slider, saved=localStorage.getItem(KEY);
@@ -329,148 +346,175 @@ function Sim(cfg){
     clearTimeout(deb); deb=setTimeout(reset,40);
   });
   document.getElementById(cfg.reset).addEventListener('click',reset);
-  let rz; window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(reset,160);});
+  let rz; window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(reset,180);});
   reset();
 }
 
-/* ---------- 01 · GOAL CLARITY ---------- */
+/* ---------- 01 · GOAL CLARITY ----------
+   Workers commit to their own misread of A (phase 1), then correct to the real
+   target once it's clear (phase 2). Fuzz widens the misread and adds path thrash,
+   so the wasted distance (total path / ideal straight line) climbs. */
 Sim({
-  id:'c1', slider:'clarity', key:'clarity', reset:'r1', P:{}, col:()=> '#922aff',
+  id:'c1', count:28, slider:'clarity', key:'clarity', reset:'r1', P:{}, clearSolid:true, trail:true,
   init(a,e){
     const fuzz=1-e.P.clarity;
-    // perceived target = blend of true A and a noisy point; fuzz widens the cloud
-    a.tx=e.t.x + randn()*e.S*0.34*fuzz;
+    a.col='#c98bff'; a.tcol='rgba(146,42,255,0.22)'; a.fuzz=fuzz; a.phase=1;
+    a.y=e.o.y+(Math.random()-.5)*e.H*0.30;
+    a.tx=e.t.x + randn()*e.S*0.40*fuzz;   // the target this worker *thinks* they're building
     a.ty=e.t.y + randn()*e.S*0.40*fuzz;
-    a.fuzz=fuzz; a.ideal=Math.hypot(e.t.x-a.x,e.t.y-a.y);
+    a.ideal=Math.hypot(e.t.x-a.x,e.t.y-a.y);
+    a.first=Math.hypot(a.tx-e.t.x,a.ty-e.t.y) < e.S*0.07;   // got the requirement right first time
   },
   update(a,e){
-    const dx=a.tx-a.x, dy=a.ty-a.y, d=Math.hypot(dx,dy)||1;
-    const sp=e.S*0.014;
-    const jit=e.S*0.010*a.fuzz;
-    a.x+=dx/d*sp + randn()*jit;
-    a.y+=dy/d*sp + randn()*jit;
-    a.path+=sp;
-    if(d<e.S*0.018) a.done=true;
+    const sp=e.S*0.013;
+    const gx=(a.phase===1?a.tx:e.t.x)-a.x, gy=(a.phase===1?a.ty:e.t.y)-a.y;
+    const d=Math.hypot(gx,gy)||1;
+    const jit=e.S*0.012*a.fuzz*(a.phase===1?1:0.4);   // ambiguity = thrash
+    const nx=-gy/d, ny=gx/d, r=randn()*jit;
+    const mx=gx/d*sp + nx*r, my=gy/d*sp + ny*r;
+    a.x+=mx; a.y+=my; a.path+=Math.hypot(mx,my);
+    if(e.step%2===0){ a.trail.push({x:a.x,y:a.y}); if(a.trail.length>200) a.trail.shift(); }
+    if(a.phase===1){ if(d<e.S*0.03) a.phase=2; }
+    else if(d<e.S*0.025) a.done=true;
   },
-  bg(ctx,e){ // fuzz halo around A
+  bg(ctx,e){ // fuzz halo around A — the uncertainty cone at the destination
     const fuzz=1-e.P.clarity;
     if(fuzz<=0.001) return;
-    const r=e.S*0.06 + e.S*0.34*fuzz;
+    const r=e.S*0.06 + e.S*0.40*fuzz;
     const g=ctx.createRadialGradient(e.t.x,e.t.y,2,e.t.x,e.t.y,r);
-    g.addColorStop(0,'rgba(146,42,255,0.16)'); g.addColorStop(1,'rgba(146,42,255,0)');
+    g.addColorStop(0,'rgba(146,42,255,0.14)'); g.addColorStop(1,'rgba(146,42,255,0)');
     ctx.fillStyle=g; ctx.beginPath(); ctx.arc(e.t.x,e.t.y,r,0,7); ctx.fill();
   },
   metrics(agents,e,settled){
-    const R=e.S*0.06;
-    let hit=0, path=0, ideal=0;
-    for(const a of agents){ path+=a.path; ideal+=a.ideal; if(Math.hypot(a.x-e.t.x,a.y-e.t.y)<R) hit++; }
-    return {conv:settled, waste:path/Math.max(ideal,1), hit:Math.round(hit/agents.length*100)};
+    let path=0, ideal=0, first=0;
+    for(const a of agents){ path+=a.path; ideal+=a.ideal; if(a.first) first++; }
+    return {conv:settled, waste:path/Math.max(ideal,1), first:Math.round(first/agents.length*100)};
   },
   render(m){
     document.getElementById('m1conv').innerHTML=(m.conv?m.conv:'—')+'<small> steps</small>';
     document.getElementById('m1waste').innerHTML=m.waste.toFixed(2)+'<small>×</small>';
-    document.getElementById('m1hit').innerHTML=m.hit+'<small>%</small>';
+    document.getElementById('m1hit').innerHTML=m.first+'<small>%</small>';
   }
 });
 
-/* ---------- 02 · PRINCIPLES / BOUNDARY CONDITIONS ---------- */
+/* ---------- 02 · PRINCIPLES / BOUNDARY CONDITIONS ----------
+   A grid of compasses. Each engineer reads "north" (the goal) with a private bias
+   plus a live wobble. Shared principles (the slider) scale that whole error toward
+   zero — so the team aligns even though no individual got more certain. */
 Sim({
-  id:'c2', slider:'principles', key:'principles', reset:'r2', P:{}, col:()=> '#726bf3',
-  init(a,e){ // every agent has its own noisy idea of where A is (fixed uncertainty)
-    a.tx=e.t.x + randn()*e.S*0.30;
-    a.ty=e.t.y + randn()*e.S*0.34;
-  },
-  pre(e){ // team's mean desired heading this frame
-    let mx=0,my=0,n=0;
-    for(const a of e.agents){ if(a.done)continue; const dx=a.tx-a.x,dy=a.ty-a.y,d=Math.hypot(dx,dy)||1; mx+=dx/d; my+=dy/d; n++; }
-    const m=Math.hypot(mx,my)||1; e.mx=mx/m; e.my=my/m;
+  id:'c2', count:24, slider:'principles', key:'principles', reset:'r2', P:{}, loopForever:true,
+  init(a,e,i,n){
+    const cols=e.W>620?6:4, rows=Math.ceil(n/cols);
+    const col=i%cols, row=(i/cols|0), cw=e.W/cols, ch=e.H/rows;
+    a.cx=cw*(col+0.5); a.cy=ch*(row+0.5); a.r=Math.min(cw,ch)*0.34;
+    a.bias=randn()*0.6; a.ph=Math.random()*6.283; a.freq=0.5+Math.random()*0.9;
+    a.err=0; a.ang=-Math.PI/2;
   },
   update(a,e){
-    const p=e.P.principles;
-    const dx=a.tx-a.x, dy=a.ty-a.y, d=Math.hypot(dx,dy)||1;
-    let hx=(1-p)*(dx/d)+p*e.mx, hy=(1-p)*(dy/d)+p*e.my;
-    const h=Math.hypot(hx,hy)||1; hx/=h; hy/=h;
-    const sp=e.S*0.013;
-    a.vx=hx; a.vy=hy;
-    a.x+=hx*sp; a.y+=hy*sp; a.path+=sp;
-    if(Math.hypot(a.x-e.t.x,a.y-e.t.y)<e.S*0.05) a.done=true;
+    const loose=1-e.P.principles, MAX=1.15;                 // ~66° of headroom
+    const wob=Math.sin(e.step*0.045*a.freq + a.ph)*0.55;    // needle wanders each reading
+    a.err=clamp(a.bias+wob,-1.6,1.6)*MAX*loose;             // radians off north
+    a.ang=-Math.PI/2 + a.err;
   },
-  metrics(agents,e){
-    let cx=0,cy=0,n=0;
-    for(const a of agents){cx+=a.x;cy+=a.y;n++;}
-    cx/=n; cy/=n;
-    let disp=0; for(const a of agents) disp+=Math.hypot(a.x-cx,a.y-cy);
-    disp=disp/n/(e.S*0.5); // normalised spread
-    // alignment: mean velocity coherence
-    let mvx=0,mvy=0,m=0;
-    for(const a of agents){ if(a.vx||a.vy){mvx+=a.vx;mvy+=a.vy;m++;} }
-    const ml=Math.hypot(mvx,mvy)/Math.max(m,1);
-    return {disp:Math.round(clamp(disp,0,1)*100), align:Math.round(clamp(ml,0,1)*100)};
+  draw(ctx,e,agents){
+    ctx.fillStyle='#160c1e'; ctx.fillRect(0,0,e.W,e.H);
+    const wedge=1.15*(1-e.P.principles);
+    for(const a of agents){
+      const cx=a.cx, cy=a.cy, r=a.r;
+      if(wedge>0.02){                                       // uncertainty wedge
+        ctx.fillStyle='rgba(146,42,255,0.13)';
+        ctx.beginPath(); ctx.moveTo(cx,cy);
+        ctx.arc(cx,cy,r,-Math.PI/2-wedge,-Math.PI/2+wedge); ctx.closePath(); ctx.fill();
+      }
+      ctx.strokeStyle='rgba(255,255,255,0.10)'; ctx.lineWidth=1;   // dial
+      ctx.beginPath(); ctx.arc(cx,cy,r,0,7); ctx.stroke();
+      ctx.strokeStyle='rgba(168,159,192,0.30)';                    // north tick
+      ctx.beginPath(); ctx.moveTo(cx,cy-r); ctx.lineTo(cx,cy-r*0.72); ctx.stroke();
+      const on=Math.abs(a.err)<0.14;                               // needle
+      ctx.strokeStyle=on?'#179f93':'#f19202'; ctx.lineWidth=2.2;
+      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+Math.cos(a.ang)*r*0.9, cy+Math.sin(a.ang)*r*0.9); ctx.stroke();
+      ctx.fillStyle='#ece5f4'; ctx.beginPath(); ctx.arc(cx,cy,2,0,7); ctx.fill();
+    }
+  },
+  metrics(agents){
+    let sx=0,sy=0; for(const a of agents){ sx+=Math.cos(a.ang); sy+=Math.sin(a.ang); }
+    const R=Math.hypot(sx,sy)/agents.length;                       // mean resultant length
+    const spread=Math.sqrt(-2*Math.log(Math.max(R,1e-4)))*180/Math.PI;  // circular std dev, degrees
+    return {align:Math.round(R*100), spread:Math.round(Math.min(spread,180))};
   },
   render(m){
-    document.getElementById('m2disp').innerHTML=m.disp+'<small>%</small>';
+    document.getElementById('m2disp').innerHTML=m.spread+'<small>°</small>';
     document.getElementById('m2align').innerHTML=m.align+'<small>%</small>';
   }
 });
 
-/* ---------- 03 · CONTEXT RETENTION ---------- */
+/* ---------- 03 · CONTEXT RETENTION ----------
+   Obstacles sit between origin and A. Memory keeps each worker's avoidance vector
+   alive, so high retention commits to a clean route around a known wall; low
+   retention forgets, re-collides, and thrashes. Efficiency = ideal / actual path. */
 Sim({
-  id:'c3', slider:'memory', key:'memory', reset:'r3', P:{}, col:()=> '#ff3939',
-  init(a,e){
-    a.ax=0; a.ay=0;
+  id:'c3', count:26, slider:'memory', key:'memory', reset:'r3', P:{}, clearSolid:true, trail:true,
+  init(a,e,i,n){
+    a.ax=0; a.ay=0; a.col='#ff6a6a'; a.tcol='rgba(255,57,57,0.16)';
+    a.y=e.o.y+(Math.random()-.5)*e.H*0.5;
     a.ideal=Math.hypot(e.t.x-a.x,e.t.y-a.y);
     if(i===0){ // rebuild obstacles each run so they track the current canvas size
       e.P._obs=[
-        {x:e.W*0.40,y:e.H*0.34,r:e.S*0.13},
-        {x:e.W*0.52,y:e.H*0.68,r:e.S*0.15},
-        {x:e.W*0.68,y:e.H*0.42,r:e.S*0.11}
+        {x:e.W*0.40,y:e.H*0.34,r:e.S*0.14},
+        {x:e.W*0.54,y:e.H*0.70,r:e.S*0.16},
+        {x:e.W*0.68,y:e.H*0.42,r:e.S*0.12}
       ];
     }
   },
   update(a,e){
-    const obs=e.P._obs, m=e.P.memory;
+    const obs=e.P._obs||[], m=e.P.memory;
     let dx=e.t.x-a.x, dy=e.t.y-a.y, d=Math.hypot(dx,dy)||1;
     let gx=dx/d, gy=dy/d; // goal direction
-    // sense obstacles, accumulate avoidance into memory vector
-    let px=0,py=0;
+    // sense obstacles: a constant radial "push out" (safety) + a memory-driven
+    // *tangential* steer that routes smoothly around a known wall
+    let px=0,py=0, near=false;
     for(const o of obs){
-      const ox=a.x-o.x, oy=a.y-o.y, od=Math.hypot(ox,oy);
+      const ox=a.x-o.x, oy=a.y-o.y, od=Math.hypot(ox,oy)||1;
       const gap=od-o.r;
-      if(gap < e.S*0.10){
-        const w=1/Math.max(gap,4);
-        px+=ox/(od||1)*w; py+=oy/(od||1)*w;
+      if(gap < e.S*0.16){
+        near=true;
+        const w=1/Math.max(gap,6);
+        px+=ox/od*w*0.5; py+=oy/od*w*0.5;           // radial safety (everyone)
+        let tx=-oy/od, ty=ox/od;                      // tangent...
+        if(tx*gx+ty*gy < 0){ tx=-tx; ty=-ty; }        // ...toward the goal side
+        px+=tx*w*(1.3*m); py+=ty*w*(1.3*m);           // memory commits to the route
       }
     }
-    // retention: high memory keeps avoidance vector alive -> commits to a detour
-    const decay=0.15+0.80*m;
-    a.ax=a.ax*decay + px*(0.6+1.6*m);
-    a.ay=a.ay*decay + py*(0.6+1.6*m);
-    let hx=gx + a.ax, hy=gy + a.ay;
+    // retention: high memory keeps the steer alive -> a clean, committed detour
+    const decay=0.30+0.62*m;
+    a.ax=a.ax*decay + px;
+    a.ay=a.ay*decay + py;
+    let hx=gx+a.ax, hy=gy+a.ay;
+    // low memory thrashes at the wall (re-walks dead-ends); high memory glides through
+    const nz=near ? 0.12+2.6*(1-m) : 0.05;
+    hx+=(Math.random()-.5)*nz; hy+=(Math.random()-.5)*nz;
     const h=Math.hypot(hx,hy)||1; hx/=h; hy/=h;
     const sp=e.S*0.013;
     let nx=a.x+hx*sp, ny=a.y+hy*sp;
     // hard collision resolve (never enter an obstacle)
     for(const o of obs){
-      const ox=nx-o.x, oy=ny-o.y, od=Math.hypot(ox,oy);
-      if(od<o.r){ nx=o.x+ox/(od||1)*o.r; ny=o.y+oy/(od||1)*o.r; }
+      const ox=nx-o.x, oy=ny-o.y, od=Math.hypot(ox,oy)||1;
+      if(od<o.r){ nx=o.x+ox/od*o.r; ny=o.y+oy/od*o.r; }
     }
-    a.path+=Math.hypot(nx-a.x,ny-a.y);
-    a.x=nx; a.y=ny;
+    a.path+=Math.hypot(nx-a.x,ny-a.y); a.x=nx; a.y=ny;
+    if(e.step%2===0){ a.trail.push({x:a.x,y:a.y}); if(a.trail.length>200) a.trail.shift(); }
     if(d<e.S*0.05) a.done=true;
   },
   bg(ctx,e){
-    if(!e.P._obs)return;
-    for(const o of e.P._obs){
-      ctx.fillStyle='rgba(90,70,96,0.30)'; ctx.strokeStyle='rgba(168,159,192,0.5)'; ctx.lineWidth=1.5;
+    for(const o of (e.P._obs||[])){
+      ctx.fillStyle='rgba(90,70,96,0.35)'; ctx.strokeStyle='rgba(168,159,192,0.5)'; ctx.lineWidth=1.5;
       ctx.beginPath(); ctx.arc(o.x,o.y,o.r,0,7); ctx.fill(); ctx.stroke();
     }
   },
   metrics(agents,e){
-    let path=0, ideal=0, n=0;
-    for(const a of agents){ path+=a.path; ideal+=a.ideal; n++; }
-    const ratioPath=path/Math.max(ideal,1);
-    const eff=clamp(ideal/Math.max(path,1),0,1);
-    return {eff:Math.round(eff*100), path:ratioPath};
+    let path=0, ideal=0;
+    for(const a of agents){ path+=a.path; ideal+=a.ideal; }
+    return {eff:Math.round(clamp(ideal/Math.max(path,1),0,1)*100), path:path/Math.max(ideal,1)};
   },
   render(m){
     document.getElementById('m3eff').innerHTML=m.eff+'<small>%</small>';
