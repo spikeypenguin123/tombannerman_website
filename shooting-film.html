@@ -71,6 +71,14 @@ section{padding:40px 0}
 .prose ul li:nth-child(5n+4)::before{background:var(--periwinkle)}
 .prose ul li:nth-child(5n+5)::before{background:var(--teal)}
 
+/* scope note */
+.note{border:1.5px solid var(--line);border-left:3px solid var(--teal);border-radius:0 14px 14px 0;
+  padding:15px 20px 14px;margin:26px 0 4px;max-width:64ch;font-size:15.5px;line-height:1.62}
+.note .label{display:block;font-family:"Space Mono",monospace;font-size:10.5px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--teal);margin-bottom:7px}
+.note p{margin:0 0 9px;max-width:none}
+.note p:last-child{margin:0}
+
 /* pull quote */
 .pull{border-left:3px solid var(--orange);background:var(--paper-deep);border-radius:0 14px 14px 0;
   padding:16px 20px;margin:20px 0 18px;max-width:64ch;font-family:"Fraunces",serif;font-size:19px;
@@ -112,7 +120,7 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
   .burger{display:block}
 }
 @media (max-width:560px){
-  .fig-pair{grid-template-columns:1fr}
+  .fig-pair{gap:9px}
 }
 </style></head><body>
 <nav class="nav"><div class="nav-in">
@@ -127,6 +135,12 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
   <h1>So you want to start shooting film?</h1>
   <p class="post-meta">A backpacker's guide · <b>7 August 2026</b> · ~9 min</p>
   <p class="abstract">Welcome to the world of film. This is everything I wish someone had told me before I spent money on my first camera — which body to buy and why it should be fully mechanical, where to actually find one, what to load it with, and the part nobody mentions before you leave: how to get three months of exposed rolls home through airport security and tropical heat without losing them. Fewer problems, more photos.</p>
+
+  <div class="note">
+    <span class="label">What this is</span>
+    <p>This isn't a how-to on <em>shooting</em> film — there's nothing here about exposure, focus or composition. It's a guide to <strong>getting into</strong> film and travelling with it: which camera to buy, where to find one, what to load it with, and how to get your rolls home in one piece.</p>
+    <p>For the craft itself, two videos worth your time — <a href="https://youtu.be/kYFSuGNzuFg" target="_blank" rel="noopener">how to shoot a film camera</a> and <a href="https://youtu.be/q03B-V6ZU2M" target="_blank" rel="noopener">how to take better photos</a>.</p>
+  </div>
 
   <figure class="fig-hero">
     <div class="fig-pair">
