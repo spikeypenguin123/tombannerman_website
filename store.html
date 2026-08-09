@@ -18,12 +18,23 @@ p{color:var(--ink-soft);font-size:13px;letter-spacing:.5px;max-width:46ch;margin
 .links a{font-size:12px;letter-spacing:.5px;text-transform:uppercase;border:1.5px solid var(--ink);
   color:var(--ink);padding:9px 16px;border-radius:30px;text-decoration:none;transition:.2s}
 .links a:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+.url{font-size:14px;letter-spacing:.5px;word-break:break-all;text-transform:none}
+.url b{font-weight:400;color:var(--violet)}
 </style></head><body>
-<h1>The store has moved.</h1>
-<p>Prints and merch now live at shop.tombannerman.com. Taking you there now &mdash; if nothing happens, use the link below.</p>
+<h1 id="state">Taking you to the store&hellip;</h1>
+<p id="detail">If nothing happens in a few seconds, use the link below.</p>
 <div class="links">
-  <a href="https://shop.tombannerman.com">Go to the store</a>
-  <a href="/">Home</a>
+  <a class="url" href="https://shop.tombannerman.com">shop<b>.</b>tombannerman.com &rarr;</a>
+  <a href="/">Back to tombannerman.com</a>
 </div>
-<script>location.replace("https://shop.tombannerman.com");</script>
+<script>
+// Three things try to move you: the meta refresh in the head, this replace(), and
+// finally the visible link. If all of them are still blocked four seconds later, say so
+// plainly rather than leaving a page that claims to be routing and never does.
+location.replace("https://shop.tombannerman.com");
+setTimeout(function () {
+  document.getElementById("state").textContent = "That redirect didn’t go through.";
+  document.getElementById("detail").textContent = "Open the store directly:";
+}, 4000);
+</script>
 </body></html>
