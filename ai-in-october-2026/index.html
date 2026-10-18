@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A five-minute beginner primer on the state of AI in October 2026, with interactive charts.">
+<title>AI in October 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: one reading column (~66ch) with charts breaking slightly wider; a field-guide primer, not a dashboard. */
+:root{
+  --paper:#f5f7f9; --panel:#ffffff; --ink:#121821; --muted:#55606e; --faint:#8b95a1; --rule:#dde2e8;
+  --closed:#2a78d6; --open:#eb6834; --band:rgba(42,120,214,.14); --brainband:rgba(98,80,214,.10);
+  --accent:#2a78d6;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#11151b; --panel:#181d25; --ink:#e9edf2; --muted:#a7b0bc; --faint:#77818d; --rule:#2a313b;
+    --closed:#3987e5; --open:#d95926; --band:rgba(57,135,229,.18); --brainband:rgba(144,133,233,.14);
+    --accent:#6aa6ef; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#11151b; --panel:#181d25; --ink:#e9edf2; --muted:#a7b0bc; --faint:#77818d; --rule:#2a313b;
+  --closed:#3987e5; --open:#d95926; --band:rgba(57,135,229,.18); --brainband:rgba(144,133,233,.14);
+  --accent:#6aa6ef; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:40px 64px;
+  -webkit-font-smoothing:antialiased}
+.col{max-width:44rem;margin:0 auto}
+.wide{max-width:52rem;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.15;text-wrap:balance;letter-spacing:-.01em;margin:0}
+h1{font-size:clamp(2rem,5.5vw,3rem)}
+h2{font-size:clamp(1.35rem,3.4vw,1.75rem);margin-top:3rem}
+p{margin:.9rem 0}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.dek{font-size:1.15rem;color:var(--muted);margin-top:.8rem}
+.tldr{margin-top:2rem;border-top:3px solid var(--ink);border-bottom:1px solid var(--rule);padding-block:1rem 1.1rem}
+.tldr h2{font-size:1rem;margin:0;font-family:var(--mono);font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.tldr ul{margin:.6rem 0 0;padding-left:1.1rem;display:grid;gap:.45rem}
+.terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:.9rem 1.6rem;margin-top:1rem}
+.terms div{min-width:0}
+.terms dt{font-family:var(--display);font-weight:700;font-size:1rem}
+.terms dd{margin:.15rem 0 0;font-size:.95rem;color:var(--muted);line-height:1.5}
+figure{margin:1.6rem 0 0;background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:16px 16px 12px}
+figcaption{font-family:var(--display);font-weight:700;font-size:1.05rem;line-height:1.3}
+.sub{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:.25rem;letter-spacing:.02em}
+.chart{position:relative;margin-top:.8rem;min-width:0}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.chart .lbl{fill:var(--ink);font-weight:500}
+.grid{stroke:var(--rule);stroke-width:1}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12px;line-height:1.45;
+  padding:7px 9px;border-radius:6px;max-width:240px;z-index:3;transform:translate(-50%,calc(-100% - 12px))}
+.controls{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-top:.8rem;font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.seg button{font:inherit;color:var(--ink);background:transparent;border:0;padding:.42rem .75rem;cursor:pointer}
+.seg button+button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+input[type=range]{flex:1 1 12rem;min-width:0;accent-color:var(--accent)}
+.readout{font-size:1rem;margin-top:.7rem;padding:.7rem .85rem;border-left:3px solid var(--accent);background:var(--paper);border-radius:0 6px 6px 0}
+.readout b{font-family:var(--display)}
+.legend{display:flex;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:.6rem}
+.legend span{display:inline-flex;align-items:center;gap:.4rem}
+.legend i{display:inline-block;width:14px;height:4px;border-radius:2px}
+.legend i.dash{height:0;border-top:2px dashed var(--muted);width:16px}
+.board{display:grid;gap:7px;margin-top:.8rem}
+.row{display:grid;grid-template-columns:minmax(0,11.5rem) minmax(0,1fr) 3.6rem;gap:.6rem;align-items:center;font-family:var(--mono);font-size:.78rem;cursor:default;border-radius:4px}
+.row .nm{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .nm small{color:var(--faint)}
+.track{display:block;height:10px;background:var(--rule);border-radius:0 4px 4px 0;position:relative}
+.fill{display:block;height:100%;width:0;border-radius:0 4px 4px 0;transition:width .45s ease}
+.row .val{text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
+.row .na{color:var(--faint);font-size:.72rem}
+details{margin-top:.8rem;font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+summary{cursor:pointer}
+.tablewrap{overflow-x:auto;margin-top:.5rem}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:4px 10px 4px 0;border-bottom:1px solid var(--rule);white-space:nowrap}
+th{color:var(--faint);font-weight:500}
+.next{display:grid;gap:1rem;margin-top:1rem}
+.next div{border-top:1px solid var(--rule);padding-top:.8rem;display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:1rem}
+.next .when{font-family:var(--mono);font-size:.85rem;color:var(--accent);padding-top:.2rem}
+.next p{margin:0}
+.note{font-size:.92rem;color:var(--muted)}
+footer{margin-top:3rem;border-top:1px solid var(--rule);padding-top:1rem;font-size:.85rem;color:var(--muted)}
+footer ul{padding-left:1.1rem;margin:.4rem 0 0}
+@media (max-width:520px){
+  body{font-size:17px}
+  .row{grid-template-columns:minmax(0,8.5rem) minmax(0,1fr) 3.2rem}
+  .next div{grid-template-columns:1fr;gap:.25rem}
+}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+</style>
+</head>
+<body>
+
+
+<article>
+  <header class="col">
+    <div class="eyebrow">A five-minute primer · 18 October 2026</div>
+    <h1>Where AI stands in October 2026, and where it's heading</h1>
+    <p class="dek">Four charts that explain what today's AI can do, how fast it is improving, and what to expect over the next two years.</p>
+
+    <section class="tldr" aria-labelledby="tldr-h">
+      <h2 id="tldr-h">TL;DR</h2>
+      <ul>
+        <li>The best AI systems now outscore PhD experts on hard science exams and can work on their own for hours at a time.</li>
+        <li>The length of task they can finish on their own has doubled roughly every 4–7 months for six years.</li>
+        <li>Free-to-download models trail the best paid ones by only about 3–4 months, at a fraction of the price.</li>
+        <li>The raw computing power once thought to match a human brain is now affordable to a business. The software was the missing piece, and it is catching up fast.</li>
+      </ul>
+    </section>
+  </header>
+
+  <section class="col" aria-labelledby="terms-h">
+    <h2 id="terms-h">Five words you need</h2>
+    <dl class="terms">
+      <div><dt>Model</dt><dd>The AI itself: a very large program trained on text, code and images. ChatGPT, Claude and Gemini are apps built on models.</dd></div>
+      <div><dt>Benchmark</dt><dd>A standard test used to compare models, like an exam with a fixed set of questions or tasks.</dd></div>
+      <div><dt>Agent</dt><dd>A model that works through a task step by step on its own, using tools such as a web browser or a code editor.</dd></div>
+      <div><dt>Open model</dt><dd>A model whose files anyone can download and run on their own computer. Closed models are only available through the company's app or paid service.</dd></div>
+      <div><dt>Compute</dt><dd>Raw computing power, counted as calculations per second. More compute lets you build and run bigger, smarter models.</dd></div>
+    </dl>
+  </section>
+
+  <!-- 1. Task length -->
+  <section class="col" aria-labelledby="s1-h">
+    <h2 id="s1-h">AI can work alone for longer and longer</h2>
+    <p>The clearest way to measure progress is to ask how long a task an AI agent can finish by itself. A research group called METR times how long each task takes a skilled person, then checks which tasks the AI completes successfully at least half the time.</p>
+    <p>In 2019 that was a few seconds of work. By early 2026 it was around 12 hours. That growth is remarkably steady on a log scale, where each gridline is a big jump in length.</p>
+  </section>
+  <div class="wide">
+    <figure id="fig-horizon">
+      <figcaption>Length of task an AI agent can finish on its own</figcaption>
+      <div class="sub">Measured by METR (dots) · trend projection (shaded) · tasks succeed about half the time</div>
+      <div class="chart" id="c-horizon"></div>
+      <div class="controls">
+        <label for="yr">Move the slider to look ahead</label>
+        <input type="range" id="yr" min="2026.75" max="2028.5" step="0.25" value="2027.5">
+      </div>
+      <div class="readout" id="r-horizon" aria-live="polite"></div>
+      <div class="legend">
+        <span><i style="background:var(--closed)"></i>Measured</span>
+        <span><i style="background:var(--band);height:10px"></i>Projection: doubling every 4 to 7 months</span>
+        <span><i class="dash"></i>Upper limit of today's test (16 h)</span>
+      </div>
+      <details><summary>Show the numbers</summary><div class="tablewrap"><table id="t-horizon"></table></div></details>
+    </figure>
+  </div>
+  <div class="col">
+    <p class="note">The newest models have not been measured yet. The test only goes up to about 16 hours of work, and the best models are already near that limit, so everything after early 2026 is a projection.</p>
+  </div>
+
+  <!-- 2. Leaderboard -->
+  <section class="col" aria-labelledby="s2-h">
+    <h2 id="s2-h">Who's ahead right now</h2>
+    <p>Seven new top-tier models arrived between mid-September and mid-October. The independent group Artificial Analysis runs every model through the same ten hard tests and combines them into one score. Switch the chart to cost to see the other half of the story: models close to the top are getting much cheaper.</p>
+  </section>
+  <div class="wide">
+    <figure id="fig-board">
+      <figcaption>The leading models, October 2026</figcaption>
+      <div class="sub">Artificial Analysis Intelligence Index · cost = US$ to run one test task</div>
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Measure">
+          <button type="button" id="m-score" aria-pressed="true">Intelligence score</button>
+          <button type="button" id="m-cost" aria-pressed="false">Cost per task</button>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--closed)"></i>Closed (paid service)</span>
+        <span><i style="background:var(--open)"></i>Open (free to download)</span>
+      </div>
+      <div class="chart"><div class="board" id="c-board"></div></div>
+      <details><summary>Show the numbers</summary><div class="tablewrap"><table id="t-board"></table></div></details>
+    </figure>
+  </div>
+  <div class="col">
+    <p>Anthropic's Claude holds the top two spots. OpenAI's GPT-6.1 Sol is the bargain: nearly as capable for about an eighth of the cost. The best open model, Xiaomi's MiMo, scores 46 and costs 13 cents a task.</p>
+  </div>
+
+  <!-- 3. Open vs closed -->
+  <section class="col" aria-labelledby="s3-h">
+    <h2 id="s3-h">Free models are only months behind</h2>
+    <p>This chart uses one hard science exam with questions written by PhD researchers. Experts score about 65% in their own field. Both paid and free models passed that line within months of each other in late 2024 and early 2025, and both are now close to the maximum.</p>
+  </section>
+  <div class="wide">
+    <figure id="fig-oc">
+      <figcaption>Best closed vs best open model on a PhD-level science exam</figcaption>
+      <div class="sub">GPQA Diamond score (%) · hover or tap a dot for the model</div>
+      <div class="chart" id="c-oc"></div>
+      <div class="legend">
+        <span><i style="background:var(--closed)"></i>Best closed model</span>
+        <span><i style="background:var(--open)"></i>Best open model</span>
+        <span><i class="dash"></i>PhD experts (65%)</span>
+      </div>
+      <details><summary>Show the numbers</summary><div class="tablewrap"><table id="t-oc"></table></div></details>
+    </figure>
+  </div>
+  <div class="col">
+    <p>Across many tests, researchers at Epoch AI find open models trail the best closed ones by about four months on average. Most of the leading open models now come from Chinese labs.</p>
+  </div>
+
+  <!-- 4. Compute -->
+  <section class="col" aria-labelledby="s4-h">
+    <h2 id="s4-h">Computing power keeps getting cheaper</h2>
+    <p>Computing power per dollar doubles about every two and a half years. Scientists' estimates of the computing power a human brain uses vary widely, but the middle estimate is about a thousand trillion calculations per second. Pick a budget to see when it could buy that much.</p>
+  </section>
+  <div class="wide">
+    <figure id="fig-compute">
+      <figcaption>Calculations per second you can buy for a fixed budget</figcaption>
+      <div class="sub">Trend from Epoch AI price-performance data · dots are real machines</div>
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Budget">
+          <button type="button" data-b="1000" aria-pressed="true">$1k</button>
+          <button type="button" data-b="10000" aria-pressed="false">$10k</button>
+          <button type="button" data-b="100000" aria-pressed="false">$100k</button>
+          <button type="button" data-b="1000000" aria-pressed="false">$1M</button>
+        </div>
+      </div>
+      <div class="chart" id="c-compute"></div>
+      <div class="readout" id="r-compute" aria-live="polite"></div>
+      <div class="legend">
+        <span><i style="background:var(--closed)"></i>Selected budget</span>
+        <span><i style="background:var(--brainband);height:10px"></i>Range of brain estimates</span>
+        <span><i class="dash"></i>Middle estimate</span>
+      </div>
+    </figure>
+  </div>
+  <div class="col">
+    <p>A business could buy brain-scale raw power years ago. That did not produce human-level AI on its own, because the software was the hard part. The first chart shows that software is now improving quickly too. NVIDIA's next chip, Vera Rubin, is shipping this autumn with about five times the AI computing power of the previous generation, and next year's models will be trained on it.</p>
+  </div>
+
+  <!-- What next -->
+  <section class="col" aria-labelledby="s5-h">
+    <h2 id="s5-h">What to expect next</h2>
+    <p>These are trend projections, not certainties. Each could arrive sooner or later.</p>
+    <div class="next">
+      <div><span class="when">Early 2027</span><p>A free, downloadable model matches July 2026's best paid model (Claude Opus 5). A version small enough for a high-end desktop follows a month or two later.</p></div>
+      <div><span class="when">Late 2026 – 2027</span><p>AI agents finish tasks that take a person a full working week, on their own, about half the time.</p></div>
+      <div><span class="when">Mid 2027 – 2028</span><p>Tasks that take a person a month of work become possible. Reliability, not raw ability, becomes the main limit on what people trust AI to do.</p></div>
+      <div><span class="when">2027</span><p>The first models trained on the new generation of chips arrive, and the cost of today's top-level AI keeps falling.</p></div>
+    </div>
+    <p class="note">Two cautions. Benchmark scores are often reported by the companies themselves, and doing well on a test is not the same as doing a job well. Treat any single number as a signal, not a guarantee.</p>
+  </section>
+
+  <footer class="col">
+    <p>For the latest numbers, updated every morning, see the <a href="../ai-dashboard/">AI Frontier Tracker</a>.</p>
+    Sources
+    <ul>
+      <li><a href="https://metr.org/time-horizons/" target="_blank" rel="noopener">METR task time horizons</a></li>
+      <li><a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">Artificial Analysis leaderboard</a> (retrieved 18 Oct 2026)</li>
+      <li><a href="https://epoch.ai/data-insights/open-closed-eci-gap" target="_blank" rel="noopener">Epoch AI: open models trail closed models by about four months</a></li>
+      <li><a href="https://epoch.ai/blog/trends-in-gpu-price-performance" target="_blank" rel="noopener">Epoch AI: trends in GPU price-performance</a></li>
+      <li><a href="https://coefficientgiving.org/research/new-report-on-how-much-computational-power-it-takes-to-match-the-human-brain/" target="_blank" rel="noopener">Open Philanthropy: computing power of the human brain</a></li>
+      <li><a href="https://www.deeplearning.ai/the-batch/an-unexpected-open-weights-leader" target="_blank" rel="noopener">The Batch: Xiaomi's MiMo leads open models</a></li>
+    </ul>
+  </footer>
+</article>
+
+<script>
+(function(){
+  const NS='http://www.w3.org/2000/svg';
+  const fmtMin=m=>{
+    if(m<1) return Math.round(m*60)+' seconds';
+    if(m<60) return Math.round(m)+' minutes';
+    if(m<480){const h=m/60;return (h<10?h.toFixed(1):Math.round(h))+' hours';}
+    if(m<2400){const d=m/480;return (d<10?d.toFixed(1):Math.round(d))+' work days';}
+    if(m<10200){const w=m/2400;return w.toFixed(1)+' work weeks';}
+    const mo=m/10200;return (mo<10?mo.toFixed(1):Math.round(mo))+' work months';
+  };
+  const yearLabel=t=>{const y=Math.floor(t+1e-9);const q=Math.round((t-y)*12);const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return M[Math.min(11,q)]+' '+y;};
+
+  // shared tooltip behaviour for any [data-tip] inside a chart container
+  function wireTips(box){
+    let tip=box.querySelector('.tip');
+    if(!tip){tip=document.createElement('div');tip.className='tip';tip.hidden=true;box.appendChild(tip);}
+    function show(el,x,y){tip.innerHTML=el.getAttribute('data-tip');tip.hidden=false;
+      const bw=box.clientWidth;const half=Math.min(120,tip.offsetWidth/2);
+      tip.style.left=Math.max(half,Math.min(bw-half,x))+'px';tip.style.top=y+'px';}
+    box.addEventListener('pointermove',e=>{const el=e.target.closest('[data-tip]');if(!el||!box.contains(el)){tip.hidden=true;return;}
+      const r=box.getBoundingClientRect();show(el,e.clientX-r.left,e.clientY-r.top);});
+    box.addEventListener('pointerleave',()=>{tip.hidden=true;});
+    box.addEventListener('focusin',e=>{const el=e.target.closest('[data-tip]');if(!el)return;
+      const r=box.getBoundingClientRect(),b=el.getBoundingClientRect();show(el,b.left-r.left+b.width/2,b.top-r.top);});
+    box.addEventListener('focusout',()=>{tip.hidden=true;});
+  }
+  function svg(w,h){const s=document.createElementNS(NS,'svg');s.setAttribute('viewBox',`0 0 ${w} ${h}`);s.setAttribute('role','img');return s;}
+  function el(tag,attrs,parent,text){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e;}
+  function size(box,ratio,minH,maxH){const w=Math.max(300,box.clientWidth);return {w,h:Math.round(Math.max(minH,Math.min(maxH,w*ratio)))};}
+  function table(id,head,rows){document.getElementById(id).innerHTML='<thead><tr>'+head.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</tbody>';}
+
+  /* ---------- 1. Task length ---------- */
+  const HZ=[
+    {n:'GPT-2',t:2019.1,m:2/60},{n:'GPT-4',t:2023.2,m:5},{n:'Claude 3.7 Sonnet',t:2025.15,m:50},
+    {n:'OpenAI o3',t:2025.3,m:92},{n:'GPT-5',t:2025.6,m:137},{n:'Claude Opus 4.5',t:2025.95,m:289},{n:'Claude Opus 4.6',t:2026.13,m:718}
+  ];
+  const A_T=2026.13,A_M=718;
+  const proj=(t,months)=>A_M*Math.pow(2,(t-A_T)/(months/12));
+  table('t-horizon',['Model','Date','Task length'],HZ.map(d=>[d.n,yearLabel(d.t),fmtMin(d.m)]));
+  const hBox=document.getElementById('c-horizon');
+  const yr=document.getElementById('yr');
+  function drawHorizon(){
+    const {w,h}=size(hBox,.58,260,400);
+    const m={l:74,r:12,t:12,b:28};
+    const X0=2019,X1=2028.5,L0=Math.log10(1/60),L1=Math.log10(30000);
+    const px=t=>m.l+(t-X0)/(X1-X0)*(w-m.l-m.r);
+    const py=v=>m.t+(L1-Math.log10(v))/(L1-L0)*(h-m.t-m.b);
+    const s=svg(w,h);
+    const defs=el('defs',{},s);const cp=el('clipPath',{id:'hzclip'},defs);el('rect',{x:m.l,y:m.t,width:w-m.l-m.r,height:h-m.t-m.b},cp);
+    [[1/60,'1 second'],[1,'1 minute'],[60,'1 hour'],[480,'1 work day'],[2400,'1 work week'],[10200,'1 work month']].forEach(([v,l])=>{
+      const y=py(v);el('line',{x1:m.l,x2:w-m.r,y1:y,y2:y,class:'grid'},s);el('text',{x:m.l-8,y:y+4,'text-anchor':'end'},s,l);});
+    for(let t=2019;t<=2028;t+=(w<520?3:1)){el('text',{x:px(t),y:h-8,'text-anchor':'middle'},s,t);}
+    // projection band
+    let up='',lo='';const pts=[];
+    for(let t=A_T;t<=X1+1e-9;t+=0.05){pts.push(t);}
+    up=pts.map((t,i)=>(i?'L':'M')+px(t).toFixed(1)+','+py(proj(t,4)).toFixed(1)).join('');
+    lo=pts.slice().reverse().map(t=>'L'+px(t).toFixed(1)+','+py(proj(t,7)).toFixed(1)).join('');
+    el('path',{d:up+lo+'Z',fill:'var(--band)','clip-path':'url(#hzclip)'},s);
+    // 16h ceiling
+    const cy=py(960);el('line',{x1:m.l,x2:w-m.r,y1:cy,y2:cy,stroke:'var(--muted)','stroke-width':1.5,'stroke-dasharray':'5 4'},s);
+    // now line
+    const nx=px(2026.79);el('line',{x1:nx,x2:nx,y1:m.t,y2:h-m.b,stroke:'var(--faint)','stroke-width':1,'stroke-dasharray':'2 3'},s);
+    el('text',{x:nx-4,y:m.t+10,'text-anchor':'end'},s,'today');
+    // selected year marker
+    const sel=+yr.value;const sx=px(sel);
+    el('line',{x1:sx,x2:sx,y1:py(proj(sel,4)),y2:py(proj(sel,7)),stroke:'var(--closed)','stroke-width':3,'stroke-linecap':'round','clip-path':'url(#hzclip)'},s);
+    // measured line
+    el('path',{d:HZ.map((d,i)=>(i?'L':'M')+px(d.t)+','+py(d.m)).join(''),fill:'none',stroke:'var(--closed)','stroke-width':2},s);
+    HZ.forEach(d=>{
+      el('circle',{cx:px(d.t),cy:py(d.m),r:4.5,fill:'var(--closed)',stroke:'var(--panel)','stroke-width':2},s);
+      el('circle',{cx:px(d.t),cy:py(d.m),r:13,fill:'transparent',tabindex:0,'data-tip':`<b>${d.n}</b><br>${yearLabel(d.t)}<br>${fmtMin(d.m)}`},s);
+    });
+    const last=HZ[HZ.length-1];el('text',{x:px(last.t)-8,y:py(last.m)-10,'text-anchor':'end',class:'lbl'},s,'~12 hours');
+    s.setAttribute('aria-label','Line chart: task length AI agents can complete alone rose from about 2 seconds in 2019 to about 12 hours in early 2026, with a projection band beyond.');
+    hBox.querySelectorAll('svg').forEach(x=>x.remove());hBox.prepend(s);
+    document.getElementById('r-horizon').innerHTML=`By <b>${yearLabel(sel)}</b>, the trend says AI agents could finish tasks that take a person between <b>${fmtMin(proj(sel,7))}</b> and <b>${fmtMin(proj(sel,4))}</b>, about half the time.`;
+  }
+  wireTips(hBox);yr.addEventListener('input',drawHorizon);
+
+  /* ---------- 2. Leaderboard ---------- */
+  const BOARD=[
+    {n:'Claude Opus 5.5',lab:'Anthropic',d:'22 Sep 2026',s:58,c:5.98,o:false},
+    {n:'Claude Sonnet 5.5',lab:'Anthropic',d:'28 Sep 2026',s:56,c:5.46,o:false},
+    {n:'Muse Wonder Full',lab:'Meta',d:'12 Oct 2026',s:56,c:null,o:false},
+    {n:'GPT-6 Astra',lab:'OpenAI',d:'3 Sep 2026',s:53,c:3.26,o:false},
+    {n:'Claude Fable 5.1',lab:'Anthropic',d:'1 Sep 2026',s:53,c:7.63,o:false},
+    {n:'Gemini 4 Argon',lab:'Google',d:'13 Oct 2026',s:53,c:1.99,o:false},
+    {n:'GPT-6.1 Sol',lab:'OpenAI',d:'29 Sep 2026',s:52,c:0.72,o:false},
+    {n:'Grok 4.7',lab:'xAI',d:'21 Sep 2026',s:46,c:2.73,o:false},
+    {n:'MiMo-V2.6-Pro',lab:'Xiaomi',d:'21 Sep 2026',s:46,c:0.13,o:true},
+    {n:'GLM-5.3',lab:'Z.ai',d:'28 Aug 2026',s:45,c:2.01,o:true},
+    {n:'Kimi K3',lab:'Moonshot AI',d:'Jul 2026',s:44,c:2.00,o:true},
+    {n:'DeepSeek V4.1 Flash',lab:'DeepSeek',d:'Sep 2026',s:39,c:null,o:true}
+  ];
+  table('t-board',['Model','Maker','Released','Weights','Score','US$ per task'],BOARD.map(d=>[d.n,d.lab,d.d,d.o?'Open':'Closed',d.s,d.c==null?'not published':'$'+d.c.toFixed(2)]));
+  const bBox=document.getElementById('c-board');
+  bBox.innerHTML=BOARD.map((d,i)=>`<div class="row" tabindex="0" data-i="${i}" data-tip="<b>${d.n}</b><br>${d.lab} · ${d.d}<br>${d.o?'Open: free to download':'Closed: paid service'}"><span class="nm">${d.n} <small>${d.lab}</small></span><span class="track"><span class="fill" style="background:var(${d.o?'--open':'--closed'})"></span></span><span class="val"></span></div>`).join('');
+  let mode='score';
+  function drawBoard(){
+    bBox.querySelectorAll('.row').forEach(r=>{
+      const d=BOARD[+r.dataset.i];const f=r.querySelector('.fill'),v=r.querySelector('.val');
+      if(mode==='score'){f.style.width=(d.s/60*100)+'%';v.textContent=d.s;v.className='val';}
+      else if(d.c==null){f.style.width='0%';v.textContent='n/a';v.className='val na';}
+      else{f.style.width=(d.c/8*100)+'%';v.textContent='$'+d.c.toFixed(2);v.className='val';}
+    });
+  }
+  const bs=document.getElementById('m-score'),bc=document.getElementById('m-cost');
+  bs.addEventListener('click',()=>{mode='score';bs.setAttribute('aria-pressed','true');bc.setAttribute('aria-pressed','false');drawBoard();});
+  bc.addEventListener('click',()=>{mode='cost';bc.setAttribute('aria-pressed','true');bs.setAttribute('aria-pressed','false');drawBoard();});
+  wireTips(bBox.parentElement);drawBoard();
+
+  /* ---------- 3. Open vs closed ---------- */
+  const CL=[{n:'GPT-4',t:2023.2,v:35},{n:'Claude 3.5 Sonnet',t:2024.5,v:59},{n:'OpenAI o1',t:2024.92,v:78},{n:'Gemini 2.5 Pro',t:2025.25,v:84},{n:'GPT-5',t:2025.6,v:89},{n:'Gemini 3 Pro',t:2025.9,v:93},{n:'Claude Mythos Preview',t:2026.2,v:95},{n:'Top closed models',t:2026.7,v:95.5}];
+  const OP=[{n:'Llama 2 70B',t:2023.55,v:30},{n:'Llama 3.1 405B',t:2024.6,v:51},{n:'DeepSeek-R1',t:2025.05,v:71},{n:'DeepSeek-R1-0528',t:2025.4,v:81},{n:'Qwen3 / Kimi K2',t:2025.65,v:84},{n:'Kimi K2.6',t:2026.1,v:90.5},{n:'Kimi K3',t:2026.55,v:93.5}];
+  table('t-oc',['Model','Weights','Date','Score'],[...CL.map(d=>[d.n,'Closed',yearLabel(d.t),d.v+'%']),...OP.map(d=>[d.n,'Open',yearLabel(d.t),d.v+'%'])]);
+  const oBox=document.getElementById('c-oc');
+  function drawOC(){
+    const {w,h}=size(oBox,.55,250,360);const m={l:36,r:14,t:12,b:28};
+    const X0=2023,X1=2026.9;const px=t=>m.l+(t-X0)/(X1-X0)*(w-m.l-m.r);const py=v=>m.t+(1-(v-20)/80)*(h-m.t-m.b);
+    const s=svg(w,h);
+    [20,40,60,80,100].forEach(v=>{const y=py(v);el('line',{x1:m.l,x2:w-m.r,y1:y,y2:y,class:'grid'},s);el('text',{x:m.l-6,y:y+4,'text-anchor':'end'},s,v);});
+    for(let t=2023;t<=2026;t++)el('text',{x:px(t),y:h-8,'text-anchor':'middle'},s,t);
+    const ey=py(65);el('line',{x1:m.l,x2:w-m.r,y1:ey,y2:ey,stroke:'var(--muted)','stroke-width':1.5,'stroke-dasharray':'5 4'},s);
+    el('text',{x:w-m.r,y:ey+15,'text-anchor':'end'},s,'PhD experts');
+    function series(D,col){
+      el('path',{d:D.map((d,i)=>(i?'L':'M')+px(d.t)+','+py(d.v)).join(''),fill:'none',stroke:col,'stroke-width':2},s);
+      D.forEach(d=>{el('circle',{cx:px(d.t),cy:py(d.v),r:4.5,fill:col,stroke:'var(--panel)','stroke-width':2},s);
+        el('circle',{cx:px(d.t),cy:py(d.v),r:13,fill:'transparent',tabindex:0,'data-tip':`<b>${d.n}</b><br>${yearLabel(d.t)} · ${d.v}%`},s);});
+    }
+    series(OP,'var(--open)');series(CL,'var(--closed)');
+    el('text',{x:px(2024.5)-8,y:py(59)-10,'text-anchor':'end',class:'lbl'},s,'Closed');
+    el('text',{x:px(2024.6)+8,y:py(51)+16,class:'lbl'},s,'Open');
+    s.setAttribute('aria-label','Line chart: best closed and best open model scores on a PhD-level science exam, 2023 to 2026. Both pass the 65% expert line in late 2024 and early 2025 and approach 95% by 2026.');
+    oBox.querySelectorAll('svg').forEach(x=>x.remove());oBox.prepend(s);
+  }
+  wireTips(oBox);
+
+  /* ---------- 4. Compute per dollar ---------- */
+  const P23=1.3e11,T=2.5,BRAIN=1e15;
+  const buy=(B,t)=>B*P23*Math.pow(2,(t-2023)/T);
+  const cross=(B,C)=>2023+T*Math.log2(C/(B*P23));
+  const MACH=[{n:'PlayStation 3',t:2006,f:2e11,p:'$599'},{n:'PlayStation 5',t:2020,f:1.03e13,p:'$499'},{n:'RTX 4090 graphics card',t:2022,f:8.3e13,p:'$1,599'},{n:'NVIDIA H100 chip',t:2023,f:1e15,p:'~$30,000'},{n:'DGX H100 server',t:2023,f:7.9e15,p:'~$350,000'}];
+  const cBox=document.getElementById('c-compute');let B=1000;
+  const money=b=>b>=1e6?'$'+(b/1e6)+' million':'$'+b.toLocaleString('en-US');
+  const sup=n=>String(n).split('').map(c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[+c]).join('');
+  function drawCompute(){
+    const {w,h}=size(cBox,.58,260,390);const m={l:46,r:14,t:12,b:28};
+    const X0=1995,X1=2040,L0=10,L1=19;
+    const px=t=>m.l+(t-X0)/(X1-X0)*(w-m.l-m.r);const py=f=>m.t+(L1-Math.log10(f))/(L1-L0)*(h-m.t-m.b);
+    const s=svg(w,h);
+    const defs=el('defs',{},s);const cp=el('clipPath',{id:'cclip'},defs);el('rect',{x:m.l,y:m.t,width:w-m.l-m.r,height:h-m.t-m.b},cp);
+    el('rect',{x:m.l,y:py(1e17),width:w-m.l-m.r,height:py(1e13)-py(1e17),fill:'var(--brainband)'},s);
+    for(let L=10;L<=19;L+=(w<520?3:1)){const y=py(Math.pow(10,L));el('line',{x1:m.l,x2:w-m.r,y1:y,y2:y,class:'grid'},s);el('text',{x:m.l-6,y:y+4,'text-anchor':'end'},s,'10'+sup(L));}
+    for(let t=2000;t<=2040;t+=(w<520?10:5))el('text',{x:px(t),y:h-8,'text-anchor':'middle'},s,t);
+    const by=py(BRAIN);el('line',{x1:m.l,x2:w-m.r,y1:by,y2:by,stroke:'var(--muted)','stroke-width':1.5,'stroke-dasharray':'5 4'},s);
+    el('text',{x:m.l+6,y:py(1e17)+14,class:'lbl'},s,'Human brain estimates');
+    // other budgets faint, selected bold
+    [1e3,1e4,1e5,1e6].forEach(b=>{
+      const d=`M${px(X0)},${py(buy(b,X0))}L${px(X1)},${py(buy(b,X1))}`;
+      el('path',{d,fill:'none',stroke:b===B?'var(--closed)':'var(--faint)','stroke-width':b===B?2.5:1,opacity:b===B?1:.45,'clip-path':'url(#cclip)'},s);
+    });
+    const ct=cross(B,BRAIN);
+    if(ct>=X0&&ct<=X1){el('circle',{cx:px(ct),cy:by,r:6,fill:'var(--panel)',stroke:'var(--closed)','stroke-width':2.5},s);}
+    MACH.forEach(d=>{el('rect',{x:px(d.t)-4,y:py(d.f)-4,width:8,height:8,rx:1.5,fill:'var(--ink)',stroke:'var(--panel)','stroke-width':1.5},s);
+      el('circle',{cx:px(d.t),cy:py(d.f),r:12,fill:'transparent',tabindex:0,'data-tip':`<b>${d.n}</b><br>${d.t} · ${d.p}<br>${d.f.toExponential(1).replace('e+',' × 10^')} calc/s`},s);});
+    s.setAttribute('aria-label','Line chart: calculations per second purchasable for a fixed budget rise steadily from 1995 to 2040 and cross the range of human brain estimates.');
+    cBox.querySelectorAll('svg').forEach(x=>x.remove());cBox.prepend(s);
+    const lo=cross(B,1e14),hi=cross(B,1e16),yrTxt=t=>t<1995?'before 1995':Math.round(t);
+    document.getElementById('r-compute').innerHTML=`With <b>${money(B)}</b>, you could buy a brain's worth of raw computing power (middle estimate) around <b>${yrTxt(ct)}</b>. Across the full range of estimates: ${yrTxt(lo)} to ${yrTxt(hi)}.`;
+  }
+  document.querySelectorAll('#fig-compute .seg button').forEach(btn=>btn.addEventListener('click',()=>{
+    B=+btn.dataset.b;document.querySelectorAll('#fig-compute .seg button').forEach(b=>b.setAttribute('aria-pressed',b===btn?'true':'false'));drawCompute();}));
+  wireTips(cBox);
+
+  function drawAll(){drawHorizon();drawOC();drawCompute();}
+  drawAll();
+  let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(drawAll,120);});
+})();
+</script>
+
+</body>
+</html>
