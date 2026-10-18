@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://tombannerman.com/</loc><priority>1.0</priority></url>
   <url><loc>https://tombannerman.com/projects.html</loc><priority>0.8</priority></url>
+  <url><loc>https://tombannerman.com/tech-tree.html</loc><priority>0.8</priority></url>
   <url><loc>https://tombannerman.com/writing.html</loc><priority>0.8</priority></url>
   <url><loc>https://tombannerman.com/ai-dashboard/</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://tombannerman.com/ai-dashboard/methodology.html</loc><priority>0.5</priority></url>
