@@ -23,7 +23,7 @@ export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
   claude -p "Follow every step in tracker/update/daily-update-prompt.md exactly. Today's run is for the date in Australia/Brisbane." \
     --permission-mode dontAsk \
     --permission-prompts none \
-    --allowedTools "Read,Edit,Write,WebSearch,WebFetch,Bash(python3 *),Bash(git *),Bash(cp *),Bash(date *),Bash(ls *)"
+    --allowedTools "Read,Edit,Write,WebSearch,WebFetch,Bash(python3 *),Bash(git *),Bash(cp *),Bash(date *),Bash(ls *)" < /dev/null
   rc=$?
   echo "claude exit code: $rc"
 
