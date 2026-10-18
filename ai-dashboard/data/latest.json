@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T22:14:12+10:00",
+  "updated_at": "2026-10-19T06:46:49+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -820,7 +820,7 @@
       },
       "suite_ceiling_minutes": 960,
       "status": "Newest measurement: Claude Mythos Preview (early checkpoint, released Apr 2026), about 17 h at 50% success (95% CI 8.5–55 h) and about 3 h at 80% (1.6–6.6 h). The 50% figure is above the 16 h where METR says its task suite stops being reliable. No model released since has a published time horizon (see other readings), so today's values are projections at METR's post-2023 doubling time of 3.4–5.2 months; the 80% series has doubled at the same pace (about every 4.4 months since 2023 on METR's data).",
-      "checked": "2026-10-18",
+      "checked": "2026-10-19",
       "other_readings": [
         {
           "source": "METR Frontier Risk Report",
@@ -861,7 +861,7 @@
       ]
     },
     "headline": [
-      "Anthropic holds the top two spots on the AA index; GPT-6.1 Sol is the price-performance leader at about $0.72 per task.",
+      "Claude Opus 5.5 (58) leads the AA index, with Claude Sonnet 5.5 and Meta's Muse Wonder Full tied second at 56; GPT-6.1 Sol is the price-performance leader at about $0.72 per task.",
       "The best open model (MiMo-V2.6-Pro, 46) trails the closed frontier (58) by 12 points, roughly 4 months on Epoch’s lag estimate; Meta's new Muse Spark Open (39) is the best US open model.",
       "An open model matching Claude Opus 5.5 (58) is expected around Jan 2027 (range Dec 2026 to Mar 2027); a version that runs on a desktop under AUD 50k about 2 months later."
     ],
@@ -1123,6 +1123,20 @@
       "title": "DeepSeek V4.1-Flash-1017 (open, MIT)",
       "summary": "Updated checkpoint with stronger vendor benchmarks and shorter outputs; prices unchanged; not yet scored on the AA index.",
       "url": "https://www.bloomberg.com/news/articles/2026-10-17/deepseek-pushes-out-updated-ai-model-it-says-is-faster-leaner"
+    },
+    {
+      "date": "2026-10-16",
+      "kind": "model",
+      "title": "Reflection releases Beam (open)",
+      "summary": "Reflection's first model, 501B / 23B active; AA index 30, the #2 US open model behind Muse Spark Open.",
+      "url": "https://artificialanalysis.ai/articles/reflection-beam"
+    },
+    {
+      "date": "2026-10-15",
+      "kind": "model",
+      "title": "NVIDIA Nemotron 3.5 Super VL and Bolt 74B-A9B (open)",
+      "summary": "Super VL (120B / 12B active) scores 26 on the AA index, double Nemotron 3 Super; Bolt scores 21.",
+      "url": "https://artificialanalysis.ai/articles/nemotron-3-5-super-and-bolt"
     },
     {
       "date": "2026-10-15",
