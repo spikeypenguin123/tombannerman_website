@@ -114,6 +114,13 @@ td.n{color:var(--faint)}
 .log .sm{font-size:.84rem;color:var(--muted)}
 .kind{font-family:var(--mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);margin-left:6px}
 .newb{font-family:var(--mono);font-size:.64rem;color:var(--new);border:1px solid var(--new);border-radius:999px;padding:0 6px;margin-left:6px}
+.hz-legend i.p80{background:var(--new)}
+.hz-other{display:grid;gap:8px;margin-top:12px}
+.hz-other .o{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;border-top:1px solid var(--rule);padding-top:8px;font-size:.88rem}
+.hz-other .o b{font-family:var(--display)}
+.hz-other .o .v{font-family:var(--mono);font-size:.8rem;text-align:right;white-space:nowrap}
+.hz-other .o .n{grid-column:1/-1;color:var(--muted)}
+.hz-other h3{font-family:var(--display);font-size:1rem;margin:14px 0 0}
 .readout{margin-top:10px;padding:10px 12px;border-left:3px solid var(--accent);background:var(--wash);border-radius:0 6px 6px 0;font-size:.9rem}
 footer{font-size:.82rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:14px;display:grid;gap:10px}
 footer ul{margin:.3rem 0 0;padding-left:1.1rem}
@@ -200,10 +207,17 @@ footer ul{margin:.3rem 0 0;padding-left:1.1rem}
       <!-- Horizon -->
       <section class="panel" aria-labelledby="hz-h">
         <h2 id="hz-h">How long a task AI can finish on its own</h2>
-        <div class="sub">METR 50% time horizon (task length for a skilled person) · dots measured · band projected</div>
+        <div class="sub">METR time horizon: length of task (for a skilled person) an AI agent finishes on its own, at 50% and 80% success · dots measured · bands projected</div>
         <div class="chart" id="c-horizon"></div>
+        <div class="legend hz-legend">
+          <span><i style="background:var(--closed)"></i>50% success</span>
+          <span><i class="p80"></i>80% success</span>
+          <span><i class="band" style="background:var(--band-c)"></i>Projection since the last measurement</span>
+        </div>
         <div class="readout" id="hz-read"></div>
         <p class="note" id="hz-status"></p>
+        <h3 class="hz-other-h" style="font-family:var(--display);font-size:1rem;margin:14px 0 0">Other readings</h3>
+        <div class="hz-other" id="hz-other"></div>
       </section>
 
       <!-- Subscriptions vs API -->
@@ -302,6 +316,8 @@ footer ul{margin:.3rem 0 0;padding-left:1.1rem}
     const F=DATA.forecast;
     const H=F.horizon, hzLast=H.measured[H.measured.length-1];
     const hzAt=(t,dm)=>hzLast.minutes*Math.pow(2,monthsBetween(D(hzLast.date),t)/dm);
+    const hz80At=(t,dm)=>hzLast.minutes_80*Math.pow(2,monthsBetween(D(hzLast.date),t)/dm);
+    const hrs=v=>v/60<10?(v/60).toFixed(1).replace(/\.0$/,''):Math.round(v/60);
     const today=new Date(updated.getFullYear(),updated.getMonth(),updated.getDate());
     const gap=bestClosed.aa_index-bestOpen.aa_index;
 
@@ -314,7 +330,7 @@ footer ul{margin:.3rem 0 0;padding-left:1.1rem}
       ['Best open model',bestOpen.aa_index,`${esc(bestOpen.name)} · ${esc(bestOpen.lab)} · ${esc(bestOpen.license||'')}`],
       ['Open vs closed gap',gap+' pts',`${esc(bestOpen.name)} (${bestOpen.aa_index}) vs ${esc(bestClosed.name)} (${bestClosed.aa_index}) · open models trail by ≈${F.open_lag_months.central} months (${F.open_lag_months.low}–${F.open_lag_months.high})`],
       ['Best value near the top',usd(valuePick.cost_per_task_usd),`${esc(valuePick.name)} scores ${valuePick.aa_index} per index task`],
-      ['Task length AI can finish',Math.round(hzAt(today,H.doubling_months.high)/60)+'–'+Math.round(hzAt(today,H.doubling_months.low)/60)+' h',`projected for today's frontier (${esc(bestClosed.name)}); last measured ${fmtMin(hzLast.minutes)} (${esc(hzLast.model)}, ${fmtM(D(hzLast.date))})`],
+      ['Task length AI can finish',Math.round(hzAt(today,H.doubling_months.high)/60)+'–'+Math.round(hzAt(today,H.doubling_months.low)/60)+' h',`at 50% success; ${hrs(hz80At(today,H.doubling_months.high))}–${hrs(hz80At(today,H.doubling_months.low))} h at 80%. Projected for today's frontier (${esc(bestClosed.name)}); last measured ${hrs(hzLast.minutes)} h / ${hrs(hzLast.minutes_80)} h (${esc(hzLast.model)}, ${fmtM(D(hzLast.date))})`],
       ['Solo engineer + AI',mDig.toFixed(1)+'×',`output multiplier on digital engineering work (est.)`]
     ];
     $('tiles').innerHTML=tiles.map(([k,v,s])=>`<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join('');
@@ -422,6 +438,7 @@ footer ul{margin:.3rem 0 0;padding-left:1.1rem}
     /* ---------- horizon ---------- */
     const hBox=$('c-horizon');wireTips(hBox);
     $('hz-status').textContent=H.status;
+    $('hz-other').innerHTML=(H.other_readings||[]).map(o=>`<div class="o"><span><b>${esc(o.subject)}</b> · ${esc(o.source)}, ${fmtD(o.date)}</span><span class="v">${o.p50?'50%: '+esc(o.p50):''}${o.p80?'<br>80%: '+esc(o.p80):''}${!o.p50&&!o.p80?'no time horizon':''}</span><span class="n">${esc(o.note)} <a href="${esc(o.url)}" target="_blank" rel="noopener">Source</a></span></div>`).join('');
     function drawHorizon(){
       const {w,h}=dims(hBox,.4,240,340);const m={l:78,r:14,t:12,b:28};
       const t0=D('2019-01-01'),t1=addMonths(today,18);
@@ -435,14 +452,23 @@ footer ul{margin:.3rem 0 0;padding-left:1.1rem}
       const up=ts.map((t,i)=>(i?'L':'M')+px(t).toFixed(1)+','+py(hzAt(t,H.doubling_months.low)).toFixed(1)).join('');
       const dn=ts.slice().reverse().map(t=>'L'+px(t).toFixed(1)+','+py(hzAt(t,H.doubling_months.high)).toFixed(1)).join('');
       el('path',{d:up+dn+'Z',fill:'var(--band-c)','clip-path':'url(#hzc)'},s);
+      const up8=ts.map((t,i)=>(i?'L':'M')+px(t).toFixed(1)+','+py(hz80At(t,H.doubling_months.low)).toFixed(1)).join('');
+      const dn8=ts.slice().reverse().map(t=>'L'+px(t).toFixed(1)+','+py(hz80At(t,H.doubling_months.high)).toFixed(1)).join('');
+      el('path',{d:up8+dn8+'Z',fill:'rgba(27,175,122,.16)','clip-path':'url(#hzc)'},s);
       el('line',{x1:m.l,x2:w-m.r,y1:py(H.suite_ceiling_minutes),y2:py(H.suite_ceiling_minutes),stroke:'var(--muted)','stroke-dasharray':'5 4'},s);
       el('text',{x:w-m.r,y:py(H.suite_ceiling_minutes)+13,'text-anchor':'end'},s,'limit of current test suite');
       const nx=px(today);el('line',{x1:nx,x2:nx,y1:m.t,y2:h-m.b,stroke:'var(--faint)','stroke-dasharray':'2 3'},s);el('text',{x:nx-4,y:m.t+9,'text-anchor':'end'},s,'today');
       el('path',{d:H.measured.map((p,i)=>(i?'L':'M')+px(D(p.date))+','+py(p.minutes)).join(''),fill:'none',stroke:'var(--closed)','stroke-width':2},s);
-      H.measured.forEach(p=>{const x=px(D(p.date)),y=py(p.minutes);el('circle',{cx:x,cy:y,r:4.5,fill:'var(--closed)',stroke:'var(--panel)','stroke-width':2},s);hit(s,x,y,`<b>${esc(p.model)}</b><br>${fmtD(p.date)} · ${fmtMin(p.minutes)}${p.ci_low!=null?`<br>95% CI ${fmtMin(p.ci_low)} – ${fmtMin(p.ci_high)}`:''}`);});
+      el('path',{d:H.measured.filter(p=>p.minutes_80!=null).map((p,i)=>(i?'L':'M')+px(D(p.date))+','+py(p.minutes_80)).join(''),fill:'none',stroke:'var(--new)','stroke-width':2},s);
+      const tipFor=p=>`<b>${esc(p.model)}</b><br>${fmtD(p.date)}<br>50%: ${fmtMin(p.minutes)}${p.ci_low!=null?` (CI ${fmtMin(p.ci_low)} – ${fmtMin(p.ci_high)})`:''}${p.minutes_80!=null?`<br>80%: ${fmtMin(p.minutes_80)} (CI ${fmtMin(p.ci80_low)} – ${fmtMin(p.ci80_high)})`:''}`;
+      H.measured.forEach(p=>{const x=px(D(p.date)),y=py(p.minutes);el('circle',{cx:x,cy:y,r:4.5,fill:'var(--closed)',stroke:'var(--panel)','stroke-width':2},s);hit(s,x,y,tipFor(p));
+        if(p.minutes_80!=null){const y8=py(p.minutes_80);el('circle',{cx:x,cy:y8,r:4,fill:'var(--new)',stroke:'var(--panel)','stroke-width':2},s);hit(s,x,y8,tipFor(p));}});
       mount(hBox,s);
       const t6=addMonths(today,6),t12=addMonths(today,12);
-      $('hz-read').innerHTML=`Projected today: <b>${fmtMin(hzAt(today,H.doubling_months.high))} to ${fmtMin(hzAt(today,H.doubling_months.low))}</b>. In 6 months: ${fmtMin(hzAt(t6,H.doubling_months.high))} to ${fmtMin(hzAt(t6,H.doubling_months.low))}. In 12 months: ${fmtMin(hzAt(t12,H.doubling_months.high))} to ${fmtMin(hzAt(t12,H.doubling_months.low))}. Tasks succeed about half the time at these lengths.`;
+      const rng=(f,t)=>`${fmtMin(f(t,H.doubling_months.high))} to ${fmtMin(f(t,H.doubling_months.low))}`;
+      $('hz-read').innerHTML=`<b>Current reading.</b> Last measured: ${esc(hzLast.model)} (${fmtM(D(hzLast.date))}), <b>${fmtMin(hzLast.minutes)}</b> at 50% success and <b>${fmtMin(hzLast.minutes_80)}</b> at 80%. `+
+        `Estimated today: <b>${hrs(hzAt(today,H.doubling_months.high))}–${hrs(hzAt(today,H.doubling_months.low))} h</b> at 50%, <b>${hrs(hz80At(today,H.doubling_months.high))}–${hrs(hz80At(today,H.doubling_months.low))} h</b> at 80%. In 12 months: ${rng(hzAt,t12)} at 50%, ${rng(hz80At,t12)} at 80%.`+
+        (H.checked?` <span style="color:var(--muted)">Sources last checked ${fmtD(H.checked)}.</span>`:'');
     }
 
     /* ---------- plans vs API ---------- */

@@ -29,7 +29,7 @@ Unknown values are `null`.
 - `closed_growth_pts_per_month` `{low, central, high}` — index points per month for the closed frontier.
 - `open_lag_months` `{low, central, high}` — how far the open frontier trails the closed one.
 - `local_extra_lag_months` `{low, central, high}` — extra delay before a version runs on a desktop under AUD 50k.
-- `horizon` — `measured[{model, date, minutes, ci_low?, ci_high?}]` (METR state-of-the-art points, oldest first; the last one anchors the projection; CI bounds in minutes), `doubling_months {low, high}`, `suite_ceiling_minutes`, `status`.
+- `horizon` — `measured[{model, date, minutes, ci_low?, ci_high?, minutes_80?, ci80_low?, ci80_high?}]` (METR Time Horizon `is_sota` points, oldest first, 50% and 80% success in minutes with 95% CIs; the last one anchors both projections), `checked` (date sources were last checked), `other_readings[{source, subject, date, p50, p80, note, url}]` (other published readings, display strings, `null` when not reported), `doubling_months {low, high}`, `suite_ceiling_minutes`, `status`.
 - `headline[]` — three plain-English sentences.
 - `founder` — calculator parameters: `as_of`, `multiplier_growth_monthly {low, central, high}`, `swarm_parallel_fraction`, `swarm_coordination_overhead_per_agent`, `agent_utilisation_during_work`, `task_mix[{task, share, multiplier, kind}]` (shares sum to 1; kind ∈ digital, physical).
 

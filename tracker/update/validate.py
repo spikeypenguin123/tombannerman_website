@@ -146,6 +146,12 @@ def check(d, prev=None):
     hz = f.get("horizon", {})
     if not hz.get("measured"):
         err("forecast.horizon.measured is empty")
+    for p in hz.get("measured", []):
+        if p.get("minutes_80") is not None and p["minutes_80"] > p.get("minutes", 0):
+            err(f"forecast.horizon.measured {p.get('model')}: 80% horizon exceeds 50% horizon")
+    for o in hz.get("other_readings", []):
+        if not str(o.get("url", "")).startswith("https://") or not is_date(o.get("date")):
+            err(f"forecast.horizon.other_readings {o.get('subject')}: needs an https url and a YYYY-MM-DD date")
     dm = hz.get("doubling_months", {})
     if not (0 < dm.get("low", 0) <= dm.get("high", 0) <= 24):
         err("forecast.horizon.doubling_months must satisfy 0 < low <= high <= 24")

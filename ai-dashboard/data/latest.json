@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T19:39:58+10:00",
+  "updated_at": "2026-10-18T22:14:12+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -636,65 +636,182 @@
         {
           "model": "GPT-2",
           "date": "2019-02-14",
-          "minutes": 0.054,
-          "ci_low": 0.01,
-          "ci_high": 0.142
+          "minutes": 0.05378,
+          "ci_low": 0.009994,
+          "ci_high": 0.1418,
+          "minutes_80": 0.0128,
+          "ci80_low": 0.001589,
+          "ci80_high": 0.06861
+        },
+        {
+          "model": "GPT-3 (davinci-002)",
+          "date": "2020-05-28",
+          "minutes": 0.1441,
+          "ci_low": 0.09332,
+          "ci_high": 0.2212,
+          "minutes_80": 0.05624,
+          "ci80_low": 0.03481,
+          "ci80_high": 0.1058
+        },
+        {
+          "model": "GPT-3.5",
+          "date": "2022-03-15",
+          "minutes": 0.5992,
+          "ci_low": 0.2551,
+          "ci_high": 1.116,
+          "minutes_80": 0.2554,
+          "ci80_low": 0.1416,
+          "ci80_high": 0.4929
         },
         {
           "model": "GPT-4",
           "date": "2023-03-14",
-          "minutes": 4.0,
-          "ci_low": 1.9,
-          "ci_high": 8.0
+          "minutes": 3.987,
+          "ci_low": 1.933,
+          "ci_high": 7.995,
+          "minutes_80": 0.8896,
+          "ci80_low": 0.343,
+          "ci80_high": 2.524
+        },
+        {
+          "model": "GPT-4 Turbo",
+          "date": "2023-11-06",
+          "minutes": 4.045,
+          "ci_low": 1.867,
+          "ci_high": 8.443,
+          "minutes_80": 0.783,
+          "ci80_low": 0.2766,
+          "ci80_high": 2.358
+        },
+        {
+          "model": "GPT-4o",
+          "date": "2024-05-13",
+          "minutes": 6.991,
+          "ci_low": 4.001,
+          "ci_high": 12.91,
+          "minutes_80": 1.267,
+          "ci80_low": 0.563,
+          "ci80_high": 3.015
+        },
+        {
+          "model": "Claude 3.5 Sonnet",
+          "date": "2024-06-20",
+          "minutes": 11.4,
+          "ci_low": 5.49,
+          "ci_high": 22.38,
+          "minutes_80": 1.672,
+          "ci80_low": 0.5793,
+          "ci80_high": 4.574
+        },
+        {
+          "model": "OpenAI o1-preview",
+          "date": "2024-09-12",
+          "minutes": 20.33,
+          "ci_low": 11.72,
+          "ci_high": 33.38,
+          "minutes_80": 4.421,
+          "ci80_low": 2.013,
+          "ci80_high": 8.912
+        },
+        {
+          "model": "Claude 3.5 Sonnet (Oct 2024)",
+          "date": "2024-10-22",
+          "minutes": 20.52,
+          "ci_low": 10.14,
+          "ci_high": 40.82,
+          "minutes_80": 2.596,
+          "ci80_low": 0.8938,
+          "ci80_high": 7.364
+        },
+        {
+          "model": "OpenAI o1",
+          "date": "2024-12-05",
+          "minutes": 38.83,
+          "ci_low": 21.16,
+          "ci_high": 64.95,
+          "minutes_80": 7.09,
+          "ci80_low": 3.036,
+          "ci80_high": 16.64
         },
         {
           "model": "Claude 3.7 Sonnet",
           "date": "2025-02-24",
-          "minutes": 60.4,
-          "ci_low": 33.0,
-          "ci_high": 104.2
+          "minutes": 60.39,
+          "ci_low": 33.01,
+          "ci_high": 104.2,
+          "minutes_80": 12.09,
+          "ci80_low": 4.576,
+          "ci80_high": 28.89
         },
         {
           "model": "OpenAI o3",
           "date": "2025-04-16",
           "minutes": 119.7,
-          "ci_low": 74.6,
-          "ci_high": 190.9
+          "ci_low": 74.62,
+          "ci_high": 190.9,
+          "minutes_80": 29.98,
+          "ci80_low": 15.13,
+          "ci80_high": 57.82
         },
         {
           "model": "GPT-5",
           "date": "2025-08-07",
           "minutes": 203.0,
           "ci_low": 112.6,
-          "ci_high": 405.6
+          "ci_high": 405.6,
+          "minutes_80": 38.31,
+          "ci80_low": 19.18,
+          "ci80_high": 70.09
+        },
+        {
+          "model": "Gemini 3 Pro",
+          "date": "2025-11-18",
+          "minutes": 224.3,
+          "ci_low": 139.6,
+          "ci_high": 379.2,
+          "minutes_80": 54.14,
+          "ci80_low": 25.65,
+          "ci80_high": 103.3
         },
         {
           "model": "Claude Opus 4.5",
           "date": "2025-11-24",
           "minutes": 293.0,
           "ci_low": 161.7,
-          "ci_high": 623.7
+          "ci_high": 623.7,
+          "minutes_80": 49.43,
+          "ci80_low": 20.66,
+          "ci80_high": 104.6
         },
         {
           "model": "GPT-5.2",
           "date": "2025-12-11",
           "minutes": 352.2,
           "ci_low": 198.1,
-          "ci_high": 815.2
+          "ci_high": 815.2,
+          "minutes_80": 66.0,
+          "ci80_low": 31.67,
+          "ci80_high": 131.7
         },
         {
           "model": "Claude Opus 4.6",
           "date": "2026-02-05",
           "minutes": 718.8,
           "ci_low": 316.7,
-          "ci_high": 3633.8
+          "ci_high": 3634.0,
+          "minutes_80": 69.87,
+          "ci80_low": 27.03,
+          "ci80_high": 170.4
         },
         {
           "model": "Claude Mythos Preview",
           "date": "2026-04-07",
-          "minutes": 1044.8,
+          "minutes": 1045.0,
           "ci_low": 508.9,
-          "ci_high": 3304.3
+          "ci_high": 3304.0,
+          "minutes_80": 185.9,
+          "ci80_low": 97.3,
+          "ci80_high": 398.5
         }
       ],
       "doubling_months": {
@@ -702,7 +819,46 @@
         "high": 5.2
       },
       "suite_ceiling_minutes": 960,
-      "status": "METR's newest measurement is Claude Mythos Preview (early checkpoint, released Apr 2026): about 17 h, 95% CI 8.5–55 h, above the 16 h where METR says its current task suite stops being reliable. METR stopped updating the page on 8 Sep 2026, so newer models (Claude Opus 5.5, GPT-6 Astra, Gemini 4 Argon) are not measured; values after April 2026 are projections at METR's post-2023 doubling time of 3.4–5.2 months."
+      "status": "Newest measurement: Claude Mythos Preview (early checkpoint, released Apr 2026), about 17 h at 50% success (95% CI 8.5–55 h) and about 3 h at 80% (1.6–6.6 h). The 50% figure is above the 16 h where METR says its task suite stops being reliable. No model released since has a published time horizon (see other readings), so today's values are projections at METR's post-2023 doubling time of 3.4–5.2 months; the 80% series has doubled at the same pace (about every 4.4 months since 2023 on METR's data).",
+      "checked": "2026-10-18",
+      "other_readings": [
+        {
+          "source": "METR Frontier Risk Report",
+          "subject": "Public frontier, Feb–Mar 2026",
+          "date": "2026-05-19",
+          "p50": "~12 h (5–61 h)",
+          "p80": "~1.5 h (50 min–2 h 40 min)",
+          "note": "METR puts the unreleased internal frontier at 16–20 h (50%) and 3–4 h (80%), about two months ahead.",
+          "url": "https://metr.org/blog/2026-05-19-frontier-risk-report/"
+        },
+        {
+          "source": "METR pre-release evaluation",
+          "subject": "GPT-5.6 Sol",
+          "date": "2026-06-26",
+          "p50": "11.3 h (5–40 h)",
+          "p80": null,
+          "note": "METR says this is not a robust measurement: its rate of cheating on tests was higher than any public model METR had evaluated. Dropping the cheating attempts gives 71 h.",
+          "url": "https://metr.org/blog/2026-06-26-gpt-5-6-sol/"
+        },
+        {
+          "source": "METR pre-release evaluation",
+          "subject": "Claude Opus 5.5",
+          "date": "2026-09-22",
+          "p50": null,
+          "p80": null,
+          "note": "No time horizon reported. METR used five long AI-research tasks instead and calls it an incremental step above Claude Fable 5.1.",
+          "url": "https://metr.org/blog/2026-09-22-claude-opus-5-5/"
+        },
+        {
+          "source": "MirrorCode (Epoch AI and METR)",
+          "subject": "Claude Opus 4.6 and 4.7",
+          "date": "2026-04-10",
+          "p50": null,
+          "p80": null,
+          "note": "A different yardstick: rebuild a real program from its behaviour. Opus 4.6 rebuilt a 16,000-line toolkit that would take a human engineer an estimated 2–17 weeks; Opus 4.7 did it in 14 hours. Scored as tests passed, not a time horizon.",
+          "url": "https://epoch.ai/blog/mirrorcode"
+        }
+      ]
     },
     "headline": [
       "Anthropic holds the top two spots on the AA index; GPT-6.1 Sol is the price-performance leader at about $0.72 per task.",
@@ -1049,7 +1205,7 @@
       "date": "2026-09-08",
       "kind": "benchmark",
       "title": "METR time-horizon page stops updating",
-      "summary": "Last scored model Claude Mythos Preview (~17 h, released Apr 2026); suite unreliable above 16 h.",
+      "summary": "Last scored model Claude Mythos Preview (~17 h at 50%, ~3 h at 80%; released Apr 2026); suite unreliable above 16 h.",
       "url": "https://metr.org/time-horizons/"
     },
     {
@@ -1150,6 +1306,11 @@
       "date": "2026-10-18",
       "what": "Task-length series rebuilt on METR Time Horizon 1.1, now ending at Claude Mythos Preview (~17 h) instead of Claude Opus 4.6; points carry 95% CIs. Horizon doubling 4–7 → 3.4–5.2 months. Open-model lag 4/5/7 → 3/4/6 months. Headline 3 now targets the current best closed model.",
       "why": "METR's results file lists Mythos Preview (added 8 May 2026) and gives v1.1 values for older models that differed from ours; its post-2023 doubling time is 128.7 days (CI 104–158). Epoch's 29 May 2026 Data Insight puts the open-model lag at 4 months since Jan 2026, about 6 under strict dominance (epoch.ai/data-insights/open-closed-eci-gap)."
+    },
+    {
+      "date": "2026-10-18",
+      "what": "Task length now shows 80% success alongside 50%, uses METR's full state-of-the-art series (18 models, 2019–2026) with 95% CIs, and lists other published readings (METR Frontier Risk Report, GPT-5.6 Sol, Claude Opus 5.5, MirrorCode).",
+      "why": "80% values are in METR's Time Horizon 1.1 results file; a fit of its 80% frontier points gives a doubling of 133 days since 2023, in line with the 50% series (129 days), so the same 3.4–5.2 month band applies. No model released after April 2026 has a published time horizon (checked METR's blog and Epoch on 2026-10-18)."
     }
   ]
 }
