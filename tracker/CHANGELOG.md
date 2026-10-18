@@ -2,6 +2,10 @@
 
 Code and method changes. Daily data changes are logged inside `ai-dashboard/data/latest.json` → `changelog`.
 
+## 2026-10-18 — v1.6
+- **What:** `ai-in-october-2026/` rebuilt in the site's essay styling with the site nav; task-length data and outlook brought in line with the tracker; compute chart gains a selector for six published brain estimates and a sources panel.
+  **Why:** The article read as a separate site, still cited Claude Opus 4.6 and Opus 5, and gave one brain figure without showing where it came from.
+
 ## 2026-10-18 — v1.5
 - **What:** The tracker now compares the newest models. The "Open vs closed gap" tile names both models; the "Task length" tile names today's frontier and the last METR-measured model with its date; the milestones follow the current best closed model instead of a hard-coded Claude Opus 5; horizon tooltips show METR's 95% CI. Schema: optional `ci_low`/`ci_high` on `horizon.measured`. The daily prompt now reads METR's results file and must keep comparisons on the newest models.
   **Why:** The page still anchored task length on Claude Opus 4.6 and two milestones on Claude Opus 5 after newer models had landed.

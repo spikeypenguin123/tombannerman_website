@@ -1,146 +1,210 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="A five-minute beginner primer on the state of AI in October 2026, with interactive charts.">
-<title>AI in October 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where AI Stands in October 2026 — Tom Bannerman</title>
+<meta name="description" content="A five-minute beginner primer on where AI stands in October 2026 and where it is heading, with four interactive charts.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script>document.documentElement.className='js'</script>
 <style>
-/* Layout: one reading column (~66ch) with charts breaking slightly wider; a field-guide primer, not a dashboard. */
 :root{
-  --paper:#f5f7f9; --panel:#ffffff; --ink:#121821; --muted:#55606e; --faint:#8b95a1; --rule:#dde2e8;
-  --closed:#2a78d6; --open:#eb6834; --band:rgba(42,120,214,.14); --brainband:rgba(98,80,214,.10);
-  --accent:#2a78d6;
-  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --body:"Source Serif 4", Georgia, "Times New Roman", serif;
-  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#11151b; --panel:#181d25; --ink:#e9edf2; --muted:#a7b0bc; --faint:#77818d; --rule:#2a313b;
-    --closed:#3987e5; --open:#d95926; --band:rgba(57,135,229,.18); --brainband:rgba(144,133,233,.14);
-    --accent:#6aa6ef; color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#11151b; --panel:#181d25; --ink:#e9edf2; --muted:#a7b0bc; --faint:#77818d; --rule:#2a313b;
-  --closed:#3987e5; --open:#d95926; --band:rgba(57,135,229,.18); --brainband:rgba(144,133,233,.14);
-  --accent:#6aa6ef; color-scheme:dark;
+  --paper:#fff7e6;--paper-deep:#FFEAD0;--ink:#2A1733;--ink-soft:#5a4660;
+  --violet:#922aff;--periwinkle:#726bf3;--orange:#f19202;--red:#ff3939;--teal:#179f93;
+  --line:rgba(42,23,51,.16);--w:760px;--w-wide:1080px;
+  --panel:#160c1e;--panel-line:rgba(255,255,255,.12);--panel-ink:#ece5f4;--panel-soft:#a99fc0;
 }
 *{box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;
-  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:40px 64px;
-  -webkit-font-smoothing:antialiased}
-.col{max-width:44rem;margin:0 auto}
-.wide{max-width:52rem;margin:0 auto}
-h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.15;text-wrap:balance;letter-spacing:-.01em;margin:0}
-h1{font-size:clamp(2rem,5.5vw,3rem)}
-h2{font-size:clamp(1.35rem,3.4vw,1.75rem);margin-top:3rem}
-p{margin:.9rem 0}
-a{color:var(--accent);text-underline-offset:3px}
-a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.dek{font-size:1.15rem;color:var(--muted);margin-top:.8rem}
-.tldr{margin-top:2rem;border-top:3px solid var(--ink);border-bottom:1px solid var(--rule);padding-block:1rem 1.1rem}
-.tldr h2{font-size:1rem;margin:0;font-family:var(--mono);font-weight:500;letter-spacing:.08em;text-transform:uppercase}
-.tldr ul{margin:.6rem 0 0;padding-left:1.1rem;display:grid;gap:.45rem}
-.terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:.9rem 1.6rem;margin-top:1rem}
-.terms div{min-width:0}
-.terms dt{font-family:var(--display);font-weight:700;font-size:1rem}
-.terms dd{margin:.15rem 0 0;font-size:.95rem;color:var(--muted);line-height:1.5}
-figure{margin:1.6rem 0 0;background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:16px 16px 12px}
-figcaption{font-family:var(--display);font-weight:700;font-size:1.05rem;line-height:1.3}
-.sub{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:.25rem;letter-spacing:.02em}
-.chart{position:relative;margin-top:.8rem;min-width:0}
-.chart svg{display:block;width:100%;height:auto;overflow:visible}
-.chart text{font-family:var(--mono);font-size:11px;fill:var(--muted)}
-.chart .lbl{fill:var(--ink);font-weight:500}
-.grid{stroke:var(--rule);stroke-width:1}
-.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12px;line-height:1.45;
-  padding:7px 9px;border-radius:6px;max-width:240px;z-index:3;transform:translate(-50%,calc(-100% - 12px))}
-.controls{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-top:.8rem;font-family:var(--mono);font-size:.8rem;color:var(--muted)}
-.seg{display:inline-flex;border:1px solid var(--rule);border-radius:8px;overflow:hidden}
-.seg button{font:inherit;color:var(--ink);background:transparent;border:0;padding:.42rem .75rem;cursor:pointer}
-.seg button+button{border-left:1px solid var(--rule)}
-.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-input[type=range]{flex:1 1 12rem;min-width:0;accent-color:var(--accent)}
-.readout{font-size:1rem;margin-top:.7rem;padding:.7rem .85rem;border-left:3px solid var(--accent);background:var(--paper);border-radius:0 6px 6px 0}
-.readout b{font-family:var(--display)}
-.legend{display:flex;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:.6rem}
-.legend span{display:inline-flex;align-items:center;gap:.4rem}
-.legend i{display:inline-block;width:14px;height:4px;border-radius:2px}
-.legend i.dash{height:0;border-top:2px dashed var(--muted);width:16px}
-.board{display:grid;gap:7px;margin-top:.8rem}
-.row{display:grid;grid-template-columns:minmax(0,11.5rem) minmax(0,1fr) 3.6rem;gap:.6rem;align-items:center;font-family:var(--mono);font-size:.78rem;cursor:default;border-radius:4px}
-.row .nm{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.row .nm small{color:var(--faint)}
-.track{display:block;height:10px;background:var(--rule);border-radius:0 4px 4px 0;position:relative}
-.fill{display:block;height:100%;width:0;border-radius:0 4px 4px 0;transition:width .45s ease}
-.row .val{text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
-.row .na{color:var(--faint);font-size:.72rem}
-details{margin-top:.8rem;font-family:var(--mono);font-size:.78rem;color:var(--muted)}
-summary{cursor:pointer}
-.tablewrap{overflow-x:auto;margin-top:.5rem}
-table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
-th,td{text-align:left;padding:4px 10px 4px 0;border-bottom:1px solid var(--rule);white-space:nowrap}
-th{color:var(--faint);font-weight:500}
-.next{display:grid;gap:1rem;margin-top:1rem}
-.next div{border-top:1px solid var(--rule);padding-top:.8rem;display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:1rem}
-.next .when{font-family:var(--mono);font-size:.85rem;color:var(--accent);padding-top:.2rem}
-.next p{margin:0}
-.note{font-size:.92rem;color:var(--muted)}
-footer{margin-top:3rem;border-top:1px solid var(--rule);padding-top:1rem;font-size:.85rem;color:var(--muted)}
-footer ul{padding-left:1.1rem;margin:.4rem 0 0}
-@media (max-width:520px){
-  body{font-size:17px}
-  .row{grid-template-columns:minmax(0,8.5rem) minmax(0,1fr) 3.2rem}
-  .next div{grid-template-columns:1fr;gap:.25rem}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;
+  font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:var(--violet);text-decoration:none}
+a:hover{color:var(--orange)}
+::selection{background:var(--periwinkle);color:#fff}
+img{max-width:100%}
+
+/* nav / tabs */
+.nav{position:sticky;top:0;z-index:20;backdrop-filter:saturate(140%) blur(8px);
+  background:rgba(255,219,187,.82);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--w-wide);margin:0 auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between}
+.mark{font-family:"Fraunces",serif;font-weight:600;font-size:19px;font-variation-settings:"opsz" 30,"SOFT" 40,"WONK" 1;letter-spacing:.3px;color:var(--ink)}
+.mark b{color:var(--violet)}
+.tabs{display:flex;gap:6px;align-items:center}
+.tabs a{font-family:"Space Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--ink-soft);padding:7px 13px;border-radius:30px}
+.tabs a:hover{color:var(--ink);background:rgba(42,23,51,.06)}
+.tabs a.active{color:var(--paper);background:var(--ink)}
+.tabs a.active:hover{background:var(--violet)}
+.burger{display:none;background:none;border:0;cursor:pointer;padding:6px}
+.burger span{display:block;width:23px;height:2px;background:var(--ink);margin:5px 0;transition:.25s}
+
+.wrap{max-width:var(--w);margin:0 auto;padding:0 24px}
+section{padding:40px 0}
+.eyebrow{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--violet);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* article */
+.post-head{padding:48px 0 6px}
+.post-head h1{font-family:"Fraunces",serif;font-weight:600;font-variation-settings:"opsz" 144,"SOFT" 40,"WONK" 1;
+  font-size:clamp(34px,6vw,58px);line-height:1.0;letter-spacing:-.025em;margin:0 0 16px}
+.post-meta{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft);margin:0}
+.post-meta b{color:var(--violet);font-weight:400}
+.abstract{font-size:18.5px;line-height:1.72;color:var(--ink);border-left:3px solid var(--violet);
+  padding:4px 0 4px 22px;margin:30px 0 8px}
+.prose h2{font-family:"Fraunces",serif;font-weight:500;font-variation-settings:"opsz" 80,"SOFT" 30,"WONK" 0;
+  font-size:clamp(24px,3.4vw,33px);line-height:1.08;margin:8px 0 18px;letter-spacing:-.01em}
+.prose h2 .num{font-family:"Space Mono",monospace;font-size:.5em;color:var(--violet);vertical-align:middle;
+  margin-right:12px;letter-spacing:0}
+.prose p{margin:0 0 16px;max-width:64ch}
+.prose strong{font-weight:700}
+
+.closer{font-size:18px;border-top:1px solid var(--line);padding-top:30px;margin-top:18px}
+.closer p{max-width:64ch}
+
+/* footer */
+footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-top:20px}
+.footsun{width:96px;height:48px;margin:0 auto 14px;display:block}
+.foot-links{display:flex;gap:20px;justify-content:center;margin:6px 0 12px;flex-wrap:wrap}
+.foot-links a{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft)}
+.foot-links a:hover{color:var(--violet)}
+.colophon{font-family:"Space Mono",monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.5px}
+
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
+
+@media (max-width:820px){
+  .tabs{position:absolute;top:100%;right:0;left:0;flex-direction:column;align-items:stretch;gap:0;
+    background:var(--paper);border-bottom:1px solid var(--line);padding:8px 18px;max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .tabs.open{max-height:340px}
+  .tabs a{padding:11px 8px;border-radius:8px}
+  .burger{display:block}
 }
+@media (max-width:600px){
+  .sim-stats{justify-content:flex-start}
+  .stat{text-align:left}
+  .sim canvas{height:280px}
+}
+
+
+/* primer: charts and reference blocks, in the site palette */
+:root{--closed:var(--violet);--open:var(--orange);--band:rgba(146,42,255,.15);--brainband:rgba(23,159,147,.14);
+  --panel:var(--paper);--muted:var(--ink-soft);--faint:rgba(42,23,51,.38);--rule:var(--line)}
+.tldr{border:1.5px solid var(--ink);border-radius:16px;background:var(--paper-deep);padding:18px 22px 6px;margin:28px 0 0;box-shadow:5px 7px 0 rgba(42,23,51,.1)}
+.tldr h2{font-family:"Space Mono",monospace;font-weight:400;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--violet);margin:0 0 10px}
+.tldr ul{margin:0 0 12px;padding-left:20px}
+.tldr li{margin:0 0 8px}
+.terms{margin:0}
+.terms div{display:grid;grid-template-columns:8.5rem minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid var(--line)}
+.terms div:last-child{border-bottom:1px solid var(--line)}
+.terms dt{font-family:"Fraunces",serif;font-weight:600;font-variation-settings:"opsz" 40,"SOFT" 30;font-size:19px}
+.terms dd{margin:0}
+figure.fig{margin:22px 0 22px;border:1.5px solid var(--ink);border-radius:18px;background:var(--paper);box-shadow:5px 7px 0 rgba(42,23,51,.12);padding:20px 20px 14px}
+.fig figcaption{font-family:"Fraunces",serif;font-weight:600;font-variation-settings:"opsz" 40,"SOFT" 30;font-size:20px;line-height:1.2;margin:0 0 4px}
+.fig .sub{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.3px;color:var(--ink-soft);margin:0 0 12px}
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart svg text{font-family:"Space Mono",monospace;font-size:10.5px;fill:var(--ink-soft)}
+.chart svg text.lbl{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:12.5px;fill:var(--ink)}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.tip{position:absolute;transform:translate(-50%,calc(-100% - 12px));background:var(--ink);color:var(--paper);font-family:"Space Mono",monospace;
+  font-size:11.5px;line-height:1.45;padding:7px 10px;border-radius:8px;pointer-events:none;white-space:nowrap;z-index:5}
+.controls{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:12px 0 4px;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-soft)}
+.controls input[type=range]{flex:1 1 200px;accent-color:var(--violet);cursor:pointer}
+.seg{display:inline-flex;gap:6px;flex-wrap:wrap}
+.seg button{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;border:1.5px solid var(--ink);background:none;color:var(--ink);padding:6px 13px;border-radius:30px;cursor:pointer;transition:.2s}
+.seg button:hover{transform:translateY(-2px)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.readout{font-size:15.5px;line-height:1.55;background:var(--paper-deep);border-left:3px solid var(--violet);padding:10px 14px;border-radius:0 10px 10px 0;margin:10px 0 6px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:"Space Mono",monospace;font-size:10.5px;color:var(--ink-soft);margin:10px 0 2px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px}
+.legend i.dash{height:0;width:16px;border-top:2px dashed var(--ink-soft);border-radius:0}
+.fig details{margin-top:10px;font-size:14px}
+.fig summary{cursor:pointer;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--violet)}
+.tablewrap{overflow-x:auto}
+.fig table{border-collapse:collapse;width:100%;margin-top:8px;font-size:14px}
+.fig th,.fig td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+.fig th{font-family:"Space Mono",monospace;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-soft);font-weight:400}
+.row{display:grid;grid-template-columns:minmax(0,12rem) minmax(0,1fr) 3.4rem;gap:10px;align-items:center;padding:6px 0;border-top:1px solid var(--line);cursor:default}
+.row .nm{font-weight:500;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .nm small{color:var(--ink-soft);font-family:"Space Mono",monospace;font-size:10px;margin-left:4px}
+.track{display:block;height:10px;background:rgba(42,23,51,.07);border-radius:6px;overflow:hidden}
+.fill{display:block;height:100%;width:0;border-radius:6px;transition:width .45s ease}
+.row .val{font-family:"Space Mono",monospace;font-size:13px;text-align:right}
+.row .na{color:var(--ink-soft);font-size:11px}
+.prose .note{font-size:15px;color:var(--ink-soft)}
+.next{margin:8px 0 18px}
+.next div{display:grid;grid-template-columns:9.5rem minmax(0,1fr);gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.next div:last-child{border-bottom:1px solid var(--line)}
+.next .when{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--violet);padding-top:4px}
+.next p{margin:0}
+.sources{font-size:15px}
+.sources ul{padding-left:20px;margin:8px 0 0}
+.sources li{margin:0 0 6px}
+@media (max-width:560px){
+  .terms div,.next div{grid-template-columns:1fr;gap:2px}
+  .row{grid-template-columns:minmax(0,1fr) 3.2rem}
+  .row .track{grid-column:1/-1;grid-row:2}
+}
+
+.est-info{font-size:14.5px;line-height:1.55;border-top:1px solid var(--line);margin-top:12px;padding-top:12px}
+.est-info b{font-family:"Fraunces",serif;font-weight:600;font-size:16px}
+.est-info .who{display:block;font-family:"Space Mono",monospace;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 6px}
+.est-info p{margin:0 0 6px;max-width:none}
+.fig-notes{border:1.5px dashed var(--ink-soft);border-radius:14px;padding:12px 18px;margin:0 0 22px;font-size:15px}
+.fig-notes[open]{border-style:solid;border-color:var(--ink);background:var(--paper-deep)}
+.fig-notes summary{cursor:pointer;font-family:"Space Mono",monospace;font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--violet)}
+.fig-notes > p{margin:12px 0}
+.srcs{margin:0}
+.srcs div{padding:10px 0;border-top:1px solid var(--line)}
+.srcs dt{font-family:"Fraunces",serif;font-weight:600;font-size:16.5px;margin-bottom:3px}
+.srcs dd{margin:0}
+.srcs a{font-family:"Space Mono",monospace;font-size:11.5px;letter-spacing:.3px;white-space:nowrap}
 @media (prefers-reduced-motion:reduce){.fill{transition:none}}
-</style>
-</head>
-<body>
 
+</style></head><body>
+<nav class="nav"><div class="nav-in">
+<a href="../index.html" class="mark">Tom<b>.</b>Bannerman</a>
+<button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+<div class="tabs" id="tabs"><a href="../index.html" class="">Home</a><a href="../projects.html" class="">Projects</a><a href="../tech-tree.html" class="">Tech Tree</a><a href="../writing.html" class="active">Writing</a><a href="../gallery.html" class="">Gallery</a><a href="https://shop.tombannerman.com" class="">Store</a></div>
+</div></nav>
 
-<article>
-  <header class="col">
-    <div class="eyebrow">A five-minute primer · 18 October 2026</div>
-    <h1>Where AI stands in October 2026, and where it's heading</h1>
-    <p class="dek">Four charts that explain what today's AI can do, how fast it is improving, and what to expect over the next two years.</p>
+<article class="wrap">
+<header class="post-head reveal">
+  <p class="eyebrow">Primer · Interactive</p>
+  <h1>Where AI Stands in October 2026, and Where It's Heading</h1>
+  <p class="post-meta">18 October 2026 · <b>Four interactive charts</b> · ~5 min</p>
+  <p class="abstract">Four charts that explain what today's AI can do, how fast it is improving, and what to expect over the next two years. No background needed.</p>
+  <section class="tldr" aria-labelledby="tldr-h">
+    <h2 id="tldr-h">TL;DR</h2>
+    <ul>
+      <li>The best AI systems now outscore PhD experts on hard science exams and can work on their own for many hours at a time.</li>
+      <li>The length of task they can finish on their own has doubled about every four months since 2023.</li>
+      <li>Free-to-download models trail the best paid ones by only about four months, at a fraction of the price.</li>
+      <li>The raw computing power once thought to match a human brain is now affordable to a business. The software was the missing piece, and it is catching up fast.</li>
+    </ul>
+  </section>
+</header>
 
-    <section class="tldr" aria-labelledby="tldr-h">
-      <h2 id="tldr-h">TL;DR</h2>
-      <ul>
-        <li>The best AI systems now outscore PhD experts on hard science exams and can work on their own for hours at a time.</li>
-        <li>The length of task they can finish on their own has doubled roughly every 4–7 months for six years.</li>
-        <li>Free-to-download models trail the best paid ones by only about 3–4 months, at a fraction of the price.</li>
-        <li>The raw computing power once thought to match a human brain is now affordable to a business. The software was the missing piece, and it is catching up fast.</li>
-      </ul>
-    </section>
-  </header>
-
-  <section class="col" aria-labelledby="terms-h">
-    <h2 id="terms-h">Five words you need</h2>
-    <dl class="terms">
+<section class="prose reveal">
+  <h2>Five words you need</h2>
+  <dl class="terms">
       <div><dt>Model</dt><dd>The AI itself: a very large program trained on text, code and images. ChatGPT, Claude and Gemini are apps built on models.</dd></div>
       <div><dt>Benchmark</dt><dd>A standard test used to compare models, like an exam with a fixed set of questions or tasks.</dd></div>
       <div><dt>Agent</dt><dd>A model that works through a task step by step on its own, using tools such as a web browser or a code editor.</dd></div>
       <div><dt>Open model</dt><dd>A model whose files anyone can download and run on their own computer. Closed models are only available through the company's app or paid service.</dd></div>
       <div><dt>Compute</dt><dd>Raw computing power, counted as calculations per second. More compute lets you build and run bigger, smarter models.</dd></div>
     </dl>
-  </section>
+</section>
 
-  <!-- 1. Task length -->
-  <section class="col" aria-labelledby="s1-h">
-    <h2 id="s1-h">AI can work alone for longer and longer</h2>
-    <p>The clearest way to measure progress is to ask how long a task an AI agent can finish by itself. A research group called METR times how long each task takes a skilled person, then checks which tasks the AI completes successfully at least half the time.</p>
-    <p>In 2019 that was a few seconds of work. By early 2026 it was around 12 hours. That growth is remarkably steady on a log scale, where each gridline is a big jump in length.</p>
-  </section>
-  <div class="wide">
-    <figure id="fig-horizon">
+<section class="prose reveal">
+  <h2><span class="num">01</span>AI can work alone for longer and longer</h2>
+  <p>The clearest way to measure progress is to ask how long a task an AI agent can finish by itself. A research group called METR times how long each task takes a skilled person, then checks which tasks the AI completes successfully at least half the time.</p>
+  <p>In 2019 that was a few seconds of work. By April 2026 it was around 17 hours, for Claude Mythos Preview. That growth is remarkably steady on a log scale, where each gridline is a big jump in length.</p>
+  <figure class="fig" id="fig-horizon">
       <figcaption>Length of task an AI agent can finish on its own</figcaption>
       <div class="sub">Measured by METR (dots) · trend projection (shaded) · tasks succeed about half the time</div>
       <div class="chart" id="c-horizon"></div>
@@ -151,23 +215,18 @@ footer ul{padding-left:1.1rem;margin:.4rem 0 0}
       <div class="readout" id="r-horizon" aria-live="polite"></div>
       <div class="legend">
         <span><i style="background:var(--closed)"></i>Measured</span>
-        <span><i style="background:var(--band);height:10px"></i>Projection: doubling every 4 to 7 months</span>
+        <span><i style="background:var(--band);height:10px"></i>Projection: doubling every 3.4 to 5.2 months</span>
         <span><i class="dash"></i>Upper limit of today's test (16 h)</span>
       </div>
       <details><summary>Show the numbers</summary><div class="tablewrap"><table id="t-horizon"></table></div></details>
     </figure>
-  </div>
-  <div class="col">
-    <p class="note">The newest models have not been measured yet. The test only goes up to about 16 hours of work, and the best models are already near that limit, so everything after early 2026 is a projection.</p>
-  </div>
+  <p class="note">The newest models have not been measured yet. METR's test only goes up to about 16 hours of work and the best model measured is already past that, so everything after April 2026 is a projection.</p>
+</section>
 
-  <!-- 2. Leaderboard -->
-  <section class="col" aria-labelledby="s2-h">
-    <h2 id="s2-h">Who's ahead right now</h2>
-    <p>Seven new top-tier models arrived between mid-September and mid-October. The independent group Artificial Analysis runs every model through the same ten hard tests and combines them into one score. Switch the chart to cost to see the other half of the story: models close to the top are getting much cheaper.</p>
-  </section>
-  <div class="wide">
-    <figure id="fig-board">
+<section class="prose reveal">
+  <h2><span class="num">02</span>Who's ahead right now</h2>
+  <p>Seven new top-tier models arrived between mid-September and mid-October. The independent group Artificial Analysis runs every model through the same ten hard tests and combines them into one score. Switch the chart to cost to see the other half of the story: models close to the top are getting much cheaper.</p>
+  <figure class="fig" id="fig-board">
       <figcaption>The leading models, October 2026</figcaption>
       <div class="sub">Artificial Analysis Intelligence Index · cost = US$ to run one test task</div>
       <div class="controls">
@@ -183,18 +242,13 @@ footer ul{padding-left:1.1rem;margin:.4rem 0 0}
       <div class="chart"><div class="board" id="c-board"></div></div>
       <details><summary>Show the numbers</summary><div class="tablewrap"><table id="t-board"></table></div></details>
     </figure>
-  </div>
-  <div class="col">
-    <p>Anthropic's Claude holds the top two spots. OpenAI's GPT-6.1 Sol is the bargain: nearly as capable for about an eighth of the cost. The best open model, Xiaomi's MiMo, scores 46 and costs 13 cents a task.</p>
-  </div>
+  <p>Anthropic's Claude holds the top two spots. OpenAI's GPT-6.1 Sol is the bargain: nearly as capable for about an eighth of the cost. The best open model, Xiaomi's MiMo, scores 46 and costs 13 cents a task.</p>
+</section>
 
-  <!-- 3. Open vs closed -->
-  <section class="col" aria-labelledby="s3-h">
-    <h2 id="s3-h">Free models are only months behind</h2>
-    <p>This chart uses one hard science exam with questions written by PhD researchers. Experts score about 65% in their own field. Both paid and free models passed that line within months of each other in late 2024 and early 2025, and both are now close to the maximum.</p>
-  </section>
-  <div class="wide">
-    <figure id="fig-oc">
+<section class="prose reveal">
+  <h2><span class="num">03</span>Free models are only months behind</h2>
+  <p>This chart uses one hard science exam with questions written by PhD researchers. Experts score about 65% in their own field. Both paid and free models passed that line within months of each other in late 2024 and early 2025, and both are now close to the maximum.</p>
+  <figure class="fig" id="fig-oc">
       <figcaption>Best closed vs best open model on a PhD-level science exam</figcaption>
       <div class="sub">GPQA Diamond score (%) · hover or tap a dot for the model</div>
       <div class="chart" id="c-oc"></div>
@@ -205,18 +259,13 @@ footer ul{padding-left:1.1rem;margin:.4rem 0 0}
       </div>
       <details><summary>Show the numbers</summary><div class="tablewrap"><table id="t-oc"></table></div></details>
     </figure>
-  </div>
-  <div class="col">
-    <p>Across many tests, researchers at Epoch AI find open models trail the best closed ones by about four months on average. Most of the leading open models now come from Chinese labs.</p>
-  </div>
+  <p>Across many tests, researchers at Epoch AI find open models trail the best closed ones by about four months on average. Most of the leading open models now come from Chinese labs.</p>
+</section>
 
-  <!-- 4. Compute -->
-  <section class="col" aria-labelledby="s4-h">
-    <h2 id="s4-h">Computing power keeps getting cheaper</h2>
-    <p>Computing power per dollar doubles about every two and a half years. Scientists' estimates of the computing power a human brain uses vary widely, but the middle estimate is about a thousand trillion calculations per second. Pick a budget to see when it could buy that much.</p>
-  </section>
-  <div class="wide">
-    <figure id="fig-compute">
+<section class="prose reveal">
+  <h2><span class="num">04</span>Computing power keeps getting cheaper</h2>
+  <p>Computing power per dollar doubles about every two and a half years. Scientists' estimates of the computing power a human brain uses vary widely, from about ten trillion to a hundred million trillion calculations per second. The most careful recent review lands on about a thousand trillion. Pick a budget and an estimate to see when that budget could buy that much.</p>
+  <figure class="fig" id="fig-compute">
       <figcaption>Calculations per second you can buy for a fixed budget</figcaption>
       <div class="sub">Trend from Epoch AI price-performance data · dots are real machines</div>
       <div class="controls">
@@ -227,35 +276,58 @@ footer ul{padding-left:1.1rem;margin:.4rem 0 0}
           <button type="button" data-b="1000000" aria-pressed="false">$1M</button>
         </div>
       </div>
+      <div class="controls"><span>Brain estimate</span><div class="seg" id="est-seg" role="group" aria-label="Brain estimate"></div></div>
       <div class="chart" id="c-compute"></div>
       <div class="readout" id="r-compute" aria-live="polite"></div>
       <div class="legend">
         <span><i style="background:var(--closed)"></i>Selected budget</span>
-        <span><i style="background:var(--brainband);height:10px"></i>Range of brain estimates</span>
-        <span><i class="dash"></i>Middle estimate</span>
+        <span><i style="background:var(--brainband);height:10px"></i>Range of the selected estimate</span>
+        <span><i class="dash"></i>Its headline figure</span>
       </div>
+      <div class="est-info" id="est-info" aria-live="polite"></div>
     </figure>
-  </div>
-  <div class="col">
-    <p>A business could buy brain-scale raw power years ago. That did not produce human-level AI on its own, because the software was the hard part. The first chart shows that software is now improving quickly too. NVIDIA's next chip, Vera Rubin, is shipping this autumn with about five times the AI computing power of the previous generation, and next year's models will be trained on it.</p>
-  </div>
 
-  <!-- What next -->
-  <section class="col" aria-labelledby="s5-h">
-    <h2 id="s5-h">What to expect next</h2>
-    <p>These are trend projections, not certainties. Each could arrive sooner or later.</p>
-    <div class="next">
-      <div><span class="when">Early 2027</span><p>A free, downloadable model matches July 2026's best paid model (Claude Opus 5). A version small enough for a high-end desktop follows a month or two later.</p></div>
-      <div><span class="when">Late 2026 – 2027</span><p>AI agents finish tasks that take a person a full working week, on their own, about half the time.</p></div>
-      <div><span class="when">Mid 2027 – 2028</span><p>Tasks that take a person a month of work become possible. Reliability, not raw ability, becomes the main limit on what people trust AI to do.</p></div>
-      <div><span class="when">2027</span><p>The first models trained on the new generation of chips arrive, and the cost of today's top-level AI keeps falling.</p></div>
-    </div>
-    <p class="note">Two cautions. Benchmark scores are often reported by the companies themselves, and doing well on a test is not the same as doing a job well. Treat any single number as a signal, not a guarantee.</p>
-  </section>
+  <details class="fig-notes">
+    <summary>Where do the brain numbers come from?</summary>
+    <p>Nobody has measured the brain's computing power directly. Each estimate picks a way to translate biology into computer operations, and the choice of method moves the answer by a factor of a million or more. These are the main approaches, with links so you can read the reasoning yourself.</p>
+    <dl class="srcs">
+      <div><dt>Open Philanthropy best guess · 10¹³–10¹⁷, best guess 10¹⁵</dt>
+        <dd>Joe Carlsmith (2020) consulted more than 30 experts and compared four methods. Modelling how neurons signal and learn gives 10¹³–10¹⁷ FLOP/s. He judges it more likely than not that 10¹⁵ is enough, and under 10% that more than 10²¹ is needed.
+        <a href="https://coefficientgiving.org/research/how-much-computational-power-does-it-take-to-match-the-human-brain/" target="_blank" rel="noopener">Full report</a> · <a href="https://forum.effectivealtruism.org/posts/nGQJEYp5X2pCbeweg/new-report-on-how-much-computational-power-it-takes-to-match" target="_blank" rel="noopener">Author's summary</a></dd></div>
+      <div><dt>Retina scaled up · 10¹²–10¹⁵ (or 10¹⁶–10²⁰)</dt>
+        <dd>Work out what it takes to match the retina, then scale up to the whole brain. Hans Moravec's 1998 version gives about 10¹⁴; the same idea using modern deep-network models of the retina gives 10¹⁶–10²⁰, a sign of how sensitive these numbers are.
+        <a href="https://jetpress.org/volume1/moravec.htm" target="_blank" rel="noopener">Moravec, 1998</a></dd></div>
+      <div><dt>Kurzweil · 10¹⁴–10¹⁶</dt>
+        <dd>Ray Kurzweil's <i>The Singularity Is Near</i> (2005) derived about 10¹⁴ calculations per second but used 10¹⁶ as a conservative figure in his forecasts.
+        <a href="https://aiimpacts.org/kurzweil-the-singularity-is-near/" target="_blank" rel="noopener">AI Impacts summary</a></dd></div>
+      <div><dt>Brain traffic · ~10¹⁶–3×10¹⁷</dt>
+        <dd>Count how many signals pass between neurons per second, then convert using the ratio computers show between that kind of traffic and arithmetic. AI Impacts notes the conversion is unchecked.
+        <a href="https://aiimpacts.org/brain-performance-in-teps/" target="_blank" rel="noopener">AI Impacts, brain performance in TEPS</a></dd></div>
+      <div><dt>Neuron-by-neuron simulation · 10¹⁸ and up</dt>
+        <dd>Anders Sandberg and Nick Bostrom's 2008 whole brain emulation roadmap: 10¹⁸ FLOP/s to simulate every neuron as a spiking model, 10²² with detailed electrical models, 10²⁵ at the level of molecules. This is the cost of copying the brain exactly, which is likely far more than doing the same job.
+        <a href="https://aiimpacts.org/brain-performance-in-flops/" target="_blank" rel="noopener">AI Impacts, brain performance in FLOPS</a></dd></div>
+      <div><dt>Energy limit · ~7×10²¹ at most</dt>
+        <dd>An upper bound, not an estimate: the most computation the brain's roughly 20-watt energy budget could pay for under the physical limit set by Landauer's principle (Carlsmith 2020).
+        <a href="https://coefficientgiving.org/research/how-much-computational-power-does-it-take-to-match-the-human-brain/" target="_blank" rel="noopener">Full report</a></dd></div>
+    </dl>
+    <p class="note">One caution: older estimates count "calculations" or "instructions" per second, newer ones count floating-point operations (FLOP/s). They are close enough for a chart that spans ten orders of magnitude, but not the same thing.</p>
+  </details>
+  <p>A business could buy brain-scale raw power years ago. That did not produce human-level AI on its own, because the software was the hard part. The first chart shows that software is now improving quickly too. NVIDIA's next chip, Vera Rubin, is shipping this autumn with about five times the AI computing power of the previous generation, and next year's models will be trained on it.</p>
+</section>
 
-  <footer class="col">
+<section class="prose reveal">
+  <h2><span class="num">05</span>What to expect next</h2>
+  <p>These are trend projections, not certainties. Each could arrive sooner or later.</p>
+  <div class="next">
+    <div><span class="when">Early 2027</span><p>A free, downloadable model matches today's best paid model (Claude Opus 5.5). A version small enough for a high-end desktop follows a month or two later.</p></div>
+    <div><span class="when">Now – early 2027</span><p>AI agents finish tasks that take a person a full working week, on their own, about half the time.</p></div>
+    <div><span class="when">2027</span><p>Tasks that take a person a month of work become possible. Reliability, not raw ability, becomes the main limit on what people trust AI to do.</p></div>
+    <div><span class="when">2027</span><p>The first models trained on the new generation of chips arrive, and the cost of today's top-level AI keeps falling.</p></div>
+  </div>
+  <p class="note">Two cautions. Benchmark scores are often reported by the companies themselves, and doing well on a test is not the same as doing a job well. Treat any single number as a signal, not a guarantee.</p>
+  <div class="closer sources">
     <p>For the latest numbers, updated every morning, see the <a href="../ai-dashboard/">AI Frontier Tracker</a>.</p>
-    Sources
+    <p class="eyebrow">Sources</p>
     <ul>
       <li><a href="https://metr.org/time-horizons/" target="_blank" rel="noopener">METR task time horizons</a></li>
       <li><a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">Artificial Analysis leaderboard</a> (retrieved 18 Oct 2026)</li>
@@ -264,9 +336,33 @@ footer ul{padding-left:1.1rem;margin:.4rem 0 0}
       <li><a href="https://coefficientgiving.org/research/new-report-on-how-much-computational-power-it-takes-to-match-the-human-brain/" target="_blank" rel="noopener">Open Philanthropy: computing power of the human brain</a></li>
       <li><a href="https://www.deeplearning.ai/the-batch/an-unexpected-open-weights-leader" target="_blank" rel="noopener">The Batch: Xiaomi's MiMo leads open models</a></li>
     </ul>
-  </footer>
+  </div>
+</section>
 </article>
 
+<footer><div class="wrap"><svg class="footsun" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs><linearGradient id="fs" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#922aff"/><stop offset="0.5" stop-color="#ff3939"/><stop offset="1" stop-color="#f19202"/>
+</linearGradient></defs>
+<g clip-path="url(#fc)"><clipPath id="fc"><rect x="0" y="0" width="200" height="100"/></clipPath>
+<circle cx="100" cy="100" r="78" fill="url(#fs)"/>
+<rect x="0" y="70" width="200" height="4" fill="#fff7e6"/><rect x="0" y="80" width="200" height="5" fill="#fff7e6"/><rect x="0" y="91" width="200" height="6" fill="#fff7e6"/>
+</g><line x1="0" y1="99" x2="200" y2="99" stroke="#2A1733" stroke-width="2"/></svg>
+<div class="foot-links">
+<!-- TODO: confirm which email you want public -->
+<a href="mailto:tban4122@gmail.com">Email</a>
+<a href="https://www.linkedin.com/in/tombannerman/" target="_blank" rel="noopener">LinkedIn</a>
+<a href="../TomBannermanResume.pdf" target="_blank" rel="noopener">Résumé</a>
+</div>
+<p class="colophon">tombannerman.com · Built on the Gold Coast · <span id="yr"></span> · First principles, always.</p>
+</div></footer>
+<script>
+const b=document.querySelector('.burger'),t=document.getElementById('tabs');
+b.addEventListener('click',()=>{const o=t.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const y=document.getElementById('yr');if(y)y.textContent=new Date().getFullYear();
+</script>
 <script>
 (function(){
   const NS='http://www.w3.org/2000/svg';
@@ -301,10 +397,11 @@ footer ul{padding-left:1.1rem;margin:.4rem 0 0}
 
   /* ---------- 1. Task length ---------- */
   const HZ=[
-    {n:'GPT-2',t:2019.1,m:2/60},{n:'GPT-4',t:2023.2,m:5},{n:'Claude 3.7 Sonnet',t:2025.15,m:50},
-    {n:'OpenAI o3',t:2025.3,m:92},{n:'GPT-5',t:2025.6,m:137},{n:'Claude Opus 4.5',t:2025.95,m:289},{n:'Claude Opus 4.6',t:2026.13,m:718}
+    {n:'GPT-2',t:2019.12,m:0.054},{n:'GPT-4',t:2023.2,m:4.0},{n:'Claude 3.7 Sonnet',t:2025.15,m:60.4},
+    {n:'OpenAI o3',t:2025.29,m:119.7},{n:'GPT-5',t:2025.6,m:203},{n:'Claude Opus 4.5',t:2025.9,m:293},{n:'GPT-5.2',t:2025.95,m:352},
+    {n:'Claude Opus 4.6',t:2026.1,m:718.8},{n:'Claude Mythos Preview',t:2026.27,m:1044.8}
   ];
-  const A_T=2026.13,A_M=718;
+  const A_T=2026.27,A_M=1044.8;
   const proj=(t,months)=>A_M*Math.pow(2,(t-A_T)/(months/12));
   table('t-horizon',['Model','Date','Task length'],HZ.map(d=>[d.n,yearLabel(d.t),fmtMin(d.m)]));
   const hBox=document.getElementById('c-horizon');
@@ -323,8 +420,8 @@ footer ul{padding-left:1.1rem;margin:.4rem 0 0}
     // projection band
     let up='',lo='';const pts=[];
     for(let t=A_T;t<=X1+1e-9;t+=0.05){pts.push(t);}
-    up=pts.map((t,i)=>(i?'L':'M')+px(t).toFixed(1)+','+py(proj(t,4)).toFixed(1)).join('');
-    lo=pts.slice().reverse().map(t=>'L'+px(t).toFixed(1)+','+py(proj(t,7)).toFixed(1)).join('');
+    up=pts.map((t,i)=>(i?'L':'M')+px(t).toFixed(1)+','+py(proj(t,3.4)).toFixed(1)).join('');
+    lo=pts.slice().reverse().map(t=>'L'+px(t).toFixed(1)+','+py(proj(t,5.2)).toFixed(1)).join('');
     el('path',{d:up+lo+'Z',fill:'var(--band)','clip-path':'url(#hzclip)'},s);
     // 16h ceiling
     const cy=py(960);el('line',{x1:m.l,x2:w-m.r,y1:cy,y2:cy,stroke:'var(--muted)','stroke-width':1.5,'stroke-dasharray':'5 4'},s);
@@ -333,17 +430,17 @@ footer ul{padding-left:1.1rem;margin:.4rem 0 0}
     el('text',{x:nx-4,y:m.t+10,'text-anchor':'end'},s,'today');
     // selected year marker
     const sel=+yr.value;const sx=px(sel);
-    el('line',{x1:sx,x2:sx,y1:py(proj(sel,4)),y2:py(proj(sel,7)),stroke:'var(--closed)','stroke-width':3,'stroke-linecap':'round','clip-path':'url(#hzclip)'},s);
+    el('line',{x1:sx,x2:sx,y1:py(proj(sel,3.4)),y2:py(proj(sel,5.2)),stroke:'var(--closed)','stroke-width':3,'stroke-linecap':'round','clip-path':'url(#hzclip)'},s);
     // measured line
     el('path',{d:HZ.map((d,i)=>(i?'L':'M')+px(d.t)+','+py(d.m)).join(''),fill:'none',stroke:'var(--closed)','stroke-width':2},s);
     HZ.forEach(d=>{
       el('circle',{cx:px(d.t),cy:py(d.m),r:4.5,fill:'var(--closed)',stroke:'var(--panel)','stroke-width':2},s);
       el('circle',{cx:px(d.t),cy:py(d.m),r:13,fill:'transparent',tabindex:0,'data-tip':`<b>${d.n}</b><br>${yearLabel(d.t)}<br>${fmtMin(d.m)}`},s);
     });
-    const last=HZ[HZ.length-1];el('text',{x:px(last.t)-8,y:py(last.m)-10,'text-anchor':'end',class:'lbl'},s,'~12 hours');
-    s.setAttribute('aria-label','Line chart: task length AI agents can complete alone rose from about 2 seconds in 2019 to about 12 hours in early 2026, with a projection band beyond.');
+    const last=HZ[HZ.length-1];el('text',{x:px(last.t)-8,y:py(last.m)-10,'text-anchor':'end',class:'lbl'},s,'~17 hours');
+    s.setAttribute('aria-label','Line chart: task length AI agents can complete alone rose from about 3 seconds in 2019 to about 17 hours in April 2026, with a projection band beyond.');
     hBox.querySelectorAll('svg').forEach(x=>x.remove());hBox.prepend(s);
-    document.getElementById('r-horizon').innerHTML=`By <b>${yearLabel(sel)}</b>, the trend says AI agents could finish tasks that take a person between <b>${fmtMin(proj(sel,7))}</b> and <b>${fmtMin(proj(sel,4))}</b>, about half the time.`;
+    document.getElementById('r-horizon').innerHTML=`By <b>${yearLabel(sel)}</b>, the trend says AI agents could finish tasks that take a person between <b>${fmtMin(proj(sel,5.2))}</b> and <b>${fmtMin(proj(sel,3.4))}</b>, about half the time.`;
   }
   wireTips(hBox);yr.addEventListener('input',drawHorizon);
 
@@ -406,7 +503,24 @@ footer ul{padding-left:1.1rem;margin:.4rem 0 0}
   wireTips(oBox);
 
   /* ---------- 4. Compute per dollar ---------- */
-  const P23=1.3e11,T=2.5,BRAIN=1e15;
+  const P23=1.3e11,T=2.5;
+  // published brain estimates (FLOP/s or calculations/s); lo/hi = the estimate's own range, mid = its headline figure
+  const ESTS=[
+    {btn:'Best guess (2020)',name:'Open Philanthropy’s',mid:1e15,lo:1e13,hi:1e17,who:'Joe Carlsmith, Open Philanthropy, 2020',
+     how:'Models how neurons signal and learn, then counts the operations needed. Judges it more likely than not that 10¹⁵ is enough.',url:'https://coefficientgiving.org/research/how-much-computational-power-does-it-take-to-match-the-human-brain/'},
+    {btn:'Moravec (1998)',name:'Moravec’s',mid:1e14,who:'Hans Moravec, 1998',
+     how:'Matched the retina in software, then scaled up by the brain’s size: about 100 million MIPS. AI Impacts converts this to roughly 3×10¹³ FLOP/s.',url:'https://jetpress.org/volume1/moravec.htm'},
+    {btn:'Kurzweil (2005)',name:'Kurzweil’s',mid:1e16,lo:1e14,hi:1e16,who:'Ray Kurzweil, The Singularity Is Near, 2005',
+     how:'Derived about 10¹⁴ calculations per second but used 10¹⁶ as a conservative figure in his forecasts.',url:'https://aiimpacts.org/kurzweil-the-singularity-is-near/'},
+    {btn:'Brain traffic',name:'the brain-traffic',mid:5.5e16,lo:9e15,hi:3.4e17,who:'AI Impacts, 2015',
+     how:'Counts signals passed between neurons per second and converts with the ratio computers show. The headline here is the middle of its range.',url:'https://aiimpacts.org/brain-performance-in-teps/'},
+    {btn:'Neuron-level sim',name:'the neuron-level simulation',mid:1e18,who:'Sandberg & Bostrom, Whole Brain Emulation roadmap, 2008',
+     how:'Simulates every neuron as a spiking model. Copying the brain exactly likely costs far more than doing the same job.',url:'https://aiimpacts.org/brain-performance-in-flops/'},
+    {btn:'Energy limit',name:'the energy-limit',mid:7e21,who:'Joe Carlsmith, Open Philanthropy, 2020',
+     how:'An upper bound, not an estimate: the most computation a 20-watt brain could physically pay for (Landauer’s principle).',url:'https://coefficientgiving.org/research/how-much-computational-power-does-it-take-to-match-the-human-brain/'}
+  ];
+  let E=ESTS[0];
+  const sci=v=>{const e=Math.floor(Math.log10(v)+1e-9),m=v/Math.pow(10,e);return (Math.abs(m-1)<.05?'':(m.toFixed(1).replace(/\.0$/,'')+' × '))+'10'+String(e).split('').map(c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[+c]).join('');};
   const buy=(B,t)=>B*P23*Math.pow(2,(t-2023)/T);
   const cross=(B,C)=>2023+T*Math.log2(C/(B*P23));
   const MACH=[{n:'PlayStation 3',t:2006,f:2e11,p:'$599'},{n:'PlayStation 5',t:2020,f:1.03e13,p:'$499'},{n:'RTX 4090 graphics card',t:2022,f:8.3e13,p:'$1,599'},{n:'NVIDIA H100 chip',t:2023,f:1e15,p:'~$30,000'},{n:'DGX H100 server',t:2023,f:7.9e15,p:'~$350,000'}];
@@ -415,31 +529,37 @@ footer ul{padding-left:1.1rem;margin:.4rem 0 0}
   const sup=n=>String(n).split('').map(c=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[+c]).join('');
   function drawCompute(){
     const {w,h}=size(cBox,.58,260,390);const m={l:46,r:14,t:12,b:28};
-    const X0=1995,X1=2040,L0=10,L1=19;
+    const X0=1995,X1=2040,L0=10,L1=Math.max(19,Math.ceil(Math.log10(E.hi||E.mid))+1);
     const px=t=>m.l+(t-X0)/(X1-X0)*(w-m.l-m.r);const py=f=>m.t+(L1-Math.log10(f))/(L1-L0)*(h-m.t-m.b);
     const s=svg(w,h);
     const defs=el('defs',{},s);const cp=el('clipPath',{id:'cclip'},defs);el('rect',{x:m.l,y:m.t,width:w-m.l-m.r,height:h-m.t-m.b},cp);
-    el('rect',{x:m.l,y:py(1e17),width:w-m.l-m.r,height:py(1e13)-py(1e17),fill:'var(--brainband)'},s);
-    for(let L=10;L<=19;L+=(w<520?3:1)){const y=py(Math.pow(10,L));el('line',{x1:m.l,x2:w-m.r,y1:y,y2:y,class:'grid'},s);el('text',{x:m.l-6,y:y+4,'text-anchor':'end'},s,'10'+sup(L));}
+    if(E.lo)el('rect',{x:m.l,y:py(E.hi),width:w-m.l-m.r,height:py(E.lo)-py(E.hi),fill:'var(--brainband)'},s);
+    for(let L=10;L<=L1;L+=(w<520||L1>19?3:1)){const y=py(Math.pow(10,L));el('line',{x1:m.l,x2:w-m.r,y1:y,y2:y,class:'grid'},s);el('text',{x:m.l-6,y:y+4,'text-anchor':'end'},s,'10'+sup(L));}
     for(let t=2000;t<=2040;t+=(w<520?10:5))el('text',{x:px(t),y:h-8,'text-anchor':'middle'},s,t);
-    const by=py(BRAIN);el('line',{x1:m.l,x2:w-m.r,y1:by,y2:by,stroke:'var(--muted)','stroke-width':1.5,'stroke-dasharray':'5 4'},s);
-    el('text',{x:m.l+6,y:py(1e17)+14,class:'lbl'},s,'Human brain estimates');
+    const by=py(E.mid);el('line',{x1:m.l,x2:w-m.r,y1:by,y2:by,stroke:'var(--muted)','stroke-width':1.5,'stroke-dasharray':'5 4'},s);
+    el('text',{x:m.l+6,y:py(E.hi||E.mid)-6,class:'lbl'},s,E.btn+': '+sci(E.mid));
     // other budgets faint, selected bold
     [1e3,1e4,1e5,1e6].forEach(b=>{
       const d=`M${px(X0)},${py(buy(b,X0))}L${px(X1)},${py(buy(b,X1))}`;
       el('path',{d,fill:'none',stroke:b===B?'var(--closed)':'var(--faint)','stroke-width':b===B?2.5:1,opacity:b===B?1:.45,'clip-path':'url(#cclip)'},s);
     });
-    const ct=cross(B,BRAIN);
+    const ct=cross(B,E.mid);
     if(ct>=X0&&ct<=X1){el('circle',{cx:px(ct),cy:by,r:6,fill:'var(--panel)',stroke:'var(--closed)','stroke-width':2.5},s);}
     MACH.forEach(d=>{el('rect',{x:px(d.t)-4,y:py(d.f)-4,width:8,height:8,rx:1.5,fill:'var(--ink)',stroke:'var(--panel)','stroke-width':1.5},s);
       el('circle',{cx:px(d.t),cy:py(d.f),r:12,fill:'transparent',tabindex:0,'data-tip':`<b>${d.n}</b><br>${d.t} · ${d.p}<br>${d.f.toExponential(1).replace('e+',' × 10^')} calc/s`},s);});
     s.setAttribute('aria-label','Line chart: calculations per second purchasable for a fixed budget rise steadily from 1995 to 2040 and cross the range of human brain estimates.');
     cBox.querySelectorAll('svg').forEach(x=>x.remove());cBox.prepend(s);
-    const lo=cross(B,1e14),hi=cross(B,1e16),yrTxt=t=>t<1995?'before 1995':Math.round(t);
-    document.getElementById('r-compute').innerHTML=`With <b>${money(B)}</b>, you could buy a brain's worth of raw computing power (middle estimate) around <b>${yrTxt(ct)}</b>. Across the full range of estimates: ${yrTxt(lo)} to ${yrTxt(hi)}.`;
+    const yrTxt=t=>t<1995?'before 1995':t>2100?'after 2100':Math.round(t);
+    document.getElementById('r-compute').innerHTML=`With <b>${money(B)}</b>, you could buy ${E.name} figure for the brain (${sci(E.mid)} per second) around <b>${yrTxt(ct)}</b>.`+
+      (E.lo?` Across that estimate's own range (${sci(E.lo)} to ${sci(E.hi)}): ${yrTxt(cross(B,E.lo))} to ${yrTxt(cross(B,E.hi))}.`:'');
+    document.getElementById('est-info').innerHTML=`<b>${E.btn}</b><span class="who">${E.who}</span><p>${E.how}</p><a href="${E.url}" target="_blank" rel="noopener">Read the source &rarr;</a>`;
   }
-  document.querySelectorAll('#fig-compute .seg button').forEach(btn=>btn.addEventListener('click',()=>{
-    B=+btn.dataset.b;document.querySelectorAll('#fig-compute .seg button').forEach(b=>b.setAttribute('aria-pressed',b===btn?'true':'false'));drawCompute();}));
+  const budgetBtns=document.querySelectorAll('#fig-compute .seg[aria-label="Budget"] button');
+  budgetBtns.forEach(btn=>btn.addEventListener('click',()=>{
+    B=+btn.dataset.b;budgetBtns.forEach(b=>b.setAttribute('aria-pressed',b===btn?'true':'false'));drawCompute();}));
+  const estSeg=document.getElementById('est-seg');
+  ESTS.forEach((e,i)=>{const b=document.createElement('button');b.type='button';b.textContent=e.btn;b.setAttribute('aria-pressed',i===0?'true':'false');
+    b.addEventListener('click',()=>{E=e;estSeg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));drawCompute();});estSeg.appendChild(b);});
   wireTips(cBox);
 
   function drawAll(){drawHorizon();drawOC();drawCompute();}
@@ -447,6 +567,4 @@ footer ul{padding-left:1.1rem;margin:.4rem 0 0}
   let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(drawAll,120);});
 })();
 </script>
-
-</body>
-</html>
+</body></html>
