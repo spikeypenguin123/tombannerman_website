@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tracker Methodology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+:root{--paper:#f4f6f9;--ink:#111821;--muted:#536070;--rule:#dde3ea;--accent:#2a78d6;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--sans:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#0f1318;--ink:#e8edf2;--muted:#a5afbb;--rule:#29303a;--accent:#6aa6ef;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#0f1318;--ink:#e8edf2;--muted:#a5afbb;--rule:#29303a;--accent:#6aa6ef;color-scheme:dark}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:32px 56px}
+main{max-width:44rem;margin:0 auto}
+h1,h2{font-family:var(--display);line-height:1.2;text-wrap:balance}
+h1{font-size:2rem;margin:0 0 .4rem}
+h2{font-size:1.2rem;margin:2rem 0 .3rem}
+a{color:var(--accent)}
+code{font-family:var(--mono);font-size:.88em}
+.muted{color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+  <p class="muted"><a href="./">← AI Frontier Tracker</a></p>
+  <h1>How the tracker works</h1>
+  <p class="muted">Every number on the tracker comes from one data file, refreshed each morning before 07:00 AEST.</p>
+
+  <h2>Scores</h2>
+  <p>The main capability score is the Artificial Analysis Intelligence Index, a composite of ten hard evaluations run independently on every model. Where available we also show the Epoch Capabilities Index (ECI). Benchmark rows taken from a company's own launch table are marked † because they are not independently verified, and different test harnesses can move a score by several points.</p>
+
+  <h2>Open vs closed</h2>
+  <p>"Open" means the model's weights can be downloaded and run by anyone under the stated licence. The frontier lines show the best score achieved so far by each group; they only ever rise.</p>
+
+  <h2>Capability forecast</h2>
+  <p>The closed frontier is projected forward at a low, central and high rate in index points per month, fitted to recent releases. The open frontier is projected as the closed frontier delayed by the open-model lag (Epoch AI measures roughly four months on average; on this index we currently use 4–7 months). A further 1–3 months is added before an equivalent model runs on a desktop costing under AUD 50k. Milestone dates combine the fastest growth with the shortest lag for the early end of each range, and the slowest with the longest for the late end.</p>
+
+  <h2>Task length</h2>
+  <p>METR measures how long a task, timed on a skilled person, an AI agent can complete with 50% reliability. We project from the last measured model with a doubling time between four and seven months. METR's current test suite is unreliable above about 16 hours and its public page has not been updated since 8 September 2026, so recent values are projections, not measurements.</p>
+
+  <h2>Subscriptions vs API</h2>
+  <p>Plan prices and included API credits are published by the vendors. How much work a plan allows is not: Anthropic and OpenAI describe session and weekly limits without token budgets. We therefore show estimate ranges for each plan's API-equivalent value and its capacity in agent-hours per week, labelled with a confidence level. One agent-hour is assumed to use 3M cached input tokens, 0.3M fresh input tokens and 0.12M output tokens; multiplying by a model's list prices gives its API cost per agent-hour. The cost comparison adds API-priced overflow when usage exceeds a plan's mid-estimate capacity, net of any included API credit.</p>
+
+  <h2>Solo engineer + AI multiplier</h2>
+  <p>A task-weighted estimate of how much more digital engineering work (design, analysis, code, documents, admin) one skilled engineer produces with a frontier model, grown by a modest monthly rate as models improve. Hands-on hardware work gets almost no speed-up and is excluded from this headline figure.</p>
+
+  <h2>Updates</h2>
+  <p>A scheduled job researches new releases, prices and measurements, edits the data file under strict rules (sources required, unknown values left blank, history never deleted), runs a validator, archives a dated snapshot and publishes. Material changes are listed at the foot of the tracker.</p>
+</main>
+</body>
+</html>

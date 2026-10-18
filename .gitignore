@@ -1,3 +1,5 @@
 # Local Claude Code guidance — not for publishing
 CLAUDE.md
 .claude/
+# Private founder calculator: local only, never published
+founder/
