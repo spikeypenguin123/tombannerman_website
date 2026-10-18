@@ -203,10 +203,10 @@ figure.fig{margin:22px 0 22px;border:1.5px solid var(--ink);border-radius:18px;b
 <section class="prose reveal">
   <h2><span class="num">01</span>AI can work alone for longer and longer</h2>
   <p>The clearest way to measure progress is to ask how long a task an AI agent can finish by itself. A research group called METR times how long each task takes a skilled person, then checks which tasks the AI completes successfully at least half the time.</p>
-  <p>In 2019 that was a few seconds of work. By April 2026 it was around 17 hours, for Claude Mythos Preview. That growth is remarkably steady on a log scale, where each gridline is a big jump in length.</p>
+  <p>In 2019 that was a few seconds of work. By April 2026 it was around 17 hours, for Claude Mythos Preview. Ask for four successes out of five instead of one in two and the length drops to about 3 hours, but it grows just as fast. That growth is remarkably steady on a log scale, where each gridline is a big jump in length.</p>
   <figure class="fig" id="fig-horizon">
       <figcaption>Length of task an AI agent can finish on its own</figcaption>
-      <div class="sub">Measured by METR (dots) · trend projection (shaded) · tasks succeed about half the time</div>
+      <div class="sub">Measured by METR (dots) · trend projection (shaded) · purple: succeeds half the time · green: four times out of five</div>
       <div class="chart" id="c-horizon"></div>
       <div class="controls">
         <label for="yr">Move the slider to look ahead</label>
@@ -214,13 +214,14 @@ figure.fig{margin:22px 0 22px;border:1.5px solid var(--ink);border-radius:18px;b
       </div>
       <div class="readout" id="r-horizon" aria-live="polite"></div>
       <div class="legend">
-        <span><i style="background:var(--closed)"></i>Measured</span>
+        <span><i style="background:var(--closed)"></i>50% success</span>
+        <span><i style="background:var(--teal)"></i>80% success</span>
         <span><i style="background:var(--band);height:10px"></i>Projection: doubling every 3.4 to 5.2 months</span>
         <span><i class="dash"></i>Upper limit of today's test (16 h)</span>
       </div>
       <details><summary>Show the numbers</summary><div class="tablewrap"><table id="t-horizon"></table></div></details>
     </figure>
-  <p class="note">The newest models have not been measured yet. METR's test only goes up to about 16 hours of work and the best model measured is already past that, so everything after April 2026 is a projection.</p>
+  <p class="note">The newest models have not been measured yet: METR's later evaluations of GPT-5.6 Sol and Claude Opus 5.5 did not produce a reliable time horizon. Its test only goes up to about 16 hours of work and the best model measured is already past that, so everything after April 2026 is a projection. The <a href="../ai-dashboard/">AI Frontier Tracker</a> lists every newer reading as it appears.</p>
 </section>
 
 <section class="prose reveal">
@@ -396,14 +397,31 @@ const y=document.getElementById('yr');if(y)y.textContent=new Date().getFullYear(
   function table(id,head,rows){document.getElementById(id).innerHTML='<thead><tr>'+head.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</tbody>';}
 
   /* ---------- 1. Task length ---------- */
+  // METR Time Horizon 1.1 state-of-the-art points: m = 50% success, m8 = 80% success (minutes)
   const HZ=[
-    {n:'GPT-2',t:2019.12,m:0.054},{n:'GPT-4',t:2023.2,m:4.0},{n:'Claude 3.7 Sonnet',t:2025.15,m:60.4},
-    {n:'OpenAI o3',t:2025.29,m:119.7},{n:'GPT-5',t:2025.6,m:203},{n:'Claude Opus 4.5',t:2025.9,m:293},{n:'GPT-5.2',t:2025.95,m:352},
-    {n:'Claude Opus 4.6',t:2026.1,m:718.8},{n:'Claude Mythos Preview',t:2026.27,m:1044.8}
+    {n:'GPT-2',t:2019.12,m:0.05378,m8:0.0128},
+    {n:'GPT-3 (davinci-002)',t:2020.405,m:0.1441,m8:0.05624},
+    {n:'GPT-3.5',t:2022.2,m:0.5992,m8:0.2554},
+    {n:'GPT-4',t:2023.197,m:3.987,m8:0.8896},
+    {n:'GPT-4 Turbo',t:2023.846,m:4.045,m8:0.783},
+    {n:'GPT-4o',t:2024.364,m:6.991,m8:1.267},
+    {n:'Claude 3.5 Sonnet',t:2024.468,m:11.4,m8:1.672},
+    {n:'OpenAI o1-preview',t:2024.698,m:20.33,m8:4.421},
+    {n:'Claude 3.5 Sonnet (Oct 2024)',t:2024.808,m:20.52,m8:2.596},
+    {n:'OpenAI o1',t:2024.928,m:38.83,m8:7.09},
+    {n:'Claude 3.7 Sonnet',t:2025.148,m:60.39,m8:12.09},
+    {n:'OpenAI o3',t:2025.287,m:119.7,m8:29.98},
+    {n:'GPT-5',t:2025.597,m:203.0,m8:38.31},
+    {n:'Gemini 3 Pro',t:2025.879,m:224.3,m8:54.14},
+    {n:'Claude Opus 4.5',t:2025.895,m:293.0,m8:49.43},
+    {n:'GPT-5.2',t:2025.942,m:352.2,m8:66.0},
+    {n:'Claude Opus 4.6',t:2026.096,m:718.8,m8:69.87},
+    {n:'Claude Mythos Preview',t:2026.263,m:1045.0,m8:185.9}
   ];
-  const A_T=2026.27,A_M=1044.8;
+  const A_T=2026.263,A_M=1045,A_M8=185.9;
   const proj=(t,months)=>A_M*Math.pow(2,(t-A_T)/(months/12));
-  table('t-horizon',['Model','Date','Task length'],HZ.map(d=>[d.n,yearLabel(d.t),fmtMin(d.m)]));
+  const proj8=(t,months)=>A_M8*Math.pow(2,(t-A_T)/(months/12));
+  table('t-horizon',['Model','Date','50% success','80% success'],HZ.map(d=>[d.n,yearLabel(d.t),fmtMin(d.m),fmtMin(d.m8)]));
   const hBox=document.getElementById('c-horizon');
   const yr=document.getElementById('yr');
   function drawHorizon(){
@@ -423,6 +441,9 @@ const y=document.getElementById('yr');if(y)y.textContent=new Date().getFullYear(
     up=pts.map((t,i)=>(i?'L':'M')+px(t).toFixed(1)+','+py(proj(t,3.4)).toFixed(1)).join('');
     lo=pts.slice().reverse().map(t=>'L'+px(t).toFixed(1)+','+py(proj(t,5.2)).toFixed(1)).join('');
     el('path',{d:up+lo+'Z',fill:'var(--band)','clip-path':'url(#hzclip)'},s);
+    const up8=pts.map((t,i)=>(i?'L':'M')+px(t).toFixed(1)+','+py(proj8(t,3.4)).toFixed(1)).join('');
+    const lo8=pts.slice().reverse().map(t=>'L'+px(t).toFixed(1)+','+py(proj8(t,5.2)).toFixed(1)).join('');
+    el('path',{d:up8+lo8+'Z',fill:'rgba(23,159,147,.16)','clip-path':'url(#hzclip)'},s);
     // 16h ceiling
     const cy=py(960);el('line',{x1:m.l,x2:w-m.r,y1:cy,y2:cy,stroke:'var(--muted)','stroke-width':1.5,'stroke-dasharray':'5 4'},s);
     // now line
@@ -431,16 +452,22 @@ const y=document.getElementById('yr');if(y)y.textContent=new Date().getFullYear(
     // selected year marker
     const sel=+yr.value;const sx=px(sel);
     el('line',{x1:sx,x2:sx,y1:py(proj(sel,3.4)),y2:py(proj(sel,5.2)),stroke:'var(--closed)','stroke-width':3,'stroke-linecap':'round','clip-path':'url(#hzclip)'},s);
+    el('line',{x1:sx,x2:sx,y1:py(proj8(sel,3.4)),y2:py(proj8(sel,5.2)),stroke:'var(--teal)','stroke-width':3,'stroke-linecap':'round','clip-path':'url(#hzclip)'},s);
     // measured line
     el('path',{d:HZ.map((d,i)=>(i?'L':'M')+px(d.t)+','+py(d.m)).join(''),fill:'none',stroke:'var(--closed)','stroke-width':2},s);
+    el('path',{d:HZ.map((d,i)=>(i?'L':'M')+px(d.t)+','+py(d.m8)).join(''),fill:'none',stroke:'var(--teal)','stroke-width':2},s);
     HZ.forEach(d=>{
+      const tip=`<b>${d.n}</b><br>${yearLabel(d.t)}<br>50%: ${fmtMin(d.m)}<br>80%: ${fmtMin(d.m8)}`;
       el('circle',{cx:px(d.t),cy:py(d.m),r:4.5,fill:'var(--closed)',stroke:'var(--panel)','stroke-width':2},s);
-      el('circle',{cx:px(d.t),cy:py(d.m),r:13,fill:'transparent',tabindex:0,'data-tip':`<b>${d.n}</b><br>${yearLabel(d.t)}<br>${fmtMin(d.m)}`},s);
+      el('circle',{cx:px(d.t),cy:py(d.m8),r:4,fill:'var(--teal)',stroke:'var(--panel)','stroke-width':2},s);
+      el('circle',{cx:px(d.t),cy:py(d.m),r:13,fill:'transparent',tabindex:0,'data-tip':tip},s);
+      el('circle',{cx:px(d.t),cy:py(d.m8),r:12,fill:'transparent','data-tip':tip},s);
     });
-    const last=HZ[HZ.length-1];el('text',{x:px(last.t)-8,y:py(last.m)-10,'text-anchor':'end',class:'lbl'},s,'~17 hours');
-    s.setAttribute('aria-label','Line chart: task length AI agents can complete alone rose from about 3 seconds in 2019 to about 17 hours in April 2026, with a projection band beyond.');
+    const last=HZ[HZ.length-1];el('text',{x:px(last.t)-8,y:py(last.m)-10,'text-anchor':'end',class:'lbl'},s,'~17 hours (50%)');
+    el('text',{x:px(last.t)+8,y:py(last.m8)+16,class:'lbl'},s,'~3 hours (80%)');
+    s.setAttribute('aria-label','Line chart: task length AI agents can complete alone rose from about 3 seconds in 2019 to about 17 hours in April 2026 at 50% success, and to about 3 hours at 80% success, with a projection band beyond.');
     hBox.querySelectorAll('svg').forEach(x=>x.remove());hBox.prepend(s);
-    document.getElementById('r-horizon').innerHTML=`By <b>${yearLabel(sel)}</b>, the trend says AI agents could finish tasks that take a person between <b>${fmtMin(proj(sel,5.2))}</b> and <b>${fmtMin(proj(sel,3.4))}</b>, about half the time.`;
+    document.getElementById('r-horizon').innerHTML=`By <b>${yearLabel(sel)}</b>, the trend says AI agents could finish tasks that take a person between <b>${fmtMin(proj(sel,5.2))}</b> and <b>${fmtMin(proj(sel,3.4))}</b> about half the time, and between <b>${fmtMin(proj8(sel,5.2))}</b> and <b>${fmtMin(proj8(sel,3.4))}</b> four times out of five.`;
   }
   wireTips(hBox);yr.addEventListener('input',drawHorizon);
 
