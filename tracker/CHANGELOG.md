@@ -2,6 +2,10 @@
 
 Code and method changes. Daily data changes are logged inside `ai-dashboard/data/latest.json` → `changelog`.
 
+## 2026-10-18 — v1.4
+- **What:** Added "Shell rules" to `tracker/update/daily-update-prompt.md` (one allowed command per call, what a refusal means, exact setup commands) and allowed `ls` in the job.
+  **Why:** The first unattended run chained commands with `&&` and `|` (`wc`, `tail`), so the allowlist refused them; the agent then decided the shell was off and stopped without updating.
+
 ## 2026-10-18 — v1.3
 - **What:** Moved into the tombannerman.com GitHub Pages repo: pages at `ai-dashboard/` and `ai-in-october-2026/` (repo root = web root), tooling under `tracker/`; listed both on `writing.html` and in `sitemap.xml`. All script and prompt paths updated; the job script now runs `tracker/update/daily-update-prompt.md` directly instead of the `/update-dashboard` slash command. Dropped `DEPLOY.md` (Cloudflare runbook), the founder page, `docs/founder-dashboard-questions.md` and `archive/` from the repo.
   **Why:** The site is already served by GitHub Pages from a public repo, so Cloudflare Pages isn't needed. A public repo can't protect `/founder/`, so it stays local and git-ignored, along with anything personal. The repo git-ignores `CLAUDE.md` and `.claude/`, so the job can't rely on a committed slash command.

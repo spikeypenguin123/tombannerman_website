@@ -7,10 +7,16 @@ Your only output that ships is a changed `ai-dashboard/data/latest.json`
 The repo is the tombannerman.com GitHub Pages site: the repo root is the web root, so every push to `main` goes live.
 Never edit the HTML pages in this job.
 
+## Shell rules (this job runs unattended with a fixed allowlist)
+- The shell is available. Allowed commands: `python3`, `git`, `cp`, `date`, `ls`, each run **on its own**.
+- One command per Bash call: no `&&`, `;`, `|`, redirects, `cd`, or `VAR=value` prefixes. Anything else is refused.
+- A refused call means that command was outside the allowlist, not that the shell is off. Rewrite it as a single allowed command and carry on. Use Read instead of `cat`/`head`/`tail`/`wc`.
+- You are already in the repo root, and `git pull` has already run. The machine's clock is set to Australia/Brisbane, so plain `date` gives Brisbane time.
+
 ## 0. Set up
 1. Read `tracker/CLAUDE.md` (if present) and `ai-dashboard/data/latest.json`.
-2. Copy the current file to `/tmp/previous.json` before changing anything.
-3. Note today's date in Australia/Brisbane (UTC+10, no daylight saving).
+2. Copy the current file before changing anything: `cp ai-dashboard/data/latest.json /tmp/previous.json`
+3. Note today's date in Australia/Brisbane: `date`
 
 ## 1. Research (web search + fetch; primary sources first)
 Check each source. Record every number you change together with the URL it came from.
