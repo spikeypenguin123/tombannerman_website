@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T14:45:00+10:00",
+  "updated_at": "2026-10-18T19:35:46+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
     "version": "v4.3.2",
     "url": "https://artificialanalysis.ai/leaderboards/models"
   },
-  "fx": { "aud_per_usd": 1.405, "as_of": "2026-09-22", "source": "https://tradingeconomics.com/australia/currency" },
+  "fx": { "aud_per_usd": 1.440, "as_of": "2026-10-17", "source": "https://tradingeconomics.com/australia/currency" },
 
   "models": [
     { "id": "claude-opus-5-5", "name": "Claude Opus 5.5", "lab": "Anthropic", "released": "2026-09-22", "weights": "closed", "license": null,
@@ -51,6 +51,10 @@
     { "id": "claude-haiku-5-5", "name": "Claude Haiku 5.5", "lab": "Anthropic", "released": "2026-10-07", "weights": "closed", "license": null,
       "params_total_b": null, "params_active_b": null, "aa_index": 43, "aa_effort": null, "eci": null, "cost_per_task_usd": null,
       "price_in": 0.10, "price_out": 0.50, "price_cache_read": null, "status": "current", "note": "Up to 100K tokens; higher tier above." },
+    { "id": "mistral-large-4-preview", "name": "Mistral Large 4 Preview", "lab": "Mistral", "released": "2026-10-06", "weights": "closed", "license": null,
+      "params_total_b": 1000, "params_active_b": null, "aa_index": 38, "aa_effort": null, "eci": null, "cost_per_task_usd": null,
+      "price_in": 1.36, "price_out": 4.18, "price_cache_read": null, "status": "current",
+      "note": "API preview; AA lists it as proprietary for now. Open weights promised for late October; reclassify as open once released." },
 
     { "id": "mimo-v2-6-pro", "name": "MiMo-V2.6-Pro", "lab": "Xiaomi", "released": "2026-09-21", "weights": "open", "license": "MIT",
       "params_total_b": 1020, "params_active_b": 42, "aa_index": 46, "aa_effort": "reasoning", "eci": null, "cost_per_task_usd": 0.13,
@@ -71,7 +75,11 @@
     { "id": "deepseek-v4-1-flash", "name": "DeepSeek V4.1 Flash", "lab": "DeepSeek", "released": "2026-09-10", "weights": "open", "license": "MIT",
       "params_total_b": 552, "params_active_b": 16, "aa_index": 39, "aa_effort": "max", "eci": 155.0, "cost_per_task_usd": null,
       "price_in": 0.15, "price_out": 0.60, "price_cache_read": null, "status": "current",
-      "note": "Off-peak prices; doubled at weekday peak. Beats DeepSeek's own V4 Pro." },
+      "note": "Off-peak prices; doubled at weekday peak. Beats DeepSeek's own V4 Pro. Score is for the September checkpoint; the 17 Oct update (1017) is not yet scored." },
+    { "id": "muse-spark-open", "name": "Muse Spark Open", "lab": "Meta", "released": "2026-10-15", "weights": "open", "license": "Muse Model License (commercial use allowed; agreement needed above US$20M model-serving revenue)",
+      "params_total_b": 816, "params_active_b": 42, "aa_index": 39, "aa_effort": "xhigh", "eci": null, "cost_per_task_usd": 0.84,
+      "price_in": 1.25, "price_out": 4.25, "price_cache_read": null, "status": "current",
+      "note": "Best US open model. Needs about 700GB at NVFP4; Meta demoed it on two 512GB Mac Studios." },
     { "id": "mimo-v2-6-flash", "name": "MiMo-V2.6-Flash", "lab": "Xiaomi", "released": "2026-09-21", "weights": "open", "license": "MIT",
       "params_total_b": 309, "params_active_b": 15, "aa_index": 38, "aa_effort": "reasoning", "eci": null, "cost_per_task_usd": null,
       "price_in": 0.14, "price_out": 0.28, "price_cache_read": 0.0028, "status": "current", "note": "Fits a 256GB Mac Studio at 4-bit." },
@@ -157,7 +165,7 @@
     },
     "headline": [
       "Anthropic holds the top two spots on the AA index; GPT-6.1 Sol is the price-performance leader at about $0.72 per task.",
-      "The best open model (MiMo-V2.6-Pro, 46) trails the closed frontier (58) by 12 points, roughly 5 months on the lag model.",
+      "The best open model (MiMo-V2.6-Pro, 46) trails the closed frontier (58) by 12 points, roughly 5 months on the lag model; Meta's new Muse Spark Open (39) is the best US open model.",
       "An open model matching Claude Opus 5 (51) is expected around Dec 2026 (range Nov 2026 to Feb 2027); a version that runs on a desktop under AUD 50k about 2 months later."
     ],
     "founder": {
@@ -232,10 +240,12 @@
   ],
 
   "releases": [
+    { "date": "2026-10-17", "kind": "model", "title": "DeepSeek V4.1-Flash-1017 (open, MIT)", "summary": "Updated checkpoint with stronger vendor benchmarks and shorter outputs; prices unchanged; not yet scored on the AA index.", "url": "https://www.bloomberg.com/news/articles/2026-10-17/deepseek-pushes-out-updated-ai-model-it-says-is-faster-leaner" },
+    { "date": "2026-10-15", "kind": "model", "title": "Meta releases Muse Spark Open", "summary": "816B / 42B active open-weights model; AA index 39, the best US open model, still 7 points behind MiMo-V2.6-Pro.", "url": "https://venturebeat.com/technology/meta-unveils-muse-spark-open-the-new-top-u-s-open-weights-model-and-it-runs-on-two-paired-mac-desktops" },
     { "date": "2026-10-13", "kind": "model", "title": "Gemini 4 Argon generally available", "summary": "Ties GPT-6 Astra on the AA index (53); leads AutomationBench and the Vals Index; lowest hallucination rate.", "url": "https://computingforgeeks.com/gemini-4-argon-released-features-benchmarks/" },
     { "date": "2026-10-12", "kind": "model", "title": "Meta releases Muse Wonder", "summary": "Meta's first frontier model; Wonder Full scores 56, level with Sonnet 5.5.", "url": "https://techcrunch.com/2026/10/12/meta-releases-its-first-frontier-model-muse-wonder" },
     { "date": "2026-10-07", "kind": "pricing", "title": "Claude Max plans gain monthly API credits; Haiku 5.5 ships", "summary": "Max 5x includes $100/month and Max 20x $200/month of API credit, not usable for interactive Claude Code.", "url": "https://www.developersdigest.tech/blog/claude-max-team-monthly-api-credits-2026" },
-    { "date": "2026-10-06", "kind": "model", "title": "Mistral Large 4 API preview", "summary": "Open weights announced for late October; not yet on the AA index.", "url": "https://www.javadex.es/blog/mejores-modelos-ia-octubre-2026-ranking-comparativa-mensual" },
+    { "date": "2026-10-06", "kind": "model", "title": "Mistral Large 4 API preview", "summary": "AA index 38; open weights promised for late October.", "url": "https://www.javadex.es/blog/mejores-modelos-ia-octubre-2026-ranking-comparativa-mensual" },
     { "date": "2026-09-29", "kind": "model", "title": "OpenAI GPT-6.1 Sol", "summary": "AA index 52 at $0.72 per task; $2/$10 per million tokens.", "url": "https://datanorth.ai/news/openai-releases-gpt-6-1-sol" },
     { "date": "2026-09-28", "kind": "model", "title": "Claude Sonnet 5.5", "summary": "AA index 56; leads Terminal-Bench 4.0 at $2/$10.", "url": "https://www.vellum.ai/md/blog/claude-sonnet-5-5-benchmarks-explained" },
     { "date": "2026-09-22", "kind": "model", "title": "Claude Opus 5.5", "summary": "New #1 on the AA index (58) and ECI; price cut to $4/$20.", "url": "https://artificialanalysis.ai/articles/claude-opus-5-5" },
@@ -254,6 +264,8 @@
     { "title": "Artificial Analysis Intelligence Index v4.3", "url": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3" },
     { "title": "Epoch AI: open vs closed ECI gap", "url": "https://epoch.ai/data-insights/open-closed-eci-gap" },
     { "title": "OrcaRouter: Opus 5.5 on the Epoch Capabilities Index", "url": "https://www.orcarouter.ai/blog/claude-opus-5-5-epoch-capabilities-index" },
+    { "title": "Artificial Analysis: Muse Spark Open", "url": "https://artificialanalysis.ai/models/muse-spark-open" },
+    { "title": "Artificial Analysis: Mistral Large 4 Preview", "url": "https://artificialanalysis.ai/models/mistral-large-4" },
     { "title": "METR time horizons", "url": "https://metr.org/time-horizons/" },
     { "title": "Claude Help Center: Max plan", "url": "https://support.claude.com/en/articles/11049741" },
     { "title": "Claude Code docs: agent teams", "url": "https://code.claude.com/docs/en/agent-teams.md" },
@@ -263,6 +275,7 @@
   ],
 
   "changelog": [
-    { "date": "2026-10-18", "what": "Initial dataset.", "why": "Split from the brain-equivalence dashboard into a daily-updated public data file." }
+    { "date": "2026-10-18", "what": "Initial dataset.", "why": "Split from the brain-equivalence dashboard into a daily-updated public data file." },
+    { "date": "2026-10-18", "what": "Added Muse Spark Open (Meta, open, AA 39) and Mistral Large 4 Preview (closed for now, AA 38); AUD/USD 1.405 → 1.440.", "why": "Both are now scored on AA index v4.3.2 (artificialanalysis.ai model pages); neither moves a frontier. FX moved more than 1% (tradingeconomics, 17 Oct)." }
   ]
 }
