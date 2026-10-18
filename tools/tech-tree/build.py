@@ -23,7 +23,7 @@ avatar = re.search(r'<div class="avatar"><img src="([^"]+)"', src).group(1)
 
 HOME = "index-demo.html" if "--home-demo" in sys.argv else "index.html"
 TABS = ('<a href="' + HOME + '" class="{h}">Home</a><a href="projects.html" class="">Projects</a>'
-        '<a href="tech-tree.html" class="{t}">Tech Tree</a><a href="writing.html" class="">Writing</a>'
+        '<a href="tech-tree.html" class="{t}">Tech Tree</a><a href="writing.html" class="">Writing</a><a href="ai-dashboard/" class="">AI Tracker</a>'
         '<a href="gallery.html" class="">Gallery</a><a href="https://shop.tombannerman.com" class="">Store</a>')
 old_tabs = re.search(r'<div class="tabs" id="tabs">.*?</div>', nav).group(0)
 
@@ -240,16 +240,12 @@ function filter(id){
 function pick(id){
   const n=byId[id],b=brOf[n.b];picked=id;
   tree.querySelectorAll('.node').forEach(el=>el.classList.toggle('sel',el.dataset.id===id));
-  const req=(n.req||[]).map(r=>byId[r].title);
-  const unlocks=N.filter(m=>(m.req||[]).includes(id)).map(m=>m.title);
   detail.style.setProperty('--c',b.c);
   detail.innerHTML=`<button class="close" id="close" aria-label="Close">&times;</button>
     <p class="eyebrow">${b.name}</p><h3>${n.title}</h3><p class="d-when">${n.when}</p>
     ${n.hard?'<span class="tag h">Hard mode</span>':''}${n.todo?'<span class="tag">To fill in</span>':''}
     <p>${n.text}</p>
     ${(n.stats||[]).length?`<dl class="mini">${n.stats.slice(0,3).map(([k,v])=>`<div><dt>${k}</dt><dd>${v??'TBC'}</dd></div>`).join('')}</dl>`:''}
-    ${req.length?`<p class="needs">Unlocked by: ${req.join(', ')}</p>`:''}
-    ${unlocks.length?`<p class="needs">Led to: ${unlocks.join(', ')}</p>`:''}
     <p><a class="story-link" href="tree/${n.id}.html">Read the story &rarr;</a></p>`;
   detail.querySelector('#close').addEventListener('click',()=>detail.classList.remove('open'));
   detail.classList.add('open');
@@ -306,11 +302,6 @@ ART_CSS = r"""
 .photos{column-count:2;column-gap:12px;margin:10px 0 18px}
 .photos figure{break-inside:avoid;margin:0 0 12px;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
 .photos img{width:100%;display:block}
-.rel{display:flex;flex-direction:column;gap:6px;margin:30px 0 0;padding-top:20px;border-top:1px solid var(--line)}
-.rel p{margin:0;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft)}
-.rel .row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
-.rel a{font-family:"Fraunces",serif;font-weight:600;font-size:16px;color:var(--ink);border:1.5px solid var(--ink);border-radius:30px;padding:6px 14px 6px 12px;border-left:5px solid var(--rc)}
-.rel a:hover{background:var(--ink);color:var(--paper)}
 @media (max-width:520px){.photos{column-count:1}.stats{grid-template-columns:1fr 1fr}}
 """
 
@@ -324,7 +315,6 @@ def img_src(src):
     return f"data:{mime};base64," + base64.b64encode(open(path, "rb").read()).decode()
 
 
-by_id = {n["id"]: n for n in NODES}
 os.makedirs("tree", exist_ok=True)
 for n in NODES:
     e = html.escape
@@ -338,14 +328,6 @@ for n in NODES:
     hero = (f'<figure class="hero">{fig(photos[0])[8:]}' if photos else '<div class="ph">Photos coming soon</div>')
     story = "".join(f"<p>{e(para)}</p>" for para in n.get("story", [])) or '<div class="todo-box">The story for this one is still to be written.</div>'
     rest = f'<div class="photos">{"".join(fig(p) for p in photos[1:])}</div>' if len(photos) > 1 else ""
-    chip = lambda m: f'<a href="{m["id"]}.html" style="--rc:{BRANCHES[m["b"]][1]}">{e(m["title"])}</a>'
-    grew = [by_id[r] for r in n.get("req", [])]
-    led = [m for m in NODES if n["id"] in m.get("req", [])]
-    rel = ""
-    if grew:
-        rel += f'<p>Grew out of</p><div class="row">{"".join(chip(m) for m in grew)}</div>'
-    if led:
-        rel += f'<p>Led to</p><div class="row">{"".join(chip(m) for m in led)}</div>'
     more = ""
     if n.get("link"):
         href = n["link"] if n["link"].startswith("http") else "../" + n["link"]
@@ -361,7 +343,6 @@ for n in NODES:
   <div class="story">{story}</div>
   {rest}
   {more}
-  {f'<nav class="rel" aria-label="Related">{rel}</nav>' if rel else ''}
 </article>
 """
     open(f"tree/{n['id']}.html", "w", encoding="utf-8").write(page(
