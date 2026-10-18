@@ -25,7 +25,7 @@ Check each source. Record every number you change together with the URL it came 
 |---|---|
 | Intelligence Index scores, cost per task, new models | artificialanalysis.ai/leaderboards/models, artificialanalysis.ai/articles |
 | ECI scores, open–closed lag | epoch.ai (data insights, model pages, benchmarking hub) |
-| Task-time horizons | metr.org/time-horizons (note: page frozen since 8 Sep 2026; check for a restart or new suite) |
+| Task-time horizons | metr.org/assets/benchmark_results_1_1.yaml (`is_sota: true` points; page frozen since 8 Sep 2026, so also check metr.org for a restart or new suite) |
 | New releases and vendor benchmark tables | anthropic.com/news, openai.com/index, blog.google / deepmind.google, ai.meta.com, x.ai/news, DeepSeek, Moonshot (Kimi), Z.ai (GLM), Alibaba (Qwen), Xiaomi (MiMo), Mistral |
 | API prices | each vendor's pricing page |
 | Subscription plans and limits | support.claude.com (Max plan, usage limits, API credits); OpenAI Codex pricing / help pages |
@@ -43,6 +43,7 @@ Look specifically for anything released or changed since `updated_at` in the cur
 - **Forecast parameters** (`forecast.closed_growth_pts_per_month`, `open_lag_months`, `local_extra_lag_months`, `horizon.doubling_months`, `founder.*`): change only with a reason (e.g. a new trailing-6-month growth fit, a new Epoch lag figure). Keep low ≤ central ≤ high. Every change needs a changelog entry with what and why.
 - **Plans.** Update `price_usd_month` and `included_api_credit_usd` from official pages. `est_api_value_usd_month` and `est_agent_hours_week` are estimates: revise only when a vendor publishes limits or a credible measurement appears, and lower `confidence` if evidence conflicts.
 - **Releases.** Prepend new items (newest first), each with a working https URL. Keep at most 40 items.
+- **Newest models first.** `forecast.horizon.measured` must end with METR's newest state-of-the-art measurement (with `ci_low`/`ci_high`), and the headline's open-model milestone must name the current best closed model. Never leave a comparison pointing at a superseded model when a newer one has the number.
 - **Headline.** Rewrite the three `forecast.headline` sentences so they reflect today's data in plain English (no jargon beyond the leaderboard terms).
 - **Timestamps.** Set `updated_at` to now in ISO 8601 with `+10:00`, even if nothing else changed.
 - **Changelog.** Append `{date, what, why}` only for material changes (new model, price change, forecast parameter change, index re-baseline). Do not add an entry for a no-change day.

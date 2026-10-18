@@ -1,194 +1,788 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-18T19:35:46+10:00",
+  "updated_at": "2026-10-18T19:39:58+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
     "version": "v4.3.2",
     "url": "https://artificialanalysis.ai/leaderboards/models"
   },
-  "fx": { "aud_per_usd": 1.440, "as_of": "2026-10-17", "source": "https://tradingeconomics.com/australia/currency" },
-
+  "fx": {
+    "aud_per_usd": 1.44,
+    "as_of": "2026-10-17",
+    "source": "https://tradingeconomics.com/australia/currency"
+  },
   "models": [
-    { "id": "claude-opus-5-5", "name": "Claude Opus 5.5", "lab": "Anthropic", "released": "2026-09-22", "weights": "closed", "license": null,
-      "params_total_b": null, "params_active_b": null, "aa_index": 58, "aa_effort": "max", "eci": 167.35, "cost_per_task_usd": 5.98,
-      "price_in": 4.0, "price_out": 20.0, "price_cache_read": 0.20, "status": "current",
-      "note": "#1 on AA index and ECI. 20% cheaper than Opus 5." },
-    { "id": "claude-sonnet-5-5", "name": "Claude Sonnet 5.5", "lab": "Anthropic", "released": "2026-09-28", "weights": "closed", "license": null,
-      "params_total_b": null, "params_active_b": null, "aa_index": 56, "aa_effort": "max", "eci": 165.2, "cost_per_task_usd": 5.46,
-      "price_in": 2.0, "price_out": 10.0, "price_cache_read": 0.20, "status": "current",
-      "note": "Mid-tier price; leads Terminal-Bench 4.0." },
-    { "id": "muse-wonder-full", "name": "Muse Wonder Full", "lab": "Meta", "released": "2026-10-12", "weights": "closed", "license": null,
-      "params_total_b": null, "params_active_b": null, "aa_index": 56, "aa_effort": "max", "eci": null, "cost_per_task_usd": null,
-      "price_in": null, "price_out": null, "price_cache_read": null, "status": "current",
-      "note": "Meta's first frontier model. Muse Code subscribers only; no API." },
-    { "id": "muse-wonder", "name": "Muse Wonder", "lab": "Meta", "released": "2026-10-12", "weights": "closed", "license": null,
-      "params_total_b": null, "params_active_b": null, "aa_index": 52, "aa_effort": "max", "eci": null, "cost_per_task_usd": 4.52,
-      "price_in": 4.0, "price_out": 20.0, "price_cache_read": null, "status": "current", "note": "API version of Muse Wonder." },
-    { "id": "claude-fable-5-1", "name": "Claude Fable 5.1", "lab": "Anthropic", "released": "2026-09-01", "weights": "closed", "license": null,
-      "params_total_b": null, "params_active_b": null, "aa_index": 53, "aa_effort": "max", "eci": 164.82, "cost_per_task_usd": 7.63,
-      "price_in": 10.0, "price_out": 50.0, "price_cache_read": null, "status": "current",
-      "note": "Mythos-tier model with extra safeguards. Out-scored on the AA index by cheaper Opus 5.5 and Sonnet 5.5." },
-    { "id": "gpt-6-astra", "name": "GPT-6 Astra", "lab": "OpenAI", "released": "2026-09-03", "weights": "closed", "license": null,
-      "params_total_b": null, "params_active_b": null, "aa_index": 53, "aa_effort": "max", "eci": 166.51, "cost_per_task_usd": 3.26,
-      "price_in": 10.0, "price_out": 50.0, "price_cache_read": null, "status": "current",
-      "note": "#2 on ECI. Leads abstract reasoning and maths (ARC-AGI-3, FrontierMath Tier 4)." },
-    { "id": "gemini-4-argon", "name": "Gemini 4 Argon", "lab": "Google", "released": "2026-10-13", "weights": "closed", "license": null,
-      "params_total_b": null, "params_active_b": null, "aa_index": 53, "aa_effort": "high", "eci": null, "cost_per_task_usd": 1.99,
-      "price_in": 2.0, "price_out": 10.0, "price_cache_read": 0.10, "status": "current",
-      "note": "Lowest hallucination rate measured (15%). Intro pricing; rises to $4/$20 on 1 Dec 2026." },
-    { "id": "gpt-6-1-sol", "name": "GPT-6.1 Sol", "lab": "OpenAI", "released": "2026-09-29", "weights": "closed", "license": null,
-      "params_total_b": null, "params_active_b": null, "aa_index": 52, "aa_effort": "max", "eci": null, "cost_per_task_usd": 0.72,
-      "price_in": 2.0, "price_out": 10.0, "price_cache_read": 0.10, "status": "current",
-      "note": "Near-frontier at about 1/8 of the cost per task." },
-    { "id": "claude-opus-5", "name": "Claude Opus 5", "lab": "Anthropic", "released": "2026-07-24", "weights": "closed", "license": null,
-      "params_total_b": null, "params_active_b": null, "aa_index": 51, "aa_effort": "max", "eci": 162.94, "cost_per_task_usd": null,
-      "price_in": 5.0, "price_out": 25.0, "price_cache_read": 0.50, "status": "superseded",
-      "note": "Superseded by Opus 5.5. Kept as the reference point for 'when does an open model match Opus 5'." },
-    { "id": "grok-4-7", "name": "Grok 4.7", "lab": "xAI", "released": "2026-09-21", "weights": "closed", "license": null,
-      "params_total_b": null, "params_active_b": null, "aa_index": 46, "aa_effort": "high", "eci": 154, "cost_per_task_usd": 2.73,
-      "price_in": 2.0, "price_out": null, "price_cache_read": null, "status": "current", "note": "ARC-AGI-2 61%." },
-    { "id": "claude-haiku-5-5", "name": "Claude Haiku 5.5", "lab": "Anthropic", "released": "2026-10-07", "weights": "closed", "license": null,
-      "params_total_b": null, "params_active_b": null, "aa_index": 43, "aa_effort": null, "eci": null, "cost_per_task_usd": null,
-      "price_in": 0.10, "price_out": 0.50, "price_cache_read": null, "status": "current", "note": "Up to 100K tokens; higher tier above." },
-    { "id": "mistral-large-4-preview", "name": "Mistral Large 4 Preview", "lab": "Mistral", "released": "2026-10-06", "weights": "closed", "license": null,
-      "params_total_b": 1000, "params_active_b": null, "aa_index": 38, "aa_effort": null, "eci": null, "cost_per_task_usd": null,
-      "price_in": 1.36, "price_out": 4.18, "price_cache_read": null, "status": "current",
-      "note": "API preview; AA lists it as proprietary for now. Open weights promised for late October; reclassify as open once released." },
-
-    { "id": "mimo-v2-6-pro", "name": "MiMo-V2.6-Pro", "lab": "Xiaomi", "released": "2026-09-21", "weights": "open", "license": "MIT",
-      "params_total_b": 1020, "params_active_b": 42, "aa_index": 46, "aa_effort": "reasoning", "eci": null, "cost_per_task_usd": 0.13,
-      "price_in": 0.435, "price_out": 0.87, "price_cache_read": 0.0036, "status": "current",
-      "note": "Best open model on the AA index. Reported training cost about US$2.6M." },
-    { "id": "glm-5-3", "name": "GLM-5.3", "lab": "Z.ai", "released": "2026-08-28", "weights": "open", "license": "GLM-5.3 custom (commercial use allowed)",
-      "params_total_b": 753, "params_active_b": null, "aa_index": 45, "aa_effort": "max", "eci": null, "cost_per_task_usd": 2.01,
-      "price_in": null, "price_out": null, "price_cache_read": null, "status": "current",
-      "note": "Largest top-tier open model that fits a 512GB machine at 4-bit (about 420GB)." },
-    { "id": "kimi-k3", "name": "Kimi K3", "lab": "Moonshot AI", "released": "2026-07-16", "weights": "open", "license": "Kimi K3 licence (revenue-thresholded)",
-      "params_total_b": 2800, "params_active_b": 104, "aa_index": 44, "aa_effort": "max", "eci": 157.61, "cost_per_task_usd": 2.00,
-      "price_in": 3.0, "price_out": 15.0, "price_cache_read": null, "status": "current",
-      "note": "Best open model on ECI (9.7 points behind Opus 5.5). Too large for any single desktop machine." },
-    { "id": "glm-5-3-flash", "name": "GLM-5.3-Flash", "lab": "Z.ai", "released": "2026-08-26", "weights": "open", "license": "MIT",
-      "params_total_b": 320, "params_active_b": 18, "aa_index": 42, "aa_effort": "max", "eci": 151.94, "cost_per_task_usd": null,
-      "price_in": 0.15, "price_out": 0.50, "price_cache_read": null, "status": "current",
-      "note": "Runs on a 256GB Mac Studio at 4-bit. Best model you can run locally today on a single desktop." },
-    { "id": "deepseek-v4-1-flash", "name": "DeepSeek V4.1 Flash", "lab": "DeepSeek", "released": "2026-09-10", "weights": "open", "license": "MIT",
-      "params_total_b": 552, "params_active_b": 16, "aa_index": 39, "aa_effort": "max", "eci": 155.0, "cost_per_task_usd": null,
-      "price_in": 0.15, "price_out": 0.60, "price_cache_read": null, "status": "current",
-      "note": "Off-peak prices; doubled at weekday peak. Beats DeepSeek's own V4 Pro. Score is for the September checkpoint; the 17 Oct update (1017) is not yet scored." },
-    { "id": "muse-spark-open", "name": "Muse Spark Open", "lab": "Meta", "released": "2026-10-15", "weights": "open", "license": "Muse Model License (commercial use allowed; agreement needed above US$20M model-serving revenue)",
-      "params_total_b": 816, "params_active_b": 42, "aa_index": 39, "aa_effort": "xhigh", "eci": null, "cost_per_task_usd": 0.84,
-      "price_in": 1.25, "price_out": 4.25, "price_cache_read": null, "status": "current",
-      "note": "Best US open model. Needs about 700GB at NVFP4; Meta demoed it on two 512GB Mac Studios." },
-    { "id": "mimo-v2-6-flash", "name": "MiMo-V2.6-Flash", "lab": "Xiaomi", "released": "2026-09-21", "weights": "open", "license": "MIT",
-      "params_total_b": 309, "params_active_b": 15, "aa_index": 38, "aa_effort": "reasoning", "eci": null, "cost_per_task_usd": null,
-      "price_in": 0.14, "price_out": 0.28, "price_cache_read": 0.0028, "status": "current", "note": "Fits a 256GB Mac Studio at 4-bit." },
-    { "id": "deepseek-v4-pro-0813", "name": "DeepSeek V4 Pro 0813", "lab": "DeepSeek", "released": "2026-08-13", "weights": "open", "license": "MIT",
-      "params_total_b": 1600, "params_active_b": 49, "aa_index": 36, "aa_effort": "max", "eci": 155.38, "cost_per_task_usd": null,
-      "price_in": 1.32, "price_out": 3.96, "price_cache_read": null, "status": "current", "note": "Peak prices; half at off-peak." },
-    { "id": "qwen-3-8-27b", "name": "Qwen 3.8 27B", "lab": "Alibaba", "released": "2026-08-01", "weights": "open", "license": "Apache-2.0",
-      "params_total_b": 27, "params_active_b": 27, "aa_index": 34, "aa_effort": "xhigh", "eci": null, "cost_per_task_usd": null,
-      "price_in": null, "price_out": null, "price_cache_read": null, "status": "current",
-      "note": "Best model that runs on a single consumer GPU. Release date approximate." }
+    {
+      "id": "claude-opus-5-5",
+      "name": "Claude Opus 5.5",
+      "lab": "Anthropic",
+      "released": "2026-09-22",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 58,
+      "aa_effort": "max",
+      "eci": 167.35,
+      "cost_per_task_usd": 5.98,
+      "price_in": 4.0,
+      "price_out": 20.0,
+      "price_cache_read": 0.2,
+      "status": "current",
+      "note": "#1 on AA index and ECI. 20% cheaper than Opus 5."
+    },
+    {
+      "id": "claude-sonnet-5-5",
+      "name": "Claude Sonnet 5.5",
+      "lab": "Anthropic",
+      "released": "2026-09-28",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 56,
+      "aa_effort": "max",
+      "eci": 165.2,
+      "cost_per_task_usd": 5.46,
+      "price_in": 2.0,
+      "price_out": 10.0,
+      "price_cache_read": 0.2,
+      "status": "current",
+      "note": "Mid-tier price; leads Terminal-Bench 4.0."
+    },
+    {
+      "id": "muse-wonder-full",
+      "name": "Muse Wonder Full",
+      "lab": "Meta",
+      "released": "2026-10-12",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 56,
+      "aa_effort": "max",
+      "eci": null,
+      "cost_per_task_usd": null,
+      "price_in": null,
+      "price_out": null,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "Meta's first frontier model. Muse Code subscribers only; no API."
+    },
+    {
+      "id": "muse-wonder",
+      "name": "Muse Wonder",
+      "lab": "Meta",
+      "released": "2026-10-12",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 52,
+      "aa_effort": "max",
+      "eci": null,
+      "cost_per_task_usd": 4.52,
+      "price_in": 4.0,
+      "price_out": 20.0,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "API version of Muse Wonder."
+    },
+    {
+      "id": "claude-fable-5-1",
+      "name": "Claude Fable 5.1",
+      "lab": "Anthropic",
+      "released": "2026-09-01",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 53,
+      "aa_effort": "max",
+      "eci": 164.82,
+      "cost_per_task_usd": 7.63,
+      "price_in": 10.0,
+      "price_out": 50.0,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "Mythos-tier model with extra safeguards. Out-scored on the AA index by cheaper Opus 5.5 and Sonnet 5.5."
+    },
+    {
+      "id": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "lab": "OpenAI",
+      "released": "2026-09-03",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 53,
+      "aa_effort": "max",
+      "eci": 166.51,
+      "cost_per_task_usd": 3.26,
+      "price_in": 10.0,
+      "price_out": 50.0,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "#2 on ECI. Leads abstract reasoning and maths (ARC-AGI-3, FrontierMath Tier 4)."
+    },
+    {
+      "id": "gemini-4-argon",
+      "name": "Gemini 4 Argon",
+      "lab": "Google",
+      "released": "2026-10-13",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 53,
+      "aa_effort": "high",
+      "eci": null,
+      "cost_per_task_usd": 1.99,
+      "price_in": 2.0,
+      "price_out": 10.0,
+      "price_cache_read": 0.1,
+      "status": "current",
+      "note": "Lowest hallucination rate measured (15%). Intro pricing; rises to $4/$20 on 1 Dec 2026."
+    },
+    {
+      "id": "gpt-6-1-sol",
+      "name": "GPT-6.1 Sol",
+      "lab": "OpenAI",
+      "released": "2026-09-29",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 52,
+      "aa_effort": "max",
+      "eci": null,
+      "cost_per_task_usd": 0.72,
+      "price_in": 2.0,
+      "price_out": 10.0,
+      "price_cache_read": 0.1,
+      "status": "current",
+      "note": "Near-frontier at about 1/8 of the cost per task."
+    },
+    {
+      "id": "claude-opus-5",
+      "name": "Claude Opus 5",
+      "lab": "Anthropic",
+      "released": "2026-07-24",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 51,
+      "aa_effort": "max",
+      "eci": 162.94,
+      "cost_per_task_usd": null,
+      "price_in": 5.0,
+      "price_out": 25.0,
+      "price_cache_read": 0.5,
+      "status": "superseded",
+      "note": "Superseded by Opus 5.5. Kept as the reference point for 'when does an open model match Opus 5'."
+    },
+    {
+      "id": "grok-4-7",
+      "name": "Grok 4.7",
+      "lab": "xAI",
+      "released": "2026-09-21",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 46,
+      "aa_effort": "high",
+      "eci": 154,
+      "cost_per_task_usd": 2.73,
+      "price_in": 2.0,
+      "price_out": null,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "ARC-AGI-2 61%."
+    },
+    {
+      "id": "claude-haiku-5-5",
+      "name": "Claude Haiku 5.5",
+      "lab": "Anthropic",
+      "released": "2026-10-07",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 43,
+      "aa_effort": null,
+      "eci": null,
+      "cost_per_task_usd": null,
+      "price_in": 0.1,
+      "price_out": 0.5,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "Up to 100K tokens; higher tier above."
+    },
+    {
+      "id": "mistral-large-4-preview",
+      "name": "Mistral Large 4 Preview",
+      "lab": "Mistral",
+      "released": "2026-10-06",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": 1000,
+      "params_active_b": null,
+      "aa_index": 38,
+      "aa_effort": null,
+      "eci": null,
+      "cost_per_task_usd": null,
+      "price_in": 1.36,
+      "price_out": 4.18,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "API preview; AA lists it as proprietary for now. Open weights promised for late October; reclassify as open once released."
+    },
+    {
+      "id": "mimo-v2-6-pro",
+      "name": "MiMo-V2.6-Pro",
+      "lab": "Xiaomi",
+      "released": "2026-09-21",
+      "weights": "open",
+      "license": "MIT",
+      "params_total_b": 1020,
+      "params_active_b": 42,
+      "aa_index": 46,
+      "aa_effort": "reasoning",
+      "eci": null,
+      "cost_per_task_usd": 0.13,
+      "price_in": 0.435,
+      "price_out": 0.87,
+      "price_cache_read": 0.0036,
+      "status": "current",
+      "note": "Best open model on the AA index. Reported training cost about US$2.6M."
+    },
+    {
+      "id": "glm-5-3",
+      "name": "GLM-5.3",
+      "lab": "Z.ai",
+      "released": "2026-08-28",
+      "weights": "open",
+      "license": "GLM-5.3 custom (commercial use allowed)",
+      "params_total_b": 753,
+      "params_active_b": null,
+      "aa_index": 45,
+      "aa_effort": "max",
+      "eci": null,
+      "cost_per_task_usd": 2.01,
+      "price_in": null,
+      "price_out": null,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "Largest top-tier open model that fits a 512GB machine at 4-bit (about 420GB)."
+    },
+    {
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "lab": "Moonshot AI",
+      "released": "2026-07-16",
+      "weights": "open",
+      "license": "Kimi K3 licence (revenue-thresholded)",
+      "params_total_b": 2800,
+      "params_active_b": 104,
+      "aa_index": 44,
+      "aa_effort": "max",
+      "eci": 157.61,
+      "cost_per_task_usd": 2.0,
+      "price_in": 3.0,
+      "price_out": 15.0,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "Best open model on ECI (9.7 points behind Opus 5.5). Too large for any single desktop machine."
+    },
+    {
+      "id": "glm-5-3-flash",
+      "name": "GLM-5.3-Flash",
+      "lab": "Z.ai",
+      "released": "2026-08-26",
+      "weights": "open",
+      "license": "MIT",
+      "params_total_b": 320,
+      "params_active_b": 18,
+      "aa_index": 42,
+      "aa_effort": "max",
+      "eci": 151.94,
+      "cost_per_task_usd": null,
+      "price_in": 0.15,
+      "price_out": 0.5,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "Runs on a 256GB Mac Studio at 4-bit. Best model you can run locally today on a single desktop."
+    },
+    {
+      "id": "deepseek-v4-1-flash",
+      "name": "DeepSeek V4.1 Flash",
+      "lab": "DeepSeek",
+      "released": "2026-09-10",
+      "weights": "open",
+      "license": "MIT",
+      "params_total_b": 552,
+      "params_active_b": 16,
+      "aa_index": 39,
+      "aa_effort": "max",
+      "eci": 155.0,
+      "cost_per_task_usd": null,
+      "price_in": 0.15,
+      "price_out": 0.6,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "Off-peak prices; doubled at weekday peak. Beats DeepSeek's own V4 Pro. Score is for the September checkpoint; the 17 Oct update (1017) is not yet scored."
+    },
+    {
+      "id": "muse-spark-open",
+      "name": "Muse Spark Open",
+      "lab": "Meta",
+      "released": "2026-10-15",
+      "weights": "open",
+      "license": "Muse Model License (commercial use allowed; agreement needed above US$20M model-serving revenue)",
+      "params_total_b": 816,
+      "params_active_b": 42,
+      "aa_index": 39,
+      "aa_effort": "xhigh",
+      "eci": null,
+      "cost_per_task_usd": 0.84,
+      "price_in": 1.25,
+      "price_out": 4.25,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "Best US open model. Needs about 700GB at NVFP4; Meta demoed it on two 512GB Mac Studios."
+    },
+    {
+      "id": "mimo-v2-6-flash",
+      "name": "MiMo-V2.6-Flash",
+      "lab": "Xiaomi",
+      "released": "2026-09-21",
+      "weights": "open",
+      "license": "MIT",
+      "params_total_b": 309,
+      "params_active_b": 15,
+      "aa_index": 38,
+      "aa_effort": "reasoning",
+      "eci": null,
+      "cost_per_task_usd": null,
+      "price_in": 0.14,
+      "price_out": 0.28,
+      "price_cache_read": 0.0028,
+      "status": "current",
+      "note": "Fits a 256GB Mac Studio at 4-bit."
+    },
+    {
+      "id": "deepseek-v4-pro-0813",
+      "name": "DeepSeek V4 Pro 0813",
+      "lab": "DeepSeek",
+      "released": "2026-08-13",
+      "weights": "open",
+      "license": "MIT",
+      "params_total_b": 1600,
+      "params_active_b": 49,
+      "aa_index": 36,
+      "aa_effort": "max",
+      "eci": 155.38,
+      "cost_per_task_usd": null,
+      "price_in": 1.32,
+      "price_out": 3.96,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "Peak prices; half at off-peak."
+    },
+    {
+      "id": "qwen-3-8-27b",
+      "name": "Qwen 3.8 27B",
+      "lab": "Alibaba",
+      "released": "2026-08-01",
+      "weights": "open",
+      "license": "Apache-2.0",
+      "params_total_b": 27,
+      "params_active_b": 27,
+      "aa_index": 34,
+      "aa_effort": "xhigh",
+      "eci": null,
+      "cost_per_task_usd": null,
+      "price_in": null,
+      "price_out": null,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "Best model that runs on a single consumer GPU. Release date approximate."
+    }
   ],
-
   "benchmarks": [
-    { "name": "Terminal-Bench 4.0", "unit": "%", "higher_is_better": true, "what": "Agentic work in a real terminal",
+    {
+      "name": "Terminal-Bench 4.0",
+      "unit": "%",
+      "higher_is_better": true,
+      "what": "Agentic work in a real terminal",
       "entries": [
-        { "model": "Claude Sonnet 5.5", "value": 70.6, "vendor_reported": true },
-        { "model": "Claude Opus 5.5", "value": 66.4, "vendor_reported": true },
-        { "model": "GPT-6 Astra", "value": 58.2, "vendor_reported": true },
-        { "model": "Claude Fable 5.1", "value": 57.9, "vendor_reported": true },
-        { "model": "Gemini 4 Argon", "value": 57.4, "vendor_reported": true } ] },
-    { "name": "AutomationBench", "unit": "%", "higher_is_better": true, "what": "Business workflows across real apps",
+        {
+          "model": "Claude Sonnet 5.5",
+          "value": 70.6,
+          "vendor_reported": true
+        },
+        {
+          "model": "Claude Opus 5.5",
+          "value": 66.4,
+          "vendor_reported": true
+        },
+        {
+          "model": "GPT-6 Astra",
+          "value": 58.2,
+          "vendor_reported": true
+        },
+        {
+          "model": "Claude Fable 5.1",
+          "value": 57.9,
+          "vendor_reported": true
+        },
+        {
+          "model": "Gemini 4 Argon",
+          "value": 57.4,
+          "vendor_reported": true
+        }
+      ]
+    },
+    {
+      "name": "AutomationBench",
+      "unit": "%",
+      "higher_is_better": true,
+      "what": "Business workflows across real apps",
       "entries": [
-        { "model": "Gemini 4 Argon", "value": 51.3, "vendor_reported": true },
-        { "model": "Claude Sonnet 5.5", "value": 44.7, "vendor_reported": true },
-        { "model": "GPT-6 Astra", "value": 41.4, "vendor_reported": true },
-        { "model": "GPT-6.1 Sol", "value": 36.0, "vendor_reported": true },
-        { "model": "Claude Opus 5.5", "value": 35.4, "vendor_reported": true, "note": "Google's table reports 42.5" },
-        { "model": "Claude Fable 5.1", "value": 31.4, "vendor_reported": true } ] },
-    { "name": "GDPval-AA v2.1", "unit": "Elo", "higher_is_better": true, "what": "Professional knowledge-work deliverables",
+        {
+          "model": "Gemini 4 Argon",
+          "value": 51.3,
+          "vendor_reported": true
+        },
+        {
+          "model": "Claude Sonnet 5.5",
+          "value": 44.7,
+          "vendor_reported": true
+        },
+        {
+          "model": "GPT-6 Astra",
+          "value": 41.4,
+          "vendor_reported": true
+        },
+        {
+          "model": "GPT-6.1 Sol",
+          "value": 36.0,
+          "vendor_reported": true
+        },
+        {
+          "model": "Claude Opus 5.5",
+          "value": 35.4,
+          "vendor_reported": true,
+          "note": "Google's table reports 42.5"
+        },
+        {
+          "model": "Claude Fable 5.1",
+          "value": 31.4,
+          "vendor_reported": true
+        }
+      ]
+    },
+    {
+      "name": "GDPval-AA v2.1",
+      "unit": "Elo",
+      "higher_is_better": true,
+      "what": "Professional knowledge-work deliverables",
       "entries": [
-        { "model": "Claude Opus 5.5", "value": 1846, "vendor_reported": false },
-        { "model": "Claude Sonnet 5.5", "value": 1844, "vendor_reported": false },
-        { "model": "Claude Fable 5.1", "value": 1735, "vendor_reported": false },
-        { "model": "Claude Opus 5", "value": 1708, "vendor_reported": false },
-        { "model": "GPT-6 Sol", "value": 1487, "vendor_reported": true } ] },
-    { "name": "Humanity's Last Exam (with tools)", "unit": "%", "higher_is_better": true, "what": "Hardest expert-written questions",
+        {
+          "model": "Claude Opus 5.5",
+          "value": 1846,
+          "vendor_reported": false
+        },
+        {
+          "model": "Claude Sonnet 5.5",
+          "value": 1844,
+          "vendor_reported": false
+        },
+        {
+          "model": "Claude Fable 5.1",
+          "value": 1735,
+          "vendor_reported": false
+        },
+        {
+          "model": "Claude Opus 5",
+          "value": 1708,
+          "vendor_reported": false
+        },
+        {
+          "model": "GPT-6 Sol",
+          "value": 1487,
+          "vendor_reported": true
+        }
+      ]
+    },
+    {
+      "name": "Humanity's Last Exam (with tools)",
+      "unit": "%",
+      "higher_is_better": true,
+      "what": "Hardest expert-written questions",
       "entries": [
-        { "model": "Claude Opus 5.5", "value": 67.7, "vendor_reported": true },
-        { "model": "Claude Fable 5.1", "value": 65.0, "vendor_reported": true },
-        { "model": "Claude Sonnet 5.5", "value": 64.5, "vendor_reported": true } ] },
-    { "name": "AA-Omniscience hallucination rate", "unit": "%", "higher_is_better": false, "what": "How often a model makes up an answer",
+        {
+          "model": "Claude Opus 5.5",
+          "value": 67.7,
+          "vendor_reported": true
+        },
+        {
+          "model": "Claude Fable 5.1",
+          "value": 65.0,
+          "vendor_reported": true
+        },
+        {
+          "model": "Claude Sonnet 5.5",
+          "value": 64.5,
+          "vendor_reported": true
+        }
+      ]
+    },
+    {
+      "name": "AA-Omniscience hallucination rate",
+      "unit": "%",
+      "higher_is_better": false,
+      "what": "How often a model makes up an answer",
       "entries": [
-        { "model": "Gemini 4 Argon", "value": 15, "vendor_reported": false },
-        { "model": "GPT-6 Astra", "value": 51, "vendor_reported": false },
-        { "model": "GPT-6.1 Sol", "value": 54, "vendor_reported": false } ] }
+        {
+          "model": "Gemini 4 Argon",
+          "value": 15,
+          "vendor_reported": false
+        },
+        {
+          "model": "GPT-6 Astra",
+          "value": 51,
+          "vendor_reported": false
+        },
+        {
+          "model": "GPT-6.1 Sol",
+          "value": 54,
+          "vendor_reported": false
+        }
+      ]
+    }
   ],
-
   "history": {
     "metric": "AA Intelligence Index v4.3.2 at release, frontier envelope",
     "closed_frontier": [
-      { "date": "2026-06-09", "value": 50, "model": "Claude Fable 5" },
-      { "date": "2026-07-24", "value": 51, "model": "Claude Opus 5" },
-      { "date": "2026-09-01", "value": 53, "model": "Claude Fable 5.1" },
-      { "date": "2026-09-22", "value": 58, "model": "Claude Opus 5.5" }
+      {
+        "date": "2026-06-09",
+        "value": 50,
+        "model": "Claude Fable 5"
+      },
+      {
+        "date": "2026-07-24",
+        "value": 51,
+        "model": "Claude Opus 5"
+      },
+      {
+        "date": "2026-09-01",
+        "value": 53,
+        "model": "Claude Fable 5.1"
+      },
+      {
+        "date": "2026-09-22",
+        "value": 58,
+        "model": "Claude Opus 5.5"
+      }
     ],
     "open_frontier": [
-      { "date": "2026-07-16", "value": 44, "model": "Kimi K3" },
-      { "date": "2026-08-28", "value": 45, "model": "GLM-5.3" },
-      { "date": "2026-09-21", "value": 46, "model": "MiMo-V2.6-Pro" }
+      {
+        "date": "2026-07-16",
+        "value": 44,
+        "model": "Kimi K3"
+      },
+      {
+        "date": "2026-08-28",
+        "value": 45,
+        "model": "GLM-5.3"
+      },
+      {
+        "date": "2026-09-21",
+        "value": 46,
+        "model": "MiMo-V2.6-Pro"
+      }
     ],
     "local_under_aud50k": [
-      { "date": "2026-08-26", "value": 42, "model": "GLM-5.3-Flash on 256GB Mac Studio" }
+      {
+        "date": "2026-08-26",
+        "value": 42,
+        "model": "GLM-5.3-Flash on 256GB Mac Studio"
+      }
     ]
   },
-
   "forecast": {
-    "closed_growth_pts_per_month": { "low": 0.8, "central": 1.5, "high": 2.3 },
-    "open_lag_months": { "low": 4, "central": 5, "high": 7 },
-    "local_extra_lag_months": { "low": 1, "central": 2, "high": 3 },
+    "closed_growth_pts_per_month": {
+      "low": 0.8,
+      "central": 1.5,
+      "high": 2.3
+    },
+    "open_lag_months": {
+      "low": 3,
+      "central": 4,
+      "high": 6
+    },
+    "local_extra_lag_months": {
+      "low": 1,
+      "central": 2,
+      "high": 3
+    },
     "horizon": {
       "measured": [
-        { "model": "GPT-2", "date": "2019-02-14", "minutes": 0.033 },
-        { "model": "GPT-4", "date": "2023-03-14", "minutes": 5 },
-        { "model": "Claude 3.7 Sonnet", "date": "2025-02-24", "minutes": 50 },
-        { "model": "OpenAI o3", "date": "2025-04-16", "minutes": 92 },
-        { "model": "GPT-5", "date": "2025-08-07", "minutes": 137 },
-        { "model": "Claude Opus 4.5", "date": "2025-11-24", "minutes": 289 },
-        { "model": "Claude Opus 4.6", "date": "2026-02-17", "minutes": 718 }
+        {
+          "model": "GPT-2",
+          "date": "2019-02-14",
+          "minutes": 0.054,
+          "ci_low": 0.01,
+          "ci_high": 0.142
+        },
+        {
+          "model": "GPT-4",
+          "date": "2023-03-14",
+          "minutes": 4.0,
+          "ci_low": 1.9,
+          "ci_high": 8.0
+        },
+        {
+          "model": "Claude 3.7 Sonnet",
+          "date": "2025-02-24",
+          "minutes": 60.4,
+          "ci_low": 33.0,
+          "ci_high": 104.2
+        },
+        {
+          "model": "OpenAI o3",
+          "date": "2025-04-16",
+          "minutes": 119.7,
+          "ci_low": 74.6,
+          "ci_high": 190.9
+        },
+        {
+          "model": "GPT-5",
+          "date": "2025-08-07",
+          "minutes": 203.0,
+          "ci_low": 112.6,
+          "ci_high": 405.6
+        },
+        {
+          "model": "Claude Opus 4.5",
+          "date": "2025-11-24",
+          "minutes": 293.0,
+          "ci_low": 161.7,
+          "ci_high": 623.7
+        },
+        {
+          "model": "GPT-5.2",
+          "date": "2025-12-11",
+          "minutes": 352.2,
+          "ci_low": 198.1,
+          "ci_high": 815.2
+        },
+        {
+          "model": "Claude Opus 4.6",
+          "date": "2026-02-05",
+          "minutes": 718.8,
+          "ci_low": 316.7,
+          "ci_high": 3633.8
+        },
+        {
+          "model": "Claude Mythos Preview",
+          "date": "2026-04-07",
+          "minutes": 1044.8,
+          "ci_low": 508.9,
+          "ci_high": 3304.3
+        }
       ],
-      "doubling_months": { "low": 4, "high": 7 },
+      "doubling_months": {
+        "low": 3.4,
+        "high": 5.2
+      },
       "suite_ceiling_minutes": 960,
-      "status": "METR's time-horizon page was last updated on 8 Sep 2026. No model newer than Opus 4.6 has a published measurement; later values are projections."
+      "status": "METR's newest measurement is Claude Mythos Preview (early checkpoint, released Apr 2026): about 17 h, 95% CI 8.5–55 h, above the 16 h where METR says its current task suite stops being reliable. METR stopped updating the page on 8 Sep 2026, so newer models (Claude Opus 5.5, GPT-6 Astra, Gemini 4 Argon) are not measured; values after April 2026 are projections at METR's post-2023 doubling time of 3.4–5.2 months."
     },
     "headline": [
       "Anthropic holds the top two spots on the AA index; GPT-6.1 Sol is the price-performance leader at about $0.72 per task.",
-      "The best open model (MiMo-V2.6-Pro, 46) trails the closed frontier (58) by 12 points, roughly 5 months on the lag model; Meta's new Muse Spark Open (39) is the best US open model.",
-      "An open model matching Claude Opus 5 (51) is expected around Dec 2026 (range Nov 2026 to Feb 2027); a version that runs on a desktop under AUD 50k about 2 months later."
+      "The best open model (MiMo-V2.6-Pro, 46) trails the closed frontier (58) by 12 points, roughly 4 months on Epoch’s lag estimate; Meta's new Muse Spark Open (39) is the best US open model.",
+      "An open model matching Claude Opus 5.5 (58) is expected around Jan 2027 (range Dec 2026 to Mar 2027); a version that runs on a desktop under AUD 50k about 2 months later."
     ],
     "founder": {
       "as_of": "2026-09-08",
-      "multiplier_growth_monthly": { "low": 0.01, "central": 0.03, "high": 0.06 },
+      "multiplier_growth_monthly": {
+        "low": 0.01,
+        "central": 0.03,
+        "high": 0.06
+      },
       "swarm_parallel_fraction": 0.6,
       "swarm_coordination_overhead_per_agent": 0.03,
       "agent_utilisation_during_work": 0.6,
       "task_mix": [
-        { "task": "Conops, requirements, trade studies", "share": 0.08, "multiplier": 5.0, "kind": "digital" },
-        { "task": "System and detailed design (CAD, P&ID, structures)", "share": 0.20, "multiplier": 2.5, "kind": "digital" },
-        { "task": "Analysis (thermal, structural, CFD, performance)", "share": 0.15, "multiplier": 2.5, "kind": "digital" },
-        { "task": "Test-stand design", "share": 0.06, "multiplier": 2.5, "kind": "digital" },
-        { "task": "Procurement and supplier management", "share": 0.08, "multiplier": 1.7, "kind": "digital" },
-        { "task": "Docs, pitch deck, grant and investor material", "share": 0.10, "multiplier": 5.0, "kind": "digital" },
-        { "task": "Business, legal, finance, admin", "share": 0.07, "multiplier": 4.0, "kind": "digital" },
-        { "task": "Test-stand build (hands-on)", "share": 0.09, "multiplier": 1.1, "kind": "physical" },
-        { "task": "Fabrication and assembly (hands-on)", "share": 0.10, "multiplier": 1.1, "kind": "physical" },
-        { "task": "Test and commissioning", "share": 0.07, "multiplier": 1.2, "kind": "physical" }
+        {
+          "task": "Conops, requirements, trade studies",
+          "share": 0.08,
+          "multiplier": 5.0,
+          "kind": "digital"
+        },
+        {
+          "task": "System and detailed design (CAD, P&ID, structures)",
+          "share": 0.2,
+          "multiplier": 2.5,
+          "kind": "digital"
+        },
+        {
+          "task": "Analysis (thermal, structural, CFD, performance)",
+          "share": 0.15,
+          "multiplier": 2.5,
+          "kind": "digital"
+        },
+        {
+          "task": "Test-stand design",
+          "share": 0.06,
+          "multiplier": 2.5,
+          "kind": "digital"
+        },
+        {
+          "task": "Procurement and supplier management",
+          "share": 0.08,
+          "multiplier": 1.7,
+          "kind": "digital"
+        },
+        {
+          "task": "Docs, pitch deck, grant and investor material",
+          "share": 0.1,
+          "multiplier": 5.0,
+          "kind": "digital"
+        },
+        {
+          "task": "Business, legal, finance, admin",
+          "share": 0.07,
+          "multiplier": 4.0,
+          "kind": "digital"
+        },
+        {
+          "task": "Test-stand build (hands-on)",
+          "share": 0.09,
+          "multiplier": 1.1,
+          "kind": "physical"
+        },
+        {
+          "task": "Fabrication and assembly (hands-on)",
+          "share": 0.1,
+          "multiplier": 1.1,
+          "kind": "physical"
+        },
+        {
+          "task": "Test and commissioning",
+          "share": 0.07,
+          "multiplier": 1.2,
+          "kind": "physical"
+        }
       ]
     }
   },
-
   "agent_hour_tokens": {
     "note": "Assumed token use for one hour of an agent actively working in a coding/engineering session. Used to convert plan usage into API dollars.",
     "input_cached_m": 3.0,
@@ -196,86 +790,366 @@
     "output_m": 0.12,
     "cache_read_fallback_fraction_of_input": 0.1
   },
-
   "plans": [
-    { "id": "claude-pro", "name": "Claude Pro", "vendor": "Anthropic", "price_usd_month": 20, "included_api_credit_usd": 0,
-      "est_api_value_usd_month": [50, 150], "est_agent_hours_week": [4, 8], "default_model": "claude-sonnet-5-5", "confidence": "low",
-      "note": "Opus not available in Claude Code on Pro." },
-    { "id": "claude-max-5x", "name": "Claude Max 5x", "vendor": "Anthropic", "price_usd_month": 100, "included_api_credit_usd": 100,
-      "est_api_value_usd_month": [200, 1900], "est_agent_hours_week": [20, 40], "default_model": "claude-opus-5-5", "confidence": "low",
-      "note": "5x Pro usage per session plus weekly caps. Since 7 Oct 2026 also includes $100/month API credit (API, Agent SDK, claude -p with an API key; not interactive Claude Code)." },
-    { "id": "claude-max-20x", "name": "Claude Max 20x", "vendor": "Anthropic", "price_usd_month": 200, "included_api_credit_usd": 200,
-      "est_api_value_usd_month": [800, 7600], "est_agent_hours_week": [80, 160], "default_model": "claude-opus-5-5", "confidence": "low",
-      "note": "20x Pro usage per session plus weekly caps. Includes $200/month API credit." },
-    { "id": "chatgpt-plus", "name": "ChatGPT Plus (Codex)", "vendor": "OpenAI", "price_usd_month": 20, "included_api_credit_usd": 0,
-      "est_api_value_usd_month": [70, 700], "est_agent_hours_week": [5, 15], "default_model": "gpt-6-1-sol", "confidence": "low",
-      "note": "Per 5-hour window: Sol 6.1 15 to 160 messages, Astra 5 to 45. Weekly caps unpublished." },
-    { "id": "chatgpt-pro-100", "name": "ChatGPT Pro 100 (Codex)", "vendor": "OpenAI", "price_usd_month": 100, "included_api_credit_usd": 0,
-      "est_api_value_usd_month": [400, 3000], "est_agent_hours_week": [25, 60], "default_model": "gpt-6-1-sol", "confidence": "low",
-      "note": "More usage than Plus; per-model limits unpublished." },
-    { "id": "chatgpt-pro-200", "name": "ChatGPT Pro 200 (Codex)", "vendor": "OpenAI", "price_usd_month": 200, "included_api_credit_usd": 0,
-      "est_api_value_usd_month": [1000, 6000], "est_agent_hours_week": [60, 150], "default_model": "gpt-6-1-sol", "confidence": "low",
-      "note": "Weekly allowance, no 5-hour limit. New subscribers get a lower allowance than the old Pro 20x." },
-    { "id": "chatgpt-pro-500", "name": "ChatGPT Pro 500 (Codex)", "vendor": "OpenAI", "price_usd_month": 500, "included_api_credit_usd": 0,
-      "est_api_value_usd_month": [2500, 12000], "est_agent_hours_week": [150, 350], "default_model": "gpt-6-astra", "confidence": "very low",
-      "note": "Highest allowance; includes Astra Ultrafast (8x the standard rate). No published usage numbers." }
+    {
+      "id": "claude-pro",
+      "name": "Claude Pro",
+      "vendor": "Anthropic",
+      "price_usd_month": 20,
+      "included_api_credit_usd": 0,
+      "est_api_value_usd_month": [
+        50,
+        150
+      ],
+      "est_agent_hours_week": [
+        4,
+        8
+      ],
+      "default_model": "claude-sonnet-5-5",
+      "confidence": "low",
+      "note": "Opus not available in Claude Code on Pro."
+    },
+    {
+      "id": "claude-max-5x",
+      "name": "Claude Max 5x",
+      "vendor": "Anthropic",
+      "price_usd_month": 100,
+      "included_api_credit_usd": 100,
+      "est_api_value_usd_month": [
+        200,
+        1900
+      ],
+      "est_agent_hours_week": [
+        20,
+        40
+      ],
+      "default_model": "claude-opus-5-5",
+      "confidence": "low",
+      "note": "5x Pro usage per session plus weekly caps. Since 7 Oct 2026 also includes $100/month API credit (API, Agent SDK, claude -p with an API key; not interactive Claude Code)."
+    },
+    {
+      "id": "claude-max-20x",
+      "name": "Claude Max 20x",
+      "vendor": "Anthropic",
+      "price_usd_month": 200,
+      "included_api_credit_usd": 200,
+      "est_api_value_usd_month": [
+        800,
+        7600
+      ],
+      "est_agent_hours_week": [
+        80,
+        160
+      ],
+      "default_model": "claude-opus-5-5",
+      "confidence": "low",
+      "note": "20x Pro usage per session plus weekly caps. Includes $200/month API credit."
+    },
+    {
+      "id": "chatgpt-plus",
+      "name": "ChatGPT Plus (Codex)",
+      "vendor": "OpenAI",
+      "price_usd_month": 20,
+      "included_api_credit_usd": 0,
+      "est_api_value_usd_month": [
+        70,
+        700
+      ],
+      "est_agent_hours_week": [
+        5,
+        15
+      ],
+      "default_model": "gpt-6-1-sol",
+      "confidence": "low",
+      "note": "Per 5-hour window: Sol 6.1 15 to 160 messages, Astra 5 to 45. Weekly caps unpublished."
+    },
+    {
+      "id": "chatgpt-pro-100",
+      "name": "ChatGPT Pro 100 (Codex)",
+      "vendor": "OpenAI",
+      "price_usd_month": 100,
+      "included_api_credit_usd": 0,
+      "est_api_value_usd_month": [
+        400,
+        3000
+      ],
+      "est_agent_hours_week": [
+        25,
+        60
+      ],
+      "default_model": "gpt-6-1-sol",
+      "confidence": "low",
+      "note": "More usage than Plus; per-model limits unpublished."
+    },
+    {
+      "id": "chatgpt-pro-200",
+      "name": "ChatGPT Pro 200 (Codex)",
+      "vendor": "OpenAI",
+      "price_usd_month": 200,
+      "included_api_credit_usd": 0,
+      "est_api_value_usd_month": [
+        1000,
+        6000
+      ],
+      "est_agent_hours_week": [
+        60,
+        150
+      ],
+      "default_model": "gpt-6-1-sol",
+      "confidence": "low",
+      "note": "Weekly allowance, no 5-hour limit. New subscribers get a lower allowance than the old Pro 20x."
+    },
+    {
+      "id": "chatgpt-pro-500",
+      "name": "ChatGPT Pro 500 (Codex)",
+      "vendor": "OpenAI",
+      "price_usd_month": 500,
+      "included_api_credit_usd": 0,
+      "est_api_value_usd_month": [
+        2500,
+        12000
+      ],
+      "est_agent_hours_week": [
+        150,
+        350
+      ],
+      "default_model": "gpt-6-astra",
+      "confidence": "very low",
+      "note": "Highest allowance; includes Astra Ultrafast (8x the standard rate). No published usage numbers."
+    }
   ],
-
   "hardware": [
-    { "name": "NVIDIA Vera Rubin (per GPU)", "kind": "datacentre", "status": "Volume shipments autumn 2026",
-      "spec": "≈50 PFLOPS FP4, 288 GB HBM4, 22 TB/s", "price": null,
-      "note": "About 5x a B200 on FP4. NVL72 rack: 3.6 EFLOPS FP4, 20.7 TB HBM4. First rack live at CoreWeave on 1 Jun 2026." },
-    { "name": "DGX Station GB300 (e.g. ASUS ET900N G3)", "kind": "desk", "status": "Shipping",
-      "spec": "748 GB coherent memory (252 GB HBM3e), up to 20 PFLOPS FP4", "price": "≈US$91–100k (≈AUD 145–155k incl. GST)",
-      "note": "Runs trillion-parameter open models locally at speed." },
-    { "name": "Mac Studio M5 Ultra 256 GB", "kind": "desk", "status": "Shipping since 22 Sep 2026",
-      "spec": "256 GB unified, 1.2 TB/s", "price": "≈AUD 17.5k",
-      "note": "Runs GLM-5.3-Flash (42) or MiMo-V2.6-Flash (38) at 4-bit." },
-    { "name": "Mac Studio M5 Ultra 512 GB", "kind": "desk", "status": "Delayed; orders reportedly slipping to late Jan 2027",
-      "spec": "512 GB unified, 1.2 TB/s", "price": "Unpriced (estimate ≈AUD 28k)",
-      "note": "Would run GLM-5.3 (45) at 4-bit." },
-    { "name": "Used dual EPYC + 1 TB DDR4", "kind": "used", "status": "Available",
-      "spec": "1 TB RAM, ≈170–200 GB/s real", "price": "≈AUD 13–15k",
-      "note": "Holds MiMo-V2.6-Pro (46) or Kimi K3, but only ≈3–6 tokens/s." }
+    {
+      "name": "NVIDIA Vera Rubin (per GPU)",
+      "kind": "datacentre",
+      "status": "Volume shipments autumn 2026",
+      "spec": "≈50 PFLOPS FP4, 288 GB HBM4, 22 TB/s",
+      "price": null,
+      "note": "About 5x a B200 on FP4. NVL72 rack: 3.6 EFLOPS FP4, 20.7 TB HBM4. First rack live at CoreWeave on 1 Jun 2026."
+    },
+    {
+      "name": "DGX Station GB300 (e.g. ASUS ET900N G3)",
+      "kind": "desk",
+      "status": "Shipping",
+      "spec": "748 GB coherent memory (252 GB HBM3e), up to 20 PFLOPS FP4",
+      "price": "≈US$91–100k (≈AUD 145–155k incl. GST)",
+      "note": "Runs trillion-parameter open models locally at speed."
+    },
+    {
+      "name": "Mac Studio M5 Ultra 256 GB",
+      "kind": "desk",
+      "status": "Shipping since 22 Sep 2026",
+      "spec": "256 GB unified, 1.2 TB/s",
+      "price": "≈AUD 17.5k",
+      "note": "Runs GLM-5.3-Flash (42) or MiMo-V2.6-Flash (38) at 4-bit."
+    },
+    {
+      "name": "Mac Studio M5 Ultra 512 GB",
+      "kind": "desk",
+      "status": "Delayed; orders reportedly slipping to late Jan 2027",
+      "spec": "512 GB unified, 1.2 TB/s",
+      "price": "Unpriced (estimate ≈AUD 28k)",
+      "note": "Would run GLM-5.3 (45) at 4-bit."
+    },
+    {
+      "name": "Used dual EPYC + 1 TB DDR4",
+      "kind": "used",
+      "status": "Available",
+      "spec": "1 TB RAM, ≈170–200 GB/s real",
+      "price": "≈AUD 13–15k",
+      "note": "Holds MiMo-V2.6-Pro (46) or Kimi K3, but only ≈3–6 tokens/s."
+    }
   ],
-
   "releases": [
-    { "date": "2026-10-17", "kind": "model", "title": "DeepSeek V4.1-Flash-1017 (open, MIT)", "summary": "Updated checkpoint with stronger vendor benchmarks and shorter outputs; prices unchanged; not yet scored on the AA index.", "url": "https://www.bloomberg.com/news/articles/2026-10-17/deepseek-pushes-out-updated-ai-model-it-says-is-faster-leaner" },
-    { "date": "2026-10-15", "kind": "model", "title": "Meta releases Muse Spark Open", "summary": "816B / 42B active open-weights model; AA index 39, the best US open model, still 7 points behind MiMo-V2.6-Pro.", "url": "https://venturebeat.com/technology/meta-unveils-muse-spark-open-the-new-top-u-s-open-weights-model-and-it-runs-on-two-paired-mac-desktops" },
-    { "date": "2026-10-13", "kind": "model", "title": "Gemini 4 Argon generally available", "summary": "Ties GPT-6 Astra on the AA index (53); leads AutomationBench and the Vals Index; lowest hallucination rate.", "url": "https://computingforgeeks.com/gemini-4-argon-released-features-benchmarks/" },
-    { "date": "2026-10-12", "kind": "model", "title": "Meta releases Muse Wonder", "summary": "Meta's first frontier model; Wonder Full scores 56, level with Sonnet 5.5.", "url": "https://techcrunch.com/2026/10/12/meta-releases-its-first-frontier-model-muse-wonder" },
-    { "date": "2026-10-07", "kind": "pricing", "title": "Claude Max plans gain monthly API credits; Haiku 5.5 ships", "summary": "Max 5x includes $100/month and Max 20x $200/month of API credit, not usable for interactive Claude Code.", "url": "https://www.developersdigest.tech/blog/claude-max-team-monthly-api-credits-2026" },
-    { "date": "2026-10-06", "kind": "model", "title": "Mistral Large 4 API preview", "summary": "AA index 38; open weights promised for late October.", "url": "https://www.javadex.es/blog/mejores-modelos-ia-octubre-2026-ranking-comparativa-mensual" },
-    { "date": "2026-09-29", "kind": "model", "title": "OpenAI GPT-6.1 Sol", "summary": "AA index 52 at $0.72 per task; $2/$10 per million tokens.", "url": "https://datanorth.ai/news/openai-releases-gpt-6-1-sol" },
-    { "date": "2026-09-28", "kind": "model", "title": "Claude Sonnet 5.5", "summary": "AA index 56; leads Terminal-Bench 4.0 at $2/$10.", "url": "https://www.vellum.ai/md/blog/claude-sonnet-5-5-benchmarks-explained" },
-    { "date": "2026-09-22", "kind": "model", "title": "Claude Opus 5.5", "summary": "New #1 on the AA index (58) and ECI; price cut to $4/$20.", "url": "https://artificialanalysis.ai/articles/claude-opus-5-5" },
-    { "date": "2026-09-21", "kind": "model", "title": "Xiaomi MiMo-V2.6-Pro and Flash (open, MIT)", "summary": "New best open model at 46.", "url": "https://www.deeplearning.ai/the-batch/an-unexpected-open-weights-leader" },
-    { "date": "2026-09-21", "kind": "model", "title": "xAI Grok 4.7", "summary": "AA index 46; closed weights.", "url": "https://epoch.ai/models/grok-4-7" },
-    { "date": "2026-09-10", "kind": "model", "title": "DeepSeek V4.1 Flash (open, MIT)", "summary": "552B / 16B active; beats DeepSeek's own V4 Pro.", "url": "https://siliconangle.com/deepseek-releases-v4-1-flash-says-it-outperforms-flagship-v4-pro" },
-    { "date": "2026-09-08", "kind": "benchmark", "title": "METR time-horizon page stops updating", "summary": "Last scored model Opus 4.6 (~12 h); suite unreliable above 16 h.", "url": "https://metr.org/time-horizons/" },
-    { "date": "2026-09-03", "kind": "model", "title": "OpenAI GPT-6 Astra", "summary": "AA index 53; #2 on ECI.", "url": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3" },
-    { "date": "2026-09-01", "kind": "model", "title": "Claude Fable 5.1 and Mythos 5.1", "summary": "AA index 53; Mythos 5.1 restricted to vetted organisations.", "url": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3" },
-    { "date": "2026-08-25", "kind": "hardware", "title": "Mac Studio M5 Ultra announced", "summary": "Up to 512 GB unified memory; 256 GB shipping since 22 Sep, 512 GB delayed.", "url": "https://www.macworld.com/article/2973459/2026-mac-studio-m5-release-date-specs-price-ram-delay-news.html" },
-    { "date": "2026-07-21", "kind": "hardware", "title": "Vera Rubin running customer workloads", "summary": "Google Cloud A5X instances live; volume shipments scheduled for autumn 2026.", "url": "https://programminginsider.com/nvidia-vera-rubin-nvl72-deliveries-what-high-performance-ai-chips-mean-for-depin-networks/" }
+    {
+      "date": "2026-10-17",
+      "kind": "model",
+      "title": "DeepSeek V4.1-Flash-1017 (open, MIT)",
+      "summary": "Updated checkpoint with stronger vendor benchmarks and shorter outputs; prices unchanged; not yet scored on the AA index.",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-17/deepseek-pushes-out-updated-ai-model-it-says-is-faster-leaner"
+    },
+    {
+      "date": "2026-10-15",
+      "kind": "model",
+      "title": "Meta releases Muse Spark Open",
+      "summary": "816B / 42B active open-weights model; AA index 39, the best US open model, still 7 points behind MiMo-V2.6-Pro.",
+      "url": "https://venturebeat.com/technology/meta-unveils-muse-spark-open-the-new-top-u-s-open-weights-model-and-it-runs-on-two-paired-mac-desktops"
+    },
+    {
+      "date": "2026-10-13",
+      "kind": "model",
+      "title": "Gemini 4 Argon generally available",
+      "summary": "Ties GPT-6 Astra on the AA index (53); leads AutomationBench and the Vals Index; lowest hallucination rate.",
+      "url": "https://computingforgeeks.com/gemini-4-argon-released-features-benchmarks/"
+    },
+    {
+      "date": "2026-10-12",
+      "kind": "model",
+      "title": "Meta releases Muse Wonder",
+      "summary": "Meta's first frontier model; Wonder Full scores 56, level with Sonnet 5.5.",
+      "url": "https://techcrunch.com/2026/10/12/meta-releases-its-first-frontier-model-muse-wonder"
+    },
+    {
+      "date": "2026-10-07",
+      "kind": "pricing",
+      "title": "Claude Max plans gain monthly API credits; Haiku 5.5 ships",
+      "summary": "Max 5x includes $100/month and Max 20x $200/month of API credit, not usable for interactive Claude Code.",
+      "url": "https://www.developersdigest.tech/blog/claude-max-team-monthly-api-credits-2026"
+    },
+    {
+      "date": "2026-10-06",
+      "kind": "model",
+      "title": "Mistral Large 4 API preview",
+      "summary": "AA index 38; open weights promised for late October.",
+      "url": "https://www.javadex.es/blog/mejores-modelos-ia-octubre-2026-ranking-comparativa-mensual"
+    },
+    {
+      "date": "2026-09-29",
+      "kind": "model",
+      "title": "OpenAI GPT-6.1 Sol",
+      "summary": "AA index 52 at $0.72 per task; $2/$10 per million tokens.",
+      "url": "https://datanorth.ai/news/openai-releases-gpt-6-1-sol"
+    },
+    {
+      "date": "2026-09-28",
+      "kind": "model",
+      "title": "Claude Sonnet 5.5",
+      "summary": "AA index 56; leads Terminal-Bench 4.0 at $2/$10.",
+      "url": "https://www.vellum.ai/md/blog/claude-sonnet-5-5-benchmarks-explained"
+    },
+    {
+      "date": "2026-09-22",
+      "kind": "model",
+      "title": "Claude Opus 5.5",
+      "summary": "New #1 on the AA index (58) and ECI; price cut to $4/$20.",
+      "url": "https://artificialanalysis.ai/articles/claude-opus-5-5"
+    },
+    {
+      "date": "2026-09-21",
+      "kind": "model",
+      "title": "Xiaomi MiMo-V2.6-Pro and Flash (open, MIT)",
+      "summary": "New best open model at 46.",
+      "url": "https://www.deeplearning.ai/the-batch/an-unexpected-open-weights-leader"
+    },
+    {
+      "date": "2026-09-21",
+      "kind": "model",
+      "title": "xAI Grok 4.7",
+      "summary": "AA index 46; closed weights.",
+      "url": "https://epoch.ai/models/grok-4-7"
+    },
+    {
+      "date": "2026-09-10",
+      "kind": "model",
+      "title": "DeepSeek V4.1 Flash (open, MIT)",
+      "summary": "552B / 16B active; beats DeepSeek's own V4 Pro.",
+      "url": "https://siliconangle.com/deepseek-releases-v4-1-flash-says-it-outperforms-flagship-v4-pro"
+    },
+    {
+      "date": "2026-09-08",
+      "kind": "benchmark",
+      "title": "METR time-horizon page stops updating",
+      "summary": "Last scored model Claude Mythos Preview (~17 h, released Apr 2026); suite unreliable above 16 h.",
+      "url": "https://metr.org/time-horizons/"
+    },
+    {
+      "date": "2026-09-03",
+      "kind": "model",
+      "title": "OpenAI GPT-6 Astra",
+      "summary": "AA index 53; #2 on ECI.",
+      "url": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3"
+    },
+    {
+      "date": "2026-09-01",
+      "kind": "model",
+      "title": "Claude Fable 5.1 and Mythos 5.1",
+      "summary": "AA index 53; Mythos 5.1 restricted to vetted organisations.",
+      "url": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3"
+    },
+    {
+      "date": "2026-08-25",
+      "kind": "hardware",
+      "title": "Mac Studio M5 Ultra announced",
+      "summary": "Up to 512 GB unified memory; 256 GB shipping since 22 Sep, 512 GB delayed.",
+      "url": "https://www.macworld.com/article/2973459/2026-mac-studio-m5-release-date-specs-price-ram-delay-news.html"
+    },
+    {
+      "date": "2026-07-21",
+      "kind": "hardware",
+      "title": "Vera Rubin running customer workloads",
+      "summary": "Google Cloud A5X instances live; volume shipments scheduled for autumn 2026.",
+      "url": "https://programminginsider.com/nvidia-vera-rubin-nvl72-deliveries-what-high-performance-ai-chips-mean-for-depin-networks/"
+    }
   ],
-
   "sources": [
-    { "title": "Artificial Analysis leaderboard", "url": "https://artificialanalysis.ai/leaderboards/models" },
-    { "title": "Artificial Analysis Intelligence Index v4.3", "url": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3" },
-    { "title": "Epoch AI: open vs closed ECI gap", "url": "https://epoch.ai/data-insights/open-closed-eci-gap" },
-    { "title": "OrcaRouter: Opus 5.5 on the Epoch Capabilities Index", "url": "https://www.orcarouter.ai/blog/claude-opus-5-5-epoch-capabilities-index" },
-    { "title": "Artificial Analysis: Muse Spark Open", "url": "https://artificialanalysis.ai/models/muse-spark-open" },
-    { "title": "Artificial Analysis: Mistral Large 4 Preview", "url": "https://artificialanalysis.ai/models/mistral-large-4" },
-    { "title": "METR time horizons", "url": "https://metr.org/time-horizons/" },
-    { "title": "Claude Help Center: Max plan", "url": "https://support.claude.com/en/articles/11049741" },
-    { "title": "Claude Code docs: agent teams", "url": "https://code.claude.com/docs/en/agent-teams.md" },
-    { "title": "Developers Digest: Codex usage limits and pricing", "url": "https://www.developersdigest.tech/blog/codex-usage-limits-pricing-2026" },
-    { "title": "MorphLLM: Codex pricing", "url": "https://www.morphllm.com/codex-pricing" },
-    { "title": "Verdent: Claude Code pricing 2026", "url": "https://www.verdent.ai/guides/claude-code-pricing-2026" }
+    {
+      "title": "Artificial Analysis leaderboard",
+      "url": "https://artificialanalysis.ai/leaderboards/models"
+    },
+    {
+      "title": "Artificial Analysis Intelligence Index v4.3",
+      "url": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3"
+    },
+    {
+      "title": "Epoch AI: open vs closed ECI gap",
+      "url": "https://epoch.ai/data-insights/open-closed-eci-gap"
+    },
+    {
+      "title": "OrcaRouter: Opus 5.5 on the Epoch Capabilities Index",
+      "url": "https://www.orcarouter.ai/blog/claude-opus-5-5-epoch-capabilities-index"
+    },
+    {
+      "title": "Artificial Analysis: Muse Spark Open",
+      "url": "https://artificialanalysis.ai/models/muse-spark-open"
+    },
+    {
+      "title": "Artificial Analysis: Mistral Large 4 Preview",
+      "url": "https://artificialanalysis.ai/models/mistral-large-4"
+    },
+    {
+      "title": "METR time horizons",
+      "url": "https://metr.org/time-horizons/"
+    },
+    {
+      "title": "Claude Help Center: Max plan",
+      "url": "https://support.claude.com/en/articles/11049741"
+    },
+    {
+      "title": "Claude Code docs: agent teams",
+      "url": "https://code.claude.com/docs/en/agent-teams.md"
+    },
+    {
+      "title": "Developers Digest: Codex usage limits and pricing",
+      "url": "https://www.developersdigest.tech/blog/codex-usage-limits-pricing-2026"
+    },
+    {
+      "title": "MorphLLM: Codex pricing",
+      "url": "https://www.morphllm.com/codex-pricing"
+    },
+    {
+      "title": "Verdent: Claude Code pricing 2026",
+      "url": "https://www.verdent.ai/guides/claude-code-pricing-2026"
+    },
+    {
+      "title": "METR Time Horizon 1.1 results (YAML)",
+      "url": "https://metr.org/assets/benchmark_results_1_1.yaml"
+    }
   ],
-
   "changelog": [
-    { "date": "2026-10-18", "what": "Initial dataset.", "why": "Split from the brain-equivalence dashboard into a daily-updated public data file." },
-    { "date": "2026-10-18", "what": "Added Muse Spark Open (Meta, open, AA 39) and Mistral Large 4 Preview (closed for now, AA 38); AUD/USD 1.405 → 1.440.", "why": "Both are now scored on AA index v4.3.2 (artificialanalysis.ai model pages); neither moves a frontier. FX moved more than 1% (tradingeconomics, 17 Oct)." }
+    {
+      "date": "2026-10-18",
+      "what": "Initial dataset.",
+      "why": "Split from the brain-equivalence dashboard into a daily-updated public data file."
+    },
+    {
+      "date": "2026-10-18",
+      "what": "Added Muse Spark Open (Meta, open, AA 39) and Mistral Large 4 Preview (closed for now, AA 38); AUD/USD 1.405 → 1.440.",
+      "why": "Both are now scored on AA index v4.3.2 (artificialanalysis.ai model pages); neither moves a frontier. FX moved more than 1% (tradingeconomics, 17 Oct)."
+    },
+    {
+      "date": "2026-10-18",
+      "what": "Task-length series rebuilt on METR Time Horizon 1.1, now ending at Claude Mythos Preview (~17 h) instead of Claude Opus 4.6; points carry 95% CIs. Horizon doubling 4–7 → 3.4–5.2 months. Open-model lag 4/5/7 → 3/4/6 months. Headline 3 now targets the current best closed model.",
+      "why": "METR's results file lists Mythos Preview (added 8 May 2026) and gives v1.1 values for older models that differed from ours; its post-2023 doubling time is 128.7 days (CI 104–158). Epoch's 29 May 2026 Data Insight puts the open-model lag at 4 months since Jan 2026, about 6 under strict dominance (epoch.ai/data-insights/open-closed-eci-gap)."
+    }
   ]
 }

@@ -312,9 +312,9 @@ footer ul{margin:.3rem 0 0;padding-left:1.1rem}
     const tiles=[
       ['Best closed model',bestClosed.aa_index,`${esc(bestClosed.name)} · ${esc(bestClosed.lab)}`],
       ['Best open model',bestOpen.aa_index,`${esc(bestOpen.name)} · ${esc(bestOpen.lab)} · ${esc(bestOpen.license||'')}`],
-      ['Open vs closed gap',gap+' pts',`≈${F.open_lag_months.central} months behind (range ${F.open_lag_months.low}–${F.open_lag_months.high})`],
+      ['Open vs closed gap',gap+' pts',`${esc(bestOpen.name)} (${bestOpen.aa_index}) vs ${esc(bestClosed.name)} (${bestClosed.aa_index}) · open models trail by ≈${F.open_lag_months.central} months (${F.open_lag_months.low}–${F.open_lag_months.high})`],
       ['Best value near the top',usd(valuePick.cost_per_task_usd),`${esc(valuePick.name)} scores ${valuePick.aa_index} per index task`],
-      ['Task length AI can finish',Math.round(hzAt(today,H.doubling_months.high)/60)+'–'+Math.round(hzAt(today,H.doubling_months.low)/60)+' h',`projected today; last measured ${fmtMin(hzLast.minutes)} (${esc(hzLast.model)})`],
+      ['Task length AI can finish',Math.round(hzAt(today,H.doubling_months.high)/60)+'–'+Math.round(hzAt(today,H.doubling_months.low)/60)+' h',`projected for today's frontier (${esc(bestClosed.name)}); last measured ${fmtMin(hzLast.minutes)} (${esc(hzLast.model)}, ${fmtM(D(hzLast.date))})`],
       ['Solo engineer + AI',mDig.toFixed(1)+'×',`output multiplier on digital engineering work (est.)`]
     ];
     $('tiles').innerHTML=tiles.map(([k,v,s])=>`<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join('');
@@ -387,11 +387,9 @@ footer ul{margin:.3rem 0 0;padding-left:1.1rem}
       lo:addMonths(closedReach(lvl,G.high),L.low+(extra?LX.low:0)),
       c:addMonths(closedReach(lvl,G.central),L.central+(extra?LX.central:0)),
       hi:addMonths(closedReach(lvl,G.low),L.high+(extra?LX.high:0))});
-    const opus5=models.find(m=>m.id==='claude-opus-5');
     const miles=[
       [`Open model matches ${bestClosed.name} (${bestClosed.aa_index})`,reach(bestClosed.aa_index,false)],
-      opus5?[`Open model matches ${opus5.name} (${opus5.aa_index})`,reach(opus5.aa_index,false)]:null,
-      opus5?[`A desktop under AUD 50k runs ${opus5.name}-level AI`,reach(opus5.aa_index,true)]:null,
+      [`A desktop under AUD 50k runs ${bestClosed.name}-level AI`,reach(bestClosed.aa_index,true)],
       [`Closed frontier passes ${bestClosed.aa_index+10}`,{lo:addMonths(D(c0.date),10/G.high),c:addMonths(D(c0.date),10/G.central),hi:addMonths(D(c0.date),10/G.low)}]
     ].filter(Boolean);
     $('miles').innerHTML=miles.map(([t,r])=>`<div class="mile"><span>${esc(t)}</span><b>${r.c<=today?'Reached':fmtM(r.c)}</b><span class="rng">range ${fmtM(r.lo)} – ${fmtM(r.hi)}</span></div>`).join('');
@@ -441,7 +439,7 @@ footer ul{margin:.3rem 0 0;padding-left:1.1rem}
       el('text',{x:w-m.r,y:py(H.suite_ceiling_minutes)+13,'text-anchor':'end'},s,'limit of current test suite');
       const nx=px(today);el('line',{x1:nx,x2:nx,y1:m.t,y2:h-m.b,stroke:'var(--faint)','stroke-dasharray':'2 3'},s);el('text',{x:nx-4,y:m.t+9,'text-anchor':'end'},s,'today');
       el('path',{d:H.measured.map((p,i)=>(i?'L':'M')+px(D(p.date))+','+py(p.minutes)).join(''),fill:'none',stroke:'var(--closed)','stroke-width':2},s);
-      H.measured.forEach(p=>{const x=px(D(p.date)),y=py(p.minutes);el('circle',{cx:x,cy:y,r:4.5,fill:'var(--closed)',stroke:'var(--panel)','stroke-width':2},s);hit(s,x,y,`<b>${esc(p.model)}</b><br>${fmtD(p.date)} · ${fmtMin(p.minutes)}`);});
+      H.measured.forEach(p=>{const x=px(D(p.date)),y=py(p.minutes);el('circle',{cx:x,cy:y,r:4.5,fill:'var(--closed)',stroke:'var(--panel)','stroke-width':2},s);hit(s,x,y,`<b>${esc(p.model)}</b><br>${fmtD(p.date)} · ${fmtMin(p.minutes)}${p.ci_low!=null?`<br>95% CI ${fmtMin(p.ci_low)} – ${fmtMin(p.ci_high)}`:''}`);});
       mount(hBox,s);
       const t6=addMonths(today,6),t12=addMonths(today,12);
       $('hz-read').innerHTML=`Projected today: <b>${fmtMin(hzAt(today,H.doubling_months.high))} to ${fmtMin(hzAt(today,H.doubling_months.low))}</b>. In 6 months: ${fmtMin(hzAt(t6,H.doubling_months.high))} to ${fmtMin(hzAt(t6,H.doubling_months.low))}. In 12 months: ${fmtMin(hzAt(t12,H.doubling_months.high))} to ${fmtMin(hzAt(t12,H.doubling_months.low))}. Tasks succeed about half the time at these lengths.`;

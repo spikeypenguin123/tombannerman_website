@@ -2,6 +2,10 @@
 
 Code and method changes. Daily data changes are logged inside `ai-dashboard/data/latest.json` → `changelog`.
 
+## 2026-10-18 — v1.5
+- **What:** The tracker now compares the newest models. The "Open vs closed gap" tile names both models; the "Task length" tile names today's frontier and the last METR-measured model with its date; the milestones follow the current best closed model instead of a hard-coded Claude Opus 5; horizon tooltips show METR's 95% CI. Schema: optional `ci_low`/`ci_high` on `horizon.measured`. The daily prompt now reads METR's results file and must keep comparisons on the newest models.
+  **Why:** The page still anchored task length on Claude Opus 4.6 and two milestones on Claude Opus 5 after newer models had landed.
+
 ## 2026-10-18 — v1.4
 - **What:** Added "Shell rules" to `tracker/update/daily-update-prompt.md` (one allowed command per call, what a refusal means, exact setup commands) and allowed `ls` in the job.
   **Why:** The first unattended run chained commands with `&&` and `|` (`wc`, `tail`), so the allowlist refused them; the agent then decided the shell was off and stopped without updating.
