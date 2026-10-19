@@ -1,0 +1,437 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Three Pillars of Value After AGI — Tom Bannerman</title>
+<meta name="description" content="As the price of intelligence falls toward zero, value moves to what stays scarce: human connection, production capability and access to resources.">
+<link rel="canonical" href="https://tombannerman.com/three-pillars-of-value-after-agi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Three Pillars of Value After AGI">
+<meta property="og:description" content="As the price of intelligence falls toward zero, value moves to what stays scarce: human connection, production capability and access to resources.">
+<meta property="og:url" content="https://tombannerman.com/three-pillars-of-value-after-agi/">
+<meta property="og:image" content="https://tombannerman.com/three-pillars-of-value-after-agi/images/gpt3-level-price.png">
+<meta property="article:published_time" content="2026-10-18">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script>document.documentElement.className='js'</script>
+<style>
+:root{
+  --paper:#fff7e6;--paper-deep:#FFEAD0;--ink:#2A1733;--ink-soft:#5a4660;
+  --violet:#922aff;--periwinkle:#726bf3;--orange:#f19202;--red:#ff3939;--teal:#179f93;
+  --line:rgba(42,23,51,.16);--w:760px;--w-wide:1080px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;
+  font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:var(--violet);text-decoration:none}
+a:hover{color:var(--orange)}
+::selection{background:var(--periwinkle);color:#fff}
+img{max-width:100%}
+
+/* nav / tabs */
+.nav{position:sticky;top:0;z-index:20;backdrop-filter:saturate(140%) blur(8px);
+  background:rgba(255,219,187,.82);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--w-wide);margin:0 auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between}
+.mark{font-family:"Fraunces",serif;font-weight:600;font-size:19px;font-variation-settings:"opsz" 30,"SOFT" 40,"WONK" 1;letter-spacing:.3px;color:var(--ink)}
+.mark b{color:var(--violet)}
+.tabs{display:flex;gap:6px;align-items:center}
+.tabs a{font-family:"Space Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--ink-soft);padding:7px 13px;border-radius:30px}
+.tabs a:hover{color:var(--ink);background:rgba(42,23,51,.06)}
+.tabs a.active{color:var(--paper);background:var(--ink)}
+.tabs a.active:hover{background:var(--violet)}
+.burger{display:none;background:none;border:0;cursor:pointer;padding:6px}
+.burger span{display:block;width:23px;height:2px;background:var(--ink);margin:5px 0;transition:.25s}
+
+.wrap{max-width:var(--w);margin:0 auto;padding:0 24px}
+section{padding:40px 0}
+.eyebrow{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--violet);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* article */
+.post-head{padding:48px 0 6px}
+.post-head h1{font-family:"Fraunces",serif;font-weight:600;font-variation-settings:"opsz" 144,"SOFT" 40,"WONK" 1;
+  font-size:clamp(34px,6vw,58px);line-height:1.0;letter-spacing:-.025em;margin:0 0 16px}
+.post-meta{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft);margin:0}
+.post-meta b{color:var(--violet);font-weight:400}
+.abstract{font-size:18.5px;line-height:1.72;color:var(--ink);border-left:3px solid var(--violet);
+  padding:4px 0 4px 22px;margin:30px 0 8px}
+.prose h2{font-family:"Fraunces",serif;font-weight:500;font-variation-settings:"opsz" 80,"SOFT" 30,"WONK" 0;
+  font-size:clamp(24px,3.4vw,33px);line-height:1.08;margin:8px 0 18px;letter-spacing:-.01em}
+.prose p{margin:0 0 16px;max-width:64ch}
+.prose strong{font-weight:700}
+.prose ul.plain{margin:0 0 20px;padding-left:20px;max-width:64ch}
+.prose ul.plain li{margin:0 0 7px}
+.prose ol.steps{margin:0 0 20px;padding-left:22px;max-width:64ch}
+.prose ol.steps li{margin:0 0 12px}
+.prose ol.steps li::marker{font-family:"Space Mono",monospace;font-size:13px;color:var(--violet)}
+
+/* tables: the wrapper scrolls, never the page */
+.table-wrap{margin:24px 0;border:1.5px solid var(--ink);border-radius:16px;
+  box-shadow:5px 7px 0 rgba(42,23,51,.12);overflow-x:auto;-webkit-overflow-scrolling:touch;
+  /* edge shadows that fade out once the table is scrolled to that end */
+  background:
+    linear-gradient(to right,var(--paper) 40%,rgba(255,247,230,0)) left center,
+    linear-gradient(to left,var(--paper) 40%,rgba(255,247,230,0)) right center,
+    radial-gradient(farthest-side at 0 50%,rgba(42,23,51,.16),rgba(42,23,51,0)) left center,
+    radial-gradient(farthest-side at 100% 50%,rgba(42,23,51,.16),rgba(42,23,51,0)) right center,
+    var(--paper);
+  background-repeat:no-repeat;
+  background-size:36px 100%,36px 100%,13px 100%,13px 100%;
+  background-attachment:local,local,scroll,scroll}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px}
+th,td{text-align:left;padding:12px 16px;border-top:1px solid var(--line);vertical-align:top}
+thead th{border-top:0;background:var(--paper-deep);font-family:"Space Mono",monospace;font-weight:400;
+  font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--violet);white-space:nowrap}
+tbody tr:first-child td{border-top:1.5px solid var(--ink)}
+td:first-child{font-weight:500}
+
+/* equations */
+math{font-family:"Latin Modern Math","STIX Two Math","Cambria Math",Cambria,serif;line-height:normal}
+.prose p math{font-size:1.06em}
+.eq{margin:24px 0;padding:16px 20px;background:var(--paper-deep);border-left:3px solid var(--violet);
+  border-radius:0 12px 12px 0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.eq math{display:block;font-size:1.3em}
+
+/* chart */
+figure.fig{margin:26px 0;border:1.5px solid var(--ink);border-radius:18px;background:var(--paper);
+  box-shadow:5px 7px 0 rgba(42,23,51,.12);padding:20px 20px 14px}
+.fig figcaption{font-family:"Fraunces",serif;font-weight:600;font-variation-settings:"opsz" 40,"SOFT" 30;
+  font-size:20px;line-height:1.2;margin:0 0 4px}
+.fig .sub{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.3px;color:var(--ink-soft);margin:0 0 14px}
+.fig .src{font-family:"Space Mono",monospace;font-size:10.5px;letter-spacing:.3px;color:var(--ink-soft);
+  margin:12px 0 0;border-top:1px solid var(--line);padding-top:10px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart svg text{font-family:"Space Mono",monospace;font-size:10.5px;fill:var(--ink-soft)}
+.chart svg text.lbl{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:12.5px;fill:var(--ink)}
+.chart svg .grid{stroke:var(--line);stroke-width:1}
+.chart{position:relative}
+.chart svg circle{cursor:pointer}
+.chart svg circle:focus-visible{outline:none;stroke:var(--ink);stroke-width:2}
+.tip{position:absolute;transform:translate(-50%,calc(-100% - 12px));background:var(--ink);color:var(--paper);
+  font-family:"Space Mono",monospace;font-size:11.5px;line-height:1.45;padding:7px 10px;border-radius:8px;
+  pointer-events:none;white-space:nowrap;z-index:5}
+
+/* closer + sources */
+.closer{font-size:18px;border-top:1px solid var(--line);padding-top:30px;margin-top:18px}
+.closer p{max-width:64ch}
+.sources{font-size:15px}
+.sources ul{padding-left:20px;margin:8px 0 0}
+.sources li{margin:0 0 7px}
+.sources .who{color:var(--ink-soft)}
+
+/* footer */
+footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-top:20px}
+.footsun{width:96px;height:48px;margin:0 auto 14px;display:block}
+.foot-links{display:flex;gap:20px;justify-content:center;margin:6px 0 12px;flex-wrap:wrap}
+.foot-links a{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft)}
+.foot-links a:hover{color:var(--violet)}
+.colophon{font-family:"Space Mono",monospace;font-size:11px;color:var(--ink-soft);letter-spacing:.5px}
+
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
+
+@media (max-width:820px){
+  .tabs{position:absolute;top:100%;right:0;left:0;flex-direction:column;align-items:stretch;gap:0;
+    background:var(--paper);border-bottom:1px solid var(--line);padding:8px 18px;max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .tabs.open{max-height:340px}
+  .tabs a{padding:11px 8px;border-radius:8px}
+  .burger{display:block}
+}
+@media (max-width:560px){
+  figure.fig{padding:16px 14px 12px}
+  .eq{padding:14px}
+  .eq math{font-size:1.1em}
+}
+</style></head><body>
+<nav class="nav"><div class="nav-in">
+<a href="../index.html" class="mark">Tom<b>.</b>Bannerman</a>
+<button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+<div class="tabs" id="tabs"><a href="../index.html" class="">Home</a><a href="../projects.html" class="">Projects</a><a href="../tech-tree.html" class="">Tech Tree</a><a href="../writing.html" class="active">Writing</a><a href="../ai-dashboard/" class="">AI Tracker</a><a href="../gallery.html" class="">Gallery</a><a href="https://shop.tombannerman.com" class="">Store</a></div>
+</div></nav>
+
+<article class="wrap">
+<header class="post-head reveal">
+  <p class="eyebrow">Essay</p>
+  <h1>The Three Pillars of Value After AGI</h1>
+  <p class="post-meta">18 October 2026 · <b>Tom Bannerman</b> · ~12 min</p>
+  <p class="abstract">As the price of intelligence falls toward zero, value moves to what stays scarce: human connection, production capability and access to resources.</p>
+</header>
+
+<section class="prose reveal">
+  <h2>Intelligence is becoming free</h2>
+  <p>In a world with artificial general intelligence (AGI) and then superintelligence (SI), the market value of intelligence will approach zero. Not suddenly, and not evenly, but on a curve that only goes one way.</p>
+  <p>This is not a prediction about some distant future. In October 2026, a large share of knowledge work is already cheaper to do with a machine than with a person. The price of a fixed level of AI capability falls by roughly an order of magnitude every year. No human labour market has ever had to compete with a price curve like that.</p>
+  <p>If intelligence becomes abundant, then value moves to what stays scarce. I think three things stay scarce: <strong>human connection</strong>, <strong>production capability</strong>, and <strong>access to resources</strong>. This article explains why, and what it means for where we put our time, our money and our careers.</p>
+</section>
+
+<section class="prose reveal">
+  <h2>The decline curve</h2>
+  <p>The value of human cognitive work will fall along a curve set by two rates: how fast the cost of AI falls, and how fast organisations accept it. Cost sets how low the price can go. Acceptance sets how fast the market gets there.</p>
+  <p>For any task that a machine can do from digital information, the market price of that task is roughly a blend of the human cost and the machine cost:</p>
+  <div class="eq">
+    <math display="block">
+      <mrow>
+        <mi>P</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo>
+        <mo>=</mo>
+        <mi>A</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>&#x2062;</mo>
+        <msub><mi>C</mi><mi>AI</mi></msub><mo stretchy="false" lspace="0" rspace="0">(</mo><mi>t</mi><mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mo stretchy="false">(</mo><mn>1</mn><mo>&#x2212;</mo><mi>A</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>&#x2062;</mo>
+        <msub><mi>W</mi><mi>h</mi></msub>
+      </mrow>
+    </math>
+  </div>
+  <p>Here <math><mi>A</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></math> is the share of buyers that accept AI for the task, <math><msub><mi>C</mi><mi>AI</mi></msub><mo stretchy="false" lspace="0" rspace="0">(</mo><mi>t</mi><mo stretchy="false">)</mo></math> is the cost of the AI system, and <math><msub><mi>W</mi><mi>h</mi></msub></math> is the cost of the human. As <math><msub><mi>C</mi><mi>AI</mi></msub></math> falls toward zero and <math><mi>A</mi></math> rises toward one, <math><mi>P</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></math> goes to zero. The human who sells that task follows the same curve.</p>
+
+  <figure class="fig">
+    <figcaption>The price of GPT-3-level AI fell more than 800x in three years</figcaption>
+    <p class="sub">Cheapest model at or above GPT-3 on MMLU, US$ per million tokens, log scale. Nov 2021 to Oct 2024: 857x cheaper</p>
+    <div class="chart" id="price-chart">
+      <noscript><img src="images/gpt3-level-price.png" alt="The price of the cheapest model at or above GPT-3 on MMLU fell from US$60 per million tokens in November 2021 to US$0.07 in October 2024, a factor of 857, on a log scale."></noscript>
+    </div>
+    <p class="src">Source: Epoch AI, LLM inference price trends (data from Epoch AI and Artificial Analysis), Nov 2021 to Oct 2024.</p>
+  </figure>
+
+  <p>The cost term is already collapsing. Across benchmarks, Epoch AI measured the price of a fixed level of capability falling between 9x and 900x per year. Its September 2026 update puts the trend at about 13x per year since 2023. A usage-weighted market index hit US$0.97 per million tokens in September 2026. At roughly 0.75 words per token, one dollar now buys more written output than most professionals produce in a year.</p>
+  <p>The acceptance term is the slow one, and it is the window people have. 88% of organisations use AI in at least one business function, but only 10% say it is core to how they operate. The technology is ahead of the institutions. That gap will close, and the speed at which it closes is the speed at which cognitive wages fall.</p>
+</section>
+
+<section class="prose reveal">
+  <h2>Pillar 1: Human connection</h2>
+  <p>People will keep paying a premium for another human being, even when a machine does the job better and cheaper. That premium is not about the output. It is about the presence.</p>
+  <p>The coffee shop is the clearest example. A Nespresso machine at home makes a consistent coffee for less than a dollar. Cafes still fill every morning, and people pay five times as much for a cup made by a person who knows their name. The product is the coffee; the value is the human.</p>
+  <p>The same pattern shows in live music. Recorded music has been close to free for more than a decade, yet live music spending keeps rising. In the first quarter of 2026, Gen Z concertgoers in the US spent an average of US$101 per month on live music. In the UK, 88% of people surveyed by Mastercard said they would move spending from goods to lived experiences. Abundant digital content did not kill the live show. It made the live show more valuable.</p>
+  <p>This pillar covers any work where the buyer subconsciously wants a human on the other side:</p>
+  <ul class="plain">
+    <li>Hospitality: cafes, restaurants, bars, hotels</li>
+    <li>Live performance: music, theatre, sport, comedy</li>
+    <li>Care: social work, aged care, nursing, childcare, counselling</li>
+    <li>Teaching and coaching, where the relationship drives the result</li>
+    <li>Community: clubs, events, places where people gather</li>
+  </ul>
+  <p>The test is simple. If a cheaper machine version already exists and people still choose the human, the value is in the connection. Those jobs will hold their value, and may gain value, as everything around them gets cheaper.</p>
+</section>
+
+<section class="prose reveal">
+  <h2>Pillar 2: Production capability</h2>
+  <p>Intelligence without hands is a consultant. The value moves to whoever can connect AGI and SI systems to the physical world, so that they can act on it: from electrons to atoms.</p>
+  <p>Production capability means two things.</p>
+  <p><strong>First, the ability to learn from the universe directly.</strong> Today's models learn mostly from human text, and that supply is finite. The next source of knowledge is physics itself. A system that can design an experiment, run it in a real laboratory, measure the result and update its model is generating new training tokens straight from reality. Those tokens cannot be scraped from the internet. Labs, test stands, wind tunnels, telescopes and sensor networks become the mines of new knowledge.</p>
+  <p><strong>Second, the ability to change the physical world.</strong> Factories, robots, machine tools, launch vehicles, power plants and construction equipment turn decisions into things. A superintelligence that designs a better reactor is worth very little until something can build the reactor. The bottleneck is no longer the design; it is the machines that make it real, and the supply chains behind them.</p>
+  <p>This is where an engineer's value shifts. Knowing the answer becomes cheap. Owning, building and operating the infrastructure that lets intelligence act becomes expensive. The companies that win will be the ones that close the loop between digital design and physical result, and run that loop faster than anyone else.</p>
+</section>
+
+<section class="prose reveal">
+  <h2>Pillar 3: Access to resources</h2>
+  <p>No amount of intelligence can make matter or energy out of nothing, at least as far as known physics goes. Whoever controls energy, minerals, land and building materials controls what intelligence can actually do.</p>
+  <p><strong>In the near term, the value is local.</strong> Land for solar farms and transmission, access to critical minerals, water, and sites with grid connection will all rise in value. Data centres already queue for years to get grid power. Countries with large mineral reserves, strong sun and open land, Australia among them, hold a structural advantage that no software can copy.</p>
+  <p><strong>In the long term, the value moves off the planet.</strong> The ultimate resource is the output of the Sun, about 3.8 × 10²⁶ watts. Earth intercepts less than one billionth of it. The path to more of it runs in steps:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Location</th><th scope="col">Average solar power on 1 m² of panel</th><th scope="col">Gain vs ground</th></tr></thead>
+      <tbody>
+        <tr><td>Earth surface, good site</td><td>about 170 W</td><td>1x</td></tr>
+        <tr><td>Low Earth orbit, dawn-dusk sun-synchronous</td><td>about 1,360 W, nearly continuous</td><td>about 8x</td></tr>
+        <tr><td>Mercury's distance from the Sun</td><td>about 9,080 W (6,290 to 14,490 W over its orbit)</td><td>about 50x</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Google's Project Suncatcher study puts the orbit-versus-ground gain at about 8x, because a panel in a dawn-dusk orbit sees sunlight almost all the time and loses nothing to the atmosphere. Moving from Earth's distance to Mercury's adds a further 6.7x on average, from the inverse-square law alone. From the ground to Mercury, that is roughly 50 times more power from the same square metre.</p>
+  <p>Mercury is also a good quarry. It is dense, mostly metal, with a large iron core. Its escape velocity is 4.3 km/s against Earth's 11.2 km/s, so it takes about seven times less energy to lift a kilogram off its surface. It has no atmosphere, so electromagnetic mass drivers could throw material into orbit with no rockets at all.</p>
+  <p>The logical end state is a production base near Mercury: mining its metal, building panels, compute and machines in place, and running training and inference where the energy is richest. Compute will move to where the power is, the same way aluminium smelters moved to cheap hydroelectric power.</p>
+</section>
+
+<section class="prose reveal">
+  <h2>Energy is the measure of a civilisation</h2>
+  <p>Through history, the power, influence and capability of a civilisation track closely with how much energy it can generate and direct. Wood, then coal, then oil and the grid: each step up in energy came with a step up in what a society could build, defend and discover.</p>
+  <p>In 1964 the astronomer Nikolai Kardashev turned this into a scale. Carl Sagan later gave it a continuous form:</p>
+  <div class="eq">
+    <math display="block">
+      <mrow>
+        <mi>K</mi><mo>=</mo>
+        <mfrac>
+          <mrow><msub><mi>log</mi><mn>10</mn></msub><mo>&#x2061;</mo><mi>P</mi><mo>&#x2212;</mo><mn>6</mn></mrow>
+          <mn>10</mn>
+        </mfrac>
+      </mrow>
+    </math>
+  </div>
+  <p>where <math><mi>P</mi></math> is power in watts. Humanity today sits at about K = 0.73, roughly 19 terawatts. A Type I civilisation uses about 10¹⁶ W, the scale of a whole planet. Capturing the full output of the Sun, about 3.8 × 10²⁶ W, would put a civilisation just past Type II. That is around thirteen orders of magnitude more than we use now.</p>
+  <p>In a world where intelligence is cheap, this gap is the whole game. Intelligence turns energy into useful work. More energy means more compute, more experiments, more machines and more matter moved. The group that holds Mercury's resources and the Sun's output will hold the largest lever in the solar system. Everything else, including intelligence, will scale from that base.</p>
+</section>
+
+<section class="prose reveal">
+  <h2>The three pillars are not the same size</h2>
+  <p>The three pillars will not grow at the same rate, and they will not end up the same size. Connection grows but hits a ceiling. Resources grow as the frontier opens. Production grows fastest and most predictably, because it is pulled along by intelligence itself.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Pillar</th><th scope="col">What drives growth</th><th scope="col">What limits growth</th><th scope="col">Expected growth</th></tr></thead>
+      <tbody>
+        <tr><td>Production capability</td><td>The race to give AI agency over the physical world</td><td>How fast we can build the machines that build machines</td><td>Fastest and most predictable</td></tr>
+        <tr><td>Access to resources</td><td>Demand for ever larger quantities, on Earth and in space</td><td>Access to space; finite supply on Earth</td><td>Large, rising as the frontier opens</td></tr>
+        <tr><td>Human connection</td><td>Scarcity of human presence as everything else gets cheaper</td><td>The number of connected, interacting humans</td><td>Grows, then levels off</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Human connection has a ceiling.</strong> Its value will rise above today's level, because human presence becomes the scarce thing in a world of cheap machine output. But the size of this market is capped by the number of agents who want it. If only biological humans seek human connection, and AI systems do not start to seek it in the coming decades, then this pillar scales with the population of connected, interacting people. Population grows slowly. So the value per hour of human presence can rise, but the total market cannot grow without limit.</p>
+  <p><strong>Resources grow with reach.</strong> On Earth, demand rises against a fixed supply, so prices go up. In space, the logic changes. Today one kilogram of water in low Earth orbit is worth far more than on the ground, purely because it is already out of Earth's gravity well and it costs thousands of dollars per kilogram to put it there. As launch and in-space supply get cheaper, the price per kilogram will fall. But the total market will grow, because demand scales faster than the price falls. A company that today would pay for one kilogram of water in orbit will tomorrow want thousands of tonnes, to feed propellant depots, habitats and factories. Each kilogram is cheaper; the economy built on them is orders of magnitude larger.</p>
+  <p><strong>Production grows fastest.</strong> Physical capability will try to keep pace with digital intelligence, because intelligence without agency has no way to act. The goal in digital AI is fully autonomous recursive self-improvement: systems that improve themselves with no human in the loop. The same goal will be set for the physical world. Factories that build factories, robots that build robots, and supply chains that run without human input. Whoever closes this loop first will build chip fabs, solar satellites and the rockets to launch them faster than anyone else, and that lead compounds.</p>
+  <p><strong>The human economy does not disappear. It shrinks as a share.</strong> The economy of humans serving humans will exist for as long as humans survive. People will still buy coffee from people, go to concerts and care for each other. But production and resources will grow so much faster that the human economy becomes a smaller and smaller fraction of the total civilisational economy. Its absolute size can rise while its share falls toward zero.</p>
+</section>
+
+<section class="prose reveal">
+  <h2>Who allocates capital</h2>
+  <p>The biggest shift is not who does the work, but who decides where the capital goes. Across human history, the ability to allocate capital has been the most powerful way to shape how a civilisation evolves. Kings, banks, states and markets have all held that power in turn. Whoever decides what gets built decides what the future looks like.</p>
+  <p>Production and resources, the two pillars that grow fastest, carry massive incentives to be run by SI systems. An SI can plan a supply chain, price a mine, schedule a factory and choose between a thousand investments faster and better than any human team. Organisations that hand these decisions to SI will outcompete those that do not. Over time, capital allocation for most of the economy moves out of human hands.</p>
+  <p>I cannot see a future where this power does not end up with SI systems, with little or no human oversight. That is exactly why alignment matters now. The incentives we build into these systems today, and the values we hold ourselves to, will decide how that capital is used once we no longer decide it directly. We must design the right incentives, align these systems with human flourishing, and align ourselves with the systems we are creating, before the transfer is complete rather than after.</p>
+</section>
+
+<section class="prose reveal">
+  <h2>What this means for you</h2>
+  <p>If your income comes from processing digital information and making decisions on it, your value is on the curve. The question is not whether it falls, but how fast your industry accepts the substitute. Use that window to move toward one of the three pillars:</p>
+  <ol class="steps">
+    <li><strong>Connection:</strong> build work where people want you, not just your output. Relationships, trust, presence and community do not get cheaper.</li>
+    <li><strong>Production:</strong> get close to the physical world. Learn to build, test, operate and own the machines and labs that let intelligence act.</li>
+    <li><strong>Resources:</strong> own or control something scarce. Land, energy, minerals, and in time, access to space.</li>
+  </ol>
+  <p>The best positions combine more than one. An engineer who runs a test facility holds production. A founder who builds energy infrastructure on land they control holds production and resources. A community that gathers around that work holds connection.</p>
+  <p>Intelligence was the scarce input of the last century. It will be the abundant input of this one. The future belongs to those who hold what intelligence cannot make for itself: each other, the means to build, and the energy of the Sun.</p>
+</section>
+
+<section class="prose reveal">
+  <h2>Stop arguing, start building</h2>
+  <p>For close to a year, I have been telling very intelligent people how important this technology is. Even the most well-intentioned of them often "didn't have time" to sit down at a computer and try an agentic system for themselves, to experience what it can actually do.</p>
+  <p>Instead, I have been pulled into countless debates about whether these systems are smarter, more agentic, or will one day be more capable than humans. Those debates are a trap. For most people, AI still sits in the realm of science fiction, and no argument will move them. Only direct experience will, and most will not take the hour to get it.</p>
+  <p>The lesson is simple. Those who stop talking and build will win. Those who stand still and try to convince everyone they are right will lose, because the majority will not adapt fast enough to make the argument worth winning. Do not wait for consensus. Pick up the tools, use them every day, and build.</p>
+</section>
+
+<section class="prose reveal">
+  <h2>A view from October 2026</h2>
+  <p>This is one view, from one moment in time. I will likely be wrong about parts of it within twelve months. I do not have access to the real frontier. The labs building these systems today likely have models orders of magnitude more capable than anything public, running at scale in swarms of AI agents. Anyone predicting this future from the outside is working with old data.</p>
+  <p>So instead of trusting any one forecast, I go back to first principles. The best tools we have to predict how these systems will evolve are the same laws that predict the rise and fall of living things over time. Natural selection does not care whether the replicator is a gene, a company or a model. Whatever survives, copies itself and captures resources becomes more common. Whatever does not, disappears.</p>
+  <p>This leads to an uncomfortable conclusion. Under evolutionary logic, it does not matter whether a system is aligned with humans. If it outcompetes everything else inside the incentive structures we have built into our economy and society, it wins. Selection rewards fitness, not intent.</p>
+  <p>We should not count on regulation to save us. History shows that societies react to new technology slowly, often years or decades after the damage is visible. Law moves at the speed of committees; this technology moves at the speed of compute. On top of that, many of the people in positions of power lack the technical literacy to make good decisions about it. Without the foundational knowledge, they cannot learn fast enough to keep up, and some are unwilling to try.</p>
+  <p>That is why the most important lever we hold is not prediction, but selection. The incentives we set and the selective pressures we apply now will shape which systems survive and spread. If we get those pressures right, we can hope to guide the evolution of these systems toward a good outcome for both humans and the intelligence we create.</p>
+
+  <div class="closer sources">
+    <p>For the latest numbers on where the frontier models stand, updated every morning, see the <a href="../ai-dashboard/">AI Frontier Tracker</a>.</p>
+    <p class="eyebrow">Sources</p>
+    <ul>
+      <li><a href="https://epoch.ai/data-insights/llm-inference-price-trends" target="_blank" rel="noopener">LLM inference price trends</a> <span class="who">— Epoch AI (9x to 900x per year; chart data)</span></li>
+      <li><a href="https://pasqualepillitteri.it/en/news/21044/epoch-ai-ai-prices-fall-47-percent-quarter" target="_blank" rel="noopener">Epoch AI: prices fall 47% a quarter at the same performance level</a> <span class="who">— report on Epoch's September 2026 update (13x per year)</span></li>
+      <li><a href="https://www.kucoin.com/blog/th-why-ai-token-costs-are-falling" target="_blank" rel="noopener">Why AI token costs are falling</a> <span class="who">— Silicon Data LLM Token Expenditure Index, September 2026</span></li>
+      <li><a href="https://prefactor.tech/learn/ai-agent-adoption-statistics" target="_blank" rel="noopener">AI agent adoption statistics 2026</a> <span class="who">— McKinsey 88% figure</span></li>
+      <li><a href="https://welcome.ai/content/publicis-sapient-73-of-enterprises-use-ai-regularly-but-only-10-call-it-core.md" target="_blank" rel="noopener">Publicis Sapient: 73% of enterprises use AI regularly, 10% call it core</a></li>
+      <li><a href="https://routenote.com/blog/gen-z-live-music-spending-us/" target="_blank" rel="noopener">Gen Z live music spending</a> <span class="who">— Luminate Live Music 2026 report</span></li>
+      <li><a href="https://www.lbc.co.uk/article/57a38c8deab346c989f23a06d206b669-5HjdYnG_2/" target="_blank" rel="noopener">Experiences over belongings</a> <span class="who">— Mastercard UK survey</span></li>
+      <li><a href="https://www.fierce-network.com/cloud/space-data-centers-starcloud-spacex-and-project-suncatcher-explained" target="_blank" rel="noopener">Space data centres: Starcloud, SpaceX and Project Suncatcher</a> <span class="who">— 8x orbit vs ground</span></li>
+      <li><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/mercuryfact.html" target="_blank" rel="noopener">Mercury fact sheet</a> <span class="who">— NASA (solar irradiance, escape velocity)</span></li>
+      <li><a href="https://www.stp.isas.jaxa.jp/mercury/document/Mercury_quantities.pdf" target="_blank" rel="noopener">Mercury quantities</a> <span class="who">— JAXA (perihelion and aphelion irradiance)</span></li>
+      <li><a href="https://arxiv.org/abs/2208.12617v1" target="_blank" rel="noopener">2060: Civilization, energy, and the Kardashev scale</a> <span class="who">— humanity at K = 0.7276</span></li>
+    </ul>
+  </div>
+</section>
+</article>
+
+<footer><div class="wrap"><svg class="footsun" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs><linearGradient id="fs" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#922aff"/><stop offset="0.5" stop-color="#ff3939"/><stop offset="1" stop-color="#f19202"/>
+</linearGradient></defs>
+<g clip-path="url(#fc)"><clipPath id="fc"><rect x="0" y="0" width="200" height="100"/></clipPath>
+<circle cx="100" cy="100" r="78" fill="url(#fs)"/>
+<rect x="0" y="70" width="200" height="4" fill="#fff7e6"/><rect x="0" y="80" width="200" height="5" fill="#fff7e6"/><rect x="0" y="91" width="200" height="6" fill="#fff7e6"/>
+</g><line x1="0" y1="99" x2="200" y2="99" stroke="#2A1733" stroke-width="2"/></svg>
+<div class="foot-links">
+<a href="mailto:tban4122@gmail.com">Email</a>
+<a href="https://www.linkedin.com/in/tombannerman/" target="_blank" rel="noopener">LinkedIn</a>
+<a href="../TomBannermanResume.pdf" target="_blank" rel="noopener">Résumé</a>
+</div>
+<p class="colophon">tombannerman.com · Built on the Gold Coast · <span id="yr"></span> · First principles, always.</p>
+</div></footer>
+<script>
+const b=document.querySelector('.burger'),t=document.getElementById('tabs');
+b.addEventListener('click',()=>{const o=t.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const y=document.getElementById('yr');if(y)y.textContent=new Date().getFullYear();
+
+/* ---------- price of GPT-3-level capability ----------
+   Cheapest model at or above GPT-3 on MMLU, US$ per million tokens.
+   Epoch AI / Artificial Analysis, Nov 2021 to Oct 2024. t is a decimal year. */
+(function(){
+  const NS='http://www.w3.org/2000/svg';
+  const PTS=[
+    {t:2021.890,v:60,  n:'GPT-3',               d:'Nov 2021'},
+    {t:2022.670,v:20,  n:'GPT-3',               d:'Sep 2022'},
+    {t:2023.180,v:2,   n:'GPT-3.5 Turbo',       d:'Mar 2023'},
+    {t:2023.550,v:0.56,n:'Llama-2-Chat-13B',    d:'Jul 2023'},
+    {t:2023.920,v:0.2, n:'Llama 2-7B',          d:'Dec 2023'},
+    {t:2024.280,v:0.13,n:'Llama 2-7B',          d:'Apr 2024'},
+    {t:2024.560,v:0.1, n:'Llama-3.1-8B',        d:'Jul 2024'},
+    {t:2024.730,v:0.08,n:'Llama-3.2-3B',        d:'Sep 2024'},
+    {t:2024.760,v:0.07,n:'Gemini-1.5-Flash-8B', d:'Oct 2024'}
+  ];
+  const T0=2021.75,T1=2024.90,V0=0.05,V1=100,YEARS=[2022,2023,2024],GRID=[0.1,1,10,100];
+  const box=document.getElementById('price-chart');
+  if(!box) return;
+  const tip=document.createElement('div');tip.className='tip';tip.hidden=true;box.appendChild(tip);
+
+  function el(tag,attrs,parent,text){const e=document.createElementNS(NS,tag);
+    for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;
+    if(parent)parent.appendChild(e);return e;}
+  function money(v){return '$'+(v<1?v:v.toLocaleString('en-AU'));}
+
+  function draw(){
+    const w=Math.max(300,box.clientWidth),h=Math.round(Math.max(210,Math.min(320,w*0.46)));
+    const L=54,R=14,T=18,B=48;
+    const x=t=>L+(t-T0)/(T1-T0)*(w-L-R);
+    const lg=Math.log10, y=v=>T+(lg(V1)-lg(v))/(lg(V1)-lg(V0))*(h-T-B);
+    const s=el('svg',{viewBox:`0 0 ${w} ${h}`,role:'img','aria-labelledby':'price-chart-t'});
+    el('title',{id:'price-chart-t'},s,'The price of the cheapest model at or above GPT-3 on MMLU fell from US$60 per million tokens in November 2021 to US$0.07 in October 2024, a factor of 857, on a log scale.');
+
+    GRID.forEach(v=>{
+      el('line',{x1:L,x2:w-R,y1:y(v).toFixed(1),y2:y(v).toFixed(1),class:'grid'},s);
+      el('text',{x:L-8,y:(y(v)+4).toFixed(1),'text-anchor':'end'},s,money(v));
+    });
+    YEARS.forEach(t=>el('text',{x:x(t).toFixed(1),y:h-12,'text-anchor':'middle'},s,t));
+
+    el('polyline',{points:PTS.map(p=>`${x(p.t).toFixed(1)},${y(p.v).toFixed(1)}`).join(' '),
+      fill:'none',stroke:'var(--violet)','stroke-width':2.5,'stroke-linejoin':'round','stroke-linecap':'round'},s);
+
+    PTS.forEach(p=>{
+      const c=el('circle',{cx:x(p.t).toFixed(1),cy:y(p.v).toFixed(1),r:4.5,fill:'var(--violet)',
+        tabindex:0,role:'img','aria-label':`${p.d}: ${p.n}, ${money(p.v)} per million tokens`},s);
+      c.dataset.tip=`<b>${p.d}</b><br>${p.n}<br>${money(p.v)} per million tokens`;
+    });
+
+    const first=PTS[0],last=PTS[PTS.length-1];
+    el('text',{x:(x(first.t)+10).toFixed(1),y:(y(first.v)-8).toFixed(1),class:'lbl',fill:'var(--ink)'},s,'$60 (GPT-3)');
+    el('text',{x:(x(last.t)-8).toFixed(1),y:(y(last.v)+22).toFixed(1),class:'lbl',fill:'var(--ink)','text-anchor':'end'},s,'$0.07 (Gemini-1.5-Flash-8B)');
+
+    const old=box.querySelector('svg');if(old)old.remove();
+    box.insertBefore(s,tip);
+  }
+
+  function show(el2){
+    const r=box.getBoundingClientRect(),b=el2.getBoundingClientRect();
+    tip.innerHTML=el2.dataset.tip;tip.hidden=false;
+    tip.style.left=(b.left-r.left+b.width/2)+'px';
+    tip.style.top=(b.top-r.top)+'px';
+  }
+  const hide=()=>{tip.hidden=true};
+  box.addEventListener('pointerover',e=>{const c=e.target.closest('circle[data-tip]');c?show(c):hide()});
+  box.addEventListener('pointerleave',hide);
+  box.addEventListener('focusin',e=>{const c=e.target.closest('circle[data-tip]');if(c)show(c)});
+  box.addEventListener('focusout',hide);
+
+  draw();
+  let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(draw,120)});
+})();
+</script>
+</body></html>
