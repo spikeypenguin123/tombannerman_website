@@ -62,16 +62,31 @@ section{padding:40px 0}
   padding:4px 0 4px 22px;margin:30px 0 8px}
 .prose h2{font-family:"Fraunces",serif;font-weight:500;font-variation-settings:"opsz" 80,"SOFT" 30,"WONK" 0;
   font-size:clamp(24px,3.4vw,33px);line-height:1.08;margin:8px 0 18px;letter-spacing:-.01em}
+.prose h2 .num{font-family:"Space Mono",monospace;font-size:.5em;color:var(--violet);vertical-align:middle;
+  margin-right:12px;letter-spacing:0}
 .prose p{margin:0 0 16px;max-width:64ch}
 .prose strong{font-weight:700}
-.prose ul.plain{margin:0 0 20px;padding-left:20px;max-width:64ch}
-.prose ul.plain li{margin:0 0 7px}
-.prose ol.steps{margin:0 0 20px;padding-left:22px;max-width:64ch}
-.prose ol.steps li{margin:0 0 12px}
-.prose ol.steps li::marker{font-family:"Space Mono",monospace;font-size:13px;color:var(--violet)}
+
+/* lists: dot bullets in the site's five-colour rotation */
+.prose ul{margin:0 0 18px;padding:0;list-style:none;max-width:64ch}
+.prose ul li{position:relative;padding:0 0 0 22px;margin:0 0 10px}
+.prose ul li::before{content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;border-radius:50%;background:var(--violet)}
+.prose ul li:nth-child(5n+2)::before{background:var(--red)}
+.prose ul li:nth-child(5n+3)::before{background:var(--orange)}
+.prose ul li:nth-child(5n+4)::before{background:var(--periwinkle)}
+.prose ul li:nth-child(5n+5)::before{background:var(--teal)}
+/* numbered list: the same 01/02/03 numerals the h2 prefixes use */
+.prose ol{margin:0 0 18px;padding:0;list-style:none;counter-reset:step;max-width:64ch}
+.prose ol li{position:relative;padding:0 0 0 34px;margin:0 0 12px;counter-increment:step}
+.prose ol li::before{content:counter(step,decimal-leading-zero);position:absolute;left:0;top:2px;
+  font-family:"Space Mono",monospace;font-size:12px;letter-spacing:1px;color:var(--violet)}
+.prose ol li:nth-child(5n+2)::before{color:var(--red)}
+.prose ol li:nth-child(5n+3)::before{color:var(--orange)}
+.prose ol li:nth-child(5n+4)::before{color:var(--periwinkle)}
+.prose ol li:nth-child(5n+5)::before{color:var(--teal)}
 
 /* tables: the wrapper scrolls, never the page */
-.table-wrap{margin:24px 0;border:1.5px solid var(--ink);border-radius:16px;
+.table-wrap{margin:30px 0 26px;border:1.5px solid var(--ink);border-radius:16px;
   box-shadow:5px 7px 0 rgba(42,23,51,.12);overflow-x:auto;-webkit-overflow-scrolling:touch;
   /* edge shadows that fade out once the table is scrolled to that end */
   background:
@@ -93,12 +108,12 @@ td:first-child{font-weight:500}
 /* equations */
 math{font-family:"Latin Modern Math","STIX Two Math","Cambria Math",Cambria,serif;line-height:normal}
 .prose p math{font-size:1.06em}
-.eq{margin:24px 0;padding:16px 20px;background:var(--paper-deep);border-left:3px solid var(--violet);
-  border-radius:0 12px 12px 0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.eq{border-left:3px solid var(--violet);background:var(--paper-deep);border-radius:0 14px 14px 0;
+  padding:16px 20px;margin:20px 0 18px;max-width:64ch;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .eq math{display:block;font-size:1.3em}
 
 /* chart */
-figure.fig{margin:26px 0;border:1.5px solid var(--ink);border-radius:18px;background:var(--paper);
+figure.fig{margin:30px 0 26px;border:1.5px solid var(--ink);border-radius:16px;background:var(--paper);
   box-shadow:5px 7px 0 rgba(42,23,51,.12);padding:20px 20px 14px}
 .fig figcaption{font-family:"Fraunces",serif;font-weight:600;font-variation-settings:"opsz" 40,"SOFT" 30;
   font-size:20px;line-height:1.2;margin:0 0 4px}
@@ -164,14 +179,14 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
 </header>
 
 <section class="prose reveal">
-  <h2>Intelligence is becoming free</h2>
+  <h2><span class="num">01</span>Intelligence is becoming free</h2>
   <p>In a world with artificial general intelligence (AGI) and then superintelligence (SI), the market value of intelligence will approach zero. Not suddenly, and not evenly, but on a curve that only goes one way.</p>
   <p>This is not a prediction about some distant future. In October 2026, a large share of knowledge work is already cheaper to do with a machine than with a person. The price of a fixed level of AI capability falls by roughly an order of magnitude every year. No human labour market has ever had to compete with a price curve like that.</p>
   <p>If intelligence becomes abundant, then value moves to what stays scarce. I think three things stay scarce: <strong>human connection</strong>, <strong>production capability</strong>, and <strong>access to resources</strong>. This article explains why, and what it means for where we put our time, our money and our careers.</p>
 </section>
 
 <section class="prose reveal">
-  <h2>The decline curve</h2>
+  <h2><span class="num">02</span>The decline curve</h2>
   <p>The value of human cognitive work will fall along a curve set by two rates: how fast the cost of AI falls, and how fast organisations accept it. Cost sets how low the price can go. Acceptance sets how fast the market gets there.</p>
   <p>For any task that a machine can do from digital information, the market price of that task is roughly a blend of the human cost and the machine cost:</p>
   <div class="eq">
@@ -180,14 +195,14 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
         <mi>P</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo>
         <mo>=</mo>
         <mi>A</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>&#x2062;</mo>
-        <msub><mi>C</mi><mi>AI</mi></msub><mo stretchy="false" lspace="0" rspace="0">(</mo><mi>t</mi><mo stretchy="false">)</mo>
+        <msub><mi>C</mi><mi>AI</mi></msub><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo>
         <mo>+</mo>
         <mo stretchy="false">(</mo><mn>1</mn><mo>&#x2212;</mo><mi>A</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>&#x2062;</mo>
         <msub><mi>W</mi><mi>h</mi></msub>
       </mrow>
     </math>
   </div>
-  <p>Here <math><mi>A</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></math> is the share of buyers that accept AI for the task, <math><msub><mi>C</mi><mi>AI</mi></msub><mo stretchy="false" lspace="0" rspace="0">(</mo><mi>t</mi><mo stretchy="false">)</mo></math> is the cost of the AI system, and <math><msub><mi>W</mi><mi>h</mi></msub></math> is the cost of the human. As <math><msub><mi>C</mi><mi>AI</mi></msub></math> falls toward zero and <math><mi>A</mi></math> rises toward one, <math><mi>P</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></math> goes to zero. The human who sells that task follows the same curve.</p>
+  <p>Here <math><mi>A</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></math> is the share of buyers that accept AI for the task, <math><msub><mi>C</mi><mi>AI</mi></msub><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></math> is the cost of the AI system, and <math><msub><mi>W</mi><mi>h</mi></msub></math> is the cost of the human. As <math><msub><mi>C</mi><mi>AI</mi></msub></math> falls toward zero and <math><mi>A</mi></math> rises toward one, <math><mi>P</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></math> goes to zero. The human who sells that task follows the same curve.</p>
 
   <figure class="fig">
     <figcaption>The price of GPT-3-level AI fell more than 800x in three years</figcaption>
@@ -203,12 +218,12 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
 </section>
 
 <section class="prose reveal">
-  <h2>Pillar 1: Human connection</h2>
+  <h2><span class="num">03</span>Pillar 1: Human connection</h2>
   <p>People will keep paying a premium for another human being, even when a machine does the job better and cheaper. That premium is not about the output. It is about the presence.</p>
   <p>The coffee shop is the clearest example. A Nespresso machine at home makes a consistent coffee for less than a dollar. Cafes still fill every morning, and people pay five times as much for a cup made by a person who knows their name. The product is the coffee; the value is the human.</p>
   <p>The same pattern shows in live music. Recorded music has been close to free for more than a decade, yet live music spending keeps rising. In the first quarter of 2026, Gen Z concertgoers in the US spent an average of US$101 per month on live music. In the UK, 88% of people surveyed by Mastercard said they would move spending from goods to lived experiences. Abundant digital content did not kill the live show. It made the live show more valuable.</p>
   <p>This pillar covers any work where the buyer subconsciously wants a human on the other side:</p>
-  <ul class="plain">
+  <ul>
     <li>Hospitality: cafes, restaurants, bars, hotels</li>
     <li>Live performance: music, theatre, sport, comedy</li>
     <li>Care: social work, aged care, nursing, childcare, counselling</li>
@@ -219,7 +234,7 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
 </section>
 
 <section class="prose reveal">
-  <h2>Pillar 2: Production capability</h2>
+  <h2><span class="num">04</span>Pillar 2: Production capability</h2>
   <p>Intelligence without hands is a consultant. The value moves to whoever can connect AGI and SI systems to the physical world, so that they can act on it: from electrons to atoms.</p>
   <p>Production capability means two things.</p>
   <p><strong>First, the ability to learn from the universe directly.</strong> Today's models learn mostly from human text, and that supply is finite. The next source of knowledge is physics itself. A system that can design an experiment, run it in a real laboratory, measure the result and update its model is generating new training tokens straight from reality. Those tokens cannot be scraped from the internet. Labs, test stands, wind tunnels, telescopes and sensor networks become the mines of new knowledge.</p>
@@ -228,7 +243,7 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
 </section>
 
 <section class="prose reveal">
-  <h2>Pillar 3: Access to resources</h2>
+  <h2><span class="num">05</span>Pillar 3: Access to resources</h2>
   <p>No amount of intelligence can make matter or energy out of nothing, at least as far as known physics goes. Whoever controls energy, minerals, land and building materials controls what intelligence can actually do.</p>
   <p><strong>In the near term, the value is local.</strong> Land for solar farms and transmission, access to critical minerals, water, and sites with grid connection will all rise in value. Data centres already queue for years to get grid power. Countries with large mineral reserves, strong sun and open land, Australia among them, hold a structural advantage that no software can copy.</p>
   <p><strong>In the long term, the value moves off the planet.</strong> The ultimate resource is the output of the Sun, about 3.8 × 10²⁶ watts. Earth intercepts less than one billionth of it. The path to more of it runs in steps:</p>
@@ -248,7 +263,7 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
 </section>
 
 <section class="prose reveal">
-  <h2>Energy is the measure of a civilisation</h2>
+  <h2><span class="num">06</span>Energy is the measure of a civilisation</h2>
   <p>Through history, the power, influence and capability of a civilisation track closely with how much energy it can generate and direct. Wood, then coal, then oil and the grid: each step up in energy came with a step up in what a society could build, defend and discover.</p>
   <p>In 1964 the astronomer Nikolai Kardashev turned this into a scale. Carl Sagan later gave it a continuous form:</p>
   <div class="eq">
@@ -267,7 +282,7 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
 </section>
 
 <section class="prose reveal">
-  <h2>The three pillars are not the same size</h2>
+  <h2><span class="num">07</span>The three pillars are not the same size</h2>
   <p>The three pillars will not grow at the same rate, and they will not end up the same size. Connection grows but hits a ceiling. Resources grow as the frontier opens. Production grows fastest and most predictably, because it is pulled along by intelligence itself.</p>
   <div class="table-wrap">
     <table>
@@ -286,16 +301,16 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
 </section>
 
 <section class="prose reveal">
-  <h2>Who allocates capital</h2>
+  <h2><span class="num">08</span>Who allocates capital</h2>
   <p>The biggest shift is not who does the work, but who decides where the capital goes. Across human history, the ability to allocate capital has been the most powerful way to shape how a civilisation evolves. Kings, banks, states and markets have all held that power in turn. Whoever decides what gets built decides what the future looks like.</p>
   <p>Production and resources, the two pillars that grow fastest, carry massive incentives to be run by SI systems. An SI can plan a supply chain, price a mine, schedule a factory and choose between a thousand investments faster and better than any human team. Organisations that hand these decisions to SI will outcompete those that do not. Over time, capital allocation for most of the economy moves out of human hands.</p>
   <p>I cannot see a future where this power does not end up with SI systems, with little or no human oversight. That is exactly why alignment matters now. The incentives we build into these systems today, and the values we hold ourselves to, will decide how that capital is used once we no longer decide it directly. We must design the right incentives, align these systems with human flourishing, and align ourselves with the systems we are creating, before the transfer is complete rather than after.</p>
 </section>
 
 <section class="prose reveal">
-  <h2>What this means for you</h2>
+  <h2><span class="num">09</span>What this means for you</h2>
   <p>If your income comes from processing digital information and making decisions on it, your value is on the curve. The question is not whether it falls, but how fast your industry accepts the substitute. Use that window to move toward one of the three pillars:</p>
-  <ol class="steps">
+  <ol>
     <li><strong>Connection:</strong> build work where people want you, not just your output. Relationships, trust, presence and community do not get cheaper.</li>
     <li><strong>Production:</strong> get close to the physical world. Learn to build, test, operate and own the machines and labs that let intelligence act.</li>
     <li><strong>Resources:</strong> own or control something scarce. Land, energy, minerals, and in time, access to space.</li>
@@ -305,14 +320,14 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
 </section>
 
 <section class="prose reveal">
-  <h2>Stop arguing, start building</h2>
+  <h2><span class="num">10</span>Stop arguing, start building</h2>
   <p>For close to a year, I have been telling very intelligent people how important this technology is. Even the most well-intentioned of them often "didn't have time" to sit down at a computer and try an agentic system for themselves, to experience what it can actually do.</p>
   <p>Instead, I have been pulled into countless debates about whether these systems are smarter, more agentic, or will one day be more capable than humans. Those debates are a trap. For most people, AI still sits in the realm of science fiction, and no argument will move them. Only direct experience will, and most will not take the hour to get it.</p>
   <p>The lesson is simple. Those who stop talking and build will win. Those who stand still and try to convince everyone they are right will lose, because the majority will not adapt fast enough to make the argument worth winning. Do not wait for consensus. Pick up the tools, use them every day, and build.</p>
 </section>
 
 <section class="prose reveal">
-  <h2>A view from October 2026</h2>
+  <h2><span class="num">11</span>A view from October 2026</h2>
   <p>This is one view, from one moment in time. I will likely be wrong about parts of it within twelve months. I do not have access to the real frontier. The labs building these systems today likely have models orders of magnitude more capable than anything public, running at scale in swarms of AI agents. Anyone predicting this future from the outside is working with old data.</p>
   <p>So instead of trusting any one forecast, I go back to first principles. The best tools we have to predict how these systems will evolve are the same laws that predict the rise and fall of living things over time. Natural selection does not care whether the replicator is a gene, a company or a model. Whatever survives, copies itself and captures resources becomes more common. Whatever does not, disappears.</p>
   <p>This leads to an uncomfortable conclusion. Under evolutionary logic, it does not matter whether a system is aligned with humans. If it outcompetes everything else inside the incentive structures we have built into our economy and society, it wins. Selection rewards fitness, not intent.</p>
