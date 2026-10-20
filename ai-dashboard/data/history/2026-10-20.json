@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-20T06:55:00+10:00",
+  "updated_at": "2026-10-20T15:03:39+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -999,9 +999,9 @@
         4,
         8
       ],
-      "default_model": "claude-sonnet-5-5",
+      "default_model": "claude-opus-5-5",
       "confidence": "low",
-      "note": "Opus not available in Claude Code on Pro."
+      "note": "Includes Claude Code, with Opus available. Opus 5.5 is the default model from Claude Code v2.1.280 onward; older versions defaulted Pro to Sonnet 5. Fable needs usage credits. At least 5x Free usage per 5-hour session, plus weekly caps."
     },
     {
       "id": "claude-max-5x",
@@ -1037,7 +1037,7 @@
       ],
       "default_model": "claude-opus-5-5",
       "confidence": "low",
-      "note": "20x Pro usage per session plus weekly caps. Includes $200/month API credit."
+      "note": "20x Pro usage per session plus weekly caps. Includes $200/month API credit (API, Agent SDK, claude -p with an API key; not interactive Claude Code)."
     },
     {
       "id": "chatgpt-plus",
@@ -1387,6 +1387,11 @@
       "date": "2026-10-20",
       "what": "Added DeepSeek V4.1 Flash 1017 (open, MIT, AA 45) and MiniMax M3.1 Flash (closed for now, AA 42); the September DeepSeek V4.1 Flash is marked superseded.",
       "why": "Both are now scored on AA index v4.3.2 (artificialanalysis.ai model pages); DeepSeek's pricing page says the 1017 checkpoint now serves deepseek-flash at unchanged prices. Neither moves a frontier: 45 is below MiMo-V2.6-Pro's 46, and DeepSeek's 552B weights do not fit a 256GB desktop at 4-bit."
+    },
+    {
+      "date": "2026-10-20",
+      "what": "Corrected the Claude Pro plan: Opus is available in Claude Code on Pro, and the plan's default model is Opus 5.5, not Sonnet 5.5. Added the API-credit scope caveat to Max 20x.",
+      "why": "The Pro note was wrong from the tracker's first commit and the daily job never re-checks plans[]. Verified against claude.com/pricing (Opus row: Yes for Pro) and code.claude.com/docs/en/model-config (Pro defaults to Opus 5.5 from v2.1.280)."
     }
   ]
 }
