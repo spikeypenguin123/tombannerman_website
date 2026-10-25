@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-22T06:55:00+10:00",
+  "updated_at": "2026-10-26T06:45:00+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -69,6 +69,25 @@
       "price_cache_read": null,
       "status": "current",
       "note": "Meta's first frontier model. Muse Code subscribers only; no API."
+    },
+    {
+      "id": "kimi-k3-1-pro",
+      "name": "Kimi K3.1 Pro",
+      "lab": "Moonshot AI",
+      "released": "2026-10-23",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": 2800,
+      "params_active_b": 104,
+      "aa_index": 55,
+      "aa_effort": "reasoning",
+      "eci": null,
+      "cost_per_task_usd": 2.11,
+      "price_in": 2.0,
+      "price_out": 10.0,
+      "price_cache_read": 0.2,
+      "status": "current",
+      "note": "#4 on the AA index; highest Terminal-Bench 4.0 score AA has measured (67%). Weights not yet published; Moonshot is expected to release them soon, which would make it the best open model by 9 points. Reclassify as open once released."
     },
     {
       "id": "muse-wonder",
@@ -223,25 +242,6 @@
       "note": "Up to 100K tokens; higher tier above."
     },
     {
-      "id": "minimax-m3-1-flash",
-      "name": "MiniMax M3.1 Flash",
-      "lab": "MiniMax",
-      "released": "2026-10-19",
-      "weights": "closed",
-      "license": null,
-      "params_total_b": null,
-      "params_active_b": null,
-      "aa_index": 42,
-      "aa_effort": null,
-      "eci": null,
-      "cost_per_task_usd": 0.22,
-      "price_in": 0.15,
-      "price_out": 0.6,
-      "price_cache_read": 0.015,
-      "status": "current",
-      "note": "API only for now; AA lists it as proprietary. MiniMax says weights will follow (reported for 23 Oct); reclassify as open once released."
-    },
-    {
       "id": "mistral-large-4-preview",
       "name": "Mistral Large 4 Preview",
       "lab": "Mistral",
@@ -335,6 +335,25 @@
       "price_cache_read": null,
       "status": "current",
       "note": "Best open model on ECI (9.7 points behind Opus 5.5). Too large for any single desktop machine."
+    },
+    {
+      "id": "minimax-m3-1-flash",
+      "name": "MiniMax M3.1 Flash",
+      "lab": "MiniMax",
+      "released": "2026-10-19",
+      "weights": "open",
+      "license": "MiniMax Community Licence (commercial use needs attribution; written authorisation above US$20M annual revenue)",
+      "params_total_b": 428,
+      "params_active_b": 23,
+      "aa_index": 43,
+      "aa_effort": null,
+      "eci": null,
+      "cost_per_task_usd": 0.22,
+      "price_in": 0.15,
+      "price_out": 0.6,
+      "price_cache_read": 0.015,
+      "status": "current",
+      "note": "Weights on Hugging Face since 23 Oct (AA still labels it proprietary). 252 GB checkpoint (mostly NVFP4), so too tight for a 256GB Mac Studio without further quantisation or offloading."
     },
     {
       "id": "glm-5-3-flash",
@@ -858,7 +877,7 @@
       },
       "suite_ceiling_minutes": 960,
       "status": "Newest measurement: Claude Mythos Preview (early checkpoint, released Apr 2026), about 17 h at 50% success (95% CI 8.5–55 h) and about 3 h at 80% (1.6–6.6 h). The 50% figure is above the 16 h where METR says its task suite stops being reliable. No model released since has a published time horizon (see other readings), so today's values are projections at METR's post-2023 doubling time of 3.4–5.2 months; the 80% series has doubled at the same pace (about every 4.4 months since 2023 on METR's data).",
-      "checked": "2026-10-22",
+      "checked": "2026-10-26",
       "other_readings": [
         {
           "source": "METR Frontier Risk Report",
@@ -899,8 +918,8 @@
       ]
     },
     "headline": [
-      "Claude Opus 5.5 (58) leads the AA index, with Claude Sonnet 5.5 and Meta's Muse Wonder Full tied second at 56; GPT-6.1 Sol is the price-performance leader at about $0.72 per task.",
-      "The best open model (MiMo-V2.6-Pro, 46) trails the closed frontier (58) by 12 points, roughly 4 months on Epoch’s lag estimate; DeepSeek's updated V4.1 Flash is one point behind at 45, and Meta's Muse Spark Open (39) is the best US open model.",
+      "Claude Opus 5.5 (58) leads the AA index, with Claude Sonnet 5.5 and Meta's Muse Wonder Full tied second at 56 and Moonshot's new Kimi K3.1 Pro fourth at 55; GPT-6.1 Sol is the price-performance leader at about $0.72 per task.",
+      "The best open model (MiMo-V2.6-Pro, 46) trails the closed frontier (58) by 12 points, roughly 4 months on Epoch’s lag estimate; if Moonshot publishes Kimi K3.1 Pro's weights as expected, that gap shrinks to 3 points.",
       "An open model matching Claude Opus 5.5 (58) is expected around Jan 2027 (range Dec 2026 to Mar 2027); a version that runs on a desktop under AUD 50k about 2 months later."
     ],
     "founder": {
@@ -1156,6 +1175,20 @@
   ],
   "releases": [
     {
+      "date": "2026-10-23",
+      "kind": "model",
+      "title": "Moonshot Kimi K3.1 Pro",
+      "summary": "AA index 55, fourth overall, at about $2.11 per task; $2/$10 per million tokens. Weights not yet published; once they are it becomes the best open model.",
+      "url": "https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks"
+    },
+    {
+      "date": "2026-10-23",
+      "kind": "model",
+      "title": "MiniMax M3.1 Flash weights released (open)",
+      "summary": "428B / 23B active under MiniMax's community licence; AA index 43. 252 GB download, too tight for a 256GB desktop.",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+    },
+    {
       "date": "2026-10-19",
       "kind": "model",
       "title": "MiniMax M3.1 Flash",
@@ -1330,6 +1363,14 @@
       "url": "https://artificialanalysis.ai/models/minimax-m3-1-flash"
     },
     {
+      "title": "Artificial Analysis: Kimi K3.1 Pro",
+      "url": "https://artificialanalysis.ai/models/kimi-k3-1-pro"
+    },
+    {
+      "title": "Hugging Face: MiniMax M3.1 Flash weights",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+    },
+    {
       "title": "DeepSeek API pricing",
       "url": "https://api-docs.deepseek.com/quick_start/pricing"
     },
@@ -1387,6 +1428,11 @@
       "date": "2026-10-20",
       "what": "Added DeepSeek V4.1 Flash 1017 (open, MIT, AA 45) and MiniMax M3.1 Flash (closed for now, AA 42); the September DeepSeek V4.1 Flash is marked superseded.",
       "why": "Both are now scored on AA index v4.3.2 (artificialanalysis.ai model pages); DeepSeek's pricing page says the 1017 checkpoint now serves deepseek-flash at unchanged prices. Neither moves a frontier: 45 is below MiMo-V2.6-Pro's 46, and DeepSeek's 552B weights do not fit a 256GB desktop at 4-bit."
+    },
+    {
+      "date": "2026-10-26",
+      "what": "Added Kimi K3.1 Pro (Moonshot, closed for now, AA 55). MiniMax M3.1 Flash reclassified as open (428B / 23B active, MiniMax Community Licence) and its AA index updated 42 → 43.",
+      "why": "Kimi K3.1 Pro is scored on AA index v4.3.2 (artificialanalysis.ai/models/kimi-k3-1-pro, $2.11 per task); AA says its weights are not yet published, so it does not count as open. MiniMax's weights went up on Hugging Face on 23 Oct (huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash), and AA's model page now shows 43. No frontier moves: 55 is below 58, 43 is below the open best of 46, and the 252 GB checkpoint has no verified 256GB-desktop run."
     }
   ]
 }
