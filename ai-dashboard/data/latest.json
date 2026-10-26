@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-26T06:45:00+10:00",
+  "updated_at": "2026-10-27T06:55:00+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -8,8 +8,8 @@
     "url": "https://artificialanalysis.ai/leaderboards/models"
   },
   "fx": {
-    "aud_per_usd": 1.44,
-    "as_of": "2026-10-17",
+    "aud_per_usd": 1.425,
+    "as_of": "2026-10-26",
     "source": "https://tradingeconomics.com/australia/currency"
   },
   "models": [
@@ -101,10 +101,10 @@
       "aa_index": 52,
       "aa_effort": "max",
       "eci": null,
-      "cost_per_task_usd": 4.52,
+      "cost_per_task_usd": 8.63,
       "price_in": 4.0,
       "price_out": 20.0,
-      "price_cache_read": null,
+      "price_cache_read": 0.2,
       "status": "current",
       "note": "API version of Muse Wonder."
     },
@@ -158,7 +158,7 @@
       "aa_index": 53,
       "aa_effort": "high",
       "eci": null,
-      "cost_per_task_usd": 1.99,
+      "cost_per_task_usd": 1.62,
       "price_in": 2.0,
       "price_out": 10.0,
       "price_cache_read": 0.1,
@@ -202,6 +202,25 @@
       "price_cache_read": 0.5,
       "status": "superseded",
       "note": "Superseded by Opus 5.5. Kept as the reference point for 'when does an open model match Opus 5'."
+    },
+    {
+      "id": "gpt-6-1-terra",
+      "name": "GPT-6.1 Terra",
+      "lab": "OpenAI",
+      "released": "2026-10-26",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 48,
+      "aa_effort": "max",
+      "eci": null,
+      "cost_per_task_usd": 0.4,
+      "price_in": 1.0,
+      "price_out": 5.0,
+      "price_cache_read": 0.05,
+      "status": "current",
+      "note": "Mid-tier GPT-6.1 at half Sol's token prices; about $0.40 per task. Available in ChatGPT, Codex and the API."
     },
     {
       "id": "grok-4-7",
@@ -877,7 +896,7 @@
       },
       "suite_ceiling_minutes": 960,
       "status": "Newest measurement: Claude Mythos Preview (early checkpoint, released Apr 2026), about 17 h at 50% success (95% CI 8.5–55 h) and about 3 h at 80% (1.6–6.6 h). The 50% figure is above the 16 h where METR says its task suite stops being reliable. No model released since has a published time horizon (see other readings), so today's values are projections at METR's post-2023 doubling time of 3.4–5.2 months; the 80% series has doubled at the same pace (about every 4.4 months since 2023 on METR's data).",
-      "checked": "2026-10-26",
+      "checked": "2026-10-27",
       "other_readings": [
         {
           "source": "METR Frontier Risk Report",
@@ -918,7 +937,7 @@
       ]
     },
     "headline": [
-      "Claude Opus 5.5 (58) leads the AA index, with Claude Sonnet 5.5 and Meta's Muse Wonder Full tied second at 56 and Moonshot's new Kimi K3.1 Pro fourth at 55; GPT-6.1 Sol is the price-performance leader at about $0.72 per task.",
+      "Claude Opus 5.5 (58) leads the AA index, with Claude Sonnet 5.5 and Meta's Muse Wonder Full tied second at 56 and Moonshot's Kimi K3.1 Pro fourth at 55; for value, GPT-6.1 Sol scores 52 at about $0.72 per task and OpenAI's new GPT-6.1 Terra 48 at about $0.40.",
       "The best open model (MiMo-V2.6-Pro, 46) trails the closed frontier (58) by 12 points, roughly 4 months on Epoch’s lag estimate; if Moonshot publishes Kimi K3.1 Pro's weights as expected, that gap shrinks to 3 points.",
       "An open model matching Claude Opus 5.5 (58) is expected around Jan 2027 (range Dec 2026 to Mar 2027); a version that runs on a desktop under AUD 50k about 2 months later."
     ],
@@ -1175,6 +1194,13 @@
   ],
   "releases": [
     {
+      "date": "2026-10-26",
+      "kind": "model",
+      "title": "OpenAI GPT-6.1 Terra",
+      "summary": "AA index 48 at about $0.40 per task; $1/$5 per million tokens, half of GPT-6.1 Sol. In ChatGPT, Codex and the API.",
+      "url": "https://community.openai.com/t/gpt-6-1-terra-delivering-fast-and-capable-computer-use-at-a-lower-price/1409900"
+    },
+    {
       "date": "2026-10-23",
       "kind": "model",
       "title": "Moonshot Kimi K3.1 Pro",
@@ -1367,6 +1393,10 @@
       "url": "https://artificialanalysis.ai/models/kimi-k3-1-pro"
     },
     {
+      "title": "Artificial Analysis: GPT-6.1 Terra",
+      "url": "https://artificialanalysis.ai/models/gpt-6-1-terra"
+    },
+    {
       "title": "Hugging Face: MiniMax M3.1 Flash weights",
       "url": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
     },
@@ -1433,6 +1463,11 @@
       "date": "2026-10-26",
       "what": "Added Kimi K3.1 Pro (Moonshot, closed for now, AA 55). MiniMax M3.1 Flash reclassified as open (428B / 23B active, MiniMax Community Licence) and its AA index updated 42 → 43.",
       "why": "Kimi K3.1 Pro is scored on AA index v4.3.2 (artificialanalysis.ai/models/kimi-k3-1-pro, $2.11 per task); AA says its weights are not yet published, so it does not count as open. MiniMax's weights went up on Hugging Face on 23 Oct (huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash), and AA's model page now shows 43. No frontier moves: 55 is below 58, 43 is below the open best of 46, and the 252 GB checkpoint has no verified 256GB-desktop run."
+    },
+    {
+      "date": "2026-10-27",
+      "what": "Added GPT-6.1 Terra (OpenAI, closed, AA 48, $1/$5 per million tokens). AA cost per task updated: Gemini 4 Argon $1.99 → $1.62, Muse Wonder $4.52 → $8.63 (cache read $0.20). AUD/USD 1.440 → 1.425.",
+      "why": "Terra is scored on AA index v4.3.2 (artificialanalysis.ai/models/gpt-6-1-terra, $0.40 per task); prices from AA and OpenAI's announcement (community.openai.com), cached input $0.05. No frontier moves: 48 is below 58. The two cost figures are what AA's model pages now show. FX moved more than 1% (tradingeconomics, 26 Oct: 0.7017 USD per AUD)."
     }
   ]
 }
