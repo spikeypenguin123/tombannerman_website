@@ -15,7 +15,7 @@ Never edit the HTML pages in this job.
 
 ## 0. Set up
 1. Read `tracker/CLAUDE.md` (if present) and `ai-dashboard/data/latest.json`.
-2. Copy the current file before changing anything: `cp ai-dashboard/data/latest.json /tmp/previous.json`
+2. Copy the current file before changing anything: `cp ai-dashboard/data/latest.json tracker/.work/previous.json` (git-ignored; writes outside the repo are refused)
 3. Note today's date in Australia/Brisbane: `date`
 
 ## 1. Research (web search + fetch; primary sources first)
@@ -51,10 +51,10 @@ Look specifically for anything released or changed since `updated_at` in the cur
 
 ## 3. Validate, archive, publish
 ```bash
-python3 tracker/update/validate.py ai-dashboard/data/latest.json --previous /tmp/previous.json
+python3 tracker/update/validate.py ai-dashboard/data/latest.json --previous tracker/.work/previous.json
 ```
 - Fix every ERROR and re-run until it passes. Read every WARN; a large one-day score jump usually means an index version change.
-- If you cannot make it pass, restore `/tmp/previous.json`, set only `updated_at`, and report the problem. Never publish a failing file.
+- If you cannot make it pass, restore `tracker/.work/previous.json`, set only `updated_at`, and report the problem. Never publish a failing file.
 
 ```bash
 python3 tracker/update/snapshot.py ai-dashboard/data/latest.json

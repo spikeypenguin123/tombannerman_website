@@ -2,6 +2,10 @@
 
 Code and method changes. Daily data changes are logged inside `ai-dashboard/data/latest.json` → `changelog`.
 
+## 2026-10-27 — v1.8
+- **What:** The daily job's backup of yesterday's data moves from `/tmp/previous.json` to `tracker/.work/previous.json` (git-ignored).
+  **Why:** The job's permission mode refuses writes outside the repo, so `cp … /tmp/` failed every run and the agent had to improvise a backup (26 Oct run report).
+
 ## 2026-10-18 — v1.7
 - **What:** Task length shows 80% success next to 50% (chart series, projection bands, tile, tooltips), a "current reading" (last measurement plus today's estimate at both rates), and an "Other readings" list. Schema: `minutes_80`/`ci80_*` on `horizon.measured`, `horizon.checked`, `horizon.other_readings`; validator checks them. The daily prompt now checks METR's blog and Epoch for new readings.
   **Why:** The chart only showed one success rate and stopped at the last METR point with no sign of newer evaluations; readers need both rates and what has (and hasn't) been measured since.
