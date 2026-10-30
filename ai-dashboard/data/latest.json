@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-30T06:45:00+10:00",
+  "updated_at": "2026-10-31T06:45:00+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -421,15 +421,15 @@
       "license": "MIT",
       "params_total_b": 320,
       "params_active_b": 18,
-      "aa_index": null,
+      "aa_index": 28,
       "aa_effort": null,
       "eci": 151.94,
-      "cost_per_task_usd": null,
+      "cost_per_task_usd": 0.58,
       "price_in": 0.15,
       "price_out": 0.5,
       "price_cache_read": null,
       "status": "current",
-      "note": "Runs on a 256GB Mac Studio at 4-bit. Not yet scored on AA v5 (was 42 on v4.3.2, then the best model you could run on a single desktop)."
+      "note": "Runs on a 256GB Mac Studio at 4-bit. AA v5 28 (was 42 on v4.3.2): the best AA v5 score of any model with a verified desktop run under AUD 50k, one point ahead of MiMo-V2.6-Flash."
     },
     {
       "id": "deepseek-v4-1-flash",
@@ -486,7 +486,7 @@
       "price_out": 0.28,
       "price_cache_read": 0.0028,
       "status": "current",
-      "note": "Fits a 256GB Mac Studio at 4-bit. Best AA v5 score of any model with a verified desktop run under AUD 50k."
+      "note": "Fits a 256GB Mac Studio at 4-bit. One point behind GLM-5.3-Flash (28), the best AA v5 score with a verified desktop run under AUD 50k."
     },
     {
       "id": "deepseek-v4-pro-0813",
@@ -718,9 +718,9 @@
     ],
     "local_under_aud50k": [
       {
-        "date": "2026-09-21",
-        "value": 27,
-        "model": "MiMo-V2.6-Flash on 256GB Mac Studio"
+        "date": "2026-08-26",
+        "value": 28,
+        "model": "GLM-5.3-Flash on 256GB Mac Studio"
       }
     ]
   },
@@ -929,7 +929,7 @@
       },
       "suite_ceiling_minutes": 960,
       "status": "Newest measurement: Claude Mythos Preview (early checkpoint, released Apr 2026), about 17 h at 50% success (95% CI 8.5–55 h) and about 3 h at 80% (1.6–6.6 h). The 50% figure is above the 16 h where METR says its task suite stops being reliable. No model released since has a published time horizon (see other readings), so today's values are projections at METR's post-2023 doubling time of 3.4–5.2 months; the 80% series has doubled at the same pace (about every 4.4 months since 2023 on METR's data).",
-      "checked": "2026-10-30",
+      "checked": "2026-10-31",
       "other_readings": [
         {
           "source": "METR Frontier Risk Report",
@@ -971,8 +971,8 @@
     },
     "headline": [
       "Google's Gemini 4 Carbon (59) leads the Artificial Analysis index, one point ahead of Claude Opus 5.5 (58) and two ahead of GPT-6 Astra (57); for value, GPT-6.1 Sol scores 55 at about $1.27 per task and GPT-6.1 Terra 51 at about $0.96.",
-      "The best open models (GLM-5.3 and DeepSeek V4.1 Flash 1017, both 32) trail the closed frontier (59) by 27 points, roughly 4 months behind on Epoch’s lag estimate; Mistral Large 4 went open yesterday at 26, and if Moonshot publishes Kimi K3.1 Pro's weights (46) by 4 November as promised, the gap shrinks to 13 points.",
-      "An open model matching Gemini 4 Carbon (59) is expected around Feb 2027 (range Jan 2027 to Apr 2027); a version that runs on a desktop under AUD 50k about 2 months later."
+      "The best open models (GLM-5.3 and DeepSeek V4.1 Flash 1017, both 32) trail the closed frontier (59) by 27 points, roughly 4 months behind on Epoch’s lag estimate; if Moonshot publishes Kimi K3.1 Pro's weights (46) by 4 November as promised, the gap shrinks to 13 points.",
+      "An open model matching Gemini 4 Carbon (59) is expected around Feb 2027 (range Jan 2027 to Apr 2027); a version that runs on a desktop under AUD 50k about 2 months later. Today the best desktop model is GLM-5.3-Flash (28) on a 256GB Mac Studio."
     ],
     "founder": {
       "as_of": "2026-09-08",
@@ -1133,7 +1133,7 @@
       "name": "ChatGPT Pro 100 (Codex)",
       "vendor": "OpenAI",
       "price_usd_month": 100,
-      "included_api_credit_usd": 0,
+      "included_api_credit_usd": 100,
       "est_api_value_usd_month": [
         400,
         3000
@@ -1144,14 +1144,14 @@
       ],
       "default_model": "gpt-6-1-sol",
       "confidence": "low",
-      "note": "More usage than Plus; per-model limits unpublished."
+      "note": "More usage than Plus; per-model limits unpublished. Work and Codex allowance doubled on 29 Oct 2026 (estimates here not yet revised). Since 28 Oct also includes $100/month API credit (API only; not Codex, signed-in or by API key)."
     },
     {
       "id": "chatgpt-pro-200",
       "name": "ChatGPT Pro 200 (Codex)",
       "vendor": "OpenAI",
       "price_usd_month": 200,
-      "included_api_credit_usd": 0,
+      "included_api_credit_usd": 200,
       "est_api_value_usd_month": [
         1000,
         6000
@@ -1162,14 +1162,14 @@
       ],
       "default_model": "gpt-6-1-sol",
       "confidence": "low",
-      "note": "Weekly allowance, no 5-hour limit. New subscribers get a lower allowance than the old Pro 20x."
+      "note": "Weekly allowance, no 5-hour limit. The planned cut for new subscribers was cancelled on 29 Oct 2026: everyone is now on the higher allowance. Since 28 Oct also includes $200/month API credit (API only; not Codex)."
     },
     {
       "id": "chatgpt-pro-500",
       "name": "ChatGPT Pro 500 (Codex)",
       "vendor": "OpenAI",
       "price_usd_month": 500,
-      "included_api_credit_usd": 0,
+      "included_api_credit_usd": 500,
       "est_api_value_usd_month": [
         2500,
         12000
@@ -1180,7 +1180,7 @@
       ],
       "default_model": "gpt-6-astra",
       "confidence": "very low",
-      "note": "Highest allowance; includes Astra Ultrafast (8x the standard rate). No published usage numbers."
+      "note": "Highest allowance; includes Astra Ultrafast (8x the standard rate). No published usage numbers. Work and Codex allowance doubled on 29 Oct 2026 (estimates here not yet revised). Since 28 Oct also includes $500/month API credit (API only; not Codex)."
     }
   ],
   "hardware": [
@@ -1206,7 +1206,7 @@
       "status": "Shipping since 22 Sep 2026",
       "spec": "256 GB unified, 1.2 TB/s",
       "price": "≈AUD 17.5k",
-      "note": "Runs MiMo-V2.6-Flash (27) or GLM-5.3-Flash (not yet scored on AA v5) at 4-bit."
+      "note": "Runs GLM-5.3-Flash (28) or MiMo-V2.6-Flash (27) at 4-bit."
     },
     {
       "name": "Mac Studio M5 Ultra 512 GB",
@@ -1226,6 +1226,13 @@
     }
   ],
   "releases": [
+    {
+      "date": "2026-10-29",
+      "kind": "pricing",
+      "title": "ChatGPT Pro gains API credits and double Codex allowance",
+      "summary": "Pro 100, 200 and 500 now include monthly API credit equal to the plan price (from 28 Oct; not usable for Codex). Work and Codex allowance doubled on Pro 100 and Pro 500, and the planned Pro 200 cut was cancelled.",
+      "url": "https://developers.openai.com/api/docs/guides/chatgpt-api-credits"
+    },
     {
       "date": "2026-10-29",
       "kind": "model",
@@ -1513,6 +1520,18 @@
     {
       "title": "METR Time Horizon 1.1 results (YAML)",
       "url": "https://metr.org/assets/benchmark_results_1_1.yaml"
+    },
+    {
+      "title": "Artificial Analysis: GLM-5.3-Flash",
+      "url": "https://artificialanalysis.ai/models/glm-5-3-flash"
+    },
+    {
+      "title": "OpenAI: API credits for ChatGPT subscribers",
+      "url": "https://developers.openai.com/api/docs/guides/chatgpt-api-credits"
+    },
+    {
+      "title": "Kingy AI: ChatGPT Pro allowances doubled, Pro 200 cut cancelled",
+      "url": "https://kingy.ai/blog/openai-cancels-chatgpt-pro-usage-cut-doubles-allowances/"
     }
   ],
   "changelog": [
@@ -1565,6 +1584,11 @@
       "date": "2026-10-30",
       "what": "Added Mistral Large 4 (Mistral, open, AA 26, $0.70/$2.10 per million tokens, $2.06 per task); Mistral Large 4 Preview marked superseded.",
       "why": "Weights went up on Hugging Face on 29 Oct under the Mistral Ecosystem Open-Weight License (huggingface.co/mistralai/Mistral-Large-4-1T-A52B); AA's model page now lists it as open weights, released 29 Oct, with the score, cost per task, prices and a 90% cache discount ($0.07 cached input). No frontier moves: 26 is below the open best of 32, and the smallest checkpoint (610 GB NVFP4, orcarouter.ai) does not fit a 512GB desktop."
+    },
+    {
+      "date": "2026-10-31",
+      "what": "GLM-5.3-Flash now scored on AA v5: 28, $0.58 per task. The local-desktop series is now GLM-5.3-Flash 28 (released 26 Aug) in place of MiMo-V2.6-Flash 27 (21 Sep). ChatGPT Pro 100/200/500 included API credit 0 → $100/$200/$500 a month; plan notes record the 29 Oct Work and Codex allowance doubling.",
+      "why": "AA's model page now shows a v5.0 score of 28 (artificialanalysis.ai/models/glm-5-3-flash). It runs on a 256GB Mac Studio at 4-bit and was released before MiMo-V2.6-Flash, so on v5 it is the true local envelope and MiMo (27) never beat it; this completes the 29 Oct re-baseline, which had no v5 score for GLM-5.3-Flash. Keeping MiMo after it would make the envelope fall. API credits are from OpenAI's guide (developers.openai.com/api/docs/guides/chatgpt-api-credits): equal to the plan price, API only, not Codex. OpenAI gave the allowance doubling only as a relative change with no absolute limits, so est_agent_hours_week and est_api_value_usd_month are unchanged. No closed or open frontier moves; forecast parameters unchanged."
     }
   ]
 }
