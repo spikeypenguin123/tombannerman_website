@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-31T06:45:00+10:00",
+  "updated_at": "2026-11-01T06:58:00+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -929,7 +929,7 @@
       },
       "suite_ceiling_minutes": 960,
       "status": "Newest measurement: Claude Mythos Preview (early checkpoint, released Apr 2026), about 17 h at 50% success (95% CI 8.5–55 h) and about 3 h at 80% (1.6–6.6 h). The 50% figure is above the 16 h where METR says its task suite stops being reliable. No model released since has a published time horizon (see other readings), so today's values are projections at METR's post-2023 doubling time of 3.4–5.2 months; the 80% series has doubled at the same pace (about every 4.4 months since 2023 on METR's data).",
-      "checked": "2026-10-31",
+      "checked": "2026-11-01",
       "other_readings": [
         {
           "source": "METR Frontier Risk Report",
@@ -1076,7 +1076,7 @@
     },
     {
       "id": "claude-max-5x",
-      "name": "Claude Max 5x",
+      "name": "Claude Max",
       "vendor": "Anthropic",
       "price_usd_month": 100,
       "included_api_credit_usd": 100,
@@ -1090,25 +1090,25 @@
       ],
       "default_model": "claude-opus-5-5",
       "confidence": "low",
-      "note": "5x Pro usage per session plus weekly caps. Since 7 Oct 2026 also includes $100/month API credit (API, Agent SDK, claude -p with an API key; not interactive Claude Code)."
+      "note": "Formerly Max 5x (renamed 30 Oct 2026). 5x Pro usage every 5 hours and every week; Fable included up to half the weekly limit. Since 7 Oct 2026 also includes $100/month API credit (API, Agent SDK, claude -p with an API key; not interactive Claude Code)."
     },
     {
       "id": "claude-max-20x",
-      "name": "Claude Max 20x",
+      "name": "Claude Ultra",
       "vendor": "Anthropic",
       "price_usd_month": 200,
       "included_api_credit_usd": 200,
       "est_api_value_usd_month": [
-        800,
-        7600
+        400,
+        3800
       ],
       "est_agent_hours_week": [
-        80,
-        160
+        40,
+        80
       ],
       "default_model": "claude-opus-5-5",
       "confidence": "low",
-      "note": "20x Pro usage per session plus weekly caps. Includes $200/month API credit."
+      "note": "Formerly Max 20x (renamed 30 Oct 2026; same price, automatic migration). 10x Pro usage every week, twice Max; no 5-hour limit for verified accounts; separate weekly limit for Fable. Includes $200/month API credit."
     },
     {
       "id": "chatgpt-plus",
@@ -1226,6 +1226,13 @@
     }
   ],
   "releases": [
+    {
+      "date": "2026-10-30",
+      "kind": "pricing",
+      "title": "Claude Max 20x becomes Ultra; Max 5x becomes Max",
+      "summary": "Ultra stays $200/month with $200 API credit, but is now defined as 10x Pro's weekly usage (twice Max) with no 5-hour limit for verified accounts. Max ($100) keeps 5x Pro every 5 hours and every week, with Fable up to half the weekly limit.",
+      "url": "https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan"
+    },
     {
       "date": "2026-10-29",
       "kind": "pricing",
@@ -1502,6 +1509,14 @@
       "url": "https://support.claude.com/en/articles/11049741"
     },
     {
+      "title": "Claude Help Center: Ultra plan",
+      "url": "https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan"
+    },
+    {
+      "title": "Claude plans and pricing",
+      "url": "https://claude.com/pricing"
+    },
+    {
       "title": "Claude Code docs: agent teams",
       "url": "https://code.claude.com/docs/en/agent-teams.md"
     },
@@ -1589,6 +1604,11 @@
       "date": "2026-10-31",
       "what": "GLM-5.3-Flash now scored on AA v5: 28, $0.58 per task. The local-desktop series is now GLM-5.3-Flash 28 (released 26 Aug) in place of MiMo-V2.6-Flash 27 (21 Sep). ChatGPT Pro 100/200/500 included API credit 0 → $100/$200/$500 a month; plan notes record the 29 Oct Work and Codex allowance doubling.",
       "why": "AA's model page now shows a v5.0 score of 28 (artificialanalysis.ai/models/glm-5-3-flash). It runs on a 256GB Mac Studio at 4-bit and was released before MiMo-V2.6-Flash, so on v5 it is the true local envelope and MiMo (27) never beat it; this completes the 29 Oct re-baseline, which had no v5 score for GLM-5.3-Flash. Keeping MiMo after it would make the envelope fall. API credits are from OpenAI's guide (developers.openai.com/api/docs/guides/chatgpt-api-credits): equal to the plan price, API only, not Codex. OpenAI gave the allowance doubling only as a relative change with no absolute limits, so est_agent_hours_week and est_api_value_usd_month are unchanged. No closed or open frontier moves; forecast parameters unchanged."
+    },
+    {
+      "date": "2026-11-01",
+      "what": "Claude plans renamed: Max 5x → Claude Max, Max 20x → Claude Ultra (ids unchanged; prices and API credits unchanged). Ultra estimates revised: agent hours a week 80–160 → 40–80, API value $800–7,600 → $400–3,800 a month.",
+      "why": "Anthropic's pricing page and Ultra help article (claude.com/pricing, support.claude.com/en/articles/17728952) now define Ultra as 10x Pro's weekly usage, with no 5-hour limit for verified accounts, and Max as 5x Pro every 5 hours and every week. Weekly usage is what limits hours per week, so Ultra is now published as twice Max, not four times; the estimates are Max's ranges doubled. Confidence stays low: Anthropic gives no absolute limits."
     }
   ]
 }
