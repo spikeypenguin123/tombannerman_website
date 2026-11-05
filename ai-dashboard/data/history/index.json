@@ -1,6 +1,13 @@
 {
-  "generated_at": "2026-11-03T06:55:00+10:00",
+  "generated_at": "2026-11-06T07:05:00+10:00",
   "snapshots": [
+    {
+      "date": "2026-11-06",
+      "file": "2026-11-06.json",
+      "best_closed": 60,
+      "best_open": 46,
+      "models": 28
+    },
     {
       "date": "2026-11-03",
       "file": "2026-11-03.json",
