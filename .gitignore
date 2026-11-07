@@ -3,3 +3,5 @@ CLAUDE.md
 .claude/
 # Private founder calculator: local only, never published
 founder/
+# Daily job scratch (backup of yesterday's data)
+tracker/.work/
