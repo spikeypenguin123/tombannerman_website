@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T07:00:00+10:00",
+  "generated_at": "2026-11-08T08:06:09+10:00",
   "snapshots": [
     {
       "date": "2026-11-08",
@@ -7,6 +7,13 @@
       "best_closed": 60,
       "best_open": 46,
       "models": 30
+    },
+    {
+      "date": "2026-11-07",
+      "file": "2026-11-07.json",
+      "best_closed": 60,
+      "best_open": 46,
+      "models": 28
     },
     {
       "date": "2026-11-06",

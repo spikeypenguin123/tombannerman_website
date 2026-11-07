@@ -81,7 +81,26 @@ NODES = [
          req=["gold-coast-marathon"],
          text="Swim, bike and run: 113 km in one day.",
          stats=[["Swim", "1.9 km"], ["Bike", "90 km"], ["Run", "21.1 km"], ["Finish time", None]],
-         story=["Ironman 70.3 Sunshine Coast in 2026: a 1.9 km swim, a 90 km ride and a 21.1 km run, back to back."]),
+         story=["Ironman 70.3 Sunshine Coast in 2026: a 1.9 km swim, a 90 km ride and a 21.1 km run, back to back. "
+                "I raced it on a $1,300 second-hand road bike, and my first time riding with cleats was three weeks before.",
+                "I was super pumped from the start. Down on the beach I was psyching myself up for the swim, bouncing "
+                "with energy from all the carb loading. The swim itself was easy and felt like a warm-up.",
+                "Transition to the bike was wet. It was raining, there was mud all over the floor, and everything was "
+                "an inch under water by the time I got to it. Transition to the run was the same.",
+                "The bike was good: wet and windy. I was pretty slow next to everyone on aerodynamic bikes, and I "
+                "definitely need a better bike next time. Still, for the amount of prep I'd done, I was pretty happy.",
+                "The first 4 km of the run were brutal. My ankle-stabilising muscles were on fire, and after a "
+                "kilometre they stopped responding. I eventually shook it off around 4 km and worked my way to the finish.",
+                "The whole way, my friends were on the sidelines cheering me on. It made the whole event so much fun "
+                "and gave me such an energy boost. They're the best ❤️",
+                "I did it with my mate Victor, and we both came out with almost the same time. It was an awesome "
+                "event to train for and finish with a mate 💪"],
+         # first photo is the hero; the rest fill a two-column grid top-to-bottom, column by column, so with
+         # three this order reads kit | bib across the top, then finish
+         photos=[{"src": "photos/ironman-70-3-sunshine-coast/1-run.jpg", "cap": "On the run."},
+                 {"src": "photos/ironman-70-3-sunshine-coast/2-kit.jpg", "cap": "Race kit laid out before the race."},
+                 {"src": "photos/ironman-70-3-sunshine-coast/4-finish.jpg", "cap": "Medals at the finish with Victor."},
+                 {"src": "photos/ironman-70-3-sunshine-coast/3-bib.jpg", "cap": "Bib 1164, before the race."}]),
     dict(id="scuba-freediving", b="sport", t=1, title="SCUBA & Freediving", when="Date TBC",
          text="The quiet world below.", stats=[["Certifications", None]], story=[]),
 
