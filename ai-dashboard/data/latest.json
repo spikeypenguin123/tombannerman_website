@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-06T07:05:00+10:00",
+  "updated_at": "2026-11-07T19:07:17+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -1099,9 +1099,9 @@
         4,
         8
       ],
-      "default_model": "claude-sonnet-5-5",
+      "default_model": "claude-opus-5-5",
       "confidence": "low",
-      "note": "Opus not available in Claude Code on Pro."
+      "note": "Includes Claude Code, with Opus available. Opus 5.5 is the default model from Claude Code v2.1.280 onward; older versions defaulted Pro to Sonnet 5. Fable needs usage credits. At least 5x Free usage per 5-hour session, plus weekly caps."
     },
     {
       "id": "claude-max-5x",
@@ -1137,7 +1137,7 @@
       ],
       "default_model": "claude-opus-5-5",
       "confidence": "low",
-      "note": "Formerly Max 20x (renamed 30 Oct 2026; same price, automatic migration). 10x Pro usage every week, twice Max; no 5-hour limit for verified accounts; separate weekly limit for Fable. Includes $200/month API credit."
+      "note": "Formerly Max 20x (renamed 30 Oct 2026; same price, automatic migration). 10x Pro usage every week, twice Max; no 5-hour limit for verified accounts; separate weekly limit for Fable. Includes $200/month API credit (API, Agent SDK, claude -p with an API key; not interactive Claude Code)."
     },
     {
       "id": "chatgpt-plus",
@@ -1685,6 +1685,11 @@
       "date": "2026-11-06",
       "what": "Artificial Analysis index v5.0 → v5.0.1: aa_index re-baselined from AA's v5.0.1 figures (Gemini 4 Carbon 59 → 60, Claude Opus 5.5 58 → 59, Claude Sonnet 5.5 54 → 55, Muse Wonder 43 → 44, DeepSeek V4.1 Flash 1017 32 → 33; all others unchanged). Closed frontier now ends Opus 5.5 59 → Gemini 4 Carbon 60. Kimi K3.1 Pro reclassified as open (Kimi K3.1-Pro License) and appended to the open frontier (46, 4 Nov), after DeepSeek V4.1 Flash 1017 (33, 17 Oct). Added Tencent Hy4 (closed for now, AA 35, $0.90/$2.70). AA cost per task: Gemini 4 Argon $7.68 → $9.95, Mistral Large 4 Preview $5.54 → $4.21. AUD/USD 1.425 → 1.442.",
       "why": "AA released v5.0.1 on 3 Nov, regrading every model on CritPt v2 (artificialanalysis.ai/changelog); scores and costs are from AA's leaderboard and model pages on 6 Nov, and every history point was re-baselined (none had to be removed). On v5.0.1 DeepSeek V4.1 Flash 1017 beats GLM-5.3, so it joins the open envelope. Kimi K3.1 Pro's weights went up on Hugging Face on 4 Nov with a licence (huggingface.co/moonshotai/Kimi-K3.1-Pro); AA still labels it proprietary, as it did MiniMax M3.1 Flash. Its open-frontier point is dated 4 Nov, when the weights were published, not its 23 Oct API launch. Tencent Hy4 launched 4 Nov (tencent.com) and is scored 35 on AA; weights are promised but not out. The local series is unchanged (GLM-5.3-Flash 28; Kimi's 1.5 TB checkpoint fits no desktop). FX moved more than 1% (tradingeconomics 0.6933 USD per AUD and x-rates 1.4422 AUD per USD, 5 Nov). Forecast parameters unchanged."
+    },
+    {
+      "date": "2026-11-07",
+      "what": "Corrected the Claude Pro plan: Opus is available in Claude Code on Pro, and the plan's default model is Opus 5.5, not Sonnet 5.5. Added the API-credit scope caveat to Ultra to match Max.",
+      "why": "The Pro note had been wrong since the tracker's first commit. Re-verified on 2026-11-07 against claude.com/pricing (Opus and Claude Code: Yes for Pro) and code.claude.com/docs/en/model-config (Pro defaults to Opus 5.5 from v2.1.280)."
     }
   ]
 }

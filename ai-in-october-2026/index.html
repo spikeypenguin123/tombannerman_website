@@ -483,8 +483,8 @@ const y=document.getElementById('yr');if(y)y.textContent=new Date().getFullYear(
     {n:'Grok 4.7',lab:'xAI',d:'21 Sep 2026',s:46,c:2.73,o:false},
     {n:'MiMo-V2.6-Pro',lab:'Xiaomi',d:'21 Sep 2026',s:46,c:0.13,o:true},
     {n:'GLM-5.3',lab:'Z.ai',d:'28 Aug 2026',s:45,c:2.01,o:true},
-    {n:'Kimi K3',lab:'Moonshot AI',d:'Jul 2026',s:44,c:2.00,o:true},
-    {n:'DeepSeek V4.1 Flash',lab:'DeepSeek',d:'Sep 2026',s:39,c:null,o:true}
+    {n:'DeepSeek V4.1 Flash 1017',lab:'DeepSeek',d:'17 Oct 2026',s:45,c:0.26,o:true},
+    {n:'Kimi K3',lab:'Moonshot AI',d:'Jul 2026',s:44,c:2.00,o:true}
   ];
   table('t-board',['Model','Maker','Released','Weights','Score','US$ per task'],BOARD.map(d=>[d.n,d.lab,d.d,d.o?'Open':'Closed',d.s,d.c==null?'not published':'$'+d.c.toFixed(2)]));
   const bBox=document.getElementById('c-board');
