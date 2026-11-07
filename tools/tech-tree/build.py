@@ -132,7 +132,7 @@ TREE_BODY = f"""
       <button class="close" id="close" aria-label="Close">&times;</button>
       <p class="eyebrow">How it works</p>
       <h3>Pick a node</h3>
-      <p>The most recent things sit at the top of each branch. Follow the lines down to see what they grew out of, all the way to the roots, including where one branch fed another.</p>
+      <p>The most recent things sit at the top of each branch. Follow the lines down to see what they grew out of, all the way to the roots.</p>
       <p class="needs">Gradient rings mark the hard-mode unlocks.</p>
     </aside>
   </div>
@@ -153,7 +153,6 @@ const N=__NODES__;
 const tree=document.getElementById('tree'),wires=document.getElementById('wires'),detail=document.getElementById('detail');
 const byId=Object.fromEntries(N.map(n=>[n.id,n])),brOf=Object.fromEntries(BR.map(b=>[b.id,b]));
 const maxT=Math.max(...N.map(n=>n.t));
-const mq=matchMedia('(max-width:820px)');
 let sel='all',picked=null;
 tree.style.setProperty('--cols',BR.length);
 
@@ -192,12 +191,13 @@ BR.forEach((b,bi)=>{
   off+=bmax+1;
 });
 
-// edges run from the older thing (below) up to what it unlocked: root → nodes without in-branch parents; then every req
+// edges run from the older thing (below) up to what it unlocked: root → nodes without in-branch parents; then each
+// in-branch req. Lines stay inside their own branch: a req pointing into another branch draws nothing.
 const edges=[];
 N.forEach(n=>{
-  const c=brOf[n.b].c,req=n.req||[];
-  if(!req.some(r=>byId[r].b===n.b))edges.push(['root',n.id,c]);
-  req.forEach(r=>edges.push([r,n.id,brOf[byId[r].b].c]));
+  const c=brOf[n.b].c,req=(n.req||[]).filter(r=>byId[r].b===n.b);
+  if(!req.length)edges.push(['root',n.id,c]);
+  req.forEach(r=>edges.push([r,n.id,c]));
 });
 const elOf=k=>k==='root'?root.firstElementChild:tree.querySelector(`[data-id="${k}"]`);
 const branchOf=k=>k==='root'?null:byId[k].b;
@@ -208,20 +208,15 @@ function draw(){
   wires.innerHTML=edges.map(([a,b,c])=>{
     const ea=elOf(a),eb=elOf(b),ba=branchOf(a),bb=branchOf(b);
     if(!ea.offsetParent||!eb.offsetParent)return '';
-    if(mq.matches&&ba!==bb)return '';  // stacked on phones: cross-branch lines would cut through other branches
     const ra=ea.getBoundingClientRect(),rb=eb.getBoundingClientRect();
     const dim=sel!=='all'&&ba!==sel&&bb!==sel;
     let d;
     if(a==='root'){  // roots: curve out along the bottom, then straight up the branch's own column
       const x1=ra.left-box.left+ra.width/2,y1=ra.top-box.top,x2=rb.left-box.left+rb.width/2,y2=rb.bottom-box.top,yb=Math.max(y2,y1-70);
       d=`M${x1},${y1} C${x1},${y1-35} ${x2},${y1-30} ${x2},${yb} L${x2},${y2}`;
-    }else if(rb.bottom<ra.top-4){  // child sits above: vertical S-curve
+    }else{  // child sits above in the same column: vertical S-curve
       const x1=ra.left-box.left+ra.width/2,y1=ra.top-box.top,x2=rb.left-box.left+rb.width/2,y2=rb.bottom-box.top,my=(y1+y2)/2;
       d=`M${x1},${y1} C${x1},${my} ${x2},${my} ${x2},${y2}`;
-    }else{  // side by side (cross-branch at a similar height): horizontal S-curve between facing edges
-      const right=rb.left>ra.left;
-      const x1=(right?ra.right:ra.left)-box.left,y1=ra.top-box.top+ra.height/2,x2=(right?rb.left:rb.right)-box.left,y2=rb.top-box.top+rb.height/2,mx=(x1+x2)/2;
-      d=`M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;
     }
     return `<path class="${dim?'dim':''}" stroke="${c}" d="${d}"/>`;
   }).join('');
