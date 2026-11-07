@@ -195,7 +195,6 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
 .tt-legend{display:flex;flex-wrap:wrap;gap:16px;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.5px;color:var(--ink-soft);text-transform:uppercase}
 .tt-legend span{display:inline-flex;align-items:center;gap:7px}
 .tt-legend i{display:inline-block;width:18px;height:12px;border-radius:4px;border:1.5px solid var(--ink)}
-.tt-legend i.h{border:2px solid transparent;background:linear-gradient(var(--paper),var(--paper)) padding-box,conic-gradient(from 210deg,var(--violet),var(--red),var(--orange),var(--periwinkle),var(--violet)) border-box}
 .tt-legend i.l{border-style:dashed;border-color:var(--ink-soft)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 8px}
 .chip{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
@@ -236,8 +235,6 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
 .detail p{font-size:15px;margin:0 0 12px}
 .detail .tag{display:inline-block;font-family:"Space Mono",monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;
   color:#fff;background:var(--ink);padding:3px 9px;border-radius:20px;margin:0 6px 10px 0}
-.detail .tag.h{background:linear-gradient(90deg,var(--violet),var(--red),var(--orange))}
-.detail .needs{font-size:13px;color:var(--ink-soft)}
 .detail .close{display:none}
 .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 14px}
 .mini div{border-top:1.5px solid var(--c,var(--ink));padding-top:6px}
@@ -271,7 +268,7 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
     <p class="eyebrow">Tech tree</p>
     <h2>Things I've unlocked</h2>
     <p class="lead">Like the tech tree in a strategy game: each thing I've learned or survived opened up the next one. The newest are at the top; pick one to see the story behind it.</p>
-    <div class="tt-legend"><span><i></i>Unlocked</span><span><i class="h"></i>Hard mode</span><span><i class="l"></i>Still to fill in</span><span id="tt-count"></span></div>
+    <div class="tt-legend"><span><i></i>Unlocked</span><span><i class="l"></i>Still to fill in</span><span id="tt-count"></span></div>
   </section>
   <div class="chips" id="chips" role="toolbar" aria-label="Filter branches"></div>
   <div class="tt-stage">
@@ -281,7 +278,6 @@ footer{padding:46px 0;border-top:1px solid var(--line);text-align:center;margin-
       <p class="eyebrow">How it works</p>
       <h3>Pick a node</h3>
       <p>The most recent things sit at the top of each branch. Follow the lines down to see what they grew out of, all the way to the roots.</p>
-      <p class="needs">Gradient rings mark the hard-mode unlocks.</p>
     </aside>
   </div>
 </div>
@@ -408,7 +404,7 @@ function pick(id){
   detail.style.setProperty('--c',b.c);
   detail.innerHTML=`<button class="close" id="close" aria-label="Close">&times;</button>
     <p class="eyebrow">${b.name}</p><h3>${n.title}</h3><p class="d-when">${n.when}</p>
-    ${n.hard?'<span class="tag h">Hard mode</span>':''}${n.todo?'<span class="tag">To fill in</span>':''}
+    ${n.todo?'<span class="tag">To fill in</span>':''}
     <p>${n.text}</p>
     ${(n.stats||[]).length?`<dl class="mini">${n.stats.slice(0,3).map(([k,v])=>`<div><dt>${k}</dt><dd>${v??'TBC'}</dd></div>`).join('')}</dl>`:''}
     <p><a class="story-link" href="tree/${n.id}.html">Read the story &rarr;</a></p>`;
@@ -424,7 +420,7 @@ const chips=document.getElementById('chips');
   ch.addEventListener('click',()=>filter(b.id));chips.appendChild(ch);
 });
 document.getElementById('close').addEventListener('click',()=>detail.classList.remove('open'));
-document.getElementById('tt-count').textContent=`${N.filter(n=>!n.todo).length} unlocked · ${N.filter(n=>n.hard).length} hard mode`;
+document.getElementById('tt-count').textContent=`${N.filter(n=>!n.todo).length} unlocked`;
 filter('all');
 addEventListener('resize',draw);
 const h=decodeURIComponent(location.hash.slice(1));

@@ -52,7 +52,6 @@ TREE_CSS = r"""
 .tt-legend{display:flex;flex-wrap:wrap;gap:16px;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.5px;color:var(--ink-soft);text-transform:uppercase}
 .tt-legend span{display:inline-flex;align-items:center;gap:7px}
 .tt-legend i{display:inline-block;width:18px;height:12px;border-radius:4px;border:1.5px solid var(--ink)}
-.tt-legend i.h{border:2px solid transparent;background:linear-gradient(var(--paper),var(--paper)) padding-box,conic-gradient(from 210deg,var(--violet),var(--red),var(--orange),var(--periwinkle),var(--violet)) border-box}
 .tt-legend i.l{border-style:dashed;border-color:var(--ink-soft)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 8px}
 .chip{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
@@ -93,8 +92,6 @@ TREE_CSS = r"""
 .detail p{font-size:15px;margin:0 0 12px}
 .detail .tag{display:inline-block;font-family:"Space Mono",monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;
   color:#fff;background:var(--ink);padding:3px 9px;border-radius:20px;margin:0 6px 10px 0}
-.detail .tag.h{background:linear-gradient(90deg,var(--violet),var(--red),var(--orange))}
-.detail .needs{font-size:13px;color:var(--ink-soft)}
 .detail .close{display:none}
 .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 14px}
 .mini div{border-top:1.5px solid var(--c,var(--ink));padding-top:6px}
@@ -123,7 +120,7 @@ TREE_BODY = f"""
     <p class="eyebrow">Tech tree</p>
     <h2>Things I've unlocked</h2>
     <p class="lead">Like the tech tree in a strategy game: each thing I've learned or survived opened up the next one. The newest are at the top; pick one to see the story behind it.</p>
-    <div class="tt-legend"><span><i></i>Unlocked</span><span><i class="h"></i>Hard mode</span><span><i class="l"></i>Still to fill in</span><span id="tt-count"></span></div>
+    <div class="tt-legend"><span><i></i>Unlocked</span><span><i class="l"></i>Still to fill in</span><span id="tt-count"></span></div>
   </section>
   <div class="chips" id="chips" role="toolbar" aria-label="Filter branches"></div>
   <div class="tt-stage">
@@ -133,7 +130,6 @@ TREE_BODY = f"""
       <p class="eyebrow">How it works</p>
       <h3>Pick a node</h3>
       <p>The most recent things sit at the top of each branch. Follow the lines down to see what they grew out of, all the way to the roots.</p>
-      <p class="needs">Gradient rings mark the hard-mode unlocks.</p>
     </aside>
   </div>
 </div>
@@ -238,7 +234,7 @@ function pick(id){
   detail.style.setProperty('--c',b.c);
   detail.innerHTML=`<button class="close" id="close" aria-label="Close">&times;</button>
     <p class="eyebrow">${b.name}</p><h3>${n.title}</h3><p class="d-when">${n.when}</p>
-    ${n.hard?'<span class="tag h">Hard mode</span>':''}${n.todo?'<span class="tag">To fill in</span>':''}
+    ${n.todo?'<span class="tag">To fill in</span>':''}
     <p>${n.text}</p>
     ${(n.stats||[]).length?`<dl class="mini">${n.stats.slice(0,3).map(([k,v])=>`<div><dt>${k}</dt><dd>${v??'TBC'}</dd></div>`).join('')}</dl>`:''}
     <p><a class="story-link" href="tree/${n.id}.html">Read the story &rarr;</a></p>`;
@@ -254,7 +250,7 @@ const chips=document.getElementById('chips');
   ch.addEventListener('click',()=>filter(b.id));chips.appendChild(ch);
 });
 document.getElementById('close').addEventListener('click',()=>detail.classList.remove('open'));
-document.getElementById('tt-count').textContent=`${N.filter(n=>!n.todo).length} unlocked · ${N.filter(n=>n.hard).length} hard mode`;
+document.getElementById('tt-count').textContent=`${N.filter(n=>!n.todo).length} unlocked`;
 filter('all');
 addEventListener('resize',draw);
 const h=decodeURIComponent(location.hash.slice(1));
@@ -279,9 +275,6 @@ ART_CSS = r"""
 .art h1{font-family:"Fraunces",serif;font-weight:600;font-variation-settings:"opsz" 144,"SOFT" 40,"WONK" 1;
   font-size:clamp(34px,6vw,54px);line-height:1;letter-spacing:-.02em;margin:0 0 10px}
 .art .when{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-soft);margin:0}
-.tag{display:inline-block;font-family:"Space Mono",monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;
-  color:#fff;background:var(--ink);padding:3px 9px;border-radius:20px;margin-left:10px;vertical-align:middle}
-.tag.h{background:linear-gradient(90deg,var(--violet),var(--red),var(--orange))}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:28px 0}
 .stat{border:1.5px solid var(--ink);border-radius:14px;padding:14px 16px 12px;background:var(--paper);box-shadow:3px 4px 0 rgba(42,23,51,.08);border-top:5px solid var(--c)}
 .stat .v{font-family:"Fraunces",serif;font-weight:600;font-variation-settings:"opsz" 60,"SOFT" 30;font-size:26px;line-height:1.1}
@@ -332,7 +325,7 @@ for n in NODES:
   <a class="back" href="../tech-tree.html#{n['id']}">&larr; Tech tree</a>
   <p class="eyebrow">{name}</p>
   <h1>{e(n['title'])}</h1>
-  <p class="when">{e(n['when'])}{'<span class="tag h">Hard mode</span>' if n.get('hard') else ''}</p>
+  <p class="when">{e(n['when'])}</p>
   {f'<div class="stats">{stats}</div>' if stats else '<div style="height:26px"></div>'}
   {hero}
   <div class="story">{story}</div>
