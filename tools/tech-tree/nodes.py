@@ -92,12 +92,14 @@ NODES = [
                 "The first 4 km of the run were brutal. My ankle-stabilising muscles were on fire, and after a "
                 "kilometre they stopped responding. I eventually shook it off around 4 km and worked my way to the finish.",
                 "The whole way, my friends were on the sidelines cheering me on. It made the whole event so much fun "
-                "and gave me such an energy boost. They're the best ❤️"],
+                "and gave me such an energy boost. They're the best ❤️",
+                "I did it with my mate Victor, and we both came out with almost the same time. It was an awesome "
+                "event to train for and finish with a mate 💪"],
          # first photo is the hero; the rest fill a two-column grid top-to-bottom, column by column, so with
          # three this order reads kit | bib across the top, then finish
          photos=[{"src": "photos/ironman-70-3-sunshine-coast/1-run.jpg", "cap": "On the run."},
                  {"src": "photos/ironman-70-3-sunshine-coast/2-kit.jpg", "cap": "Race kit laid out before the race."},
-                 {"src": "photos/ironman-70-3-sunshine-coast/4-finish.jpg", "cap": "Medals at the finish."},
+                 {"src": "photos/ironman-70-3-sunshine-coast/4-finish.jpg", "cap": "Medals at the finish with Victor."},
                  {"src": "photos/ironman-70-3-sunshine-coast/3-bib.jpg", "cap": "Bib 1164, before the race."}]),
     dict(id="scuba-freediving", b="sport", t=1, title="SCUBA & Freediving", when="Date TBC",
          text="The quiet world below.", stats=[["Certifications", None]], story=[]),
