@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-08T08:06:09+10:00",
+  "updated_at": "2026-11-09T06:49:09+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -43,13 +43,13 @@
       "params_active_b": null,
       "aa_index": 59,
       "aa_effort": "max",
-      "eci": 167.35,
+      "eci": 168.36,
       "cost_per_task_usd": 10.04,
       "price_in": 4.0,
       "price_out": 20.0,
       "price_cache_read": 0.2,
       "status": "current",
-      "note": "#2 on AA index v5.0.1, one point behind Gemini 4 Carbon; #1 on ECI. 20% cheaper than Opus 5."
+      "note": "#2 on AA index v5.0.1, one point behind Gemini 4 Carbon; #3 on ECI (168.36), just behind GPT-6 Astra and GPT-6.1 Sol. 20% cheaper than Opus 5."
     },
     {
       "id": "claude-sonnet-5-5",
@@ -62,7 +62,7 @@
       "params_active_b": null,
       "aa_index": 55,
       "aa_effort": "max",
-      "eci": 165.2,
+      "eci": 166.24,
       "cost_per_task_usd": 10.02,
       "price_in": 2.0,
       "price_out": 10.0,
@@ -119,7 +119,7 @@
       "params_active_b": null,
       "aa_index": 44,
       "aa_effort": "max",
-      "eci": null,
+      "eci": 162.02,
       "cost_per_task_usd": 6.95,
       "price_in": 4.0,
       "price_out": 20.0,
@@ -138,7 +138,7 @@
       "params_active_b": null,
       "aa_index": 49,
       "aa_effort": "max",
-      "eci": 164.82,
+      "eci": 166.9,
       "cost_per_task_usd": 12.99,
       "price_in": 10.0,
       "price_out": 50.0,
@@ -157,13 +157,13 @@
       "params_active_b": null,
       "aa_index": 57,
       "aa_effort": "max",
-      "eci": 166.51,
+      "eci": 169.07,
       "cost_per_task_usd": 6.24,
       "price_in": 10.0,
       "price_out": 50.0,
       "price_cache_read": null,
       "status": "current",
-      "note": "#2 on ECI. Leads abstract reasoning and maths (ARC-AGI-3, FrontierMath Tier 4)."
+      "note": "#1 on ECI (169.07). Leads abstract reasoning and maths (ARC-AGI-3, FrontierMath Tier 4)."
     },
     {
       "id": "gemini-4-argon",
@@ -176,7 +176,7 @@
       "params_active_b": null,
       "aa_index": 50,
       "aa_effort": "high",
-      "eci": null,
+      "eci": 166.45,
       "cost_per_task_usd": 9.95,
       "price_in": 2.0,
       "price_out": 10.0,
@@ -195,13 +195,13 @@
       "params_active_b": null,
       "aa_index": 55,
       "aa_effort": "max",
-      "eci": null,
+      "eci": 168.94,
       "cost_per_task_usd": 1.27,
       "price_in": 2.0,
       "price_out": 10.0,
       "price_cache_read": 0.1,
       "status": "current",
-      "note": "Near-frontier (55) at about 1/6 of Gemini 4 Carbon's cost per task."
+      "note": "Near-frontier (55) at about 1/6 of Gemini 4 Carbon's cost per task; #2 on ECI (168.94), 0.13 behind GPT-6 Astra."
     },
     {
       "id": "claude-opus-5",
@@ -214,7 +214,7 @@
       "params_active_b": null,
       "aa_index": null,
       "aa_effort": null,
-      "eci": 162.94,
+      "eci": 164.45,
       "cost_per_task_usd": null,
       "price_in": 5.0,
       "price_out": 25.0,
@@ -233,7 +233,7 @@
       "params_active_b": null,
       "aa_index": 51,
       "aa_effort": "max",
-      "eci": null,
+      "eci": 167.82,
       "cost_per_task_usd": 0.96,
       "price_in": 1.0,
       "price_out": 5.0,
@@ -253,7 +253,7 @@
       "aa_index": 35,
       "aa_effort": "reasoning",
       "eci": null,
-      "cost_per_task_usd": null,
+      "cost_per_task_usd": 1.03,
       "price_in": 0.9,
       "price_out": 2.7,
       "price_cache_read": 0.045,
@@ -290,7 +290,7 @@
       "params_active_b": null,
       "aa_index": 35,
       "aa_effort": "high",
-      "eci": 154,
+      "eci": 156.07,
       "cost_per_task_usd": 6.18,
       "price_in": 2.0,
       "price_out": 6.0,
@@ -309,7 +309,7 @@
       "params_active_b": null,
       "aa_index": 36,
       "aa_effort": "max",
-      "eci": null,
+      "eci": 160.22,
       "cost_per_task_usd": 0.41,
       "price_in": 0.1,
       "price_out": 0.5,
@@ -328,7 +328,7 @@
       "params_active_b": 52,
       "aa_index": 26,
       "aa_effort": "high",
-      "eci": null,
+      "eci": 154.66,
       "cost_per_task_usd": 2.06,
       "price_in": 0.7,
       "price_out": 2.1,
@@ -347,7 +347,7 @@
       "params_active_b": null,
       "aa_index": 25,
       "aa_effort": null,
-      "eci": null,
+      "eci": 152.62,
       "cost_per_task_usd": 4.21,
       "price_in": 1.36,
       "price_out": 4.18,
@@ -404,13 +404,13 @@
       "params_active_b": 16,
       "aa_index": 33,
       "aa_effort": "max",
-      "eci": null,
+      "eci": 159.31,
       "cost_per_task_usd": 0.6,
       "price_in": 0.15,
       "price_out": 0.6,
       "price_cache_read": 0.003,
       "status": "current",
-      "note": "Off-peak prices; doubled at weekday peak. Second-best open model on AA v5.0.1 (33), behind Kimi K3.1 Pro (46). Too large for a 256GB Mac Studio at 4-bit."
+      "note": "Off-peak prices; doubled at weekday peak. Second-best open model on AA v5.0.1 (33), behind Kimi K3.1 Pro (46); best open model on ECI (159.31). Too large for a 256GB Mac Studio at 4-bit."
     },
     {
       "id": "kimi-k3",
@@ -423,13 +423,13 @@
       "params_active_b": 104,
       "aa_index": null,
       "aa_effort": null,
-      "eci": 157.61,
+      "eci": 158.51,
       "cost_per_task_usd": null,
       "price_in": 3.0,
       "price_out": 15.0,
       "price_cache_read": null,
       "status": "current",
-      "note": "Best open model on ECI (9.7 points behind Opus 5.5). No AA v5 score yet (was 44 on v4.3.2). Too large for any single desktop machine."
+      "note": "Second-best open model on ECI (158.51), behind DeepSeek V4.1 Flash 1017 (159.31) and 10.6 points behind GPT-6 Astra. No AA v5 score yet (was 44 on v4.3.2). Too large for any single desktop machine."
     },
     {
       "id": "minimax-m3-1-flash",
@@ -461,7 +461,7 @@
       "params_active_b": 18,
       "aa_index": 28,
       "aa_effort": null,
-      "eci": 151.94,
+      "eci": 153.64,
       "cost_per_task_usd": 0.58,
       "price_in": 0.15,
       "price_out": 0.5,
@@ -480,7 +480,7 @@
       "params_active_b": 16,
       "aa_index": null,
       "aa_effort": null,
-      "eci": 155.0,
+      "eci": 156.49,
       "cost_per_task_usd": null,
       "price_in": 0.15,
       "price_out": 0.6,
@@ -499,7 +499,7 @@
       "params_active_b": 42,
       "aa_index": 25,
       "aa_effort": "xhigh",
-      "eci": null,
+      "eci": 155.42,
       "cost_per_task_usd": 2.02,
       "price_in": 1.25,
       "price_out": 4.25,
@@ -537,7 +537,7 @@
       "params_active_b": 49,
       "aa_index": 23,
       "aa_effort": "max",
-      "eci": 155.38,
+      "eci": 155.87,
       "cost_per_task_usd": 1.77,
       "price_in": 1.32,
       "price_out": 3.96,
@@ -996,7 +996,7 @@
       },
       "suite_ceiling_minutes": 960,
       "status": "Newest measurement: Claude Mythos Preview (early checkpoint, released Apr 2026), about 17 h at 50% success (95% CI 8.5–55 h) and about 3 h at 80% (1.6–6.6 h). The 50% figure is above the 16 h where METR says its task suite stops being reliable. No model released since has a published time horizon (see other readings), so today's values are projections at METR's post-2023 doubling time of 3.4–5.2 months; the 80% series has doubled at the same pace (about every 4.4 months since 2023 on METR's data).",
-      "checked": "2026-11-08",
+      "checked": "2026-11-09",
       "other_readings": [
         {
           "source": "METR Frontier Risk Report",
@@ -1024,6 +1024,15 @@
           "p80": null,
           "note": "No time horizon reported. METR used five long AI-research tasks instead and calls it an incremental step above Claude Fable 5.1.",
           "url": "https://metr.org/blog/2026-09-22-claude-opus-5-5/"
+        },
+        {
+          "source": "METR independent assessment",
+          "subject": "AI R&D acceleration at Anthropic, Oct 2026",
+          "date": "2026-11-05",
+          "p50": null,
+          "p80": null,
+          "note": "No time horizon. METR tracks progress on Anthropic's capability index (AECI) instead: 1.9x faster (95% CI 1.5–2.8x) since October 2025, from about 15 to 29 points a year.",
+          "url": "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/"
         },
         {
           "source": "MirrorCode (Epoch AI and METR)",
@@ -1299,6 +1308,20 @@
       "title": "Thinking Machines Inkling 2 Small",
       "summary": "594B / 17B active MoE; AA index 31 at about $1.18 per task, $0.30/$1.00 per million tokens. On Tinker only for now; Apache 2.0 weights promised after safety testing.",
       "url": "https://the-decoder.com/thinking-machines-inkling-2-small-claims-top-spot-among-western-open-weight-models/"
+    },
+    {
+      "date": "2026-11-05",
+      "kind": "benchmark",
+      "title": "METR: AI R&D acceleration at Anthropic",
+      "summary": "METR's independent assessment finds Anthropic's capability index rising 1.9x faster (1.5–2.8x) than a year earlier. No new time horizon.",
+      "url": "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/"
+    },
+    {
+      "date": "2026-11-04",
+      "kind": "benchmark",
+      "title": "Epoch refits its Capabilities Index (ECI)",
+      "summary": "New Bayesian method on the same scale. GPT-6 Astra (169.07) now leads, just ahead of GPT-6.1 Sol (168.94) and Claude Opus 5.5 (168.36); DeepSeek V4.1 Flash 1017 (159.31) is the best open model.",
+      "url": "https://epoch.ai/publications/eci-bayesian-methodology"
     },
     {
       "date": "2026-11-04",
@@ -1681,6 +1704,18 @@
     {
       "title": "Hugging Face: Nanbeige4.3-33B weights and licence",
       "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B"
+    },
+    {
+      "title": "Epoch AI: ECI scores (CSV)",
+      "url": "https://epoch.ai/data/eci_scores.csv"
+    },
+    {
+      "title": "Epoch AI: ECI Bayesian methodology",
+      "url": "https://epoch.ai/publications/eci-bayesian-methodology"
+    },
+    {
+      "title": "METR: AI R&D acceleration at Anthropic, Oct 2026",
+      "url": "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/"
     }
   ],
   "changelog": [
@@ -1763,6 +1798,11 @@
       "date": "2026-11-08",
       "what": "Corrected the Claude Pro plan: Opus is available in Claude Code on Pro, and the plan's default model is Opus 5.5, not Sonnet 5.5. Added the API-credit scope caveat to Ultra to match Max.",
       "why": "The Pro note had been wrong since the tracker's first commit. Verified on 2026-11-07 against claude.com/pricing (Opus and Claude Code: Yes for Pro) and code.claude.com/docs/en/model-config (Pro defaults to Opus 5.5 from v2.1.280)."
+    },
+    {
+      "date": "2026-11-09",
+      "what": "ECI updated to Epoch's refit for 10 models (e.g. GPT-6 Astra 166.51 → 169.07, Claude Opus 5.5 167.35 → 168.36, Claude Fable 5.1 164.82 → 166.9) and newly filled for 9: GPT-6.1 Sol, GPT-6.1 Terra, Gemini 4 Argon, Muse Wonder, Claude Haiku 5.5, DeepSeek V4.1 Flash 1017, Muse Spark Open and both Mistral Large 4 versions. GPT-6 Astra, not Opus 5.5, is now #1 on ECI; DeepSeek V4.1 Flash 1017 replaces Kimi K3 as the best open model on ECI. Tencent Hy4 cost per task now $1.03 (was unknown). METR's 5 Nov AI R&D acceleration assessment added to other readings.",
+      "why": "Epoch moved ECI to a Bayesian fit on 4 Nov, on the same scale (Claude 3.5 Sonnet 130, GPT-5 150; epoch.ai/publications/eci-bayesian-methodology); all values are from its scores file dated 8 Nov (epoch.ai/data/eci_scores.csv). Gemini 4 Carbon and Kimi K3.1 Pro are not in the file yet. Hy4's cost is from AA's leaderboard. No AA scores, frontiers, prices, plans or forecast parameters changed, and no model released since 8 Nov is scored on AA. FX (x-rates 1.4550 AUD per USD, 8 Nov) moved under 1%, so unchanged."
     }
   ]
 }
