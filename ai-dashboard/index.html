@@ -220,6 +220,20 @@ footer ul{margin:.3rem 0 0;padding-left:1.1rem}
         <div class="hz-other" id="hz-other"></div>
       </section>
 
+      <!-- Singularity fit -->
+      <section class="panel" aria-labelledby="sg-h">
+        <h2 id="sg-h">Is the task-length trend heading for a singularity?</h2>
+        <div class="sub">METR 50% time horizon for each record-holding model, against time left until the fitted singularity (log scales, calendar years on top) · on these axes a finite-time singularity is a straight line</div>
+        <div class="chart" id="c-sing"></div>
+        <div class="legend">
+          <span><i style="background:var(--closed);width:9px;height:9px;border-radius:50%"></i>Measured by METR (record holder)</span>
+          <span><i style="background:var(--ink);height:2px"></i>Singularity fit</span>
+          <span><i class="dash" style="border-color:var(--open)"></i>Exponential that sped up once</span>
+        </div>
+        <div class="readout" id="sg-read"></div>
+        <p class="note" id="sg-note"></p>
+      </section>
+
       <!-- Subscriptions vs API -->
       <section class="panel" aria-labelledby="pl-h">
         <h2 id="pl-h">Subscriptions vs API: what heavy use really costs</h2>
@@ -471,6 +485,69 @@ footer ul{margin:.3rem 0 0;padding-left:1.1rem}
         (H.checked?` <span style="color:var(--muted)">Sources last checked ${fmtD(H.checked)}.</span>`:'');
     }
 
+    /* ---------- singularity fit ---------- */
+    // Finite-time singularity, log10 h = a - alpha*log10(tc - t), fitted to METR's record holders, compared with an
+    // exponential whose doubling time changed once. Both are refitted here from H.measured, so new METR points update them.
+    const sgBox=$('c-sing');wireTips(sgBox);
+    const decY=d=>{const y=d.getFullYear(),s=new Date(y,0,1),e=new Date(y+1,0,1);return y+(d-s)/(e-s);};
+    const fromY=y=>{const Y=Math.floor(y),s=new Date(Y,0,1),e=new Date(Y+1,0,1);return new Date(s.getTime()+(y-Y)*(e-s));};
+    const sT=H.measured.map(p=>decY(D(p.date))),sY=H.measured.map(p=>Math.log10(p.minutes/60)),sN=sT.length,tMax=Math.max(...sT);
+    const ols=(X,Y)=>{const n=X.length,mx=X.reduce((s,v)=>s+v,0)/n,my=Y.reduce((s,v)=>s+v,0)/n;let sxx=0,sxy=0;
+      X.forEach((x,i)=>{sxx+=(x-mx)**2;sxy+=(x-mx)*(Y[i]-my);});const b=sxy/sxx,a=my-b*mx;let r=0;X.forEach((x,i)=>{r+=(Y[i]-a-b*x)**2;});return {a,b,r};};
+    const hypAt=tc=>ols(sT.map(t=>Math.log10(tc-t)),sY);
+    let HF=null;for(let tc=tMax+.01;tc<tMax+40;tc+=.002){const f=hypAt(tc);if(!HF||f.r<HF.r)HF={...f,tc};}
+    const alpha=-HF.b;
+    // rough 95% range for the singularity date: where the fit error stays within an F-test margin of the best
+    const lim=HF.r*(1+4.5/(sN-3));let tcLo=null,tcHi=null;
+    for(let tc=tMax+.01;tc<tMax+40;tc+=.004)if(hypAt(tc).r<=lim){if(tcLo==null)tcLo=tc;tcHi=tc;}
+    const solve3=(A,y)=>{const M=[0,1,2].map(i=>[0,1,2].map(j=>A.reduce((s,r)=>s+r[i]*r[j],0))),v=[0,1,2].map(i=>A.reduce((s,r,k)=>s+r[i]*y[k],0));
+      for(let i=0;i<3;i++){let p=i;for(let r=i+1;r<3;r++)if(Math.abs(M[r][i])>Math.abs(M[p][i]))p=r;[M[i],M[p]]=[M[p],M[i]];[v[i],v[p]]=[v[p],v[i]];
+        for(let r=0;r<3;r++)if(r!==i){const f=M[r][i]/M[i][i];for(let j=0;j<3;j++)M[r][j]-=f*M[i][j];v[r]-=f*v[i];}}
+      return v.map((x,i)=>x/M[i][i]);};
+    let TP=null;for(let tb=Math.min(...sT)+1;tb<tMax-1;tb+=.005){
+      const A=sT.map(t=>[1,Math.min(t,tb)-tb,Math.max(t,tb)-tb]),c=solve3(A,sY);let r=0;A.forEach((row,i)=>{r+=(sY[i]-c[0]-c[1]*row[1]-c[2]*row[2])**2;});
+      if(!TP||r<TP.r)TP={r,tb,b:c[0],c1:c[1],c2:c[2]};}
+    const tpY=t=>TP.b+TP.c1*(Math.min(t,TP.tb)-TP.tb)+TP.c2*(Math.max(t,TP.tb)-TP.tb);
+    // small-sample AIC: the singularity fit has 3 parameters, the two-phase exponential 4
+    const aicc=(r,k)=>sN*Math.log(r/sN)+2*k+2*k*(k+1)/(sN-k-1);
+    const dAIC=aicc(TP.r,4)-aicc(HF.r,3);
+    const dblMo=c=>(12*Math.log10(2)/c).toFixed(1);
+    const shorter=Math.round(100*(1-Math.pow(2,-1/alpha)));
+    $('sg-read').innerHTML=`<b>Singularity fit.</b> Fitted to METR's ${sN} record-holding models since ${sT[0]|0}, the curve reaches unlimited task length around <b>${fmtM(fromY(HF.tc))}</b>`+
+      (tcLo!=null?` (roughly ${fmtM(fromY(tcLo))} to ${fmtM(fromY(tcHi))})`:'')+`, with each doubling about ${shorter}% quicker than the one before (α = ${alpha.toFixed(1)}). `+
+      `<b>It isn't the only reading.</b> An exponential that sped up once, doubling every ${dblMo(TP.c1)} months before ${fmtM(fromY(TP.tb))} and every ${dblMo(TP.c2)} months since, `+
+      (dAIC<-2?'fits the same measurements better':dAIC>2?'fits the same measurements worse':'fits the same measurements about as well')+
+      ` (dashed). `+(Math.abs(dAIC)<=2?`METR's data can't yet tell continuous acceleration from a one-off speed-up.`:'');
+    $('sg-note').innerHTML=(hzLast.minutes>H.suite_ceiling_minutes?`The newest point, ${esc(hzLast.model)} at ${Math.round(hzLast.minutes/60)} hours, sits above the ${Math.round(H.suite_ceiling_minutes/60)} hours where METR says its tasks stop being reliable, and the fit leans on it. `:'')+
+      `Method after <a href="https://x.com/nikolaj2030/status/2118776619687133579" target="_blank" rel="noopener">a chart by @nikolaj2030</a>, which also overlaid time horizons derived from METR's AECI scores; those are not METR time-horizon measurements and are not shown.`;
+    function drawSing(){
+      const {w,h}=dims(sgBox,.5,270,390);const m={l:78,r:14,t:26,b:30};
+      const uOf=t=>Math.log10(HF.tc-t);
+      const U0=Math.log10(Math.min(12,HF.tc-sT[0]+1.5)),U1=Math.log10(.4);  // left: far from the singularity; right: 5 months out
+      const Y0=Math.log10(2/3600),Y1=Math.log10(5000);                       // log10 hours
+      const px=u=>m.l+(U0-u)/(U0-U1)*(w-m.l-m.r);const py=v=>m.t+(Y1-v)/(Y1-Y0)*(h-m.t-m.b);
+      const s=svg(w,h,'AI task length against time left until the fitted singularity, log scales');
+      const defs=el('defs',{},s);const cp=el('clipPath',{id:'sgc'},defs);el('rect',{x:m.l,y:m.t,width:w-m.l-m.r,height:h-m.t-m.b},cp);
+      [[1/360,'10 sec'],[1/60,'1 min'],[1/6,'10 min'],[1,'1 hour'],[10,'10 hours'],[100,'100 hours'],[1000,'1,000 hours']].forEach(([v,l])=>{
+        const y=py(Math.log10(v));el('line',{x1:m.l,x2:w-m.r,y1:y,y2:y,class:'gl'},s);el('text',{x:m.l-8,y:y+4,'text-anchor':'end'},s,l);});
+      [[10,'10 yr'],[5,'5 yr'],[2,'2 yr'],[1,'1 yr'],[.5,'6 mo']].filter(([v])=>Math.log10(v)<=U0&&Math.log10(v)>=U1)
+        .forEach(([v,l])=>el('text',{x:px(Math.log10(v)),y:h-8,'text-anchor':'middle'},s,l));
+      let lastX=-1e9;for(let y=Math.ceil(HF.tc-Math.pow(10,U0));y<HF.tc-.4;y++){const x=px(uOf(y));if(x-lastX<(w<620?44:30))continue;
+        el('text',{x,y:m.t-10,'text-anchor':'middle'},s,y);lastX=x;}
+      const yc=py(Math.log10(H.suite_ceiling_minutes/60));
+      el('line',{x1:m.l,x2:w-m.r,y1:yc,y2:yc,stroke:'var(--muted)','stroke-dasharray':'5 4'},s);
+      el('text',{x:w-m.r,y:yc+13,'text-anchor':'end'},s,w<620?'test suite limit':'limit of current test suite');
+      const tN=decY(today);if(tN<HF.tc-.4){const x=px(uOf(tN));el('line',{x1:x,x2:x,y1:m.t,y2:h-m.b,stroke:'var(--faint)','stroke-dasharray':'2 3'},s);el('text',{x:x+4,y:m.t+11},s,'today');}
+      el('line',{x1:px(U0),y1:py(HF.a-alpha*U0),x2:px(U1),y2:py(HF.a-alpha*U1),stroke:'var(--ink)','stroke-width':2,'clip-path':'url(#sgc)'},s);
+      const ts=[];for(let t=HF.tc-Math.pow(10,U0);t<=HF.tc-.4;t+=.02)ts.push(t);
+      el('path',{d:ts.map((t,i)=>(i?'L':'M')+px(uOf(t)).toFixed(1)+','+py(tpY(t)).toFixed(1)).join(''),fill:'none',stroke:'var(--open)','stroke-width':2,'stroke-dasharray':'6 4','clip-path':'url(#sgc)'},s);
+      const tipFor=p=>`<b>${esc(p.model)}</b><br>${fmtD(p.date)}<br>50%: ${fmtMin(p.minutes)}${p.ci_low!=null?` (CI ${fmtMin(p.ci_low)} – ${fmtMin(p.ci_high)})`:''}`;
+      H.measured.forEach((p,i)=>{const x=px(uOf(sT[i])),y=py(sY[i]);
+        el('circle',{cx:x,cy:y,r:4.5,fill:'var(--closed)',stroke:'var(--panel)','stroke-width':2},s);hit(s,x,y,tipFor(p));
+        if(i===0||i===sN-1||/^GPT-4$/.test(p.model))el('text',{x:x+(i===sN-1?-8:8),y:y+(i===sN-1?-8:14),'text-anchor':i===sN-1?'end':'start'},s,p.model);});
+      mount(sgBox,s);
+    }
+
     /* ---------- plans vs API ---------- */
     const AT=DATA.agent_hour_tokens, fx=DATA.fx.aud_per_usd;
     const rate=m=>{if(!m||m.price_in==null||m.price_out==null)return null;const cr=m.price_cache_read??m.price_in*AT.cache_read_fallback_fraction_of_input;return AT.input_cached_m*cr+AT.input_fresh_m*m.price_in+AT.output_m*m.price_out;};
@@ -522,7 +599,7 @@ footer ul{margin:.3rem 0 0;padding-left:1.1rem}
     const ch=DATA.changelog.slice(-3).reverse();
     $('changes').innerHTML='<b>Data changes.</b><ul>'+ch.map(c=>`<li>${fmtD(c.date)}: ${esc(c.what)} <span style="color:var(--faint)">Why: ${esc(c.why)}</span></li>`).join('')+'</ul>';
 
-    function drawAll(){drawScatter();drawForecast();drawHorizon();drawPlans();}
+    function drawAll(){drawScatter();drawForecast();drawHorizon();drawSing();drawPlans();}
     drawAll();let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(drawAll,120);});
   }
 })();
