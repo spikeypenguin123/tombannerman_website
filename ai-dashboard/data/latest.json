@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-11T06:45:13+10:00",
+  "updated_at": "2026-11-12T06:48:30+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -8,9 +8,9 @@
     "url": "https://artificialanalysis.ai/leaderboards/models"
   },
   "fx": {
-    "aud_per_usd": 1.442,
-    "as_of": "2026-11-05",
-    "source": "https://tradingeconomics.com/australia/currency"
+    "aud_per_usd": 1.46,
+    "as_of": "2026-11-11",
+    "source": "https://www.x-rates.com/calculator/?from=USD&to=AUD&amount=1"
   },
   "models": [
     {
@@ -24,13 +24,13 @@
       "params_active_b": null,
       "aa_index": 65,
       "aa_effort": "max",
-      "eci": 174.24,
+      "eci": 173.44,
       "cost_per_task_usd": 26.54,
       "price_in": 8.0,
       "price_out": 40.0,
       "price_cache_read": 0.2,
       "status": "current",
-      "note": "New #1 on AA index v5.0.1 (65), five points ahead of Gemini 4 Carbon, and #1 on ECI (174.24, five points ahead of GPT-6 Astra), but the most expensive model AA has run ($26.54 per task; very verbose). Cheaper than Fable 5.1. Mythos 5.2 is the same model without cyber and biology safeguards, for verified organisations only."
+      "note": "New #1 on AA index v5.0.1 (65), five points ahead of Gemini 4 Carbon, and #1 on ECI (173.44, 3.7 points ahead of Gemini 4 Carbon), but the most expensive model AA has run ($26.54 per task; very verbose). Cheaper than Fable 5.1. Mythos 5.2 is the same model without cyber and biology safeguards, for verified organisations only."
     },
     {
       "id": "gemini-4-carbon",
@@ -43,13 +43,13 @@
       "params_active_b": null,
       "aa_index": 60,
       "aa_effort": "high",
-      "eci": null,
+      "eci": 169.76,
       "cost_per_task_usd": 7.76,
       "price_in": 2.0,
       "price_out": 10.0,
       "price_cache_read": 0.1,
       "status": "current",
-      "note": "#2 on AA index v5.0.1 (60), behind Claude Fable 5.2 (65); was #1 from 28 Oct to 9 Nov. Generally available since 10 Nov (API, Gemini app, Antigravity) after two weeks with selected cyber defenders. Intro pricing until 30 Nov 2026, then $4/$20. Not yet on ECI."
+      "note": "#2 on AA index v5.0.1 (60), behind Claude Fable 5.2 (65); was #1 from 28 Oct to 9 Nov. Generally available since 10 Nov (API, Gemini app, Antigravity) after two weeks with selected cyber defenders. Intro pricing until 30 Nov 2026, then $4/$20. #2 on ECI (169.76), behind Claude Fable 5.2 (173.44)."
     },
     {
       "id": "claude-opus-5-5",
@@ -62,13 +62,13 @@
       "params_active_b": null,
       "aa_index": 59,
       "aa_effort": "max",
-      "eci": 168.67,
+      "eci": 168.54,
       "cost_per_task_usd": 10.04,
       "price_in": 4.0,
       "price_out": 20.0,
       "price_cache_read": 0.2,
       "status": "current",
-      "note": "#3 on AA index v5.0.1, behind Claude Fable 5.2 (65) and Gemini 4 Carbon (60); #4 on ECI (168.67), behind Fable 5.2, GPT-6 Astra and GPT-6.1 Sol. 20% cheaper than Opus 5."
+      "note": "#3 on AA index v5.0.1, behind Claude Fable 5.2 (65) and Gemini 4 Carbon (60); #4 on ECI (168.54), behind Fable 5.2, Gemini 4 Carbon and GPT-6 Astra. 20% cheaper than Opus 5."
     },
     {
       "id": "claude-sonnet-5-5",
@@ -81,7 +81,7 @@
       "params_active_b": null,
       "aa_index": 55,
       "aa_effort": "max",
-      "eci": 166.32,
+      "eci": 166.56,
       "cost_per_task_usd": 10.02,
       "price_in": 2.0,
       "price_out": 10.0,
@@ -119,13 +119,13 @@
       "params_active_b": 104,
       "aa_index": 46,
       "aa_effort": "reasoning",
-      "eci": 162.02,
+      "eci": 161.37,
       "cost_per_task_usd": 3.68,
       "price_in": 2.0,
       "price_out": 10.0,
       "price_cache_read": 0.2,
       "status": "current",
-      "note": "Best open model on AA v5.0.1 (46), 13 points ahead of DeepSeek V4.1 Flash 1017, and on ECI (162.02). API launch 23 Oct; weights on Hugging Face since 4 Nov (MXFP4, about 1.5 TB; AA still labels it proprietary), too large for any desktop machine. Highest Terminal-Bench 4.0 score AA has measured (67%)."
+      "note": "Best open model on AA v5.0.1 (46), 13 points ahead of DeepSeek V4.1 Flash 1017, and on ECI (161.37). API launch 23 Oct; weights on Hugging Face since 4 Nov (MXFP4, about 1.5 TB; AA still labels it proprietary), too large for any desktop machine. Highest Terminal-Bench 4.0 score AA has measured (67%)."
     },
     {
       "id": "muse-wonder",
@@ -138,7 +138,7 @@
       "params_active_b": null,
       "aa_index": 44,
       "aa_effort": "max",
-      "eci": 162.01,
+      "eci": 161.68,
       "cost_per_task_usd": 6.95,
       "price_in": 4.0,
       "price_out": 20.0,
@@ -157,7 +157,7 @@
       "params_active_b": null,
       "aa_index": 49,
       "aa_effort": "max",
-      "eci": 167.04,
+      "eci": 166.99,
       "cost_per_task_usd": 12.99,
       "price_in": 10.0,
       "price_out": 50.0,
@@ -176,13 +176,13 @@
       "params_active_b": null,
       "aa_index": 57,
       "aa_effort": "max",
-      "eci": 169.16,
+      "eci": 169.0,
       "cost_per_task_usd": 6.24,
       "price_in": 10.0,
       "price_out": 50.0,
       "price_cache_read": null,
       "status": "current",
-      "note": "#2 on ECI (169.16), behind Claude Fable 5.2 (174.24). Leads abstract reasoning and maths (ARC-AGI-3, FrontierMath Tier 4)."
+      "note": "#3 on ECI (169.0), behind Claude Fable 5.2 (173.44) and Gemini 4 Carbon (169.76). Leads abstract reasoning and maths (ARC-AGI-3, FrontierMath Tier 4)."
     },
     {
       "id": "gemini-4-argon",
@@ -195,7 +195,7 @@
       "params_active_b": null,
       "aa_index": 50,
       "aa_effort": "high",
-      "eci": 166.53,
+      "eci": 166.48,
       "cost_per_task_usd": 9.95,
       "price_in": 2.0,
       "price_out": 10.0,
@@ -214,13 +214,13 @@
       "params_active_b": null,
       "aa_index": 55,
       "aa_effort": "max",
-      "eci": 168.87,
+      "eci": 168.48,
       "cost_per_task_usd": 1.27,
       "price_in": 2.0,
       "price_out": 10.0,
       "price_cache_read": 0.1,
       "status": "current",
-      "note": "Near-frontier (55) at about 1/6 of Gemini 4 Carbon's cost per task; #3 on ECI (168.87), 0.29 behind GPT-6 Astra."
+      "note": "Near-frontier (55) at about 1/6 of Gemini 4 Carbon's cost per task; #5 on ECI (168.48), just behind Claude Opus 5.5 (168.54)."
     },
     {
       "id": "claude-opus-5",
@@ -233,7 +233,7 @@
       "params_active_b": null,
       "aa_index": null,
       "aa_effort": null,
-      "eci": 164.48,
+      "eci": 164.68,
       "cost_per_task_usd": null,
       "price_in": 5.0,
       "price_out": 25.0,
@@ -252,7 +252,7 @@
       "params_active_b": null,
       "aa_index": 51,
       "aa_effort": "max",
-      "eci": 168.11,
+      "eci": 167.67,
       "cost_per_task_usd": 0.96,
       "price_in": 1.0,
       "price_out": 5.0,
@@ -309,7 +309,7 @@
       "params_active_b": null,
       "aa_index": 35,
       "aa_effort": "high",
-      "eci": 156.05,
+      "eci": 156.18,
       "cost_per_task_usd": 6.18,
       "price_in": 2.0,
       "price_out": 6.0,
@@ -328,7 +328,7 @@
       "params_active_b": null,
       "aa_index": 36,
       "aa_effort": "max",
-      "eci": 160.25,
+      "eci": 160.43,
       "cost_per_task_usd": 0.41,
       "price_in": 0.1,
       "price_out": 0.5,
@@ -356,6 +356,25 @@
       "note": "Cheapest model scoring 36 on AA: matches Claude Haiku 5.5 at about a third of its cost per task. Meta's API and Muse Code only; size not disclosed."
     },
     {
+      "id": "longcat-2-5",
+      "name": "LongCat-2.5",
+      "lab": "Meituan",
+      "released": "2026-11-02",
+      "weights": "open",
+      "license": "MIT",
+      "params_total_b": 1600,
+      "params_active_b": 48,
+      "aa_index": null,
+      "aa_effort": null,
+      "eci": null,
+      "cost_per_task_usd": null,
+      "price_in": null,
+      "price_out": null,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "Native multimodal MoE for long-horizon agent work. Launched 2 Nov on Meituan's chat and API; weights on Hugging Face under MIT by 10 Nov. Not yet scored on AA or ECI. At 1.6T parameters (BF16) it is far too large for any desktop machine."
+    },
+    {
       "id": "mistral-large-4",
       "name": "Mistral Large 4",
       "lab": "Mistral",
@@ -366,7 +385,7 @@
       "params_active_b": 52,
       "aa_index": 26,
       "aa_effort": "high",
-      "eci": 154.59,
+      "eci": 154.62,
       "cost_per_task_usd": 2.06,
       "price_in": 0.7,
       "price_out": 2.1,
@@ -385,7 +404,7 @@
       "params_active_b": null,
       "aa_index": 25,
       "aa_effort": null,
-      "eci": 152.55,
+      "eci": 152.69,
       "cost_per_task_usd": 4.21,
       "price_in": 1.36,
       "price_out": 4.18,
@@ -423,7 +442,7 @@
       "params_active_b": null,
       "aa_index": 32,
       "aa_effort": "max",
-      "eci": 156.94,
+      "eci": 157.1,
       "cost_per_task_usd": 5.01,
       "price_in": null,
       "price_out": null,
@@ -442,13 +461,13 @@
       "params_active_b": 16,
       "aa_index": 33,
       "aa_effort": "max",
-      "eci": 159.34,
+      "eci": 159.41,
       "cost_per_task_usd": 0.6,
       "price_in": 0.15,
       "price_out": 0.6,
       "price_cache_read": 0.003,
       "status": "current",
-      "note": "Off-peak prices; doubled at weekday peak. Second-best open model on AA v5.0.1 (33) and on ECI (159.34), both behind Kimi K3.1 Pro. Too large for a 256GB Mac Studio at 4-bit."
+      "note": "Off-peak prices; doubled at weekday peak. Second-best open model on AA v5.0.1 (33) and on ECI (159.41), both behind Kimi K3.1 Pro. Too large for a 256GB Mac Studio at 4-bit."
     },
     {
       "id": "kimi-k3",
@@ -461,13 +480,13 @@
       "params_active_b": 104,
       "aa_index": null,
       "aa_effort": null,
-      "eci": 158.53,
+      "eci": 158.58,
       "cost_per_task_usd": null,
       "price_in": 3.0,
       "price_out": 15.0,
       "price_cache_read": null,
       "status": "current",
-      "note": "Third-best open model on ECI (158.53), behind Kimi K3.1 Pro (162.02) and DeepSeek V4.1 Flash 1017 (159.34), and 15.7 points behind Claude Fable 5.2. No AA v5 score yet (was 44 on v4.3.2). Too large for any single desktop machine."
+      "note": "Third-best open model on ECI (158.58), behind Kimi K3.1 Pro (161.37) and DeepSeek V4.1 Flash 1017 (159.41), and 14.9 points behind Claude Fable 5.2. No AA v5 score yet (was 44 on v4.3.2). Too large for any single desktop machine."
     },
     {
       "id": "minimax-m3-1-flash",
@@ -499,7 +518,7 @@
       "params_active_b": 18,
       "aa_index": 28,
       "aa_effort": null,
-      "eci": 153.6,
+      "eci": 153.82,
       "cost_per_task_usd": 0.58,
       "price_in": 0.15,
       "price_out": 0.5,
@@ -518,7 +537,7 @@
       "params_active_b": 16,
       "aa_index": null,
       "aa_effort": null,
-      "eci": 156.45,
+      "eci": 156.7,
       "cost_per_task_usd": null,
       "price_in": 0.15,
       "price_out": 0.6,
@@ -537,7 +556,7 @@
       "params_active_b": 42,
       "aa_index": 25,
       "aa_effort": "xhigh",
-      "eci": 155.41,
+      "eci": 155.42,
       "cost_per_task_usd": 2.02,
       "price_in": 1.25,
       "price_out": 4.25,
@@ -594,7 +613,7 @@
       "params_active_b": 49,
       "aa_index": 23,
       "aa_effort": "max",
-      "eci": 155.9,
+      "eci": 155.94,
       "cost_per_task_usd": 1.77,
       "price_in": 1.32,
       "price_out": 3.96,
@@ -1074,7 +1093,7 @@
       },
       "suite_ceiling_minutes": 960,
       "status": "Newest measurement: Claude Mythos Preview (early checkpoint, released Apr 2026), about 17 h at 50% success (95% CI 8.5–55 h) and about 3 h at 80% (1.6–6.6 h). The 50% figure is above the 16 h where METR says its task suite stops being reliable. No model released since has a published time horizon (see other readings), so today's values are projections at METR's post-2023 doubling time of 3.4–5.2 months; the 80% series has doubled at the same pace (about every 4.4 months since 2023 on METR's data).",
-      "checked": "2026-11-11",
+      "checked": "2026-11-12",
       "other_readings": [
         {
           "source": "METR Frontier Risk Report",
@@ -1124,8 +1143,8 @@
       ]
     },
     "headline": [
-      "Anthropic's Claude Fable 5.2 (65), released on 9 November, leads the Artificial Analysis index by five points over Gemini 4 Carbon (60, generally available since 10 November) and Claude Opus 5.5 (59), and now also tops Epoch's capabilities index, but at about $26.54 per task it is the most expensive model tested; for value, GPT-6.1 Sol scores 55 at about $1.27 per task and GPT-6.1 Terra 51 at about $0.96.",
-      "Kimi K3.1 Pro (46), whose weights came out on 4 November, is the best open model, 19 points behind the closed frontier (65) and roughly 4 months behind on Epoch’s lag estimate; the next-best open model, DeepSeek V4.1 Flash 1017, scores 33, and Thinking Machines' Inkling 2 Small (31) would be the best open model from outside China once its promised weights are out.",
+      "Anthropic's Claude Fable 5.2 (65), released on 9 November, leads the Artificial Analysis index by five points over Gemini 4 Carbon (60) and Claude Opus 5.5 (59), and also tops Epoch's capabilities index, where Gemini 4 Carbon is now second; but at about $26.54 per task it is the most expensive model tested. For value, GPT-6.1 Sol scores 55 at about $1.27 per task and GPT-6.1 Terra 51 at about $0.96.",
+      "Kimi K3.1 Pro (46) is the best open model, 19 points behind the closed frontier (65) and roughly 4 months behind on Epoch's lag estimate; the next-best scored open model, DeepSeek V4.1 Flash 1017, has 33. Meituan's LongCat-2.5, whose weights came out this week, has not been scored yet.",
       "An open model matching Claude Fable 5.2 (65) is expected around Mar 2027 (range Feb 2027 to May 2027); a version that runs on a desktop under AUD 50k about 2 months later. Today the best desktop model is GLM-5.3-Flash (28) on a 256GB Mac Studio."
     ],
     "founder": {
@@ -1380,6 +1399,13 @@
     }
   ],
   "releases": [
+    {
+      "date": "2026-11-10",
+      "kind": "model",
+      "title": "Meituan LongCat-2.5 weights released (open, MIT)",
+      "summary": "1.6T / 48B active multimodal MoE for agent work, launched by API on 2 Nov. Not yet scored on the AA index; far too large for a desktop.",
+      "url": "https://huggingface.co/meituan-longcat/LongCat-2.5"
+    },
     {
       "date": "2026-11-10",
       "kind": "model",
@@ -1652,13 +1678,6 @@
       "title": "Mac Studio M5 Ultra announced",
       "summary": "Up to 512 GB unified memory; 256 GB shipping since 22 Sep, 512 GB delayed.",
       "url": "https://www.macworld.com/article/2973459/2026-mac-studio-m5-release-date-specs-price-ram-delay-news.html"
-    },
-    {
-      "date": "2026-07-21",
-      "kind": "hardware",
-      "title": "Vera Rubin running customer workloads",
-      "summary": "Google Cloud A5X instances live; volume shipments scheduled for autumn 2026.",
-      "url": "https://programminginsider.com/nvidia-vera-rubin-nvl72-deliveries-what-high-performance-ai-chips-mean-for-depin-networks/"
     }
   ],
   "sources": [
@@ -1853,6 +1872,14 @@
     {
       "title": "Artificial Analysis: Agnes 2.5 Pro Theta",
       "url": "https://artificialanalysis.ai/models/agnes-2-5-pro-theta"
+    },
+    {
+      "title": "Hugging Face: LongCat-2.5 weights and licence",
+      "url": "https://huggingface.co/meituan-longcat/LongCat-2.5"
+    },
+    {
+      "title": "x-rates: USD to AUD",
+      "url": "https://www.x-rates.com/calculator/?from=USD&to=AUD&amount=1"
     }
   ],
   "changelog": [
@@ -1950,6 +1977,11 @@
       "date": "2026-11-11",
       "what": "Added Agnes 2.5 Pro Theta (Sapiens AI, closed, AA 24, $0.10/$0.30, $0.57 per task). ECI refreshed for 22 models and newly filled for Claude Fable 5.2 (174.24, now #1), Kimi K3.1 Pro (162.02, now the best open model on ECI) and GLM-5.3 (156.94); other moves are small (e.g. GPT-6 Astra 169.07 → 169.16, Claude Opus 5.5 168.36 → 168.67, GPT-6.1 Sol 168.94 → 168.87). Gemini 4 Carbon's note now records general availability (10 Nov) and the end of its intro pricing (30 Nov, then $4/$20).",
       "why": "Agnes was scored on AA index v5.0.1 on 8 Nov (artificialanalysis.ai/changelog and model page: released 7 Nov, weights not public, cached price from AA's 90% cache discount). ECI values are from Epoch's scores file as of 10 Nov (epoch.ai/data/eci_scores.csv); Gemini 4 Carbon and Muse Ember are not in it yet. Carbon's availability and price date are from Google's 10 Nov post (blog.google); today's price is unchanged. No AA scores, frontiers, plans or forecast parameters changed. FX (x-rates 1.4563 AUD per USD, 10 Nov) moved under 1%, so unchanged."
+    },
+    {
+      "date": "2026-11-12",
+      "what": "ECI refreshed for 23 models and newly filled for Gemini 4 Carbon (169.76, now #2 behind Claude Fable 5.2 at 173.44); other moves are small (e.g. Fable 5.2 174.24 → 173.44, GPT-6 Astra 169.16 → 169.0, GPT-6.1 Sol 168.87 → 168.48, now just behind Claude Opus 5.5 at 168.54; Kimi K3.1 Pro 162.02 → 161.37, still the best open model). Added LongCat-2.5 (Meituan, open, MIT, 1.6T / 48B active, not yet scored). AUD/USD 1.442 → 1.460.",
+      "why": "ECI values are from Epoch's scores file as fetched on 12 Nov (epoch.ai/data/eci_scores.csv); Muse Ember is not in it yet. LongCat-2.5's licence and size are from its Hugging Face model card (huggingface.co/meituan-longcat/LongCat-2.5; repo last modified 10 Nov); its 2 Nov API launch date is from launch coverage (cryptobriefing.com, aiweekly.co). It has no AA or ECI score, so no frontier moves. FX moved more than 1% (x-rates 1.4599 AUD per USD, 11 Nov). No AA scores, prices, plans or forecast parameters changed: AA's changelog has no new evaluations since 9 Nov, METR has published no new time horizon, and the Claude and Codex plan pages match the current notes."
     }
   ]
 }
