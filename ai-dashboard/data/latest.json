@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-12T06:48:30+10:00",
+  "updated_at": "2026-11-13T06:52:00+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -88,6 +88,25 @@
       "price_cache_read": 0.2,
       "status": "current",
       "note": "Mid-tier price; leads Terminal-Bench 4.0."
+    },
+    {
+      "id": "gemini-4-hydrogen",
+      "name": "Gemini 4 Hydrogen",
+      "lab": "Google",
+      "released": "2026-11-12",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 54,
+      "aa_effort": "xhigh",
+      "eci": null,
+      "cost_per_task_usd": 3.16,
+      "price_in": 1.5,
+      "price_out": 7.5,
+      "price_cache_read": 0.075,
+      "status": "current",
+      "note": "Cheaper Gemini 4 for agentic coding: 54 on AA v5.0.1, ahead of GPT-6.1 Terra (51) and Gemini 4 Argon (50), at about $3.16 per task. Flat pricing with no intro discount; free tier in AI Studio. Default model for Google's Antigravity agent. Size not disclosed; not yet on ECI."
     },
     {
       "id": "muse-wonder-full",
@@ -1093,7 +1112,7 @@
       },
       "suite_ceiling_minutes": 960,
       "status": "Newest measurement: Claude Mythos Preview (early checkpoint, released Apr 2026), about 17 h at 50% success (95% CI 8.5–55 h) and about 3 h at 80% (1.6–6.6 h). The 50% figure is above the 16 h where METR says its task suite stops being reliable. No model released since has a published time horizon (see other readings), so today's values are projections at METR's post-2023 doubling time of 3.4–5.2 months; the 80% series has doubled at the same pace (about every 4.4 months since 2023 on METR's data).",
-      "checked": "2026-11-12",
+      "checked": "2026-11-13",
       "other_readings": [
         {
           "source": "METR Frontier Risk Report",
@@ -1143,8 +1162,8 @@
       ]
     },
     "headline": [
-      "Anthropic's Claude Fable 5.2 (65), released on 9 November, leads the Artificial Analysis index by five points over Gemini 4 Carbon (60) and Claude Opus 5.5 (59), and also tops Epoch's capabilities index, where Gemini 4 Carbon is now second; but at about $26.54 per task it is the most expensive model tested. For value, GPT-6.1 Sol scores 55 at about $1.27 per task and GPT-6.1 Terra 51 at about $0.96.",
-      "Kimi K3.1 Pro (46) is the best open model, 19 points behind the closed frontier (65) and roughly 4 months behind on Epoch's lag estimate; the next-best scored open model, DeepSeek V4.1 Flash 1017, has 33. Meituan's LongCat-2.5, whose weights came out this week, has not been scored yet.",
+      "Anthropic's Claude Fable 5.2 (65), released on 9 November, leads the Artificial Analysis index by five points over Gemini 4 Carbon (60) and Claude Opus 5.5 (59), and also tops Epoch's capabilities index, where Gemini 4 Carbon is now second; but at about $26.54 per task it is the most expensive model tested. For value, GPT-6.1 Sol scores 55 at about $1.27 per task and GPT-6.1 Terra 51 at about $0.96; Google's new Gemini 4 Hydrogen, released on 12 November, scores 54 at about $3.16.",
+      "Kimi K3.1 Pro (46) is the best open model, 19 points behind the closed frontier (65) and roughly 4 months behind on Epoch's lag estimate; the next-best scored open model, DeepSeek V4.1 Flash 1017, has 33. Meituan's LongCat-2.5, whose weights came out on 10 November, has not been scored yet.",
       "An open model matching Claude Fable 5.2 (65) is expected around Mar 2027 (range Feb 2027 to May 2027); a version that runs on a desktop under AUD 50k about 2 months later. Today the best desktop model is GLM-5.3-Flash (28) on a 256GB Mac Studio."
     ],
     "founder": {
@@ -1399,6 +1418,13 @@
     }
   ],
   "releases": [
+    {
+      "date": "2026-11-12",
+      "kind": "model",
+      "title": "Google Gemini 4 Hydrogen",
+      "summary": "AA index 54 at about $3.16 per task, ahead of GPT-6.1 Terra and Gemini 4 Argon; $1.50/$7.50 per million tokens with no intro pricing. Gemini API and AI Studio (free tier included); closed.",
+      "url": "https://aistudio.google.com/docs/whats-new-gemini-4-hydrogen"
+    },
     {
       "date": "2026-11-10",
       "kind": "model",
@@ -1671,13 +1697,6 @@
       "title": "Claude Fable 5.1 and Mythos 5.1",
       "summary": "AA index 53; Mythos 5.1 restricted to vetted organisations.",
       "url": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3"
-    },
-    {
-      "date": "2026-08-25",
-      "kind": "hardware",
-      "title": "Mac Studio M5 Ultra announced",
-      "summary": "Up to 512 GB unified memory; 256 GB shipping since 22 Sep, 512 GB delayed.",
-      "url": "https://www.macworld.com/article/2973459/2026-mac-studio-m5-release-date-specs-price-ram-delay-news.html"
     }
   ],
   "sources": [
@@ -1878,6 +1897,14 @@
       "url": "https://huggingface.co/meituan-longcat/LongCat-2.5"
     },
     {
+      "title": "Artificial Analysis: Gemini 4 Hydrogen",
+      "url": "https://artificialanalysis.ai/models/gemini-4-hydrogen"
+    },
+    {
+      "title": "Google AI Studio: Gemini API pricing",
+      "url": "https://aistudio.google.com/docs/pricing"
+    },
+    {
       "title": "x-rates: USD to AUD",
       "url": "https://www.x-rates.com/calculator/?from=USD&to=AUD&amount=1"
     }
@@ -1982,6 +2009,11 @@
       "date": "2026-11-12",
       "what": "ECI refreshed for 23 models and newly filled for Gemini 4 Carbon (169.76, now #2 behind Claude Fable 5.2 at 173.44); other moves are small (e.g. Fable 5.2 174.24 → 173.44, GPT-6 Astra 169.16 → 169.0, GPT-6.1 Sol 168.87 → 168.48, now just behind Claude Opus 5.5 at 168.54; Kimi K3.1 Pro 162.02 → 161.37, still the best open model). Added LongCat-2.5 (Meituan, open, MIT, 1.6T / 48B active, not yet scored). AUD/USD 1.442 → 1.460.",
       "why": "ECI values are from Epoch's scores file as fetched on 12 Nov (epoch.ai/data/eci_scores.csv); Muse Ember is not in it yet. LongCat-2.5's licence and size are from its Hugging Face model card (huggingface.co/meituan-longcat/LongCat-2.5; repo last modified 10 Nov); its 2 Nov API launch date is from launch coverage (cryptobriefing.com, aiweekly.co). It has no AA or ECI score, so no frontier moves. FX moved more than 1% (x-rates 1.4599 AUD per USD, 11 Nov). No AA scores, prices, plans or forecast parameters changed: AA's changelog has no new evaluations since 9 Nov, METR has published no new time horizon, and the Claude and Codex plan pages match the current notes."
+    },
+    {
+      "date": "2026-11-13",
+      "what": "Added Gemini 4 Hydrogen (Google, closed, AA 54 at xhigh, $1.50/$7.50 per million tokens, $0.075 cached, $3.16 per task).",
+      "why": "AA added it to index v5.0.1 on 12 Nov (artificialanalysis.ai/changelog and model page: released 12 Nov, weights not public, size not disclosed). Prices are from Google's Gemini API pricing page (aistudio.google.com/docs/pricing), which lists flat pricing with no intro period; availability from Google's what's-new page. No frontier moves: 54 is below the closed best of 65. Not yet in Epoch's ECI file. No other AA scores, ECI values, prices, plans or forecast parameters changed (claude.com/pricing, code.claude.com model-config and the Codex pricing page match the current notes; METR's newest state-of-the-art point is still Claude Mythos Preview). FX (x-rates 1.4693 AUD per USD, 12 Nov) moved under 1%, so unchanged."
     }
   ]
 }
