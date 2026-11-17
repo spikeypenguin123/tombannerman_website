@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T06:58:00+10:00",
+  "updated_at": "2026-11-18T06:50:49+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -24,13 +24,32 @@
       "params_active_b": null,
       "aa_index": 65,
       "aa_effort": "max",
-      "eci": 173.44,
+      "eci": 173.5,
       "cost_per_task_usd": 26.54,
       "price_in": 8.0,
       "price_out": 40.0,
       "price_cache_read": 0.2,
       "status": "current",
-      "note": "New #1 on AA index v5.0.1 (65), five points ahead of Gemini 4 Carbon, and #1 on ECI (173.44, 3.7 points ahead of Gemini 4 Carbon), but the most expensive model AA has run ($26.54 per task; very verbose). Cheaper than Fable 5.1. Mythos 5.2 is the same model without cyber and biology safeguards, for verified organisations only."
+      "note": "#1 on AA index v5.0.1 (65), three points ahead of GPT-6.2 Astra (62) and five ahead of Gemini 4 Carbon, but the most expensive model AA has run ($26.54 per task; very verbose). #2 on ECI (173.5), just behind GPT-6.2 Astra (174.17). Cheaper than Fable 5.1. Mythos 5.2 is the same model without cyber and biology safeguards, for verified organisations only."
+    },
+    {
+      "id": "gpt-6-2-astra",
+      "name": "GPT-6.2 Astra",
+      "lab": "OpenAI",
+      "released": "2026-11-17",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 62,
+      "aa_effort": "max",
+      "eci": 174.17,
+      "cost_per_task_usd": 4.0,
+      "price_in": 8.0,
+      "price_out": 40.0,
+      "price_cache_read": 0.4,
+      "status": "current",
+      "note": "#2 on AA index v5.0.1 (62), three points behind Claude Fable 5.2 (65), at about $4.00 per task, under a sixth of Fable 5.2's cost. #1 on ECI (174.17), just ahead of Fable 5.2 (173.5). Token prices 20% below GPT-6 Astra. Hallucination rate 59% on AA-Omniscience. In ChatGPT Work, Codex and the API."
     },
     {
       "id": "gemini-4-carbon",
@@ -43,13 +62,13 @@
       "params_active_b": null,
       "aa_index": 60,
       "aa_effort": "high",
-      "eci": 169.76,
+      "eci": 169.78,
       "cost_per_task_usd": 5.48,
       "price_in": 2.0,
       "price_out": 10.0,
       "price_cache_read": 0.1,
       "status": "current",
-      "note": "#2 on AA index v5.0.1 (60), behind Claude Fable 5.2 (65); was #1 from 28 Oct to 9 Nov. Generally available since 10 Nov (API, Gemini app, Antigravity) after two weeks with selected cyber defenders. Intro pricing until 30 Nov 2026, then $4/$20. #2 on ECI (169.76), behind Claude Fable 5.2 (173.44)."
+      "note": "#3 on AA index v5.0.1 (60), behind Claude Fable 5.2 (65) and GPT-6.2 Astra (62); was #1 from 28 Oct to 9 Nov. Generally available since 10 Nov (API, Gemini app, Antigravity) after two weeks with selected cyber defenders. Intro pricing until 30 Nov 2026, then $4/$20 ($0.20 cached). #3 on ECI (169.78), behind GPT-6.2 Astra (174.17) and Claude Fable 5.2 (173.5)."
     },
     {
       "id": "claude-opus-5-5",
@@ -62,13 +81,32 @@
       "params_active_b": null,
       "aa_index": 59,
       "aa_effort": "max",
-      "eci": 168.54,
+      "eci": 168.7,
       "cost_per_task_usd": 10.04,
       "price_in": 4.0,
       "price_out": 20.0,
       "price_cache_read": 0.2,
       "status": "current",
-      "note": "#3 on AA index v5.0.1, behind Claude Fable 5.2 (65) and Gemini 4 Carbon (60); #4 on ECI (168.54), behind Fable 5.2, Gemini 4 Carbon and GPT-6 Astra. 20% cheaper than Opus 5."
+      "note": "#4 on AA index v5.0.1, behind Claude Fable 5.2 (65), GPT-6.2 Astra (62) and Gemini 4 Carbon (60); #5 on ECI (168.7), behind GPT-6.2 Astra, Fable 5.2, Gemini 4 Carbon and GPT-6 Astra. 20% cheaper than Opus 5."
+    },
+    {
+      "id": "gpt-6-2-sol",
+      "name": "GPT-6.2 Sol",
+      "lab": "OpenAI",
+      "released": "2026-11-17",
+      "weights": "closed",
+      "license": null,
+      "params_total_b": null,
+      "params_active_b": null,
+      "aa_index": 57,
+      "aa_effort": "max",
+      "eci": null,
+      "cost_per_task_usd": 1.01,
+      "price_in": 2.0,
+      "price_out": 10.0,
+      "price_cache_read": 0.1,
+      "status": "current",
+      "note": "57 on AA v5.0.1, two points above GPT-6.1 Sol and level with GPT-6 Astra, at about $1.01 per task; token prices unchanged from GPT-6.1 Sol. On AA's Coding Agent Index it is 3 points below GPT-6.1 Sol. Not yet on ECI."
     },
     {
       "id": "claude-sonnet-5-5",
@@ -81,7 +119,7 @@
       "params_active_b": null,
       "aa_index": 55,
       "aa_effort": "max",
-      "eci": 166.56,
+      "eci": 166.59,
       "cost_per_task_usd": 10.02,
       "price_in": 2.0,
       "price_out": 10.0,
@@ -138,13 +176,13 @@
       "params_active_b": 104,
       "aa_index": 46,
       "aa_effort": "reasoning",
-      "eci": 161.37,
+      "eci": 161.36,
       "cost_per_task_usd": 3.68,
       "price_in": 2.0,
       "price_out": 10.0,
       "price_cache_read": 0.2,
       "status": "current",
-      "note": "Best open model on AA v5.0.1 (46), 13 points ahead of DeepSeek V4.1 Flash 1017, and on ECI (161.37). API launch 23 Oct; weights on Hugging Face since 4 Nov (MXFP4, about 1.5 TB; AA still labels it proprietary), too large for any desktop machine. Highest Terminal-Bench 4.0 score AA has measured (67%)."
+      "note": "Best open model on AA v5.0.1 (46), 13 points ahead of DeepSeek V4.1 Flash 1017, and on ECI (161.36). API launch 23 Oct; weights on Hugging Face since 4 Nov (MXFP4, about 1.5 TB; AA still labels it proprietary), too large for any desktop machine. Highest Terminal-Bench 4.0 score AA has measured (67%)."
     },
     {
       "id": "qwen4-max",
@@ -176,7 +214,7 @@
       "params_active_b": null,
       "aa_index": 44,
       "aa_effort": "max",
-      "eci": 161.68,
+      "eci": 161.74,
       "cost_per_task_usd": 6.95,
       "price_in": 4.0,
       "price_out": 20.0,
@@ -195,7 +233,7 @@
       "params_active_b": null,
       "aa_index": 49,
       "aa_effort": "max",
-      "eci": 166.99,
+      "eci": 167.09,
       "cost_per_task_usd": 12.99,
       "price_in": 10.0,
       "price_out": 50.0,
@@ -214,13 +252,13 @@
       "params_active_b": null,
       "aa_index": 57,
       "aa_effort": "max",
-      "eci": 169.0,
+      "eci": 169.2,
       "cost_per_task_usd": 6.24,
       "price_in": 10.0,
       "price_out": 50.0,
       "price_cache_read": 1.0,
-      "status": "current",
-      "note": "#3 on ECI (169.0), behind Claude Fable 5.2 (173.44) and Gemini 4 Carbon (169.76). Leads abstract reasoning and maths (ARC-AGI-3, FrontierMath Tier 4)."
+      "status": "superseded",
+      "note": "Superseded on 17 Nov by GPT-6.2 Astra (AA lists it as deprecated; still selectable in Codex and the API). #4 on ECI (169.2). Led abstract reasoning and maths (ARC-AGI-3, FrontierMath Tier 4) at launch."
     },
     {
       "id": "gemini-4-argon",
@@ -233,13 +271,13 @@
       "params_active_b": null,
       "aa_index": 50,
       "aa_effort": "high",
-      "eci": 166.48,
+      "eci": 166.57,
       "cost_per_task_usd": 4.97,
       "price_in": 2.0,
       "price_out": 10.0,
       "price_cache_read": 0.1,
       "status": "current",
-      "note": "Lowest hallucination rate measured (15%). Intro pricing; rises to $4/$20 on 1 Dec 2026."
+      "note": "Lowest hallucination rate measured (15%). Intro pricing; rises to $4/$20 ($0.20 cached) on 1 Dec 2026."
     },
     {
       "id": "gpt-6-1-sol",
@@ -252,13 +290,13 @@
       "params_active_b": null,
       "aa_index": 55,
       "aa_effort": "max",
-      "eci": 168.48,
+      "eci": 168.63,
       "cost_per_task_usd": 1.27,
       "price_in": 2.0,
       "price_out": 10.0,
       "price_cache_read": 0.1,
-      "status": "current",
-      "note": "Near-frontier (55) at about a quarter of Gemini 4 Carbon's cost per task; #5 on ECI (168.48), just behind Claude Opus 5.5 (168.54)."
+      "status": "superseded",
+      "note": "Superseded on 17 Nov by GPT-6.2 Sol (57 at about $1.01 per task) at the same token prices; AA lists it as deprecated, though it is still selectable in Codex and the API. #6 on ECI (168.63), just behind Claude Opus 5.5 (168.7)."
     },
     {
       "id": "claude-opus-5",
@@ -271,7 +309,7 @@
       "params_active_b": null,
       "aa_index": null,
       "aa_effort": null,
-      "eci": 164.68,
+      "eci": 164.74,
       "cost_per_task_usd": null,
       "price_in": 5.0,
       "price_out": 25.0,
@@ -290,7 +328,7 @@
       "params_active_b": null,
       "aa_index": 51,
       "aa_effort": "max",
-      "eci": 167.67,
+      "eci": 167.72,
       "cost_per_task_usd": 0.96,
       "price_in": 1.0,
       "price_out": 5.0,
@@ -347,7 +385,7 @@
       "params_active_b": null,
       "aa_index": 35,
       "aa_effort": "xhigh",
-      "eci": 156.18,
+      "eci": 156.43,
       "cost_per_task_usd": 7.77,
       "price_in": 2.0,
       "price_out": 6.0,
@@ -366,7 +404,7 @@
       "params_active_b": null,
       "aa_index": 36,
       "aa_effort": "max",
-      "eci": 160.43,
+      "eci": 160.29,
       "cost_per_task_usd": 0.41,
       "price_in": 0.1,
       "price_out": 0.5,
@@ -423,7 +461,7 @@
       "params_active_b": 52,
       "aa_index": 26,
       "aa_effort": "high",
-      "eci": 154.62,
+      "eci": 154.56,
       "cost_per_task_usd": 2.06,
       "price_in": 0.7,
       "price_out": 2.1,
@@ -442,7 +480,7 @@
       "params_active_b": null,
       "aa_index": 25,
       "aa_effort": null,
-      "eci": 152.69,
+      "eci": 152.71,
       "cost_per_task_usd": 4.21,
       "price_in": 1.36,
       "price_out": 4.18,
@@ -499,13 +537,13 @@
       "params_active_b": 16,
       "aa_index": 33,
       "aa_effort": "max",
-      "eci": 159.41,
+      "eci": 159.4,
       "cost_per_task_usd": 0.6,
       "price_in": 0.15,
       "price_out": 0.6,
       "price_cache_read": 0.003,
       "status": "current",
-      "note": "Off-peak prices; doubled at weekday peak. Second-best open model on AA v5.0.1 (33) and on ECI (159.41), both behind Kimi K3.1 Pro. Too large for a 256GB Mac Studio at 4-bit."
+      "note": "Off-peak prices; doubled at weekday peak. Second-best open model on AA v5.0.1 (33) and on ECI (159.4), both behind Kimi K3.1 Pro. Too large for a 256GB Mac Studio at 4-bit."
     },
     {
       "id": "kimi-k3",
@@ -518,13 +556,13 @@
       "params_active_b": 104,
       "aa_index": null,
       "aa_effort": null,
-      "eci": 158.58,
+      "eci": 158.6,
       "cost_per_task_usd": null,
       "price_in": 3.0,
       "price_out": 15.0,
       "price_cache_read": null,
       "status": "current",
-      "note": "Third-best open model on ECI (158.58), behind Kimi K3.1 Pro (161.37) and DeepSeek V4.1 Flash 1017 (159.41), and 14.9 points behind Claude Fable 5.2. No AA v5 score yet (was 44 on v4.3.2). Too large for any single desktop machine."
+      "note": "Third-best open model on ECI (158.6), behind Kimi K3.1 Pro (161.36) and DeepSeek V4.1 Flash 1017 (159.4), and 15.6 points behind GPT-6.2 Astra. No AA v5 score yet (was 44 on v4.3.2). Too large for any single desktop machine."
     },
     {
       "id": "minimax-m3-1-flash",
@@ -556,7 +594,7 @@
       "params_active_b": 18,
       "aa_index": 28,
       "aa_effort": null,
-      "eci": 153.82,
+      "eci": 153.78,
       "cost_per_task_usd": 0.58,
       "price_in": 0.15,
       "price_out": 0.5,
@@ -575,7 +613,7 @@
       "params_active_b": 16,
       "aa_index": null,
       "aa_effort": null,
-      "eci": 156.7,
+      "eci": 157.0,
       "cost_per_task_usd": null,
       "price_in": 0.15,
       "price_out": 0.6,
@@ -594,7 +632,7 @@
       "params_active_b": 42,
       "aa_index": 25,
       "aa_effort": "xhigh",
-      "eci": 155.42,
+      "eci": 155.45,
       "cost_per_task_usd": 2.02,
       "price_in": 1.25,
       "price_out": 4.25,
@@ -651,7 +689,7 @@
       "params_active_b": 49,
       "aa_index": 23,
       "aa_effort": "max",
-      "eci": 155.94,
+      "eci": 155.96,
       "cost_per_task_usd": 1.77,
       "price_in": 1.32,
       "price_out": 3.96,
@@ -881,6 +919,16 @@
         {
           "model": "GPT-6.1 Sol",
           "value": 54,
+          "vendor_reported": false
+        },
+        {
+          "model": "GPT-6.2 Sol",
+          "value": 55,
+          "vendor_reported": false
+        },
+        {
+          "model": "GPT-6.2 Astra",
+          "value": 59,
           "vendor_reported": false
         }
       ]
@@ -1150,7 +1198,7 @@
       },
       "suite_ceiling_minutes": 960,
       "status": "Newest measurement: Claude Mythos Preview (early checkpoint, released Apr 2026), about 17 h at 50% success (95% CI 8.5–55 h) and about 3 h at 80% (1.6–6.6 h). The 50% figure is above the 16 h where METR says its task suite stops being reliable. No model released since has a published time horizon (see other readings), so today's values are projections at METR's post-2023 doubling time of 3.4–5.2 months; the 80% series has doubled at the same pace (about every 4.4 months since 2023 on METR's data).",
-      "checked": "2026-11-17",
+      "checked": "2026-11-18",
       "other_readings": [
         {
           "source": "METR Frontier Risk Report",
@@ -1200,8 +1248,8 @@
       ]
     },
     "headline": [
-      "Anthropic's Claude Fable 5.2 (65), released on 9 November, leads the Artificial Analysis index by five points over Gemini 4 Carbon (60) and Claude Opus 5.5 (59), and also tops Epoch's capabilities index, where Gemini 4 Carbon is second; but at about $26.54 per task it is the most expensive model tested. For value, GPT-6.1 Sol scores 55 at about $1.27 per task, Gemini 4 Hydrogen 54 at about $3.16 and GPT-6.1 Terra 51 at about $0.96.",
-      "Kimi K3.1 Pro (46) is the best open model, 19 points behind the closed frontier (65) and roughly 4 months behind on Epoch's lag estimate; the next-best scored open model, DeepSeek V4.1 Flash 1017, has 33, and Thinking Machines' Inkling 2 Small (31) is the best from outside China. Alibaba's new flagship Qwen4 Max, released on 16 November, scores 43 but its weights are not public. Meituan's open LongCat-2.5 has not been scored yet.",
+      "Anthropic's Claude Fable 5.2 (65) still leads the Artificial Analysis index, but OpenAI's GPT-6.2 Astra, released on 17 November, is now second with 62 at about $4.00 per task, under a sixth of Fable 5.2's $26.54, and narrowly tops Epoch's capabilities index (174.17 against 173.5). Gemini 4 Carbon (60) and Claude Opus 5.5 (59) follow. For value, GPT-6.2 Sol scores 57 at about $1.01 per task, Gemini 4 Hydrogen 54 at about $3.16 and GPT-6.1 Terra 51 at about $0.96.",
+      "Kimi K3.1 Pro (46) is the best open model, 19 points behind the closed frontier (65) and roughly 4 months behind on Epoch's lag estimate; the next-best scored open model, DeepSeek V4.1 Flash 1017, has 33, and Thinking Machines' Inkling 2 Small (31) is the best from outside China. Alibaba's flagship Qwen4 Max, released on 16 November, scores 43 but its weights are not public. Meituan's open LongCat-2.5 has not been scored yet.",
       "An open model matching Claude Fable 5.2 (65) is expected around Mar 2027 (range Feb 2027 to May 2027); a version that runs on a desktop under AUD 50k about 2 months later. Today the best desktop model is GLM-5.3-Flash (28) on a 256GB Mac Studio."
     ],
     "founder": {
@@ -1302,7 +1350,7 @@
       ],
       "default_model": "claude-opus-5-5",
       "confidence": "low",
-      "note": "Includes Claude Code, with Opus available. Opus 5.5 is the default model from Claude Code v2.1.280 onward; older versions defaulted Pro to Sonnet 5. Fable needs usage credits (except a Fable 5.2 launch offer to 16 Nov 2026: up to half the weekly limit). At least 5x Free usage per 5-hour session, plus weekly caps."
+      "note": "Includes Claude Code, with Opus available. Opus 5.5 is the default model from Claude Code v2.1.280 onward; older versions defaulted Pro to Sonnet 5. Fable needs usage credits (the one-week Fable 5.2 launch offer ended on 16 Nov 2026). More usage than Free, with a 5-hour limit and a weekly limit; Anthropic publishes no multiple."
     },
     {
       "id": "claude-max-5x",
@@ -1338,7 +1386,7 @@
       ],
       "default_model": "claude-opus-5-5",
       "confidence": "low",
-      "note": "Formerly Max 20x (renamed 30 Oct 2026; same price, automatic migration). 10x Pro usage every week, twice Max; no 5-hour limit for verified accounts; separate weekly limit for Fable. Includes $200/month API credit (API, Agent SDK, claude -p with an API key; not interactive Claude Code)."
+      "note": "Formerly Max 20x (renamed 30 Oct 2026; same price, automatic migration). 10x Pro usage every week, twice Max; no 5-hour limit for verified accounts; Fable included up to half the weekly limit, as on Max. Includes $200/month API credit (API, Agent SDK, claude -p with an API key; not interactive Claude Code)."
     },
     {
       "id": "chatgpt-plus",
@@ -1354,9 +1402,9 @@
         5,
         15
       ],
-      "default_model": "gpt-6-1-sol",
+      "default_model": "gpt-6-2-sol",
       "confidence": "low",
-      "note": "Per 5-hour window: Sol 6.1 15 to 160 messages, Astra 5 to 45. Weekly caps unpublished."
+      "note": "OpenAI's estimates per 5-hour window (not fixed limits): GPT-6.2 Sol 17 to 180 messages, GPT-6.2 Astra 6 to 50 (GPT-6.1 Sol 15 to 160, GPT-6 Astra 5 to 45). Weekly caps unpublished. New chats start on GPT-6.2 Sol; OpenAI names no per-plan Codex default."
     },
     {
       "id": "chatgpt-pro-100",
@@ -1372,9 +1420,9 @@
         25,
         60
       ],
-      "default_model": "gpt-6-1-sol",
+      "default_model": "gpt-6-2-sol",
       "confidence": "low",
-      "note": "More usage than Plus; per-model limits unpublished. Work and Codex allowance doubled on 29 Oct 2026 (estimates here not yet revised). Since 28 Oct also includes $100/month API credit (API only; not Codex, signed-in or by API key)."
+      "note": "More usage than Plus and no 5-hour limit; per-model weekly limits unpublished. Work and Codex allowance doubled on 29 Oct 2026 (estimates here not yet revised). Since 28 Oct also includes $100/month API credit (API only; not Codex, signed-in or by API key)."
     },
     {
       "id": "chatgpt-pro-200",
@@ -1390,9 +1438,9 @@
         60,
         150
       ],
-      "default_model": "gpt-6-1-sol",
+      "default_model": "gpt-6-2-sol",
       "confidence": "low",
-      "note": "Weekly allowance, no 5-hour limit. The planned cut for new subscribers was cancelled on 29 Oct 2026: everyone is now on the higher allowance. Since 28 Oct also includes $200/month API credit (API only; not Codex)."
+      "note": "Weekly allowance, no 5-hour limit; GPT-6.2 Sol in Ultrafast mode. The planned cut for new subscribers was cancelled on 29 Oct 2026: everyone is now on the higher allowance. Since 28 Oct also includes $200/month API credit (API only; not Codex)."
     },
     {
       "id": "chatgpt-pro-500",
@@ -1408,9 +1456,9 @@
         150,
         350
       ],
-      "default_model": "gpt-6-astra",
+      "default_model": "gpt-6-2-astra",
       "confidence": "very low",
-      "note": "Highest allowance; includes Astra Ultrafast (8x the standard rate). No published usage numbers. Work and Codex allowance doubled on 29 Oct 2026 (estimates here not yet revised). Since 28 Oct also includes $500/month API credit (API only; not Codex)."
+      "note": "Highest allowance; includes Ultrafast mode for GPT-6.2 Astra and Sol (6x the standard rate; GPT-6 Astra 8x). No published usage numbers, and OpenAI names no per-plan default model: GPT-6.2 Astra is its pick for demanding work. Work and Codex allowance doubled on 29 Oct 2026 (estimates here not yet revised). Since 28 Oct also includes $500/month API credit (API only; not Codex)."
     }
   ],
   "hardware": [
@@ -1456,6 +1504,13 @@
     }
   ],
   "releases": [
+    {
+      "date": "2026-11-17",
+      "kind": "model",
+      "title": "OpenAI GPT-6.2 Astra and GPT-6.2 Sol",
+      "summary": "Astra is the new #2 on the AA index (62, behind Claude Fable 5.2 at 65) at about $4.00 per task, and #1 on Epoch's ECI (174.17); $8/$40 per million tokens, 20% below GPT-6 Astra. Sol scores 57 at about $1.01 per task with prices unchanged ($2/$10).",
+      "url": "https://artificialanalysis.ai/articles/openai-has-the-2-model-in-the-intelligence-index-with-the-release-of-gpt-6-2-astra-and-gpt-6-2-sol"
+    },
     {
       "date": "2026-11-16",
       "kind": "model",
@@ -1728,13 +1783,6 @@
       "title": "xAI Grok 4.7",
       "summary": "AA index 46; closed weights.",
       "url": "https://epoch.ai/models/grok-4-7"
-    },
-    {
-      "date": "2026-09-10",
-      "kind": "model",
-      "title": "DeepSeek V4.1 Flash (open, MIT)",
-      "summary": "552B / 16B active; beats DeepSeek's own V4 Pro.",
-      "url": "https://siliconangle.com/deepseek-releases-v4-1-flash-says-it-outperforms-flagship-v4-pro"
     }
   ],
   "sources": [
@@ -1981,6 +2029,30 @@
     {
       "title": "Claude API pricing",
       "url": "https://platform.claude.com/docs/en/about-claude/pricing"
+    },
+    {
+      "title": "Artificial Analysis: GPT-6.2 Astra and GPT-6.2 Sol (article)",
+      "url": "https://artificialanalysis.ai/articles/openai-has-the-2-model-in-the-intelligence-index-with-the-release-of-gpt-6-2-astra-and-gpt-6-2-sol"
+    },
+    {
+      "title": "Artificial Analysis: GPT-6.2 Astra",
+      "url": "https://artificialanalysis.ai/models/gpt-6-2-astra"
+    },
+    {
+      "title": "Artificial Analysis: GPT-6.2 Sol",
+      "url": "https://artificialanalysis.ai/models/gpt-6-2-sol"
+    },
+    {
+      "title": "OpenAI: Codex pricing and usage estimates",
+      "url": "https://learn.chatgpt.com/docs/pricing"
+    },
+    {
+      "title": "OpenAI: Codex models",
+      "url": "https://learn.chatgpt.com/docs/models"
+    },
+    {
+      "title": "Claude Help Center: Fable models on your plan",
+      "url": "https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan"
     }
   ],
   "changelog": [
@@ -2103,6 +2175,11 @@
       "date": "2026-11-17",
       "what": "Added Qwen4 Max (Alibaba, closed, AA 43, $1.50/$4.50 per million tokens, $3.27 per task). Cached-input prices corrected: Claude Sonnet 5.5 $0.20 → $0.10, Claude Haiku 5.5 now $0.01 (was unknown) per million tokens.",
       "why": "AA added Qwen4 Max to index v5.0.1 on 15 Nov (artificialanalysis.ai/changelog and model page: released 16 Nov, weights not public, size not disclosed, 95% cache discount, from which the $0.075 cached price is derived); token prices confirmed on Alibaba Cloud's Model Studio page (alibabacloud.com/help/en/model-studio/qwen4-max, international region). One outlet reports 2.4T parameters, but with no second source the size stays unknown. No frontier moves: 43 is below the closed best of 65, and it is not open. Anthropic's API pricing table (platform.claude.com/docs/en/about-claude/pricing) prices Sonnet 5.5 cache reads at 0.05x input ($0.10; $0.20 was the older Sonnet 5 rate) and Haiku 5.5 at $0.01 for prompts up to 100K tokens. No other AA scores, ECI values, prices, plans or forecast parameters changed: AA's leaderboard and Epoch's ECI file match; METR's newest state-of-the-art point is still Claude Mythos Preview; Tencent Hy4's weights are still not out; claude.com/pricing, code.claude.com model-config and the Codex pricing page match the current notes. FX (x-rates 1.4849 AUD per USD, 16 Nov) moved under 1%, so unchanged."
+    },
+    {
+      "date": "2026-11-18",
+      "what": "Added GPT-6.2 Astra (OpenAI, closed, AA 62, $8/$40 per million tokens, $0.40 cached, $4.00 per task, ECI 174.17) and GPT-6.2 Sol (AA 57, $2/$10, $0.10 cached, $1.01 per task); GPT-6 Astra and GPT-6.1 Sol marked superseded. GPT-6.2 Astra is now #2 on the AA index and #1 on ECI, ahead of Claude Fable 5.2 (173.5). ECI refreshed for 22 models (small moves, e.g. Fable 5.2 173.44 → 173.5, GPT-6 Astra 169.0 → 169.2, DeepSeek V4.1 Flash 156.7 → 157.0). AA-Omniscience hallucination rates added for GPT-6.2 Astra (59%) and Sol (55%). Codex plan defaults moved to the GPT-6.2 models and plan notes corrected: Plus message estimates for GPT-6.2, no 5-hour limit on any Pro tier, Ultrafast multipliers. Claude Pro note: the Fable 5.2 launch offer has ended and '5x Free' replaced by Anthropic's wording; Claude Ultra note: Fable is up to half the weekly limit, as on Max.",
+      "why": "OpenAI released both models on 17 Nov; AA scored them on index v5.0.1 the same day (artificialanalysis.ai/changelog, the 17 Nov article and model pages), and token prices are from OpenAI's API pricing page (developers.openai.com/api/docs/pricing). AA now labels GPT-6 Astra and GPT-6.1 Sol deprecated in favour of the 6.2 models; OpenAI still offers both. The closed frontier is unchanged: 62 is below Fable 5.2's 65, so headline 3 still targets Fable 5.2; open and local series unchanged. ECI values are from Epoch's scores file as fetched on 18 Nov (epoch.ai/data/eci_scores.csv); GPT-6.2 Sol is not in it yet. Codex notes follow OpenAI's pricing and models pages (learn.chatgpt.com/docs/pricing, /docs/models): new chats start on GPT-6.2 Sol and GPT-6.2 Astra is the pick for demanding work, but OpenAI names no per-plan default, so Pro 500's Astra default is a judgement. Claude notes follow claude.com/pricing (Pro: 'More usage than Free'; Fable 'Usage credits' on Pro and '50% of weekly limits' on both Max and Ultra) and the launch-offer article (support.claude.com/en/articles/17506494: Pro offer ran to 16 Nov). Plan prices, API credits and usage estimates are unchanged. METR has published no GPT-6.2 evaluation and its newest state-of-the-art point is still Claude Mythos Preview; Tencent Hy4's weights are still not out; forecast parameters unchanged. FX (x-rates 1.4847 AUD per USD, 17 Nov) moved under 1%, so unchanged."
     }
   ]
 }
