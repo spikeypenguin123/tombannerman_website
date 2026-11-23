@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T06:48:00+10:00",
+  "updated_at": "2026-11-24T06:49:00+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -736,6 +736,25 @@
       "note": "Reasoning model with text and image input and 1M context; size not disclosed. Scores the median for its class (24) on AA v5.0.1. Cached price from AA's stated 90% cache discount."
     },
     {
+      "id": "ling-3-2-air",
+      "name": "Ling-3.2-air",
+      "lab": "InclusionAI",
+      "released": "2026-11-23",
+      "weights": "open",
+      "license": "MIT",
+      "params_total_b": 124,
+      "params_active_b": 5.5,
+      "aa_index": 23,
+      "aa_effort": "reasoning",
+      "eci": null,
+      "cost_per_task_usd": null,
+      "price_in": null,
+      "price_out": null,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "Hybrid-linear MoE (124B total, 5.5B active) with text and image input and 1M context. Scores 23 on AA v5.0.1, three points above Inkling 2 Mini and Qwen 3.8 27B (20), but 23 points behind the open best (Kimi K3.1 Pro, 46). Very verbose (199M output tokens on the index). No public API, so no prices or cost per task. Weights in BF16 and FP8 on Hugging Face; no verified desktop run yet. Not yet on ECI."
+    },
+    {
       "id": "deepseek-v4-pro-0813",
       "name": "DeepSeek V4 Pro 0813",
       "lab": "DeepSeek",
@@ -848,6 +867,25 @@
       "price_cache_read": null,
       "status": "current",
       "note": "Microsoft's coding model, announced at Ignite. Microsoft says it reaches 98% of GPT-6.1 Sol's score across four coding benchmarks at 40% of the cost, and 96% of Claude Opus 5.5's at 5% (at a 50% promotional price). In GitHub Copilot; no per-token prices published. Not yet scored on AA or ECI; size not disclosed. A smaller MAI Code 2 Flash is in limited preview."
+    },
+    {
+      "id": "lingsante-3-1-flash",
+      "name": "LingSante-3.1-flash",
+      "lab": "InclusionAI",
+      "released": "2026-11-22",
+      "weights": "open",
+      "license": "MIT",
+      "params_total_b": 560,
+      "params_active_b": 25,
+      "aa_index": null,
+      "aa_effort": null,
+      "eci": null,
+      "cost_per_task_usd": null,
+      "price_in": null,
+      "price_out": null,
+      "price_cache_read": null,
+      "status": "current",
+      "note": "Medical-reasoning MoE (560B total, 25B active; text only, 1M context). AA has only run its medical long-context benchmark on it, with no Intelligence Index score. AA lists InclusionAI's API at $0.00, so prices are left unknown. Not on ECI. Far too large for any desktop machine at full precision."
     }
   ],
   "benchmarks": [
@@ -1299,7 +1337,7 @@
       },
       "suite_ceiling_minutes": 960,
       "status": "Newest measurement: Claude Mythos Preview (early checkpoint, released Apr 2026), about 17 h at 50% success (95% CI 8.5–55 h) and about 3 h at 80% (1.6–6.6 h). The 50% figure is above the 16 h where METR says its task suite stops being reliable. No model released since has a published time horizon (see other readings), so today's values are projections at METR's post-2023 doubling time of 3.4–5.2 months; the 80% series has doubled at the same pace (about every 4.4 months since 2023 on METR's data).",
-      "checked": "2026-11-23",
+      "checked": "2026-11-24",
       "other_readings": [
         {
           "source": "Epoch AI report",
@@ -1359,7 +1397,7 @@
     },
     "headline": [
       "Anthropic's Claude Fable 5.2 (65) leads the Artificial Analysis index and, after Epoch revised OpenAI's pre-launch score, Epoch's capabilities index too (173.4 against GPT-6.2 Astra's 172.82). GPT-6.2 Astra is second on the Artificial Analysis index with 62 at about $4.00 per task, under a sixth of Fable 5.2's $26.54; Google's Gemini 4 Neon is third with 61 at about $6.44, one point above Gemini 4 Carbon (60), and Claude Opus 5.5 (59) follows. For value, GPT-6.2 Sol scores 57 at about $1.01 per task, Gemini 4 Hydrogen 54 at about $3.16 and GPT-6.1 Terra 51 at about $0.96.",
-      "Kimi K3.1 Pro (46) is the best open model, 19 points behind the closed frontier (65) and roughly 4 months behind on Epoch's lag estimate. Tencent published the full Hy4's weights on 20 November, making it the second-best open model (35), ahead of DeepSeek V4.1 Flash 1017 (33); Thinking Machines' Inkling 2 Small (31) is the best from outside China. Its new Inkling 2 Mini, also out on 20 November, matches Qwen 3.8 27B (20) in a 20 GB download at a sixth of the cost per task.",
+      "Kimi K3.1 Pro (46) is the best open model, 19 points behind the closed frontier (65) and roughly 4 months behind on Epoch's lag estimate. Tencent published the full Hy4's weights on 20 November, making it the second-best open model (35), ahead of DeepSeek V4.1 Flash 1017 (33); Thinking Machines' Inkling 2 Small (31) is the best from outside China. Among smaller open models, InclusionAI's Ling-3.2-air (23, out on 23 November, with only 5.5B active parameters) now edges out Thinking Machines' Inkling 2 Mini and Qwen 3.8 27B (both 20).",
       "An open model matching Claude Fable 5.2 (65) is expected around Mar 2027 (range Feb 2027 to May 2027); a version that runs on a desktop under AUD 50k about 2 months later. Today the best desktop model is GLM-5.3-Flash (28) on a 256GB Mac Studio."
     ],
     "founder": {
@@ -1614,6 +1652,13 @@
     }
   ],
   "releases": [
+    {
+      "date": "2026-11-23",
+      "kind": "model",
+      "title": "InclusionAI Ling-3.2-air (open, MIT)",
+      "summary": "124B / 5.5B active multimodal MoE with 1M context; AA index 23, three points above Inkling 2 Mini and Qwen 3.8 27B. No public API. A day earlier InclusionAI also released LingSante-3.1-flash, a 560B medical model with no index score.",
+      "url": "https://artificialanalysis.ai/models/ling-3-2-air"
+    },
     {
       "date": "2026-11-21",
       "kind": "benchmark",
@@ -1886,13 +1931,6 @@
       "title": "Meta releases Muse Spark Open",
       "summary": "816B / 42B active open-weights model; AA index 39, the best US open model, still 7 points behind MiMo-V2.6-Pro.",
       "url": "https://venturebeat.com/technology/meta-unveils-muse-spark-open-the-new-top-u-s-open-weights-model-and-it-runs-on-two-paired-mac-desktops"
-    },
-    {
-      "date": "2026-10-13",
-      "kind": "model",
-      "title": "Gemini 4 Argon generally available",
-      "summary": "Ties GPT-6 Astra on the AA index (53); leads AutomationBench and the Vals Index; lowest hallucination rate.",
-      "url": "https://computingforgeeks.com/gemini-4-argon-released-features-benchmarks/"
     }
   ],
   "sources": [
@@ -2350,6 +2388,11 @@
       "date": "2026-11-22",
       "what": "AA cost per task updated: Gemini 4 Argon (high) $4.97 → $9.95. ECI revised by 0.01–0.04 for 11 models: GPT-6.1 Terra 167.71, Claude Fable 5.1 167.06, Claude Sonnet 5.5 166.6, Gemini 4 Argon 166.53, Claude Opus 5 164.72, Claude Haiku 5.5 160.33, DeepSeek V4.1 Flash 157.01, Muse Spark Open 155.47, Mistral Large 4 154.57, GLM-5.3-Flash 153.77, Mistral Large 4 Preview 152.74. No rank changes.",
       "why": "The Argon figure is what AA's leaderboard and model page show on 22 Nov (artificialanalysis.ai/models/gemini-4-argon); AA gives no reason, and it reverses the 15 Nov change, as happened with Gemini 4 Carbon on 19 Nov (score unchanged at 50). ECI values are from epoch.ai/data/eci_scores.csv as read on 22 Nov; GPT-6.2 Sol, Gemini 4 Neon, Qwen4 Max, Muse Ember, Tencent Hy4 and both Inklings are still absent. Unchanged: AA index version (v5.0.1) and all other AA scores and costs (AA's changelog has nothing after 20 Nov); METR's newest state-of-the-art point is still Claude Mythos Preview and its blog has nothing since 5 Nov; no new model releases on the Anthropic, OpenAI, Google, DeepSeek, Moonshot or Mistral pages; claude.com/pricing, code.claude.com model-config, Anthropic's, OpenAI's and Google's API price tables and the Codex pricing and models pages match the current notes. No forecast parameter changed. FX (x-rates 1.5104 AUD per USD, 21 Nov) moved under 1%, so unchanged. Not verified today: Apple's 512GB Mac Studio price, and the xAI, Z.ai, Qwen, Meta and Xiaomi news pages (failed to load or showed no current list)."
+    },
+    {
+      "date": "2026-11-24",
+      "what": "Added Ling-3.2-air (InclusionAI, open, MIT, 124B / 5.5B active, AA 23, no public API) and LingSante-3.1-flash (InclusionAI, open, MIT, 560B / 25B active medical model, no AA index score). Headline 2 now names Ling-3.2-air as the top smaller open model.",
+      "why": "AA added both on 22–23 Nov (artificialanalysis.ai/changelog; /models/ling-3-2-air: released 23 Nov, index 23 on v5.0.1, reasoning, open weights, no public API; /models/lingsante-3-1-flash-1119: released 22 Nov, only a medical long-context benchmark, prices shown as $0.00 so left unknown). Licence and parameter counts confirmed on Hugging Face (huggingface.co/inclusionAI/Ling-3.2-air). No frontier or local series moves: 23 is below the open best (46) and there is no verified desktop run. Not added: 'Kimi K3.1 Pro Prime', listed only by an aggregator (llmgateway.io) as an Alibaba Model Studio tier, with no Moonshot source. Unchanged: AA index version (v5.0.1) and all other AA scores and costs; Epoch's ECI file (GPT-6.2 Sol, Gemini 4 Neon, Qwen4 Max, Muse Ember, Tencent Hy4 and both Inklings still absent); METR's newest state-of-the-art point is still Claude Mythos Preview and its blog has nothing since 5 Nov; claude.com/pricing, code.claude.com model-config (Opus 5.5 default on every plan; 'fable' = Fable 5.2), Anthropic's and OpenAI's API price tables and the Codex pricing and models pages match the current notes; no new model posts from Anthropic, OpenAI, Google, Meta or Mistral. No forecast parameter changed. FX (x-rates 1.5093 AUD per USD, 23 Nov) moved under 1%, so unchanged. Not verified today: Apple's 512GB Mac Studio price, Moonshot's price table (did not render), and the xAI, DeepSeek, Z.ai, Qwen and AMD news pages (failed to load)."
     }
   ]
 }
