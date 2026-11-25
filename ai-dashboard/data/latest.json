@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-25T06:58:00+10:00",
+  "updated_at": "2026-11-26T06:48:00+10:00",
   "update_schedule": "Daily 07:00 Australia/Brisbane (AEST, UTC+10)",
   "index": {
     "name": "Artificial Analysis Intelligence Index",
@@ -1331,9 +1331,18 @@
         "high": 5.2
       },
       "suite_ceiling_minutes": 960,
-      "status": "Newest measurement: Claude Mythos Preview (early checkpoint, released Apr 2026), about 17 h at 50% success (95% CI 8.5–55 h) and about 3 h at 80% (1.6–6.6 h). The 50% figure is above the 16 h where METR says its task suite stops being reliable. No model released since has a published time horizon (see other readings), so today's values are projections at METR's post-2023 doubling time of 3.4–5.2 months; the 80% series has doubled at the same pace (about every 4.4 months since 2023 on METR's data).",
-      "checked": "2026-11-25",
+      "status": "Newest measurement: Claude Mythos Preview (early checkpoint, released Apr 2026), about 17 h at 50% success (95% CI 8.5–55 h) and about 3 h at 80% (1.6–6.6 h). The 50% figure is above the 16 h where METR says its task suite stops being reliable. Newer models have been measured only on METR's new combined task suite (20 Nov: GPT-6 Astra about 40 h, Claude Opus 5.5 about 39 h; see other readings), which METR says gives lower values than the old suite, so those are not on this chart. Today's values are projections at METR's post-2023 doubling time of 3.4–5.2 months (METR's new suite gives 3.6 months, inside that band); the 80% series has doubled at the same pace (about every 4.4 months since 2023 on METR's data).",
+      "checked": "2026-11-26",
       "other_readings": [
+        {
+          "source": "METR capability update (Q4 2026)",
+          "subject": "GPT-6 Astra and Claude Opus 5.5 on METR's combined TH1.1 + TH2 task suite",
+          "date": "2026-11-20",
+          "p50": "GPT-6 Astra ~40 h (13–2,645 h); Opus 5.5 ~39 h (12–1,253 h)",
+          "p80": null,
+          "note": "A new, harder suite with tasks up to 200 h, because recent models have saturated Time Horizon 1.1; METR says any model scores lower on it than on TH1.1 alone, so these are not comparable with the measured series. Doubling every 3.61 months (2.08–4.94) on the combined suite; up to 27 h on the verifiable TH2 subset. Tested models up to Opus 5.5 only (no Fable 5.2 or GPT-6.2). 80% values shown only in a chart.",
+          "url": "https://metr.org/blog/2026-11-20-q4-2026-capability-update/"
+        },
         {
           "source": "Epoch AI report",
           "subject": "Claude Fable 5.2, GPT-6.2 Astra and four other models on real Epoch work",
@@ -1670,6 +1679,13 @@
     },
     {
       "date": "2026-11-20",
+      "kind": "benchmark",
+      "title": "METR: new combined time-horizon suite",
+      "summary": "METR adds harder tasks (up to 200 h) because models have saturated its old suite. GPT-6 Astra and Claude Opus 5.5 reach about 40 h at 50% success; horizons double about every 3.6 months. Not comparable with the older measurements.",
+      "url": "https://metr.org/blog/2026-11-20-q4-2026-capability-update/"
+    },
+    {
+      "date": "2026-11-20",
       "kind": "model",
       "title": "Thinking Machines Inkling 2 Mini (open, Apache 2.0)",
       "summary": "26.4B / 3.4B active looped-transformer MoE with 1M context; AA index 20, level with Qwen 3.8 27B, at about $0.59 per task ($0.15/$0.50 per million tokens). A single 20 GB checkpoint.",
@@ -1919,13 +1935,6 @@
       "title": "Reflection releases Beam (open)",
       "summary": "Reflection's first model, 501B / 23B active; AA index 30, the #2 US open model behind Muse Spark Open.",
       "url": "https://artificialanalysis.ai/articles/reflection-beam"
-    },
-    {
-      "date": "2026-10-15",
-      "kind": "model",
-      "title": "NVIDIA Nemotron 3.5 Super VL and Bolt 74B-A9B (open)",
-      "summary": "Super VL (120B / 12B active) scores 26 on the AA index, double Nemotron 3 Super; Bolt scores 21.",
-      "url": "https://artificialanalysis.ai/articles/nemotron-3-5-super-and-bolt"
     }
   ],
   "sources": [
@@ -2240,6 +2249,10 @@
     {
       "title": "Artificial Analysis: Intelligence Index methodology (v5.0.2)",
       "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
+    },
+    {
+      "title": "METR: Q4 2026 capability update (combined time-horizon suite)",
+      "url": "https://metr.org/blog/2026-11-20-q4-2026-capability-update/"
     }
   ],
   "changelog": [
@@ -2397,6 +2410,11 @@
       "date": "2026-11-25",
       "what": "Artificial Analysis index v5.0.1 → v5.0.2: aa_index re-baselined from AA's v5.0.2 figures (Gemini 4 Neon 61 → 62, now joint #2 with GPT-6.2 Astra; Kimi K3.1 Pro 46 → 47; Gemini 4 Argon 50 → 51; Claude Haiku 5.5 36 → 37; DeepSeek V4.1 Flash 1017 33 → 32; all others unchanged). Open frontier: Kimi K3.1 Pro point 46 → 47, and the DeepSeek V4.1 Flash 1017 point (17 Oct) removed. Rank notes and headlines 1–2 updated.",
       "why": "AA released v5.0.2 on 24 Nov (artificialanalysis.ai/changelog; artificialanalysis.ai/methodology/intelligence-benchmarking): Terminal-Bench 4.0 replaced by 4.1 (same tasks, updated verifiers, saved runs rescored) and FrontierCode 2.0 regraded on existing attempts with an updated trajectory scanner. Scores are from AA's leaderboard and model pages on 25 Nov, including the deprecated Claude Fable 5.1 (49), GPT-6 Astra (57), GPT-6.1 Sol (55) and Mistral Large 4 Preview (25), all unchanged; costs per task are unchanged. On v5.0.2 DeepSeek V4.1 Flash 1017 (32) only ties GLM-5.3 (32, 28 Aug), so it no longer raises the open envelope and its point was removed; the open series keeps three points (DeepSeek V4 Pro 0813 23, GLM-5.3 32, Kimi K3.1 Pro 47). The closed series (Fable 5.1 49, GPT-6 Astra 57, Opus 5.5 59, Gemini 4 Carbon 60, Fable 5.2 65) and local series (GLM-5.3-Flash 28) are unchanged. Neon's 62 still trails Fable 5.2's 65, so the closed frontier and headline 3's target are unchanged; forecast parameters unchanged. Also checked, no change: Epoch's ECI file (GPT-6.2 Sol, Gemini 4 Neon, Qwen4 Max, Muse Ember, Tencent Hy4 and both Inklings still absent); METR's newest state-of-the-art point is still Claude Mythos Preview and its blog has nothing after 5 Nov; claude.com/pricing and code.claude.com model-config (Opus 5.5 default on every plan; 'fable' = Fable 5.2) match the plan notes; OpenAI's API price table and the Codex pricing page (Plus estimates unchanged; no 5-hour limit on Pro) match; no new model posts from Anthropic, OpenAI, Google or Mistral. FX (x-rates 1.5060 AUD per USD, 24 Nov) moved under 1%, so unchanged."
+    },
+    {
+      "date": "2026-11-26",
+      "what": "Task length: METR's 20 Nov capability update added to other readings (GPT-6 Astra ~40 h, Claude Opus 5.5 ~39 h at 50% on its new combined TH1.1 + TH2 suite; doubling 3.61 months) and listed under releases; the status text no longer says no newer model has a published time horizon. The oldest release item (Nemotron 3.5, 15 Oct) dropped to keep 40.",
+      "why": "The post (metr.org/blog/2026-11-20-q4-2026-capability-update/) is not on METR's blog index, so earlier runs missed it; it was found through a link in METR's 24 Nov pretraining-loss post. METR says models score lower on the combined suite than on TH1.1, and its TH1.1 results file still ends at Claude Mythos Preview as the newest state-of-the-art point, so the measured series is unchanged. Doubling-time band unchanged: METR's new 3.61-month estimate is on a different suite and lies inside the current 3.4–5.2 band. Also checked, no change: AA's changelog has nothing after the 24 Nov v5.0.2 update and all scores and costs match; Epoch's ECI file matches (GPT-6.2 Sol, Gemini 4 Neon, Qwen4 Max, Muse Ember, Tencent Hy4 and both Inklings still absent); claude.com/pricing and code.claude.com model-config (Opus 5.5 default on every plan; 'fable' = Fable 5.2) match the plan notes; OpenAI's API price table and the Codex pricing page match. Not added: 'GLM-5.4' and 'S1 Fast/Pro', listed only by aggregators, with no AA page, Hugging Face repo or vendor post. FX (x-rates 1.5086 AUD per USD, 25 Nov) moved under 1%, so unchanged. Not verified today: Anthropic's API price table (page truncated) and Apple's 512GB Mac Studio price (reports conflict: US$22,299 vs US$24,618)."
     }
   ]
 }
